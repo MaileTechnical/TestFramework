@@ -1,0 +1,333 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'TestSuite',
+	99,
+	'TestSuite',
+	'A named collection of test cases. Related test cases are grouped in test buckets.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("5f6b9307-a1a4-45ba-9d2a-78f1606a0a60",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'RunTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
+select one bucket related by self->TestBucket[R111.''will first run''];
+if ( not_empty bucket )
+  relate self to bucket across R118.''is running'';
+  send TESTBENCH::InitializeBucket( bucketId:bucket.assignedID );
+else
+  LOG::LogFailure( message:"SEQ No tests to run!" );
+end if;',
+	1,
+	'',
+	"1a9fbf33-1ec8-49d6-ae22-1d875f0510e6",
+	0);
+INSERT INTO O_TFR
+	VALUES ("4397b71c-de2d-434c-a016-a421c3783aa0",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'BucketDone',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one bucket related by self->TestBucket[R118.''is running''];
+unrelate self from bucket across R118.''is running'';
+select one next_bucket related by bucket->TestBucket[R113.''follows''];
+if ( not self.retainAll )
+  bucket.Dismantle();
+end if;
+
+if ( not_empty next_bucket )
+  relate self to next_bucket across R118.''is running'';
+  send TESTBENCH::InitializeBucket( bucketId:next_bucket.assignedID );
+else
+  LOG::LogInfo( message:"SEQ Suite complete: " + self.suiteLabel );
+  LOG::LogInfo( message:" ------ " );	// separator
+  Requirement::TestedBy();
+  Requirement::ShowUntested();
+  self.SummaryReport();
+  send TESTBENCH::TestSuiteComplete();
+end if;  ',
+	1,
+	'',
+	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
+	0);
+INSERT INTO O_TFR
+	VALUES ("1a9fbf33-1ec8-49d6-ae22-1d875f0510e6",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'AddBucket',
+	'Add a test bucket to the set to be run by the test suite.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'select any ts from instances of TestSuite;
+if ( empty ts )
+  create object instance ts of TestSuite;
+  ts.suiteLabel = "Default";
+  ts.timerResolution = timerResolution::second;		// default
+end if;
+
+create object instance new_bucket of TestBucket;
+new_bucket.assignedID = param.bucketId;
+new_bucket.timerResolution = ts.timerResolution;	// default
+
+select one first_bucket related by ts->TestBucket[R111.''will first run''];
+if ( empty first_bucket )
+  relate ts to new_bucket across R111.''will first run'';
+else
+  cursor = first_bucket;
+  while ( True )
+    select one next related by cursor->TestBucket[R113.''follows''];
+    if ( empty next )
+      break;
+    else
+      cursor = next;
+    end if;
+  end while;
+  relate cursor to new_bucket across R113.''follows'';
+end if;
+new_bucket.bktStatus = tsStatus::created;
+',
+	1,
+	'',
+	"df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("1fbe1517-179e-48b9-a1fa-fb64b75cde96",
+	"1a9fbf33-1ec8-49d6-ae22-1d875f0510e6",
+	'bucketId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("8a5d688d-f48b-465c-8930-167630d9c2a9",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'Register',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'select any ts from instances of TestSuite;  // Test Suite should be a singleton
+if ( empty ts ) 
+  create object instance ts of TestSuite;
+  ts.timerResolution = timerResolution::second;		// default
+else
+  LOG::LogFailure( message:"SEQ  Test suite already exists!" );
+end if;
+ts.suiteLabel = param.suiteLabel;
+ts.retainAll = param.retainAll;
+select one tmr related by ts->CountdownTimer[R123.''limits test case duration with''];
+if ( empty tmr )
+  create object instance tmr of CountdownTimer;
+  relate ts to tmr across R123.''limits test case duration with'';
+end if;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("1f4f1fc6-9f39-4ad5-95d8-0de3192ecbb3",
+	"8a5d688d-f48b-465c-8930-167630d9c2a9",
+	'suiteLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("da74df33-601a-44a1-a4a7-8c71217e9e40",
+	"8a5d688d-f48b-465c-8930-167630d9c2a9",
+	'retainAll',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"1f4f1fc6-9f39-4ad5-95d8-0de3192ecbb3",
+	'');
+INSERT INTO O_TFR
+	VALUES ("014f2f7d-eb4a-4972-827d-b94e37df2bdc",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'Assess',
+	'Re-evaluate any currently waiting observations with matching assess key value.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one tc related by self->TestBucket[R118.''is running'']
+                             ->TestCase[R117.''is currently running''];
+select many seqs related by tc->StimulusSequence[R119.''executes''];
+for each seq in seqs
+  select one obs related by seq->Stimulus[R116.''is processing'']
+                                ->Observation[R115.''is current active''];
+  if ( not_empty obs )
+    if ( obs.assessKey == param.key )
+      obs.assessKey = "";	// ..otherwise it will not trigger in state action
+      generate Observation1:Observe() to obs;
+    end if;
+  end if;
+end for;
+',
+	1,
+	'',
+	"5f6b9307-a1a4-45ba-9d2a-78f1606a0a60",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("bd40cd9e-6330-45a8-a1dc-e919c14f530b",
+	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
+	'key',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("9c5e8b50-d65d-4931-8447-cc3528b4e9b1",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'SummaryReport',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'LOG::LogInfo( message:" --- SEQ Summary test suite report ---" );
+LOG::LogInfo( message:self.suiteLabel );
+select one bucket related by self->TestBucket[R111.''will first run''];
+while ( not_empty bucket )
+  LOG::LogInfo( message:"Reporting for Test Bucket: " + bucket.bucketLabel );
+  select one tc related by bucket->TestCase[R112.''will first execute''];
+  while ( not_empty tc )
+   if ( tc.tcStatus == tsStatus::completed )
+    LOG::LogInfo( message:"Test case passed: " + tc.testCaseLabel );
+   end if;
+   if ( tc.tcStatus == tsStatus::failed )
+    LOG::LogFailure( message:"Test case failed; " + tc.testCaseLabel );
+    select any seq related by tc->StimulusSequence[R119.''executes''];
+    if ( not_empty seq )
+      LOG::LogFailure( message:" in sequence " + seq.seqLabel );
+      select one stm related by seq->Stimulus[R116.''is processing''];
+      LOG::LogReal( message:" after stimulus ", r:stm.numberInSeq );
+      select one obs related by stm->Observation[R115.''is current active''];
+      LOG::LogReal( message:" observation ", r:obs.sequence_number );
+      if ( obs.obsStatus == tsStatus::failed )
+        LOG::LogFailure( message:"Observation failed" );
+      end if;
+      if ( obs.obsStatus == tsStatus::timedout )
+        LOG::LogInfo( message:"Observation timed out" );
+      end if;
+    end if;
+   end if;
+   if ( tc.tcStatus == tsStatus::created )
+    LOG::LogFailure( message:"Test case not run; " + tc.testCaseLabel );
+   end if;
+   select one tc related by tc->TestCase[R114.''follows''];
+  end while;
+  select one bucket related by bucket->TestBucket[R113.''follows''];
+end while;
+LOG::LogInfo( message:" --- End of summary report ---" );',
+	1,
+	'',
+	"4397b71c-de2d-434c-a016-a421c3783aa0",
+	0);
+INSERT INTO O_TFR
+	VALUES ("df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	'SetTimerResolution',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	1,
+	'',
+	"8a5d688d-f48b-465c-8930-167630d9c2a9",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("47e7a7ae-396c-47dc-b828-57e187a82a71",
+	"df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("b980968f-16f6-4867-b93f-b083badb5d39",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_BATTR
+	VALUES ("b980968f-16f6-4867-b93f-b083badb5d39",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ATTR
+	VALUES ("b980968f-16f6-4867-b93f-b083badb5d39",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	"00000000-0000-0000-0000-000000000000",
+	'suiteLabel',
+	'',
+	'',
+	'suiteLabel',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("a0b29faf-0f0b-4498-ac82-0496a0a93132",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_BATTR
+	VALUES ("a0b29faf-0f0b-4498-ac82-0496a0a93132",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ATTR
+	VALUES ("a0b29faf-0f0b-4498-ac82-0496a0a93132",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	"b980968f-16f6-4867-b93f-b083badb5d39",
+	'retainAll',
+	'',
+	'',
+	'retainAll',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("05045c98-25f1-4ba4-abc2-770e0e9016fb",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_BATTR
+	VALUES ("05045c98-25f1-4ba4-abc2-770e0e9016fb",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ATTR
+	VALUES ("05045c98-25f1-4ba4-abc2-770e0e9016fb",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	"a0b29faf-0f0b-4498-ac82-0496a0a93132",
+	'timerResolution',
+	'',
+	'',
+	'timerResolution',
+	0,
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ID
+	VALUES (1,
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ID
+	VALUES (2,
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO PE_PE
+	VALUES ("a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

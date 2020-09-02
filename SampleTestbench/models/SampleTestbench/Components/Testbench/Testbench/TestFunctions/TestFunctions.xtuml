@@ -1,0 +1,113 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("cc3240a4-f0b4-40f2-814a-b3059697e12f",
+	'TestFunctions',
+	19,
+	'TestFunctions',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("7cdb2003-40a0-4607-8b6f-0c5332da6d44",
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f",
+	'RunAllTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:1, reqRemark:" 1st" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:2, reqRemark:" 2nd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:3, reqRemark:" 3rd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:4, reqRemark:" 4th" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:5, reqRemark:" 5th" );
+
+send TESTSEQ::RegisterTestSuite( suiteLabel:"Sample Test Suite", keepAllCases:False ); 
+
+create object instance tb1 of TestBucket_1;
+tb1.AddBucket();
+
+create object instance tb2 of TestBucket_2;
+tb2.AddBucket();
+
+create object instance tb3 of TestBucket_3;
+tb3.AddBucket();
+
+send TESTSEQ::RunTestSuite();',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("ce3b2cd2-e349-4f45-9171-e773872f13bc",
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f",
+	'RunFailureTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:1, reqRemark:" 1st" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:2, reqRemark:" 2nd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:3, reqRemark:" 3rd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:4, reqRemark:" 4th" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:5, reqRemark:" 5th" );
+
+send TESTSEQ::RegisterTestSuite( suiteLabel:"Sample Test Suite", keepAllCases:False ); 
+
+//create object instance tb1 of TestBucket_1;
+//tb1.AddBucket();
+
+create object instance tb2 of TestBucket_2;
+tb2.AddBucket();
+
+create object instance tb3 of TestBucket_3;
+tb3.AddBucket();
+
+send TESTSEQ::RunTestSuite();',
+	1,
+	'',
+	"7cdb2003-40a0-4607-8b6f-0c5332da6d44",
+	0);
+INSERT INTO O_TFR
+	VALUES ("0457d1bf-3e39-42ae-9338-f3a86aeee4b1",
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f",
+	'RunSuccessfulTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:1, reqRemark:" 1st" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:2, reqRemark:" 2nd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:3, reqRemark:" 3rd" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:4, reqRemark:" 4th" );
+send TESTSEQ::MakeRequirement( reqPrefix:"SampleApp", reqNumber:5, reqRemark:" 5th" );
+
+send TESTSEQ::RegisterTestSuite( suiteLabel:"Sample Test Suite", keepAllCases:False ); 
+
+create object instance tb1 of TestBucket_1;
+tb1.AddBucket();
+
+send TESTSEQ::RunTestSuite();',
+	1,
+	'',
+	"ce3b2cd2-e349-4f45-9171-e773872f13bc",
+	0);
+INSERT INTO O_ID
+	VALUES (0,
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f");
+INSERT INTO O_ID
+	VALUES (1,
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f");
+INSERT INTO O_ID
+	VALUES (2,
+	"cc3240a4-f0b4-40f2-814a-b3059697e12f");
+INSERT INTO PE_PE
+	VALUES ("cc3240a4-f0b4-40f2-814a-b3059697e12f",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');

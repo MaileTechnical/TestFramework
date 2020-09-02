@@ -1,0 +1,115 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("01abc37e-ea77-4796-9587-cba42ce59ad4",
+	'TestBucket_2',
+	16,
+	'TestBucket_2',
+	'A sample test bucket which runs several test cases demonstrating various failure modes.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("1e19d54d-4079-4cea-8d1f-55783d68dff0",
+	"01abc37e-ea77-4796-9587-cba42ce59ad4",
+	'RunBucketTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'// demonstrate two parallel sequences with failure - both sequences terminated.
+// ObservationX is configured to fail: no instance of ObservationY should be invoked
+select one bucket related by self->TestBucket[R7];
+send TESTSEQ::NameTestBucket( bucketId:bucket.assigned_bucket_id, bucketLabel:"Bucket2" );
+send TESTSEQ::SetTestBucketResolution( bucketId:bucket.assigned_bucket_id, 
+                                       resolution:timerResolution::millisecond );
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB2_1" );
+send TESTSEQ::LinkRequirement( reqPrefix:"SampleApp", reqNumber:3, caseId:tc );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_1" );
+send seq2 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_2" );
+stId = StimulusA::Create( seq:seq1, value:15 );
+::InsertDelay( stimulus:stId, duration:10 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:15, tolerance:1, pollInterval:1, timeLimit:10 );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:10, timeLimit:0 );
+stId = StimulusC::Create( seq:seq2, status:True );
+::InsertDelay( stimulus:stId, duration:20 );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:10, timeLimit:0 );
+
+// demonstrate a triggered observation: ObservationZ is triggered by a condition in ObservationX
+// the second instance of ObservationZ is configure to fail; 
+// both following instances of ObservationY should be cancelled.
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB2_2" );
+send TESTSEQ::LinkRequirement( reqPrefix:"ANY", reqNumber:3, caseId:tc );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_1" );
+send seq2 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_2" );
+stId = StimulusA::Create( seq:seq1, value:15 );
+::InsertDelay( stimulus:stId, duration:30 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:1, tolerance:1, pollInterval:1, timeLimit:10 );
+::InsertDelay( stimulus:stId, duration:20 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:1, tolerance:1, pollInterval:1, timeLimit:10 );
+::InsertDelay( stimulus:stId, duration:10 );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:10, timeLimit:0 );
+stId = StimulusC::Create( seq:seq2, status:True );
+ObservationZ::CreateTriggered( stimulus:stId, expectedValue:100, key:"EventZ", timeLimit:100 );
+ObservationZ::CreateTriggered( stimulus:stId, expectedValue:10, key:"EventZ", timeLimit:100 );
+::InsertDelay( stimulus:stId, duration:10 );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:10, timeLimit:0 );
+
+bucket.Initialized();
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("741dc11e-8cbd-4a3f-afdb-f503d9958364",
+	"01abc37e-ea77-4796-9587-cba42ce59ad4",
+	'AddBucket',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create object instance bucket of TestBucket;
+relate self to bucket across R7;
+bucket.AddToSuite();',
+	1,
+	'',
+	"1e19d54d-4079-4cea-8d1f-55783d68dff0",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("09366467-a217-4c4a-84c5-4dd0fceae16a",
+	"01abc37e-ea77-4796-9587-cba42ce59ad4");
+INSERT INTO O_BATTR
+	VALUES ("09366467-a217-4c4a-84c5-4dd0fceae16a",
+	"01abc37e-ea77-4796-9587-cba42ce59ad4");
+INSERT INTO O_ATTR
+	VALUES ("09366467-a217-4c4a-84c5-4dd0fceae16a",
+	"01abc37e-ea77-4796-9587-cba42ce59ad4",
+	"00000000-0000-0000-0000-000000000000",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"01abc37e-ea77-4796-9587-cba42ce59ad4");
+INSERT INTO O_ID
+	VALUES (1,
+	"01abc37e-ea77-4796-9587-cba42ce59ad4");
+INSERT INTO O_ID
+	VALUES (2,
+	"01abc37e-ea77-4796-9587-cba42ce59ad4");
+INSERT INTO PE_PE
+	VALUES ("01abc37e-ea77-4796-9587-cba42ce59ad4",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');

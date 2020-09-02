@@ -1,0 +1,267 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	'Requirement',
+	102,
+	'Requirement',
+	'Each instance represents one requirement as expressed in the 
+relevant requirements specification.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("c46a2afb-9638-414e-b9fe-81f816df0540",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	'ShowUntested',
+	'Report created requirements which are not linked to any test case.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'// this should probably be ammended to include phase parameter...
+LOG::LogInfo( message:"Untested Requirements" );
+
+select many reqs from instances of Requirement;
+total_reqs = 0;
+tested_reqs = 0;
+for each req in reqs
+  total_reqs = total_reqs + 1;
+  select any test_case related by req->TestCase[R101.''is tested by''];
+  if ( empty test_case )
+    untested = req.prefix + " Untested: " + req.remark;
+    LOG::LogReal( message:untested, r:req.number );
+  else
+    tested_reqs = tested_reqs + 1;
+  end if;
+end for;
+LOG::LogReal( message:"Total requirements: ", r:total_reqs );
+LOG::LogReal( message:"Tested requirements: ", r:tested_reqs );
+LOG::LogReal( message:"Untested requirements: ", r:(total_reqs - tested_reqs) );',
+	1,
+	'',
+	"869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	0);
+INSERT INTO O_TFR
+	VALUES ("6cd90eac-232e-4a6b-b01d-70efa1111cd9",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	'TestedBy',
+	'List test cases which (partially) test a each created requirement.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'LOG::LogInfo( message:"** Successfully Tested Requirements **" );
+select many reqs from instances of Requirement;
+for each req in reqs
+  select many tcs related by req->TestCase[R101.''is tested by''];
+  if ( not_empty tcs )
+    LOG::LogReal( message:req.prefix, r:req.number);
+    for each tc in tcs
+      if ( tc.tcStatus == tsStatus::completed )
+    	LOG::LogInfo( message:" tested by successful test case " + tc.testCaseLabel );
+      end if;
+    end for;
+  end if;
+end for; 
+LOG::LogInfo( message:"** Failed Test Case Requirements **" );
+for each req in reqs
+  select many tcs related by req->TestCase[R101.''is tested by''];
+  if ( not_empty tcs )
+    LOG::LogReal( message:req.prefix, r:req.number);
+    for each tc in tcs
+      if ( tc.tcStatus != tsStatus::completed )
+    	LOG::LogInfo( message:" associated with failed test case " + tc.testCaseLabel );
+      end if;
+    end for;
+  end if;
+end for; 
+',
+	1,
+	'',
+	"c46a2afb-9638-414e-b9fe-81f816df0540",
+	0);
+INSERT INTO O_TFR
+	VALUES ("d9576ec5-8992-4354-b846-dfe3fe360374",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	'Create',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'select any req from instances of Requirement
+  where ( selected.prefix == param.reqPrefix and 
+          selected.number == param.reqNumber );
+if ( empty req )
+  create object instance req of Requirement;
+  req.prefix = param.reqPrefix;
+  req.number = param.reqNumber;
+  req.remark = param.reqRemark;
+end if;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("aa4a7564-b1db-4b07-81fc-9a9d130e69db",
+	"d9576ec5-8992-4354-b846-dfe3fe360374",
+	'reqPrefix',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("fa6efa2b-bbd7-42a4-b39b-964af7cf52fa",
+	"d9576ec5-8992-4354-b846-dfe3fe360374",
+	'reqNumber',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"aa4a7564-b1db-4b07-81fc-9a9d130e69db",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("b0dfc85f-2d02-446c-a155-49d7f1bcabbe",
+	"d9576ec5-8992-4354-b846-dfe3fe360374",
+	'reqRemark',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"fa6efa2b-bbd7-42a4-b39b-964af7cf52fa",
+	'');
+INSERT INTO O_TFR
+	VALUES ("869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	'Link',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'select any req from instances of Requirement
+  where ( selected.prefix == param.reqPrefix and 
+          selected.number == param.reqNumber );
+if ( empty req )
+  create object instance req of Requirement;
+  req.prefix = param.reqPrefix;
+  req.number = param.reqNumber;
+  req.remark = "requirement not found";
+end if;
+select any tc from instances of TestCase
+  where ( selected.testCaseLabel == param.caseLabel );
+if ( not_empty tc )
+  relate req to tc across R101.''is tested by'';
+else
+  LOG::LogFailure( message:"SEQ Invalid test case identifier" );
+end if;',
+	1,
+	'',
+	"d9576ec5-8992-4354-b846-dfe3fe360374",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("998a7e79-ffcf-4de7-a580-d58cd0a0f321",
+	"869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	'reqPrefix',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("75f2087f-2348-47fa-860f-f49308204816",
+	"869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	'reqNumber',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"998a7e79-ffcf-4de7-a580-d58cd0a0f321",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("06018333-112a-4929-b54e-0c1eb493da7e",
+	"869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	'caseLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"75f2087f-2348-47fa-860f-f49308204816",
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("f3dfa84f-e8f9-40b2-b319-8d5a2bfe81cd",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_BATTR
+	VALUES ("f3dfa84f-e8f9-40b2-b319-8d5a2bfe81cd",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_ATTR
+	VALUES ("f3dfa84f-e8f9-40b2-b319-8d5a2bfe81cd",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	"00000000-0000-0000-0000-000000000000",
+	'prefix',
+	'Prefix for requirement traceability.
+',
+	'',
+	'prefix',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("2d23a97a-4a5d-4169-a202-46fb62e66181",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_BATTR
+	VALUES ("2d23a97a-4a5d-4169-a202-46fb62e66181",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_ATTR
+	VALUES ("2d23a97a-4a5d-4169-a202-46fb62e66181",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	"f3dfa84f-e8f9-40b2-b319-8d5a2bfe81cd",
+	'number',
+	'Requirement number for traceability.',
+	'',
+	'number',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("494c9f18-faf6-4cd5-aded-a43ea01566f1",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_BATTR
+	VALUES ("494c9f18-faf6-4cd5-aded-a43ea01566f1",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_ATTR
+	VALUES ("494c9f18-faf6-4cd5-aded-a43ea01566f1",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	"2d23a97a-4a5d-4169-a202-46fb62e66181",
+	'remark',
+	'Arbitrary information associted with the requirement.
+E.g "dropped", "moved to phase X", ...',
+	'',
+	'remark',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_OIDA
+	VALUES ("f3dfa84f-e8f9-40b2-b319-8d5a2bfe81cd",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	0,
+	'prefix');
+INSERT INTO O_OIDA
+	VALUES ("2d23a97a-4a5d-4169-a202-46fb62e66181",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	0,
+	'number');
+INSERT INTO O_ID
+	VALUES (1,
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_ID
+	VALUES (2,
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO PE_PE
+	VALUES ("dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

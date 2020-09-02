@@ -1,0 +1,128 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("f75b05d9-68ad-43e3-9d65-f96d9a7ab10f",
+	'TestBucket_1',
+	15,
+	'TestBucket_1',
+	'A sample test bucket which runs several test cases demonstrating various capabilities.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("4df7a765-7373-4384-9090-f98ae1a9172e",
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f",
+	'RunBucketTests',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'// demonstrate bucket containing 4 tests
+select one bucket related by self->TestBucket[R7];
+send TESTSEQ::NameTestBucket( bucketId:bucket.assigned_bucket_id, bucketLabel:"Bucket_1" );
+send TESTSEQ::SetTestBucketResolution( bucketId:bucket.assigned_bucket_id, 
+                                       resolution:timerResolution::minute );
+
+// demonstrate successful single sequence test; linked requirements and preconditions
+send TESTSEQ::NameTestBucket( bucketId:bucket.assigned_bucket_id, bucketLabel:"Bucket_1" );
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB1_1" );
+send TESTSEQ::LinkRequirement( reqPrefix:"SampleApp", reqNumber:2, caseId:tc );
+send TESTSEQ::LinkRequirement( reqPrefix:"SampleApp", reqNumber:3, caseId:tc );
+PreConditions::Create( testCase:tc, valueA:10, valueB:20, statusC:False );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_1_1" );
+stId = StimulusA::Create( seq:seq1, value:15 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:8, tolerance:1, pollInterval:1, timeLimit:10  );
+stId = StimulusC::Create( seq:seq1, status:True );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:0, timeLimit:20 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:6, tolerance:1, pollInterval:1, timeLimit:10 );
+
+// demonstrate interval timer: negative values in StimulusA & ObservationX will start & read timer
+// this runs slowly because this interval timer selects a millisecond time resolution.
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB1_2" );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_2_1" );
+stId = StimulusA::Create( seq:seq1, value:-2 );
+::InsertDelay( stimulus:stId, duration:25 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:5, tolerance:-1, pollInterval:1, timeLimit:10 );
+
+// demonstrate a test case with two parallel sequences - different delays means we see Y before X
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB1_3" );
+send TESTSEQ::LinkRequirement( reqPrefix:"SampleApp", reqNumber:3, caseId:tc );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_3_1" );
+send seq2 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_3_2" );
+stId = StimulusA::Create( seq:seq1, value:15 );
+::InsertDelay( stimulus:stId, duration:30 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:5, tolerance:1, pollInterval:1, timeLimit:10 );
+stId = StimulusC::Create( seq:seq2, status:True );
+::InsertDelay( stimulus:stId, duration:10 );
+ObservationY::CreatePolling( stimulus:stId, expectedC:True, pollInterval:10, timeLimit:0 );
+
+// demonstrate triggered observation across sequences: 
+// ObservationZ will be triggered by a contrived condition in ObservationX.
+send tc = TESTSEQ::AddTestCase( bucketId:bucket.assigned_bucket_id, caseLabel:"testB1_4" );
+send TESTSEQ::LinkRequirement( reqPrefix:"ANY", reqNumber:3, caseId:tc );
+send seq1 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_4_1" );
+send seq2 = TESTSEQ::AttachStimulusSequence( caseId:tc, seqLabel:"seq_B1_4_2" );
+stId = StimulusA::Create( seq:seq1, value:15 );
+::InsertDelay( stimulus:stId, duration:10 );
+ObservationX::CreatePolling( stimulus:stId, expectedA:1, tolerance:1, pollInterval:1, timeLimit:10 );
+stId = StimulusC::Create( seq:seq2, status:True );
+ObservationZ::CreateTriggered( stimulus:stId, expectedValue:100, key:"EventZ", timeLimit:100 );
+
+bucket.Initialized();
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("5dd669f3-93da-412b-9a96-63d069f19849",
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f",
+	'AddBucket',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create object instance bucket of TestBucket;
+relate self to bucket across R7;
+bucket.AddToSuite();',
+	1,
+	'',
+	"4df7a765-7373-4384-9090-f98ae1a9172e",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("a21df49c-8c2e-48d2-91bc-76f216c4a56f",
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f");
+INSERT INTO O_BATTR
+	VALUES ("a21df49c-8c2e-48d2-91bc-76f216c4a56f",
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f");
+INSERT INTO O_ATTR
+	VALUES ("a21df49c-8c2e-48d2-91bc-76f216c4a56f",
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f",
+	"00000000-0000-0000-0000-000000000000",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f");
+INSERT INTO O_ID
+	VALUES (1,
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f");
+INSERT INTO O_ID
+	VALUES (2,
+	"f75b05d9-68ad-43e3-9d65-f96d9a7ab10f");
+INSERT INTO PE_PE
+	VALUES ("f75b05d9-68ad-43e3-9d65-f96d9a7ab10f",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');

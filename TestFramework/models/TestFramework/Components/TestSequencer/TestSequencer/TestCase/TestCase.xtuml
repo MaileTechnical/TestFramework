@@ -1,0 +1,204 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("ec247a2b-53a1-4839-882c-db3bb2812c25",
+	'TestCase',
+	100,
+	'TestCase',
+	'A test case presents a sequence of stimuli to an application under test, making observations to evaluate behavior.
+Unwanted behavior summarily fails the test case, cancelling all subsequent stimuli and observations.
+A test case may be configured to run multiple sequences in parallel.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("8879251c-f38e-48ba-96a3-4a6b3f3fcdf4",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	'CancelObservations',
+	'Invoked when a test cases fails.
+Cancel any current observations.
+No further stimuli will be injected.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'LOG::LogInfo( message:"SEQ Cancelling all further Stimuli/Observations in incomplete test case " + self.testCaseLabel );
+select many seqs related by self->StimulusSequence[R119.''executes''];
+for each seq in seqs
+  select one stim related by seq->Stimulus[R116.''is processing''];
+  if ( not_empty stim )
+    select one obs related by stim->Observation[R115.''is current active''];
+    if ( not_empty obs )
+      obs.CancelTimers();
+    end if;
+  end if;
+end for;
+	',
+	1,
+	'',
+	"214debee-c292-46cc-8a56-fac51578e9b9",
+	0);
+INSERT INTO O_TFR
+	VALUES ("214debee-c292-46cc-8a56-fac51578e9b9",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	'AttachSequence',
+	'Add an instance of stimulus sequence which can hold a series of stimuli and associated observations.
+A test case may have several such sequences which execute in parallel.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create object instance seq of StimulusSequence;
+seq.seqLabel = param.seqLabel;
+relate seq to self across R119.''is execution thread for'';
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("be2ec140-e04e-4747-a9b8-f37de36251e5",
+	"214debee-c292-46cc-8a56-fac51578e9b9",
+	'seqLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("74064370-1d28-45f8-8225-1cffeb0706d7",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	'Dismantle',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'send TESTBENCH::DeletePreCondition( caseLabel:self.testCaseLabel );
+select many seqs related by self->StimulusSequence[R119.''executes''];
+for each seq in seqs
+  unrelate self from seq across R119.''executes'';
+  seq.Dismantle();
+end for;',
+	1,
+	'',
+	"8879251c-f38e-48ba-96a3-4a6b3f3fcdf4",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"7354e7f1-53ba-4203-a949-1f0d41145330",
+	'testCaseLabel',
+	'Testbench-assigned label used for identification.',
+	'',
+	'testCaseLabel',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
+	'tcStatus',
+	'Completion status.',
+	'',
+	'tcStatus',
+	0,
+	"f118c998-732a-4398-a820-4480fa8cdb21",
+	'',
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
+	"00000000-0000-0000-0000-000000000000",
+	'tsStatus',
+	'',
+	'',
+	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("d1aa937d-f84c-48ed-b0f0-0cc18b8ff8d4",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("d1aa937d-f84c-48ed-b0f0-0cc18b8ff8d4",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("d1aa937d-f84c-48ed-b0f0-0cc18b8ff8d4",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"4fceeb4d-7131-4175-9bc2-2367f3e97a39",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("7354e7f1-53ba-4203-a949-1f0d41145330",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("7354e7f1-53ba-4203-a949-1f0d41145330",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("7354e7f1-53ba-4203-a949-1f0d41145330",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"00000000-0000-0000-0000-000000000000",
+	'testCaseId',
+	'An arbitrary unique id which can be used to identify an instance.',
+	'',
+	'testCaseId',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	'durationLimit',
+	'If positive, the maximum time the test case can contimue execution.
+Units: see test bucket timer resolution setting.',
+	'',
+	'durationLimit',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_OIDA
+	VALUES ("7354e7f1-53ba-4203-a949-1f0d41145330",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	0,
+	'testCaseId');
+INSERT INTO O_ID
+	VALUES (1,
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ID
+	VALUES (2,
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO PE_PE
+	VALUES ("ec247a2b-53a1-4839-882c-db3bb2812c25",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

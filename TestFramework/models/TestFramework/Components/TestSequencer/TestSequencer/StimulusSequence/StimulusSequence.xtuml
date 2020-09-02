@@ -1,0 +1,239 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	'StimulusSequence',
+	123,
+	'StimulusSequence',
+	'Represents a sequence of stimuli, each of which may may be followed by a sequence of observations.
+A test case may be configured to run more than one test sequence in parallel.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("5a4d2c90-55b1-4d65-a736-980238f02208",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	'Dismantle',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one stimulus related by self->Stimulus[R104.''will first inject''];
+if ( not_empty stimulus )
+  unrelate self from stimulus across R104.''will first inject'';
+end if;
+while ( not empty stimulus )
+  select one obs related by stimulus->Observation[R105.''will first trigger''];
+  if ( not_empty obs )
+    unrelate stimulus from obs across R105.''will first trigger'';
+  end if;
+  while ( not_empty obs )
+    select one next_obs related by obs->Observation[R106.''follows''];
+    if ( not_empty next_obs )
+      unrelate obs from next_obs across R106.''follows'';
+    end if;
+    obs.Delete();
+    obs = next_obs;
+  end while;
+  select one next_stimulus related by stimulus->Stimulus[R102.''follows''];
+  if ( not_empty next_stimulus )
+    unrelate stimulus from next_stimulus across R102.''follows'';
+  end if;
+  stimulus.Delete();
+  stimulus = next_stimulus;
+end while;
+self.DeleteTimers();
+
+delete object instance self;',
+	1,
+	'',
+	"8bedcf33-635e-410e-bff2-14de88e3ffe9",
+	0);
+INSERT INTO O_TFR
+	VALUES ("8bedcf33-635e-410e-bff2-14de88e3ffe9",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	'Completed',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.seqStatus = tsStatus::completed;
+LOG::LogInfo( message:"SEQ Stimulus sequence complete " + self.seqLabel );
+select one tc related by self->TestCase[R119.''is execution thread for''];
+generate TestCase3:SequenceComplete to tc;
+',
+	1,
+	'',
+	"a71e16a2-a938-4663-8f0e-b1ecb9e451bd",
+	0);
+INSERT INTO O_TFR
+	VALUES ("a71e16a2-a938-4663-8f0e-b1ecb9e451bd",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	'CreateTimers',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'// Create the 3 timers associated with a stimulus sequence:
+// One interval timer for general timimg use by testbench.
+// Two countdown timers for observation polling and timeout use.
+select one bucket related by self->TestCase[R119.''is execution thread for'']
+                                 ->TestBucket[R117.''is active for''];
+create object instance itmr of IntervalTimer;
+itmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
+relate self to itmr across R120.''measures intervals with'';
+create object instance ctmr of CountdownTimer;
+ctmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
+relate self to ctmr across R121.''limits observation duration with'';
+create object instance ctmr of CountdownTimer;
+ctmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
+relate self to ctmr across R122.''polls observation with'';',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("2001704a-ac41-4358-8995-b86650348538",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	'DeleteTimers',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
+if ( not_empty itmr )	// this sequence never started
+  unrelate itmr from self across R120.''times intervals for'';
+  itmr.Delete();
+  select one ctmr related by self->CountdownTimer[R121.''limits observation duration with''];
+  unrelate ctmr from self across R121.''triggers observation timeout for'';
+  ctmr.Delete();
+  select one ctmr related by self->CountdownTimer[R122.''polls observation with''];
+  unrelate ctmr from self across R122.''triggers polling observation for'';
+  ctmr.Delete();
+end if;
+',
+	1,
+	'',
+	"5a4d2c90-55b1-4d65-a736-980238f02208",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	'seqLabel',
+	'Testbench-assigned label used for identification.',
+	'',
+	'seqLabel',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"00000000-0000-0000-0000-000000000000",
+	'sequenceId',
+	'An arbitrary unique id which can be used to identify an instance.',
+	'',
+	'sequenceId',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("70fc584c-3727-4bf6-8a12-20c70cafb7e5",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("70fc584c-3727-4bf6-8a12-20c70cafb7e5",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("70fc584c-3727-4bf6-8a12-20c70cafb7e5",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"280d0095-61a4-4fe8-bee9-09bef3406932",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("280d0095-61a4-4fe8-bee9-09bef3406932",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("280d0095-61a4-4fe8-bee9-09bef3406932",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("280d0095-61a4-4fe8-bee9-09bef3406932",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"95b56ef1-8098-454b-9fef-203a680cbe09",
+	'lastStimulus',
+	'Used to assign sequence number to each new stimulus added to a stimulus sequence.
+Numberings are used in identifying/reporting failure points.
+',
+	'',
+	'lastStimulus',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("95b56ef1-8098-454b-9fef-203a680cbe09",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("95b56ef1-8098-454b-9fef-203a680cbe09",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("95b56ef1-8098-454b-9fef-203a680cbe09",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"ce363601-8e98-4cbe-b4d3-b03e48c3e581",
+	'seqStatus',
+	'',
+	'',
+	'seqStatus',
+	0,
+	"f118c998-732a-4398-a820-4480fa8cdb21",
+	'',
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
+	"00000000-0000-0000-0000-000000000000",
+	'tsStatus',
+	'',
+	'',
+	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_ID
+	VALUES (0,
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_OIDA
+	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	0,
+	'sequenceId');
+INSERT INTO O_ID
+	VALUES (1,
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ID
+	VALUES (2,
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO PE_PE
+	VALUES ("0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

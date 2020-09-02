@@ -1,0 +1,105 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("0e823b74-cfb5-4226-8779-310f458d931e",
+	'StimulusC',
+	6,
+	'StimulusC',
+	'An example of a stimulus invoking an interface signal to the application under test.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("e1fada9b-524f-45ca-94a1-b0a901ee1108",
+	"0e823b74-cfb5-4226-8779-310f458d931e",
+	'Create',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'create object instance sc of StimulusC;
+sc.newStatus = param.status;
+create object instance stimulus of Stimulus;
+relate stimulus to sc across R3;
+
+stimulus.AddToTest( assigned_seq_id:param.seq );
+return stimulus.assigned_stm_id;
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("ee6e26be-9036-4aeb-8de0-20e86b64376b",
+	"e1fada9b-524f-45ca-94a1-b0a901ee1108",
+	'seq',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("e803a516-cf6e-43d6-994f-467e7d8cb1c9",
+	"e1fada9b-524f-45ca-94a1-b0a901ee1108",
+	'status',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"ee6e26be-9036-4aeb-8de0-20e86b64376b",
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("1e794ccc-4cf7-46af-a6f5-09f02a048334",
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_BATTR
+	VALUES ("1e794ccc-4cf7-46af-a6f5-09f02a048334",
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_ATTR
+	VALUES ("1e794ccc-4cf7-46af-a6f5-09f02a048334",
+	"0e823b74-cfb5-4226-8779-310f458d931e",
+	"00000000-0000-0000-0000-000000000000",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("3a31a6a9-d471-481c-8fcb-a0828237f87f",
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_BATTR
+	VALUES ("3a31a6a9-d471-481c-8fcb-a0828237f87f",
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_ATTR
+	VALUES ("3a31a6a9-d471-481c-8fcb-a0828237f87f",
+	"0e823b74-cfb5-4226-8779-310f458d931e",
+	"1e794ccc-4cf7-46af-a6f5-09f02a048334",
+	'newStatus',
+	'',
+	'',
+	'newStatus',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_ID
+	VALUES (1,
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO O_ID
+	VALUES (2,
+	"0e823b74-cfb5-4226-8779-310f458d931e");
+INSERT INTO PE_PE
+	VALUES ("0e823b74-cfb5-4226-8779-310f458d931e",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');

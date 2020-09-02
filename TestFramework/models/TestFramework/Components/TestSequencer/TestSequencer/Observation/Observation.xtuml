@@ -1,0 +1,473 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'Observation',
+	105,
+	'Observation',
+	'Each instance makes a particular observation, or fails to do so
+within a prescribed length of time.  Various types of observations
+are possible, including the receipt of interface messages from
+the application under test and from the simulated environment.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("6475862e-fa46-4136-b86e-0c99df6734ca",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'StartPollingTimer',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one seq related by self->Stimulus[R115.''is currently observing for'']
+                              ->StimulusSequence[R116.''is active for''];
+select one ptmr related by seq->CountdownTimer[R122.''polls observation with''];
+create event instance poll of Observation1:Observe to self;
+ptmr.Start( event:poll, duration:self.polling_interval );
+',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("99f3a05c-edfd-49a4-8f70-160c84f5a3e7",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'StartDurationLimitTimer',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one seq related by self->Stimulus[R115.''is currently observing for'']
+                              ->StimulusSequence[R116.''is active for''];
+select one mtmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+if ( self.isDelay )
+  create event instance evt of Observation2:Completed to self;
+  mtmr.Start( event:evt, duration:self.duration_limit );
+  LOG::LogInfo( message:"SEQ: Delay timer started in seq: " + seq.seqLabel );                    
+else
+  create event instance evt of Observation4:TimedOut to self;
+  mtmr.Start( event:evt, duration:self.duration_limit );
+end if;
+',
+	1,
+	'',
+	"6475862e-fa46-4136-b86e-0c99df6734ca",
+	0);
+INSERT INTO O_TFR
+	VALUES ("d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'CancelTimers',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one seq related by self->Stimulus[R115.''is currently observing for'']
+                              ->StimulusSequence[R116.''is active for''];
+if ( self.polling_interval > 0 )
+  select one ptmr related by seq->CountdownTimer[R122.''polls observation with''];
+  cancel = ptmr.Cancel();
+end if;
+if ( self.duration_limit > 0 )
+  select one ptmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+  cancel = ptmr.Cancel();
+end if;
+',
+	1,
+	'',
+	"a0ac75b4-7713-4a89-b89a-2954d6e781ff",
+	0);
+INSERT INTO O_TFR
+	VALUES ("a0ac75b4-7713-4a89-b89a-2954d6e781ff",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'ReportedDone',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'if ( param.success == True )
+  LOG::LogSuccess( message:"SEQ Observation good" );
+  generate Observation2:Completed to self;
+else
+  LOG::LogFailure( message:"SEQ Observation FAILED" );
+  generate Observation3:Failed to self;
+end if;',
+	1,
+	'',
+	"99f3a05c-edfd-49a4-8f70-160c84f5a3e7",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("67147451-c4cd-4968-aadb-65c3cc37009c",
+	"a0ac75b4-7713-4a89-b89a-2954d6e781ff",
+	'success',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'Append',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'select any stimulus from instances of Stimulus
+  where ( selected.assignedID == param.stimulusId );
+if ( empty stimulus )
+  LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
+  return;
+end if;
+
+create object instance new_observation of Observation;
+new_observation.assignedID = param.observationId;
+new_observation.polling_interval = param.pollInterval;
+new_observation.duration_limit = param.durationLimit;
+new_observation.assessKey = param.eventKey;
+new_observation.isDelay = param.isDelay;
+new_observation.obsStatus = tsStatus::created;
+
+stimulus.observations = stimulus.observations + 1;
+new_observation.sequence_number = stimulus.observations;
+
+select one first_observation related by stimulus->Observation[R105.''will first trigger''];
+if ( empty first_observation ) 
+  relate stimulus to new_observation across R105.''will first trigger'';
+else
+  // Point cursor at last observation in sequence for this stimulus.
+  cursor = first_observation;
+  while ( True )
+    select one next related by cursor->Observation[R106.''follows''];
+    if ( empty next )
+      break;
+    else
+      cursor = next;
+    end if;
+  end while;
+  // Add this instance of observation to the end of the sequence.
+  relate cursor to new_observation across R106.''follows'';
+end if;',
+	1,
+	'',
+	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("e4be0c83-60d3-496e-a688-3e3d832da9bf",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'pollInterval',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"ed94511a-1ba5-41fa-af71-bf810cc45f5c",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("5cd1928e-f46d-4919-aee6-2bfb9590acbe",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'durationLimit',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"e4be0c83-60d3-496e-a688-3e3d832da9bf",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("4d06e5c5-3364-404d-9364-b3340967640d",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'stimulusId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("4733748f-225f-4480-87ef-6251e166bc50",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'eventKey',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"5cd1928e-f46d-4919-aee6-2bfb9590acbe",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("ed94511a-1ba5-41fa-af71-bf810cc45f5c",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'observationId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"4d06e5c5-3364-404d-9364-b3340967640d",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("1f61a05e-fae9-4aa6-8b2f-a094515f4bda",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	'isDelay',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"4733748f-225f-4480-87ef-6251e166bc50",
+	'');
+INSERT INTO O_TFR
+	VALUES ("11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'AppendDelay',
+	'Add a specialized observation which only incurs a time delay in the sequence of observations.
+It does not have a counterpart invocation in the testbench and it cannot report failure.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'Observation::Append( stimulusId:param.stimulusId,
+                          observationId:param.observationId,
+                          pollInterval:0, 
+                          durationLimit:param.duration, 
+                          eventKey:"", 
+                          isDelay:True );
+',
+	1,
+	'',
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("cd2fd7d6-5ef0-42ab-ade3-261df1c4b92a",
+	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	'stimulusId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("f41f3a9c-d352-499f-b728-1036840b835c",
+	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	'duration',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"85a546a9-5163-44b9-96c4-7f0edd992456",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("85a546a9-5163-44b9-96c4-7f0edd992456",
+	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	'observationId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"cd2fd7d6-5ef0-42ab-ade3-261df1c4b92a",
+	'');
+INSERT INTO O_TFR
+	VALUES ("3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'ReadIntervalTimer',
+	'Access the interval timer belonging to the stimulus sequence that triggered this observation.
+Optionally, reset the timer value to zero after reading: see reset paramater.',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	1,
+	'select one tmr related by self->Stimulus[R115.''is currently observing for'']
+                             ->StimulusSequence[R116.''is active for'']
+                             ->IntervalTimer[R120.''measures intervals with''];
+interval = tmr.ticks;
+if ( param.reset )
+  tmr.ticks = 0;
+end if;
+return interval;
+',
+	1,
+	'',
+	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("6ad5b0b1-6d02-41f7-899b-df41524719e0",
+	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	'reset',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'If set to true, the timer value will reset to zero after being read.');
+INSERT INTO O_TFR
+	VALUES ("47df170d-7e82-485c-a2ec-b2936e92e9fb",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'Delete',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'if ( not self.isDelay )
+  send TESTBENCH::DeleteObservation( observationId:self.assignedID );
+end if;
+delete object instance self;
+',
+	1,
+	'',
+	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
+	'obsStatus',
+	'Tracks the status of the observation through creation to completion/failure.',
+	'',
+	'obsStatus',
+	0,
+	"f118c998-732a-4398-a820-4480fa8cdb21",
+	'',
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
+	"00000000-0000-0000-0000-000000000000",
+	'tsStatus',
+	'',
+	'',
+	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("461e232d-e064-4ec7-991a-9ab6353d0a53",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("461e232d-e064-4ec7-991a-9ab6353d0a53",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("461e232d-e064-4ec7-991a-9ab6353d0a53",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
+	'sequence_number',
+	'Observations are numbered, starting at 1, on an observation sequence attached to a stimulus.
+Numberings are used in identifying/reporting failure points.
+',
+	'',
+	'sequence_number',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"655558b2-6035-4116-afec-d34876d2b21f",
+	'duration_limit',
+	'The time limit for which this observation may delay, waiting for a successful evaluation.
+While delaying, re-evaluation my be triggered by polling or by a reassess request from the client.
+If not a positive value, this is deemed to be a one-shot observation: succeed or fail.
+Units: as specified/inherited by stimulus sequence resolution.',
+	'',
+	'duration_limit',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"461e232d-e064-4ec7-991a-9ab6353d0a53",
+	'polling_interval',
+	'The periodic interval at which the observation will re-evaluate.
+Units: as specified/inherited by stimulus sequence resolution.',
+	'',
+	'polling_interval',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"24be76cd-6e25-43bb-ad99-9b1b9098100a",
+	'assessKey',
+	'If a client sends an assess signal with a matching key, this observation will evaluate.',
+	'',
+	'assessKey',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"00000000-0000-0000-0000-000000000000",
+	'assignedID',
+	'A supplied value which identifies the counterpart entity in the Testbench.',
+	'',
+	'assignedID',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	'isDelay',
+	'This ''observation'' just uses timeout as a delay; it will not invoke any client activity.',
+	'',
+	'isDelay',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ID
+	VALUES (1,
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ID
+	VALUES (2,
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO PE_PE
+	VALUES ("575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

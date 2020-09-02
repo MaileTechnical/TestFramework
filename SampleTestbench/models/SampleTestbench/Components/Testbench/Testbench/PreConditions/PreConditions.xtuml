@@ -1,0 +1,178 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("55dff990-8281-416e-bb96-54ba74cd157b",
+	'PreConditions',
+	4,
+	'PreConditions',
+	'This class represents a set of application values which should be established before a test case is initiated.
+',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	'Create',
+	'Create an instance, associated with the given test case which stores the supplied values.
+These values will be used to establish context when the test case initializes.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'create object instance conditions of PreConditions;
+conditions.value_A = param.valueA;
+conditions.value_B = param.valueB;
+conditions.status_C = param.statusC;
+condition_id = param.testCase;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("a5a78ab5-03fe-43c3-aae3-b340f7f6d9af",
+	"a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	'testCase',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'The assigned id of the test case associated with this instance of pre-conditions.');
+INSERT INTO O_TPARM
+	VALUES ("133382d5-2d7c-4426-8614-4cc580d58259",
+	"a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	'valueA',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"a5a78ab5-03fe-43c3-aae3-b340f7f6d9af",
+	'An example of a value which may be desired to set as a pre-condition.
+Typically injected to appliacation under test:
+send SomePort::SomeSignal(a_value:self.valueA );');
+INSERT INTO O_TPARM
+	VALUES ("5b4a6780-3c48-4417-8b5a-5dd59766bf75",
+	"a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	'valueB',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"133382d5-2d7c-4426-8614-4cc580d58259",
+	'see description for valueA.');
+INSERT INTO O_TPARM
+	VALUES ("b15f2776-0f5b-4e29-a4bd-997ce1c69512",
+	"a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	'statusC',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"5b4a6780-3c48-4417-8b5a-5dd59766bf75",
+	'see description for valueA.');
+INSERT INTO O_TFR
+	VALUES ("50d45808-a403-4613-a0f0-25df43a5c316",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	'Establish',
+	'When invoked, the values represented in the attributes are to be passed in to the application.
+Typically: send SomePort::SomeActivity( value: self.valueX );',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'// supply the condition values to the application
+// send SomePort::setA ( value:self.valueA );
+// send SomePort::setC ( value:self.valueC );
+// etc.
+LOG::LogInfo( message:"Establishing pre-conditions" );',
+	1,
+	'',
+	"a6088d9d-6b2d-45bb-b39c-591f4b314686",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("0a459903-04e5-4fc5-9e94-ebb41a7be1db",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_BATTR
+	VALUES ("0a459903-04e5-4fc5-9e94-ebb41a7be1db",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ATTR
+	VALUES ("0a459903-04e5-4fc5-9e94-ebb41a7be1db",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	"e50ab44c-28b4-41a7-98c6-0be5dbfa716e",
+	'value_A',
+	'Just a place-holder representing some value that may be associted with setting pre/post conditions. ',
+	'',
+	'value_A',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("5e8e21a0-ce7b-4ced-ac42-49e448f40b08",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_BATTR
+	VALUES ("5e8e21a0-ce7b-4ced-ac42-49e448f40b08",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ATTR
+	VALUES ("5e8e21a0-ce7b-4ced-ac42-49e448f40b08",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	"0a459903-04e5-4fc5-9e94-ebb41a7be1db",
+	'value_B',
+	'Just a place-holder representing some value that may be associted with setting pre/post conditions. ',
+	'',
+	'value_B',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("a78849fd-c55f-478d-80b6-1416fbc0a172",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_BATTR
+	VALUES ("a78849fd-c55f-478d-80b6-1416fbc0a172",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ATTR
+	VALUES ("a78849fd-c55f-478d-80b6-1416fbc0a172",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	"5e8e21a0-ce7b-4ced-ac42-49e448f40b08",
+	'status_C',
+	'Just a place-holder representing some status that may be associted with setting pre/post conditions. ',
+	'',
+	'status_C',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("e50ab44c-28b4-41a7-98c6-0be5dbfa716e",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_BATTR
+	VALUES ("e50ab44c-28b4-41a7-98c6-0be5dbfa716e",
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ATTR
+	VALUES ("e50ab44c-28b4-41a7-98c6-0be5dbfa716e",
+	"55dff990-8281-416e-bb96-54ba74cd157b",
+	"00000000-0000-0000-0000-000000000000",
+	'conditions_id',
+	'Used to identify an instance when being invoked by the Test sequencer.
+This id should match the sequence service assigned id of the associated test case. ',
+	'',
+	'conditions_id',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ID
+	VALUES (1,
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO O_ID
+	VALUES (2,
+	"55dff990-8281-416e-bb96-54ba74cd157b");
+INSERT INTO PE_PE
+	VALUES ("55dff990-8281-416e-bb96-54ba74cd157b",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');

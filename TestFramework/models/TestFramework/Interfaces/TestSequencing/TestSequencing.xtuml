@@ -1,0 +1,894 @@
+-- BP 7.1.6 content: Interface syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO C_I
+	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	"00000000-0000-0000-0000-000000000000",
+	'TestSequencing',
+	'');
+INSERT INTO C_EP
+	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InjectStimulus',
+	'Invoke injection of the identified stimulus in the test bench.');
+INSERT INTO C_AS
+	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
+	'InjectStimulus',
+	'Invoke injection of the identified stimulus in the test bench.',
+	1,
+	"976b6c82-6628-4a51-b78f-8a11577ec800");
+INSERT INTO C_PP
+	VALUES ("9bc8c978-ca6b-47a0-8dd1-55afa3ace49d",
+	"abb1f40e-d7c8-4654-94f5-c0a999c3866a",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TriggerObservation',
+	'Invoke evaluation of the identified observation in the test bench.');
+INSERT INTO C_AS
+	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
+	'TriggerObservation',
+	'Invoke evaluation of the identified observation in the test bench.',
+	1,
+	"ef029a3f-8bbc-4d01-b248-9d10545d4527");
+INSERT INTO C_PP
+	VALUES ("c973a7db-dd6d-4edf-af93-3435a4492e94",
+	"ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'ObservationDone',
+	'Report to the Test sequencer service that an observation has completed.');
+INSERT INTO C_AS
+	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
+	'ObservationDone',
+	'Report to the Test sequencer service that an observation has completed.',
+	0,
+	"ed6e0575-1418-4e51-82ef-2f3bf15fbb57");
+INSERT INTO C_PP
+	VALUES ("4d27807e-e09b-4eb3-afda-961c06ab71e1",
+	"5df7def7-0028-4dc9-8578-87518097d737",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'success',
+	'',
+	0,
+	'',
+	"225b783e-dcc0-43e3-960c-d1ef7359e0ea");
+INSERT INTO C_PP
+	VALUES ("225b783e-dcc0-43e3-960c-d1ef7359e0ea",
+	"5df7def7-0028-4dc9-8578-87518097d737",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InitializeTestCase',
+	'Testbench receives notification that a new test case has been selected to run.
+Initialize any pre-conditions and respond when ready for stimulus injection.');
+INSERT INTO C_AS
+	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
+	'InitializeTestCase',
+	'Testbench receives notification that a new test case has been selected to run.
+Initialize any pre-conditions and respond when ready for stimulus injection.',
+	1,
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a");
+INSERT INTO C_PP
+	VALUES ("c02030b7-ef6c-49fa-b222-f4ceb8fa62c9",
+	"b5ee9925-8760-47c6-a3ea-734b7d165169",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'StimulusDone',
+	'Respond with this signal when all observations for an executed stimulus are complete.');
+INSERT INTO C_AS
+	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
+	'StimulusDone',
+	'Respond with this signal when all observations for an executed stimulus are complete.',
+	0,
+	"abb1f40e-d7c8-4654-94f5-c0a999c3866a");
+INSERT INTO C_PP
+	VALUES ("6ec5eb21-b263-42de-b812-4320efc689d1",
+	"ef029a3f-8bbc-4d01-b248-9d10545d4527",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestCaseInitialized',
+	'Report back to the Test sequencer service that a testbench test case has completed initialization.
+This will initiate stimiuli injection, and thus observation reporting, for a test case.
+If the test case has more than one test sequence, these will start in parallel.');
+INSERT INTO C_AS
+	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
+	'TestCaseInitialized',
+	'Report back to the Test sequencer service that a testbench test case has completed initialization.
+This will initiate stimiuli injection, and thus observation reporting, for a test case.
+If the test case has more than one test sequence, these will start in parallel.',
+	0,
+	"b5ee9925-8760-47c6-a3ea-734b7d165169");
+INSERT INTO C_PP
+	VALUES ("aade6cbf-a9fb-4d61-8435-26963598db19",
+	"976b6c82-6628-4a51-b78f-8a11577ec800",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'Assess',
+	'On this signal, any active observations with matching key value will be triggered to re-evaluate.');
+INSERT INTO C_AS
+	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
+	'Assess',
+	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
+	0,
+	"5df7def7-0028-4dc9-8578-87518097d737");
+INSERT INTO C_PP
+	VALUES ("353dad1e-4205-4c48-9beb-29afc39119b1",
+	"b5a796ca-6082-48ac-92dd-efc0a0922ce7",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'key',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'LinkRequirement',
+	'Indicate that the given requirement is (partially) tested by the given test case.
+This is used for test coverage reporting.');
+INSERT INTO C_AS
+	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	'LinkRequirement',
+	'Indicate that the given requirement is (partially) tested by the given test case.
+This is used for test coverage reporting.',
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("358dd60f-20a6-4a55-af48-25036f6e89a6",
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"037c672e-66f8-45df-9842-c388896b39bc");
+INSERT INTO C_PP
+	VALUES ("9ff93b4d-6fd4-4ae4-aeb8-90077e8f505d",
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'reqPrefix',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("037c672e-66f8-45df-9842-c388896b39bc",
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'reqNumber',
+	'',
+	0,
+	'',
+	"9ff93b4d-6fd4-4ae4-aeb8-90077e8f505d");
+INSERT INTO C_EP
+	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RunTestSuite',
+	'Run the sequence of test buckets associated with the singleton test suite.');
+INSERT INTO C_AS
+	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
+	'RunTestSuite',
+	'Run the sequence of test buckets associated with the singleton test suite.',
+	0,
+	"2410fcc8-0433-44ba-8e92-f529a7ae4e7d");
+INSERT INTO C_EP
+	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'MakeRequirement',
+	'Create an instance of a requirement which may be linked to test cases for coverage reporting.');
+INSERT INTO C_AS
+	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	'MakeRequirement',
+	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
+	0,
+	"b5a796ca-6082-48ac-92dd-efc0a0922ce7");
+INSERT INTO C_PP
+	VALUES ("7813a0d1-0a45-49de-8966-da74d442ccf9",
+	"2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'reqNumber',
+	'',
+	0,
+	'',
+	"55acbdc1-6767-4ed3-b2d4-92eaf73f2f04");
+INSERT INTO C_PP
+	VALUES ("55acbdc1-6767-4ed3-b2d4-92eaf73f2f04",
+	"2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'reqPrefix',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("6a167e3c-92c5-4f89-971a-f27356ed48ec",
+	"2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'reqRemark',
+	'',
+	0,
+	'',
+	"7813a0d1-0a45-49de-8966-da74d442ccf9");
+INSERT INTO C_EP
+	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'BucketInitialized',
+	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
+');
+INSERT INTO C_AS
+	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	'BucketInitialized',
+	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
+',
+	0,
+	"acaa32df-c46b-4fb9-8a4d-e3da8ab0716a");
+INSERT INTO C_PP
+	VALUES ("f5605492-acb1-44fb-a382-5395aae09fc2",
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InitializeBucket',
+	'Signals a test bucket to instantiate its test case sequences.');
+INSERT INTO C_AS
+	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
+	'InitializeBucket',
+	'Signals a test bucket to instantiate its test case sequences.',
+	1,
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d");
+INSERT INTO C_PP
+	VALUES ("e72f587a-0906-403e-bf54-8da9835177dd",
+	"14882a87-5828-4191-a273-30b8788f3566",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InsertDelay',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.');
+INSERT INTO C_AS
+	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	'InsertDelay',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
+	0,
+	"14882a87-5828-4191-a273-30b8788f3566");
+INSERT INTO C_PP
+	VALUES ("48668688-6431-4a4e-9c59-68e291cc9ef5",
+	"581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("7e2f2673-087c-414e-8e3a-db5f0738b4d0",
+	"581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'duration',
+	'',
+	0,
+	'',
+	"16e8b79e-2e3e-437e-83a9-26b07e9dbc4f");
+INSERT INTO C_PP
+	VALUES ("16e8b79e-2e3e-437e-83a9-26b07e9dbc4f",
+	"581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"48668688-6431-4a4e-9c59-68e291cc9ef5");
+INSERT INTO C_EP
+	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'StartIntervalTimer',
+	'A stimulus may request start of the interval timer linked to its test sequence.');
+INSERT INTO C_AS
+	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
+	'StartIntervalTimer',
+	'A stimulus may request start of the interval timer linked to its test sequence.',
+	0,
+	"581dc69f-0c98-4ab6-baf0-a03c367e212f");
+INSERT INTO C_PP
+	VALUES ("af889643-e099-4142-9bdd-28ee47d7c661",
+	"bb4f4c38-32d2-41f1-a540-93e7d083ed70",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("8dd429c8-69fa-400e-93ff-d0db0ee2302a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeletePreCondition',
+	'Signals the testbench that the identified precodition instance can be disposed of.');
+INSERT INTO C_AS
+	VALUES ("8dd429c8-69fa-400e-93ff-d0db0ee2302a",
+	'DeletePreCondition',
+	'Signals the testbench that the identified precodition instance can be disposed of.',
+	1,
+	"bb4f4c38-32d2-41f1-a540-93e7d083ed70");
+INSERT INTO C_PP
+	VALUES ("becb91d8-4a53-4fda-a64f-422cc1525b97",
+	"8dd429c8-69fa-400e-93ff-d0db0ee2302a",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteStimulus',
+	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.');
+INSERT INTO C_AS
+	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
+	'DeleteStimulus',
+	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
+	1,
+	"8dd429c8-69fa-400e-93ff-d0db0ee2302a");
+INSERT INTO C_PP
+	VALUES ("4199f30c-3fc4-4ce2-8c47-f425a2f29e68",
+	"d5a4cf86-3f41-407c-831c-18e679999a67",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteTestBucket',
+	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.');
+INSERT INTO C_AS
+	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
+	'DeleteTestBucket',
+	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
+	1,
+	"d5a4cf86-3f41-407c-831c-18e679999a67");
+INSERT INTO C_PP
+	VALUES ("a61997cc-8035-4cb9-b752-57eec7f15a1d",
+	"e3261067-756f-427b-94ca-307412068ce6",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("9ef51640-e733-4e08-87de-474d06cc17d7",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.');
+INSERT INTO C_AS
+	VALUES ("9ef51640-e733-4e08-87de-474d06cc17d7",
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	0,
+	"e3261067-756f-427b-94ca-307412068ce6");
+INSERT INTO C_PP
+	VALUES ("71c44585-83bd-445b-a4dc-f3dbb40a111b",
+	"9ef51640-e733-4e08-87de-474d06cc17d7",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"d795b40b-f09f-4252-9545-5feb96cbf681");
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO C_PP
+	VALUES ("d795b40b-f09f-4252-9545-5feb96cbf681",
+	"9ef51640-e733-4e08-87de-474d06cc17d7",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
+INSERT INTO C_AS
+	VALUES ("7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	0,
+	"9ef51640-e733-4e08-87de-474d06cc17d7");
+INSERT INTO C_PP
+	VALUES ("48a0cdad-a4ed-4014-b6d3-a3a2edf57eb8",
+	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"a1289f11-7c22-4b1c-afb2-c21251d2afd6");
+INSERT INTO C_PP
+	VALUES ("a1289f11-7c22-4b1c-afb2-c21251d2afd6",
+	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("e9a718cd-155e-4f82-ab40-9e08b065623a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.');
+INSERT INTO C_AS
+	VALUES ("e9a718cd-155e-4f82-ab40-9e08b065623a",
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	0,
+	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f");
+INSERT INTO C_PP
+	VALUES ("28079354-b5a2-4b50-9f4c-fcf9a03b4ff2",
+	"e9a718cd-155e-4f82-ab40-9e08b065623a",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RegisterTestSuite',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).');
+INSERT INTO C_AS
+	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
+	'RegisterTestSuite',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
+	0,
+	"e9a718cd-155e-4f82-ab40-9e08b065623a");
+INSERT INTO C_PP
+	VALUES ("57323b9a-ddb1-4267-ad70-201602c6b6c1",
+	"b1465433-efc9-45bd-ad88-e5ead4500931",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'suiteLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("0218eeeb-fb8d-48a4-afff-8958f8688153",
+	"b1465433-efc9-45bd-ad88-e5ead4500931",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'keepAllCases',
+	'Provide a choice for disposition of successful test cases.
+If false, then only failed test cases will be retained for diagnosis.
+If true all test case contexts will be retained.',
+	0,
+	'',
+	"57323b9a-ddb1-4267-ad70-201602c6b6c1");
+INSERT INTO C_EP
+	VALUES ("9e278084-be96-4393-8eee-f1793a29017b",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestCaseDurationLimit',
+	'Assign an optional overall duration limit for execution of a test case.
+If the limit is exceeded, the test case fails and terminates all sequence execution.');
+INSERT INTO C_AS
+	VALUES ("9e278084-be96-4393-8eee-f1793a29017b",
+	'SetTestCaseDurationLimit',
+	'Assign an optional overall duration limit for execution of a test case.
+If the limit is exceeded, the test case fails and terminates all sequence execution.',
+	0,
+	"b1465433-efc9-45bd-ad88-e5ead4500931");
+INSERT INTO C_PP
+	VALUES ("c6a21297-95fd-4d19-b54c-7cc977ec6524",
+	"9e278084-be96-4393-8eee-f1793a29017b",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("b9d2538b-4997-45c5-a6d4-c6598ea8c167",
+	"9e278084-be96-4393-8eee-f1793a29017b",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'durationLimit',
+	'',
+	0,
+	'',
+	"c6a21297-95fd-4d19-b54c-7cc977ec6524");
+INSERT INTO C_EP
+	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteObservation',
+	'Signals the testbench that the identified observation sub/supertype can be disposed of.');
+INSERT INTO C_AS
+	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
+	'DeleteObservation',
+	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
+	1,
+	"9e278084-be96-4393-8eee-f1793a29017b");
+INSERT INTO C_PP
+	VALUES ("e582117a-a982-428d-86d9-0158140f94af",
+	"a65ba45b-40f5-486e-9280-968e92d5d402",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("43da9421-f19f-491d-b0de-6d07de88d215",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'NameTestBucket',
+	'Assign an optional arbitrary naming label to a test bucket instance.');
+INSERT INTO C_AS
+	VALUES ("43da9421-f19f-491d-b0de-6d07de88d215",
+	'NameTestBucket',
+	'Assign an optional arbitrary naming label to a test bucket instance.',
+	0,
+	"a65ba45b-40f5-486e-9280-968e92d5d402");
+INSERT INTO C_PP
+	VALUES ("9c132e72-c162-4670-980f-630443c96da1",
+	"43da9421-f19f-491d-b0de-6d07de88d215",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("2b434da0-158a-4d9e-9144-380bb5de32e8",
+	"43da9421-f19f-491d-b0de-6d07de88d215",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'bucketLabel',
+	'',
+	0,
+	'',
+	"9c132e72-c162-4670-980f-630443c96da1");
+INSERT INTO C_EP
+	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestSuiteComplete',
+	'Signals completion of the test suite.');
+INSERT INTO C_AS
+	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
+	'TestSuiteComplete',
+	'Signals completion of the test suite.',
+	1,
+	"43da9421-f19f-491d-b0de-6d07de88d215");
+INSERT INTO C_EP
+	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.');
+INSERT INTO C_AS
+	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	0,
+	"2ab9bd8f-a044-44bc-b988-74be588a3af7");
+INSERT INTO C_PP
+	VALUES ("c8487470-bc98-44db-809e-5d7d9968f2e9",
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'ID',
+	'The identifier taken from the corresponding test bucket in the Testbench.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'CreateTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.');
+INSERT INTO C_AS
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	'CreateTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	0,
+	"3ab9f7fe-b572-4c34-98f5-076122029206");
+INSERT INTO C_PP
+	VALUES ("7ec424e2-95e1-43ff-9286-ac8dabca9c1b",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("b57fa56d-a016-4bb3-a78b-d2bc343e0c81",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"7ec424e2-95e1-43ff-9286-ac8dabca9c1b");
+INSERT INTO C_EP
+	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'CreateStimulusSequence',
+	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+These sequences may run in parallel and may interact via assess signals.');
+INSERT INTO C_AS
+	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	'CreateStimulusSequence',
+	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+These sequences may run in parallel and may interact via assess signals.',
+	0,
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394");
+INSERT INTO C_PP
+	VALUES ("311075c1-7128-43a0-b06a-db8459d97bbb",
+	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
+	'',
+	0,
+	'',
+	"510b96c8-0ab7-4cb2-b73e-2a7353e31af7");
+INSERT INTO C_PP
+	VALUES ("510b96c8-0ab7-4cb2-b73e-2a7353e31af7",
+	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddStimulus',
+	'');
+INSERT INTO C_AS
+	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	'AddStimulus',
+	'',
+	0,
+	"63e52cd1-3ec8-4352-ade8-ba438a671bd3");
+INSERT INTO C_PP
+	VALUES ("92524ef5-e6f9-45d9-a452-e5a01514e6dd",
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
+	'Identifies the sequence of stimuli to which to add this one.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("5e407328-83bc-408d-aa13-81f1509a2e46",
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"92524ef5-e6f9-45d9-a452-e5a01514e6dd");
+INSERT INTO C_EP
+	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.');
+INSERT INTO C_AS
+	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.',
+	0,
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d");
+INSERT INTO C_PP
+	VALUES ("589d107b-bf56-490e-ba8b-50b57cfc90d2",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'Identifies the stimulus which this observation will follow.
+This is the value assigned by the Testbench when the stimulus was added.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("9b42030c-17eb-4c48-aad6-3deba33aaac5",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollInterval',
+	'For an observation that needs to mett criteria to succeed, it may specify an interval at which it will repeatedly be evaluated.',
+	0,
+	'',
+	"00dca565-b335-4dab-a665-1915fea5fce8");
+INSERT INTO C_PP
+	VALUES ("5ab01dbf-492b-42d0-bce8-58a279f06715",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollDuration',
+	'',
+	0,
+	'',
+	"9b42030c-17eb-4c48-aad6-3deba33aaac5");
+INSERT INTO C_PP
+	VALUES ("a5cf080d-7c9a-4f46-b70c-49d0ab7876f5",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'eventKey',
+	'A value which, if matched by "assess", will trigger an invocation to evaluate the observation.',
+	0,
+	'',
+	"5ab01dbf-492b-42d0-bce8-58a279f06715");
+INSERT INTO C_PP
+	VALUES ("00dca565-b335-4dab-a665-1915fea5fce8",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"589d107b-bf56-490e-ba8b-50b57cfc90d2");
+INSERT INTO C_EP
+	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RequestIntervalTimerValue',
+	'Request the value of the interval timer associated with the sequence to which the observation belongs.
+The value will be signalled to the testbench, attaching the observation identifier.
+Optionally, the timer can be reset.');
+INSERT INTO C_AS
+	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	'RequestIntervalTimerValue',
+	'Request the value of the interval timer associated with the sequence to which the observation belongs.
+The value will be signalled to the testbench, attaching the observation identifier.
+Optionally, the timer can be reset.',
+	0,
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2");
+INSERT INTO C_PP
+	VALUES ("6f29b081-e959-4f67-8b2c-03368fb69a98",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'This value is used to navigate to the associated stimulus sequence, and hence the timer.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("9f2d1cb3-f76c-489f-a3cd-ae9412109a19",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'reset',
+	'If true, the interval timer value will be reset to zero after being read.',
+	0,
+	'',
+	"6f29b081-e959-4f67-8b2c-03368fb69a98");
+INSERT INTO C_EP
+	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'IntervalTimerValue',
+	'');
+INSERT INTO C_AS
+	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	'IntervalTimerValue',
+	'',
+	1,
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa");
+INSERT INTO C_PP
+	VALUES ("a24e164c-5e00-413f-a9c6-e1e3ba762353",
+	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'This value is used to navigate to the associated stimulus sequence, and hence the timer.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("b617f901-0f94-447c-a83d-9d5a78c4b847",
+	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'value',
+	'',
+	0,
+	'',
+	"a24e164c-5e00-413f-a9c6-e1e3ba762353");
+INSERT INTO PE_PE
+	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	1,
+	"eaa424e5-0180-44cb-ae52-584f5f7a739e",
+	"00000000-0000-0000-0000-000000000000",
+	6);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("eaa424e5-0180-44cb-ae52-584f5f7a739e",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'Interfaces',
+	'',
+	0,
+	'../Interfaces.xtuml');

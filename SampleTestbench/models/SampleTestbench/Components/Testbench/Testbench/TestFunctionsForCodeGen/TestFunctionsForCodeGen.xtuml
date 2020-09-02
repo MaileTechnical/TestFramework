@@ -1,0 +1,102 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'TestFunctionsForCodeGen',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("1fe93a4e-2478-4ec4-b781-d3e0674701cf",
+	112,
+	"2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'4.1.17',
+	'SampleTestbench::Components::Testbench::Testbench::TestFunctionsForCodeGen');
+INSERT INTO DIM_DIA
+	VALUES ("1fe93a4e-2478-4ec4-b781-d3e0674701cf",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO S_SYNC
+	VALUES ("f4c85b08-8b60-4bc4-88c3-e24b0e490f16",
+	"00000000-0000-0000-0000-000000000000",
+	'RunAllTests',
+	'',
+	'TestFunctions::RunAllTests();',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("f4c85b08-8b60-4bc4-88c3-e24b0e490f16",
+	1,
+	"2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("006acf07-96d1-473d-a01c-80621376822b",
+	"00000000-0000-0000-0000-000000000000",
+	'RunFailureTests',
+	'',
+	'TestFunctions::RunFailureTests();',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("006acf07-96d1-473d-a01c-80621376822b",
+	1,
+	"2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("9e3d188b-f22f-4fba-bc34-d2435f967d22",
+	"00000000-0000-0000-0000-000000000000",
+	'RunSuccessfulTests',
+	'',
+	'TestFunctions::RunSuccessfulTests();',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("9e3d188b-f22f-4fba-bc34-d2435f967d22",
+	1,
+	"2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO PE_PE
+	VALUES ("2cc3ee3a-f13b-41c2-b5a2-ee379b4ac17e",
+	1,
+	"c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	7);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c8211b48-8bfc-4132-8bde-d1324c67d3ff",
+	"00000000-0000-0000-0000-000000000000",
+	"f1d52077-c56d-42f9-a782-ae875ac97594",
+	'Testbench',
+	'',
+	0,
+	'../Testbench.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("f1d52077-c56d-42f9-a782-ae875ac97594",
+	'SampleTestbench',
+	1,
+	'../../../../SampleTestbench.xtuml');

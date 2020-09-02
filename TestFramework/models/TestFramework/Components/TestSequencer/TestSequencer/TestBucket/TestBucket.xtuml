@@ -1,0 +1,293 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("cf812356-d586-4cdf-9c29-72003a1e9246",
+	'TestBucket',
+	122,
+	'TestBucket',
+	'A convenient grouping of related test cases.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'AddTestCase',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create object instance new_tc of TestCase;
+new_tc.testCaseLabel = param.caseLabel;
+new_tc.tcStatus = tsStatus::created;
+select one first_case related by self->TestCase[R112.''will first execute''];
+if ( empty first_case )
+  relate self to new_tc across R112.''will first execute'';
+else
+  cursor = first_case;
+  while ( True )
+    select one next related by cursor->TestCase[R114.''follows''];
+    if ( empty next )
+      break;
+    else
+      cursor = next;
+    end if;
+  end while;
+  relate cursor to new_tc across R114.''follows'';
+end if;
+',
+	1,
+	'',
+	"a74bd92a-e1c2-4cc9-8129-7acf7f50c1f3",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("d0804e39-c56c-479a-a3fc-63a7b0e81956",
+	"2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
+	'caseLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("6ce05e9b-06fe-4c0b-9d34-8111f867249d",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'Dismantle',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one tc related by self->TestCase[R112.''will first execute''];
+while ( not_empty tc )
+  select one next_tc related by tc->TestCase[R114.''follows''];
+  if ( tc.tcStatus == tsStatus::completed )	// keep all context for failed test case for diagnosis
+    // delete the sequences, stimuli and observations of successsful test cases
+    tc.Dismantle();
+  end if;
+  tc = next_tc;
+end while;
+if ( self.bktStatus == tsStatus::completed )
+  send TESTBENCH::DeleteTestBucket( bucketId:self.assignedID );
+end if;',
+	1,
+	'',
+	"60029514-495b-47fa-bdf4-1ee87abe0986",
+	0);
+INSERT INTO O_TFR
+	VALUES ("d1031ea8-3f36-4e69-86bb-8be5960a911c",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'NextTestCase',
+	'Select the next test case in the test bucket sequence, if there is one.
+Imvoked from the event signalling test case completion.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one tc related by self->TestCase[R117.''is currently running''];
+if ( tc.durationLimit > 0 )
+  select one tmr related by self->TestSuite[R118.''is current for'']
+                                  ->CountdownTimer[R123.''limits test case duration with''];
+  self.ignoreTimeout = tmr.Cancel();
+end if;
+unrelate self from tc across R117.''is currently running'';
+if ( tc.tcStatus != tsStatus::completed )
+  self.bktStatus = tsStatus::failed;	// inhibit deletion of client test bucket at clean-up
+else
+  tc.Dismantle();
+end if;
+select one tc related by tc->TestCase[R114.''follows''];
+if ( not_empty tc )
+  relate self to tc across R117.''is currently running'';
+end if;',
+	1,
+	'',
+	"2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
+	0);
+INSERT INTO O_TFR
+	VALUES ("60029514-495b-47fa-bdf4-1ee87abe0986",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'StartGuardTimer',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one tmr related by self->TestSuite[R118.''is current for'']
+                              ->CountdownTimer[R123.''limits test case duration with''];
+create event instance timeout of TestBucket5:TimedOut to self;
+tmr.SetResolution( resolution:self.timerResolution );
+tmr.Start( event:timeout, duration:param.duration );
+',
+	1,
+	'',
+	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("a53c8ab2-8ef4-4624-b990-2c3058ef25f9",
+	"60029514-495b-47fa-bdf4-1ee87abe0986",
+	'duration',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("a74bd92a-e1c2-4cc9-8129-7acf7f50c1f3",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'SetTimerResolution',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.timerResolution = param.resolution;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("23835361-1e48-450d-969c-19960fcba6ea",
+	"a74bd92a-e1c2-4cc9-8129-7acf7f50c1f3",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"00000000-0000-0000-0000-000000000000",
+	'assignedID',
+	'An id passed in from the client testbench which can be used to identify an instance.',
+	'',
+	'assignedID',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("9c0da15d-eace-4093-959c-0312f913dfbe",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("9c0da15d-eace-4093-959c-0312f913dfbe",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("9c0da15d-eace-4093-959c-0312f913dfbe",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"467db403-b4d1-4eb4-a423-82cfe5bbf674",
+	'bucketLabel',
+	'An assigned label to be used in reporting analysis.',
+	'',
+	'bucketLabel',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("09fd0ce6-922b-4aa2-aafb-555b1db3c564",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("09fd0ce6-922b-4aa2-aafb-555b1db3c564",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("09fd0ce6-922b-4aa2-aafb-555b1db3c564",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"9c0da15d-eace-4093-959c-0312f913dfbe",
+	'timerResolution',
+	'The choice of timer resolution - see Datatypes.',
+	'',
+	'timerResolution',
+	0,
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"5d4115da-b32c-4c29-a2d8-440144b10019",
+	'bktStatus',
+	'This status is used to prevent client (testbench) teardown of a bucket which contains failed test cases.
+The bucket context is retained for diagnosis.',
+	'',
+	'bktStatus',
+	0,
+	"f118c998-732a-4398-a820-4480fa8cdb21",
+	'',
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
+	"00000000-0000-0000-0000-000000000000",
+	'tsStatus',
+	'',
+	'',
+	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"de9eb285-b54e-4445-80bb-62d345a4a89f",
+	'ignoreTimeout',
+	'If true, this indicates that an attempt to cancel the the countdown timer encountered 
+the ''event-in-flight'' circumstance; when received, the event is to be ignored.',
+	'',
+	'ignoreTimeout',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'False');
+INSERT INTO O_ID
+	VALUES (0,
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ID
+	VALUES (1,
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ID
+	VALUES (2,
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO PE_PE
+	VALUES ("cf812356-d586-4cdf-9c29-72003a1e9246",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

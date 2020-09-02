@@ -1,0 +1,239 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'CountdownTimer',
+	125,
+	'CountdownTimer',
+	'A timer which is used to dispatch an event pre-created by the client.
+It is based on the built-in microsecond timer, but can be scaled by chosen resolution.',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("6baeba1a-2ea3-48a2-935d-f08301f43f44",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'SetResolution',
+	'Set the ratio between base timer units and this timer''s desired units.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.scale_factor = ::ResolutionToScaleFactor( resolution:param.resolution ); ',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("2e8cfe46-cf31-44b7-a35b-ffa902851d44",
+	"6baeba1a-2ea3-48a2-935d-f08301f43f44",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_TFR
+	VALUES ("8810f559-085b-4b79-91f8-3e421175d8a5",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'Start',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.triggered_event = param.event;
+self.countdown = param.duration;
+if ( self.countdown > 0 )
+  create event instance tick of CountdownTimer1:timer_tick to self;
+  self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );
+  self.expired = False;
+else
+  LOG::LogFailure( message:"SEQ Timeout value for coundown must be positive" );
+end if;
+',
+	1,
+	'',
+	"6baeba1a-2ea3-48a2-935d-f08301f43f44",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("4f8252dc-9e9e-40e4-bcc4-8c2e13f03434",
+	"8810f559-085b-4b79-91f8-3e421175d8a5",
+	'duration',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"edb2d211-a55d-4489-bbcb-0017e37f9690",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("edb2d211-a55d-4489-bbcb-0017e37f9690",
+	"8810f559-085b-4b79-91f8-3e421175d8a5",
+	'event',
+	"ba5eda7a-def5-0000-0000-00000000000a",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("145f9bc8-85bc-48db-8acc-66154b415578",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'Cancel',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	1,
+	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
+// event-in-flight is of no consequence here.
+return self.expired;	// timer has expired; timeout event has been sent.
+',
+	1,
+	'',
+	"8810f559-085b-4b79-91f8-3e421175d8a5",
+	0);
+INSERT INTO O_TFR
+	VALUES ("9304f596-e8ce-4497-927a-3b7c88918d77",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'Delete',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
+// if the event happens to be ''in-flight'' it is ignored in Final state.
+generate CountdownTimer2:kill to self;',
+	1,
+	'',
+	"145f9bc8-85bc-48db-8acc-66154b415578",
+	0);
+INSERT INTO O_NBATTR
+	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"00000000-0000-0000-0000-000000000000",
+	'triggered_event',
+	'A pre-created event which will be dispatched if the countdown value reaches zero.',
+	'',
+	'triggered_event',
+	0,
+	"ba5eda7a-def5-0000-0000-00000000000a",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("9d3ef48c-ad39-4983-b56f-569da5a82b0d",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("9d3ef48c-ad39-4983-b56f-569da5a82b0d",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("9d3ef48c-ad39-4983-b56f-569da5a82b0d",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"ecb2bc28-1d95-4420-9248-8aeecb280cc9",
+	'countdown',
+	'The countdown value: it will be decremented regularly.
+If it reaches zero, a timeout event is dispatched.
+Units: scale_factor * microseconds.',
+	'',
+	'countdown',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("e5fc602d-1ecc-4de7-939b-96fb419d7059",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("e5fc602d-1ecc-4de7-939b-96fb419d7059",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("e5fc602d-1ecc-4de7-939b-96fb419d7059",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"33cae18e-65cf-406c-b7c6-effa5245d5c5",
+	'scale_factor',
+	'Multiplier of base timer units to configured timer resolution.',
+	'',
+	'scale_factor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("33cae18e-65cf-406c-b7c6-effa5245d5c5",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("33cae18e-65cf-406c-b7c6-effa5245d5c5",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("33cae18e-65cf-406c-b7c6-effa5245d5c5",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"9d3ef48c-ad39-4983-b56f-569da5a82b0d",
+	'base_timer',
+	'Underlying built-in microsecond timer.',
+	'',
+	'base_timer',
+	0,
+	"ba5eda7a-def5-0000-0000-00000000000f",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("471b085b-f4d9-4949-81ab-762f740c4630",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("471b085b-f4d9-4949-81ab-762f740c4630",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("471b085b-f4d9-4949-81ab-762f740c4630",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
+	'current_state',
+	'',
+	'',
+	'current_state',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_BATTR
+	VALUES ("ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ATTR
+	VALUES ("ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	"e5fc602d-1ecc-4de7-939b-96fb419d7059",
+	'expired',
+	'If true, the countdown value has reached zero; a timeout event has been dispatched.',
+	'',
+	'expired',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ID
+	VALUES (1,
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO O_ID
+	VALUES (2,
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5");
+INSERT INTO PE_PE
+	VALUES ("051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');
