@@ -100,7 +100,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("512cfb1c-2a27-4850-b476-af09f545d2f6",
 	"2dddec3a-18f0-4b83-9148-04feccae7c47",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -119,7 +119,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("b3cc5cd3-e757-4ee1-9774-5c1a28c0d3de",
 	"2dddec3a-18f0-4b83-9148-04feccae7c47",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -138,7 +138,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("67f1cae8-b355-4b89-8159-fce251a06273",
 	"2dddec3a-18f0-4b83-9148-04feccae7c47",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -410,112 +410,6 @@ INSERT INTO C_EP_PROXY
 	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
 	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_REP
-	VALUES ("fa722481-7623-4d43-a07c-4b44ba46bbb8",
-	"55a0e619-9899-42ff-b4c4-f2e53dce5bfa",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("fa722481-7623-4d43-a07c-4b44ba46bbb8",
-	'AddTestBucket',
-	'Create a representative of a test bucket in the Test sequencer service.
-A test bucket maintains an ordering of test cases.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("55a0e619-9899-42ff-b4c4-f2e53dce5bfa",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AddTestBucket',
-	'Create a representative of a test bucket in the Test sequencer service.
-A test bucket maintains an ordering of test cases.',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("4537ea81-d83c-4d2a-a97f-856ef41b2bf9",
-	"a5e756a0-e7cd-4688-b091-3b765a277dfe",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("4537ea81-d83c-4d2a-a97f-856ef41b2bf9",
-	'AddTestCase',
-	'Add a representative of a test case to a test bucket in the Test sequencer service.
-Test cases in a given test bucket will be be executed in the order they are added.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("a5e756a0-e7cd-4688-b091-3b765a277dfe",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AddTestCase',
-	'Add a representative of a test case to a test bucket in the Test sequencer service.
-Test cases in a given test bucket will be be executed in the order they are added.',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("9d34f607-593c-4e9a-b695-1e778952bc17",
-	"78b0b631-2e04-43c4-ae45-6d1b1b77c270",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("9d34f607-593c-4e9a-b695-1e778952bc17",
-	'AppendStimulus',
-	'Add a stimulus to the chain of stimuli in a given sequence.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("78b0b631-2e04-43c4-ae45-6d1b1b77c270",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AppendStimulus',
-	'Add a stimulus to the chain of stimuli in a given sequence.',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("53dd01ff-47f5-4184-82b9-92d1b3f77a2e",
-	"7c81b3c6-29a0-4c5d-a248-f17d2dee1bae",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("53dd01ff-47f5-4184-82b9-92d1b3f77a2e",
-	'AppendObservation',
-	'Add an observation to the chain of observations that will execute after a stimulus injection.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("7c81b3c6-29a0-4c5d-a248-f17d2dee1bae",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AppendObservation',
-	'Add an observation to the chain of observations that will execute after a stimulus injection.',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("e413714b-42b5-4850-9f44-ebf7f11accf5",
-	"901a4c37-8864-4074-b742-6b4b8abd2937",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("e413714b-42b5-4850-9f44-ebf7f11accf5",
-	'AttachStimulusSequence',
-	'Attach a separate instance of a sequence to a test case.
-Each sequence may order one or more instances of stimulus, each possibly followed by observations.
-Stimuli in each sequence are ordered, but independent of other sequences in the test case.
-All sequences are activated at test case initialization; later attachments are ignored.
-
-
-',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("901a4c37-8864-4074-b742-6b4b8abd2937",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AttachStimulusSequence',
-	'Attach a separate instance of a sequence to a test case.
-Each sequence may order one or more instances of stimulus, each possibly followed by observations.
-Stimuli in each sequence are ordered, but independent of other sequences in the test case.
-All sequences are activated at test case initialization; later attachments are ignored.
-
-
-',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
 	VALUES ("03d2e65d-95b0-4449-aa00-196c79ec8e2a",
 	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
 	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
@@ -564,7 +458,8 @@ INSERT INTO SPR_REP
 INSERT INTO SPR_RS
 	VALUES ("b94e9a83-2fd2-4bf7-8dc7-0c8b0091d809",
 	'InsertDelay',
-	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
 	'',
 	1,
 	0);
@@ -573,29 +468,8 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'InsertDelay',
-	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.',
-	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("b6f634bd-083a-4803-b77d-5b0d2028b49d",
-	"aa6fda4c-6b41-41a1-8919-4495bdc90167",
-	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
-INSERT INTO SPR_RO
-	VALUES ("b6f634bd-083a-4803-b77d-5b0d2028b49d",
-	'ReadIntervalTimer',
-	'A test case can run multiple independent sequences of stimuli.
-Each such sequence has an associated interval timer.
-An observation invocation can request the value of the interval timer for its sequence.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("aa6fda4c-6b41-41a1-8919-4495bdc90167",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'ReadIntervalTimer',
-	'A test case can run multiple independent sequences of stimuli.
-Each such sequence has an associated interval timer.
-An observation invocation can request the value of the interval timer for its sequence.',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
 	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_REP
 	VALUES ("1e20fc42-1f2d-4a37-b635-83329f1b30e7",
@@ -738,7 +612,7 @@ INSERT INTO SPR_REP
 INSERT INTO SPR_RS
 	VALUES ("e3c557b4-bb48-43f0-85c1-108bc5469c0b",
 	'RegisterTestSuite',
-	'',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
 	'',
 	1,
 	0);
@@ -747,7 +621,7 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RegisterTestSuite',
-	'',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
 	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_REP
 	VALUES ("265dae01-983d-43a6-952f-6c3041a27080",
@@ -814,7 +688,7 @@ INSERT INTO SPR_REP
 INSERT INTO SPR_RS
 	VALUES ("8b8864b3-0cd2-405f-b973-fd2a3a9a5165",
 	'TestSuiteComplete',
-	'',
+	'Signals completion of the test suite.',
 	'::Finish();',
 	1,
 	0);
@@ -823,6 +697,138 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'TestSuiteComplete',
+	'Signals completion of the test suite.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8dac4b0b-3d6b-439b-b3af-518512d77e23",
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("8dac4b0b-3d6b-439b-b3af-518512d77e23",
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("3887c89c-6ec1-40c4-afaf-8ea3cf20cff9",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("3887c89c-6ec1-40c4-afaf-8ea3cf20cff9",
+	'CreateTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'CreateTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("ee8628cb-20dd-43b6-a0c5-f49eb41ee32a",
+	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("ee8628cb-20dd-43b6-a0c5-f49eb41ee32a",
+	'CreateStimulusSequence',
+	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+These sequences may run in parallel and may interact via assess signals.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'CreateStimulusSequence',
+	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+These sequences may run in parallel and may interact via assess signals.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("3207ec1e-857f-471b-94be-a5c5577f9915",
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("3207ec1e-857f-471b-94be-a5c5577f9915",
+	'AddStimulus',
+	'',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddStimulus',
+	'',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8804c977-c405-4d21-8e27-835394ced721",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("8804c977-c405-4d21-8e27-835394ced721",
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("ef1d78a3-9fa0-4b94-bbba-bec65149201b",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("ef1d78a3-9fa0-4b94-bbba-bec65149201b",
+	'RequestIntervalTimerValue',
+	'Request the value of the interval timer associated with the sequence to which the observation belongs.
+The value will be signalled to the testbench, attaching the observation identifier.
+Optionally, the timer can be reset.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RequestIntervalTimerValue',
+	'Request the value of the interval timer associated with the sequence to which the observation belongs.
+The value will be signalled to the testbench, attaching the observation identifier.
+Optionally, the timer can be reset.',
+	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("7b79b32b-a75b-4410-a5ba-f73d8577688f",
+	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"690eaf4f-1a39-48c0-a2e3-94416f2d7a31");
+INSERT INTO SPR_RS
+	VALUES ("7b79b32b-a75b-4410-a5ba-f73d8577688f",
+	'IntervalTimerValue',
+	'',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'IntervalTimerValue',
 	'',
 	'../../../../../TestFramework/models/TestFramework/Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY

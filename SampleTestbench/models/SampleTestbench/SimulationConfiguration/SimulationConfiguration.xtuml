@@ -38,8 +38,8 @@ INSERT INTO GD_SHP
 INSERT INTO GD_NCS
 	VALUES ("0f0a7637-3e79-464a-ab6c-f4c71f9fd225");
 INSERT INTO DIM_ND
-	VALUES (200.000000,
-	150.000000,
+	VALUES (276.000000,
+	121.000000,
 	"0f0a7637-3e79-464a-ab6c-f4c71f9fd225");
 INSERT INTO DIM_GE
 	VALUES (0.000000,
@@ -52,8 +52,8 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("1c7af7e0-3188-40ab-99b0-e93edd9e98d9",
-	155.000000,
-	150.000000,
+	144.000000,
+	121.000000,
 	"0f0a7637-3e79-464a-ab6c-f4c71f9fd225");
 INSERT INTO GD_GE
 	VALUES ("dc2cf750-8659-4ded-8a01-e7d4b2593f00",
@@ -68,7 +68,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("29a0776b-1b3a-42cc-9cc3-cfc8bc3c3d08",
 	"dc2cf750-8659-4ded-8a01-e7d4b2593f00",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -87,7 +87,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("866b913b-93ce-4809-93be-30ea8ee61f4e",
 	"dc2cf750-8659-4ded-8a01-e7d4b2593f00",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -95,8 +95,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"866b913b-93ce-4809-93be-30ea8ee61f4e");
 INSERT INTO DIM_GE
-	VALUES (47.000000,
-	175.000000,
+	VALUES (-163.000000,
+	209.000000,
 	"866b913b-93ce-4809-93be-30ea8ee61f4e",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -106,7 +106,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("5d85a98b-5c1d-47b7-ae8e-1375c9ed03d5",
 	"dc2cf750-8659-4ded-8a01-e7d4b2593f00",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -130,15 +130,15 @@ INSERT INTO GD_LS
 	"0ac8c336-7d1d-49a3-80b2-25da52a981c7");
 INSERT INTO DIM_WAY
 	VALUES ("701e9dab-f72f-4681-a8d3-edf24e719672",
-	155.000000,
-	150.000000,
+	144.000000,
+	121.000000,
 	"dc2cf750-8659-4ded-8a01-e7d4b2593f00",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("0ac8c336-7d1d-49a3-80b2-25da52a981c7",
-	155.000000,
-	215.000000,
+	144.000000,
+	168.000000,
 	"dc2cf750-8659-4ded-8a01-e7d4b2593f00",
 	"00000000-0000-0000-0000-000000000000",
 	"701e9dab-f72f-4681-a8d3-edf24e719672");
@@ -167,12 +167,12 @@ INSERT INTO GD_SHP
 INSERT INTO GD_NCS
 	VALUES ("1fda8ce7-e17c-4854-9d10-f4454041836f");
 INSERT INTO DIM_ND
-	VALUES (200.000000,
-	150.000000,
+	VALUES (289.000000,
+	97.000000,
 	"1fda8ce7-e17c-4854-9d10-f4454041836f");
 INSERT INTO DIM_GE
-	VALUES (420.000000,
-	144.000000,
+	VALUES (0.000000,
+	240.000000,
 	"1fda8ce7-e17c-4854-9d10-f4454041836f",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -181,8 +181,8 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("89a9115a-3102-4bdd-99fc-57caae9eb33f",
-	420.000000,
-	215.000000,
+	144.000000,
+	240.000000,
 	"1fda8ce7-e17c-4854-9d10-f4454041836f");
 INSERT INTO GD_GE
 	VALUES ("998a318d-2c23-4040-a583-707747ec0b9c",
@@ -197,7 +197,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("8ccd3cf4-d3fc-49b0-89c8-c051ffaa02ff",
 	"998a318d-2c23-4040-a583-707747ec0b9c",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -216,7 +216,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("414b7817-351f-40f8-8eaa-2f3626c18fc1",
 	"998a318d-2c23-4040-a583-707747ec0b9c",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -224,8 +224,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"414b7817-351f-40f8-8eaa-2f3626c18fc1");
 INSERT INTO DIM_GE
-	VALUES (158.000000,
-	233.000000,
+	VALUES (159.000000,
+	173.000000,
 	"414b7817-351f-40f8-8eaa-2f3626c18fc1",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -235,7 +235,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("fb55d583-76e5-458c-98f3-6350e0ec0c83",
 	"998a318d-2c23-4040-a583-707747ec0b9c",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -262,15 +262,15 @@ INSERT INTO GD_AOS
 	"f97c1186-8c40-4132-ad36-b12662897b12");
 INSERT INTO DIM_WAY
 	VALUES ("95825fa2-eec3-4f86-b281-48f06abcc040",
-	420.000000,
-	215.000000,
+	144.000000,
+	240.000000,
 	"998a318d-2c23-4040-a583-707747ec0b9c",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("d3d51309-9249-4e2f-b530-a10652fe66d8",
-	155.000000,
-	215.000000,
+	144.000000,
+	168.000000,
 	"998a318d-2c23-4040-a583-707747ec0b9c",
 	"00000000-0000-0000-0000-000000000000",
 	"95825fa2-eec3-4f86-b281-48f06abcc040");
@@ -285,8 +285,8 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("45502039-acd6-4f21-ab37-10a9b226d62a",
-	155.000000,
-	215.000000,
+	144.000000,
+	168.000000,
 	"998a318d-2c23-4040-a583-707747ec0b9c");
 INSERT INTO DIM_ED
 	VALUES ("89a9115a-3102-4bdd-99fc-57caae9eb33f",
@@ -469,9 +469,9 @@ sequences in the Test Sequencer service context.
 For each instance of test bucket, stimulus or observation created in the testbench in this way, the 
 service returns identifying information which is used to activate those instances when appropriate.
 
-The testbench test bucket, stimulus and observation subtype classes must provide instance-based state 
-machines which will respond to the invocation events which are polymorphically dispatched from the 
-supertype when triggered by the sequencing service as it works through the series of test cases. 
+The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
+respond to the invocations of injection and observation operations on the supertype when triggered by 
+the sequencing service as it works through the series of test cases. 
 The supertypes also provide operations to signal responses to the service.
 
 The test cases are created in an instance based operation of a test bucket subtype. This operation 
@@ -495,8 +495,8 @@ the timer was started - and may optionally reset the timer value to zero on read
 resolution defaults to that of the test case, but can be overridden.
 
 The provided sample testbench demonstrates the capabilities provided by the test sequencing service.
-They include adding naming labels to test suite components, linking pre-conditions and requirements 
-to test cases, chosing time resolution values and measuring elapsed time intervals.
+They include linking pre-conditions and requirements to test cases, chosing time resolution values 
+and measuring elapsed time intervals.
 ',
 	0,
 	"00000000-0000-0000-0000-000000000000",
