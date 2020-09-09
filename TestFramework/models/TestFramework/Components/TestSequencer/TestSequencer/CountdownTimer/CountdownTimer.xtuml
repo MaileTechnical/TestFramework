@@ -35,7 +35,7 @@ INSERT INTO S_DT_PROXY
 	'timerResolution',
 	'',
 	'',
-	'../../../../Datatypes/Datatypes.xtuml');
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_TFR
 	VALUES ("8810f559-085b-4b79-91f8-3e421175d8a5",
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",

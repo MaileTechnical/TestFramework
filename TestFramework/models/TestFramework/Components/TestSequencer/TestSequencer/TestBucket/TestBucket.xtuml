@@ -150,7 +150,7 @@ INSERT INTO S_DT_PROXY
 	'timerResolution',
 	'',
 	'',
-	'../../../../Datatypes/Datatypes.xtuml');
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");

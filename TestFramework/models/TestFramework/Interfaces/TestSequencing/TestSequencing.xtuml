@@ -455,7 +455,7 @@ INSERT INTO S_DT_PROXY
 	'timerResolution',
 	'',
 	'',
-	'../../Datatypes/Datatypes.xtuml');
+	'../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO C_PP
 	VALUES ("d795b40b-f09f-4252-9545-5feb96cbf681",
 	"9ef51640-e733-4e08-87de-474d06cc17d7",
