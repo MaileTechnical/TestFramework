@@ -3543,7 +3543,7 @@ INSERT INTO S_DT_PROXY
 	'timerResolution',
 	'',
 	'',
-	'../../../Datatypes/Datatypes.xtuml');
+	'../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO PE_PE
 	VALUES ("e4bd00ce-b30e-4101-832c-bdcd65b8aa0e",
 	1,
