@@ -114,16 +114,14 @@ INSERT INTO O_TFR
 if ( empty ts ) 
   create object instance ts of TestSuite;
   ts.timerResolution = timerResolution::second;		// default
+  ts.suiteLabel = param.suiteLabel;
+  ts.retainAll = param.retainAll;
+  create object instance tmr of CountdownTimer;
+  relate ts to tmr across R123.''limits test case duration with'';
 else
   LOG::LogFailure( message:"SEQ  Test suite already exists!" );
 end if;
-ts.suiteLabel = param.suiteLabel;
-ts.retainAll = param.retainAll;
-select one tmr related by ts->CountdownTimer[R123.''limits test case duration with''];
-if ( empty tmr )
-  create object instance tmr of CountdownTimer;
-  relate ts to tmr across R123.''limits test case duration with'';
-end if;',
+',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
