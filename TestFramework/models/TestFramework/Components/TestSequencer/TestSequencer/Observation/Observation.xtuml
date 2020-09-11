@@ -64,8 +64,8 @@ if ( self.polling_interval > 0 )
   cancel = ptmr.Cancel();
 end if;
 if ( self.duration_limit > 0 )
-  select one ptmr related by seq->CountdownTimer[R121.''limits observation duration with''];
-  cancel = ptmr.Cancel();
+  select one dtmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+  cancel = dtmr.Cancel();
 end if;
 ',
 	1,

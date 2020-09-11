@@ -324,8 +324,9 @@ INSERT INTO SM_ACT
 	'if ( not self.isDelay)
   if ( self.assessKey == "" )
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
-  else
-    i = 1; // @TODO for debug breakpoint only
+    if ( self.polling_interval > 0 )
+      self.StartPollingTimer();
+    end if;
   end if;
 end if;',
 	'',
