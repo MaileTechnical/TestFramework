@@ -60,7 +60,8 @@ INSERT INTO O_TFR
 	1,
 	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
 // if the event happens to be ''in-flight'' it is ignored in Final state.
-generate IntervalTimer2:kill to self;',
+//generate IntervalTimer2:kill to self;
+delete object instance self;',
 	1,
 	'',
 	"b173f025-7e0f-4936-a747-91d43f786ed7",

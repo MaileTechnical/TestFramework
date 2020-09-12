@@ -48,7 +48,12 @@ self.countdown = param.duration;
 if ( self.countdown > 0 )
   create event instance tick of CountdownTimer1:timer_tick to self;
   self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );
-  self.expired = False;
+  t = TIM::timer_remaining_time( timer_inst_ref:self.base_timer );
+  if ( t <= 0 )
+    LOG::LogFailure( message:"SEQ timer start failed" );
+  else
+    self.activate = true;
+  end if;
 else
   LOG::LogFailure( message:"SEQ Timeout value for coundown must be positive" );
 end if;
@@ -82,10 +87,15 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	1,
-	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
-// event-in-flight is of no consequence here.
-return self.expired;	// timer has expired; timeout event has been sent.
-',
+	'if ( not self.activate )
+  return false;
+end if;
+cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
+if ( not cancel )
+  LOG::LogInfo( message:" @@@@@@@@@@@@@@@@@@@@@@@ Cancelling an expired timer?" );
+end if;
+self.activate = false;
+return cancel;',
 	1,
 	'',
 	"8810f559-085b-4b79-91f8-3e421175d8a5",
@@ -97,9 +107,8 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
-// if the event happens to be ''in-flight'' it is ignored in Final state.
-generate CountdownTimer2:kill to self;',
+	'cancel = self.Cancel();
+delete object instance self;',
 	1,
 	'',
 	"145f9bc8-85bc-48db-8acc-66154b415578",
@@ -206,10 +215,10 @@ INSERT INTO O_ATTR
 	VALUES ("ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	"e5fc602d-1ecc-4de7-939b-96fb419d7059",
-	'expired',
+	'activate',
 	'If true, the countdown value has reached zero; a timeout event has been dispatched.',
 	'',
-	'expired',
+	'activate',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
