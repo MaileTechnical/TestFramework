@@ -10,15 +10,15 @@ INSERT INTO O_OBJ
 INSERT INTO O_TFR
 	VALUES ("891b02a7-dd4e-4827-ad9c-dcd4a549a840",
 	"7bace9c9-8570-48bf-8acc-0cd320b31d08",
-	'start',
+	'Start',
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'self.ticks = 0;
-cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );	// just in case it was already running
-create event instance tick of IntervalTimer1:timer_tick to self;
-self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );
-',
+	'if ( self.ticks != 0 )
+  self.ignore_tick = not TIM::timer_cancel( timer_inst_ref:self.base_timer );
+  self.ticks = 0;
+end if;;
+self.MakeTick();',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -60,7 +60,22 @@ INSERT INTO O_TFR
 	1,
 	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
 // if the event happens to be ''in-flight'' it is ignored in Final state.
+// but a synchronous delete here might lead to event-in-flight finding no target instance.
 generate IntervalTimer2:kill to self;',
+	1,
+	'',
+	"efa37563-506f-4cd0-b2c3-cc7617805097",
+	0);
+INSERT INTO O_TFR
+	VALUES ("efa37563-506f-4cd0-b2c3-cc7617805097",
+	"7bace9c9-8570-48bf-8acc-0cd320b31d08",
+	'MakeTick',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create event instance tick of IntervalTimer1:timer_tick to self;
+self.base_timer = TIM::timer_start( event_inst:tick, microseconds:self.scale_factor );
+',
 	1,
 	'',
 	"b173f025-7e0f-4936-a747-91d43f786ed7",
@@ -110,7 +125,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("91a41fda-c957-426f-9c72-c7eea36d2206",
 	"7bace9c9-8570-48bf-8acc-0cd320b31d08",
-	"4738cc71-6bfd-45dc-8478-7145f39c68e6",
+	"447bf994-3b93-48b5-b202-3468a784606a",
 	'current_state',
 	'',
 	'',
@@ -135,6 +150,24 @@ INSERT INTO O_ATTR
 	'scale_factor',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("447bf994-3b93-48b5-b202-3468a784606a",
+	"7bace9c9-8570-48bf-8acc-0cd320b31d08");
+INSERT INTO O_BATTR
+	VALUES ("447bf994-3b93-48b5-b202-3468a784606a",
+	"7bace9c9-8570-48bf-8acc-0cd320b31d08");
+INSERT INTO O_ATTR
+	VALUES ("447bf994-3b93-48b5-b202-3468a784606a",
+	"7bace9c9-8570-48bf-8acc-0cd320b31d08",
+	"4738cc71-6bfd-45dc-8478-7145f39c68e6",
+	'ignore_tick',
+	'If true, a timer cancel came too late; a stored event has been dispatched and is "in-flight".',
+	'',
+	'ignore_tick',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
 	'');
 INSERT INTO O_ID
