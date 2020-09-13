@@ -47,7 +47,7 @@ INSERT INTO O_TFR
 self.countdown = param.duration;
 if ( self.countdown > 0 )
   create event instance tick of CountdownTimer1:timer_tick to self;
-  self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );
+  self.base_timer = TIM::timer_start( event_inst:tick, microseconds:self.scale_factor );
   t = TIM::timer_remaining_time( timer_inst_ref:self.base_timer );
   if ( t <= 0 )
     LOG::LogFailure( message:"SEQ timer start failed" );

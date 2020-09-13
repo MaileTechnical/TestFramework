@@ -94,6 +94,9 @@ INSERT INTO SM_ACT
 if ( self.countdown == 0 )
   generate self.triggered_event;
   cancel = self.Cancel();
+else
+  create event instance tick of CountdownTimer1:timer_tick to self;
+  self.base_timer = TIM::timer_start( event_inst:tick, microseconds:self.scale_factor );
 end if;',
 	'',
 	0);
