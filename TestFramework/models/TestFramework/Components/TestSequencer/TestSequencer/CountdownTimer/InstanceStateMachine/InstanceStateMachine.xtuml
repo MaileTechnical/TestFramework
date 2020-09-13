@@ -124,12 +124,17 @@ INSERT INTO SM_ACT
 	VALUES ("3d9f8d6a-54b2-4b13-956a-c3ff3893f5b2",
 	"21cac2b9-9ab6-45ac-b3a6-e047235a3533",
 	1,
-	'self.countdown = self.countdown - 1;
-if ( self.countdown == 0 )
-  generate self.triggered_event;
-  cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
-  self.expired = True;
-end if;',
+	'if ( self.ignore_tick )  // event-in-flight from a too-late cancel
+  self.ignore_tick = false;
+else
+  self.countdown = self.countdown - 1;
+  if ( self.countdown == 0 )
+    generate self.triggered_event;
+  else
+    self.MakeTick();
+  end if;
+end if;
+',
 	'',
 	0);
 INSERT INTO SM_MOAH
@@ -170,7 +175,7 @@ INSERT INTO SM_AH
 INSERT INTO SM_ACT
 	VALUES ("45167327-593b-4474-b704-cd7a9267c762",
 	"21cac2b9-9ab6-45ac-b3a6-e047235a3533",
-	3,
+	1,
 	'',
 	'',
 	0);

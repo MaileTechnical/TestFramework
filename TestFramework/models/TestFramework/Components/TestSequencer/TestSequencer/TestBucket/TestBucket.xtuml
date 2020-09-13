@@ -81,7 +81,7 @@ Imvoked from the event signalling test case completion.',
 if ( tc.durationLimit > 0 )
   select one tmr related by self->TestSuite[R118.''is current for'']
                                   ->CountdownTimer[R123.''limits test case duration with''];
-  self.ignoreTimeout = tmr.Cancel();
+  tmr.Cancel();
 end if;
 unrelate self from tc across R117.''is currently running'';
 if ( tc.tcStatus != tsStatus::completed )
@@ -196,7 +196,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("09fd0ce6-922b-4aa2-aafb-555b1db3c564",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	"1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
+	"de9eb285-b54e-4445-80bb-62d345a4a89f",
 	'current_state',
 	'',
 	'',
@@ -249,25 +249,6 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
-INSERT INTO O_NBATTR
-	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
-	"cf812356-d586-4cdf-9c29-72003a1e9246");
-INSERT INTO O_BATTR
-	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
-	"cf812356-d586-4cdf-9c29-72003a1e9246");
-INSERT INTO O_ATTR
-	VALUES ("1e39195c-e1b6-428e-ab4f-a3ddd676ef55",
-	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	"de9eb285-b54e-4445-80bb-62d345a4a89f",
-	'ignoreTimeout',
-	'If true, this indicates that an attempt to cancel the the countdown timer encountered 
-the ''event-in-flight'' circumstance; when received, the event is to be ignored.',
-	'',
-	'ignoreTimeout',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000001",
-	'',
-	'False');
 INSERT INTO O_ID
 	VALUES (0,
 	"cf812356-d586-4cdf-9c29-72003a1e9246");

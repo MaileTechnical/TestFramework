@@ -61,11 +61,11 @@ INSERT INTO O_TFR
                               ->StimulusSequence[R116.''is active for''];
 if ( self.polling_interval > 0 )
   select one ptmr related by seq->CountdownTimer[R122.''polls observation with''];
-  cancel = ptmr.Cancel();
+  ptmr.Cancel();
 end if;
 if ( self.duration_limit > 0 )
-  select one ptmr related by seq->CountdownTimer[R121.''limits observation duration with''];
-  cancel = ptmr.Cancel();
+  select one dtmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+  dtmr.Cancel();
 end if;
 ',
 	1,

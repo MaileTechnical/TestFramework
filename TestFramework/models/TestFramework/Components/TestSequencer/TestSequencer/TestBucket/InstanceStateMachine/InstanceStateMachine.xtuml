@@ -536,13 +536,9 @@ INSERT INTO SM_ACT
 	VALUES ("d5158e7d-ca69-4155-979b-b81222556eac",
 	"3be63f3c-c125-4392-81ae-903e75b9eb89",
 	1,
-	'if ( self.ignoreTimeout )		// event-in-flight when last cancel attempted.
-    self.ignoreTimeout = False;
-else
-  select one tc related by self->TestCase[R117.''is currently running''];
-  LOG::LogFailure( message:"SEQ Testcase timed out " + tc.testCaseLabel );
-  generate TestCase5:StimulusIncomplete to tc;
-end if;                           ',
+	'select one tc related by self->TestCase[R117.''is currently running''];
+LOG::LogFailure( message:"SEQ Testcase timed out " + tc.testCaseLabel );
+generate TestCase5:StimulusIncomplete to tc;                      ',
 	'Transition to this state is triggered by an event from the duration limit timer.
 It can happen that an attempt to cancel that timer for the previous test case encountered an ''event-in-flight'' circumstance.
 Reception of that event will incorrecctly transition to this state.
@@ -745,7 +741,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("12583291-c14f-44d3-867a-d22f5c93f7e7",
 	"fc31fce5-aa7f-4fc8-97f5-7eb9a52cf664",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -764,7 +760,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("f4d2357e-0d89-441c-b745-6f85e6f0a22e",
 	"fc31fce5-aa7f-4fc8-97f5-7eb9a52cf664",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -783,7 +779,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("671e117e-bc20-42ce-ada5-2930b3825d10",
 	"fc31fce5-aa7f-4fc8-97f5-7eb9a52cf664",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -884,7 +880,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("5a6afc77-a4ee-459f-94e4-114331c069a4",
 	"97a6b62b-946b-4d81-9e2d-7c92c7ebe62d",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -903,7 +899,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("7c521eb9-d053-4712-a594-7c561a7bf0a8",
 	"97a6b62b-946b-4d81-9e2d-7c92c7ebe62d",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -922,7 +918,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("943d6a16-044f-468f-87c7-14c07b978bdf",
 	"97a6b62b-946b-4d81-9e2d-7c92c7ebe62d",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1046,7 +1042,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("9b502821-91ac-481c-ada5-600ebb51a45c",
 	"817e3032-1336-466c-a812-8ad23b8364d1",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1065,7 +1061,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("5f0728f1-0b49-47cb-9cb3-b448a9242c48",
 	"817e3032-1336-466c-a812-8ad23b8364d1",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1084,7 +1080,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("b08af296-bf6b-4c8d-b682-2f733ed3f5a4",
 	"817e3032-1336-466c-a812-8ad23b8364d1",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1146,7 +1142,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("ae657e90-f4fa-421b-92f4-b35ac5142178",
 	"04e35099-1302-41bc-9fd8-5d1f82ef8de8",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1165,7 +1161,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("5337b9f5-3f70-40d6-ab3b-71e4236c938a",
 	"04e35099-1302-41bc-9fd8-5d1f82ef8de8",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1184,7 +1180,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("48a885eb-2fef-4eac-ba53-7ac1d2dc25a9",
 	"04e35099-1302-41bc-9fd8-5d1f82ef8de8",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1272,7 +1268,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("d0d408bd-3410-4233-8c2a-43a9ef91794c",
 	"5c2079a3-c506-4431-8698-61542c3f24b9",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1291,7 +1287,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("b4571ae8-1d01-414a-805d-a92c6b0f41ae",
 	"5c2079a3-c506-4431-8698-61542c3f24b9",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1310,7 +1306,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("d1cf7b92-6adb-4701-b030-1914f2471adc",
 	"5c2079a3-c506-4431-8698-61542c3f24b9",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1434,7 +1430,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("536075de-480d-4b73-9c70-2ce0bf8569aa",
 	"e16491ac-56c2-4541-9dd1-f6917ea69a04",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1453,7 +1449,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("3cff1d01-217f-4965-b6c1-b4385bef8f88",
 	"e16491ac-56c2-4541-9dd1-f6917ea69a04",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1472,7 +1468,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("ace36b8e-e361-41e9-aeb3-9698814226a0",
 	"e16491ac-56c2-4541-9dd1-f6917ea69a04",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1534,7 +1530,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("03d07c68-3b6c-4e1b-9193-082c7186340a",
 	"a0ad759c-0de8-48f3-9370-9f6f5cee162d",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1553,7 +1549,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("32145882-f7d9-41f6-bce0-5489f771501d",
 	"a0ad759c-0de8-48f3-9370-9f6f5cee162d",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1572,7 +1568,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("0c9efb74-765d-43f6-a93e-f249e5899ad3",
 	"a0ad759c-0de8-48f3-9370-9f6f5cee162d",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1634,7 +1630,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("e166a9e8-2401-440b-bb99-269e793e2b0c",
 	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1653,7 +1649,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("dd639769-d8bd-481f-a41c-27486aa127c0",
 	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -1672,7 +1668,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("0de87d3a-2f9d-4c16-8b13-29b01a311f7a",
 	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND

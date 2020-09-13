@@ -46,9 +46,7 @@ INSERT INTO O_TFR
 	'self.triggered_event = param.event;
 self.countdown = param.duration;
 if ( self.countdown > 0 )
-  create event instance tick of CountdownTimer1:timer_tick to self;
-  self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );
-  self.expired = False;
+  self.MakeTick();
 else
   LOG::LogFailure( message:"SEQ Timeout value for coundown must be positive" );
 end if;
@@ -80,15 +78,13 @@ INSERT INTO O_TFR
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	'Cancel',
 	'',
-	"ba5eda7a-def5-0000-0000-000000000001",
+	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
-// event-in-flight is of no consequence here.
-return self.expired;	// timer has expired; timeout event has been sent.
-',
+	'// watch for event-in-flight: if cancel returns false the event has already flown
+self.ignore_tick = not TIM::timer_cancel( timer_inst_ref:self.base_timer );',
 	1,
 	'',
-	"8810f559-085b-4b79-91f8-3e421175d8a5",
+	"43d8260e-1b16-4852-a3e2-b3a0e3975e5f",
 	0);
 INSERT INTO O_TFR
 	VALUES ("9304f596-e8ce-4497-927a-3b7c88918d77",
@@ -99,10 +95,25 @@ INSERT INTO O_TFR
 	1,
 	'cancel = TIM::timer_cancel( timer_inst_ref:self.base_timer );
 // if the event happens to be ''in-flight'' it is ignored in Final state.
+// but a synchronous delete here might lead to event-in-flight finding no target instance.
 generate CountdownTimer2:kill to self;',
 	1,
 	'',
 	"145f9bc8-85bc-48db-8acc-66154b415578",
+	0);
+INSERT INTO O_TFR
+	VALUES ("43d8260e-1b16-4852-a3e2-b3a0e3975e5f",
+	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
+	'MakeTick',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'create event instance tick of CountdownTimer1:timer_tick to self;
+self.base_timer = TIM::timer_start( event_inst:tick, microseconds:self.scale_factor );
+',
+	1,
+	'',
+	"8810f559-085b-4b79-91f8-3e421175d8a5",
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",
@@ -206,10 +217,10 @@ INSERT INTO O_ATTR
 	VALUES ("ae37d3c8-a246-4c8a-9756-f4ed7eefc555",
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	"e5fc602d-1ecc-4de7-939b-96fb419d7059",
-	'expired',
-	'If true, the countdown value has reached zero; a timeout event has been dispatched.',
+	'ignore_tick',
+	'If true, a timer cancel come too late; a stored event has been dispatched and is "in-flight".',
 	'',
-	'expired',
+	'ignore_tick',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
