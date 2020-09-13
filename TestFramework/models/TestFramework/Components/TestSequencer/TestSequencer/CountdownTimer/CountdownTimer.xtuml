@@ -218,7 +218,7 @@ INSERT INTO O_ATTR
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	"e5fc602d-1ecc-4de7-939b-96fb419d7059",
 	'ignore_tick',
-	'If true, a timer cancel come too late; a stored event has been dispatched and is "in-flight".',
+	'If true, a timer cancel came too late; a stored event has been dispatched and is "in-flight".',
 	'',
 	'ignore_tick',
 	0,

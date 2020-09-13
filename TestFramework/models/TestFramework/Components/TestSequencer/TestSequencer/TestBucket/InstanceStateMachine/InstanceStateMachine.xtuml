@@ -294,6 +294,12 @@ INSERT INTO SM_SEME
 	"0fe74f46-7347-4260-847b-918cce0b6c16",
 	"3be63f3c-c125-4392-81ae-903e75b9eb89",
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SM_CH
+	VALUES ("ec57fcf5-a7ab-46e5-a941-9aada36467ee",
+	"f5329f05-7fbe-4c31-9edf-37a75188e1da",
+	"3be63f3c-c125-4392-81ae-903e75b9eb89",
+	"00000000-0000-0000-0000-000000000000",
+	'');
 INSERT INTO SM_SEME
 	VALUES ("ec57fcf5-a7ab-46e5-a941-9aada36467ee",
 	"f5329f05-7fbe-4c31-9edf-37a75188e1da",
@@ -375,17 +381,6 @@ INSERT INTO SM_TXN
 	VALUES ("fa79ff91-3a21-4b03-84fa-aabd4d810714",
 	"3be63f3c-c125-4392-81ae-903e75b9eb89",
 	"f000bee0-3d9f-499a-83be-03f4f0b90c19",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO SM_NSTXN
-	VALUES ("7eab5928-5891-4467-b71c-b0ae5d332a35",
-	"3be63f3c-c125-4392-81ae-903e75b9eb89",
-	"ec57fcf5-a7ab-46e5-a941-9aada36467ee",
-	"f5329f05-7fbe-4c31-9edf-37a75188e1da",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO SM_TXN
-	VALUES ("7eab5928-5891-4467-b71c-b0ae5d332a35",
-	"3be63f3c-c125-4392-81ae-903e75b9eb89",
-	"ec57fcf5-a7ab-46e5-a941-9aada36467ee",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO SM_MOAH
 	VALUES ("4346ed9b-43f5-48b5-887d-1a5fc6868beb",
@@ -539,10 +534,7 @@ INSERT INTO SM_ACT
 	'select one tc related by self->TestCase[R117.''is currently running''];
 LOG::LogFailure( message:"SEQ Testcase timed out " + tc.testCaseLabel );
 generate TestCase5:StimulusIncomplete to tc;                      ',
-	'Transition to this state is triggered by an event from the duration limit timer.
-It can happen that an attempt to cancel that timer for the previous test case encountered an ''event-in-flight'' circumstance.
-Reception of that event will incorrecctly transition to this state.
-In that case, the ignore timeout flag is set and no action is taken until either a true timeout event or a test case completion event is received.',
+	'Transition to this state is triggered by an event from the duration limit timer.',
 	0);
 INSERT INTO SM_TAH
 	VALUES ("64476b48-ca40-4355-a2f9-98542de54beb",
@@ -571,20 +563,6 @@ INSERT INTO SM_ACT
 	1,
 	'self.NextTestCase();',
 	'A test case has finished - it may have completed successsfully or it may have failed. Look for the next test case to be run for this bucket.',
-	0);
-INSERT INTO SM_TAH
-	VALUES ("28c1e781-8d7d-4103-ba9f-0ae291c69637",
-	"3be63f3c-c125-4392-81ae-903e75b9eb89",
-	"7eab5928-5891-4467-b71c-b0ae5d332a35");
-INSERT INTO SM_AH
-	VALUES ("28c1e781-8d7d-4103-ba9f-0ae291c69637",
-	"3be63f3c-c125-4392-81ae-903e75b9eb89");
-INSERT INTO SM_ACT
-	VALUES ("28c1e781-8d7d-4103-ba9f-0ae291c69637",
-	"3be63f3c-c125-4392-81ae-903e75b9eb89",
-	1,
-	'',
-	'',
 	0);
 INSERT INTO GD_MD
 	VALUES ("38bfba2f-2d39-47f7-9d1b-d40018dc20af",
@@ -1381,7 +1359,7 @@ INSERT INTO GD_NCS
 	VALUES ("42559cfe-f881-4864-966e-8d91e9f3ecc1");
 INSERT INTO DIM_ND
 	VALUES (444.000000,
-	144.000000,
+	109.000000,
 	"42559cfe-f881-4864-966e-8d91e9f3ecc1");
 INSERT INTO DIM_GE
 	VALUES (4752.000000,
@@ -1617,145 +1595,6 @@ INSERT INTO DIM_ED
 	VALUES ("b9aa84a8-0760-4cbf-9aac-c78022f8b746",
 	"4ddbdb7c-8294-4d3c-aae0-9c2cb6447f8a",
 	"a0ad759c-0de8-48f3-9370-9f6f5cee162d");
-INSERT INTO GD_GE
-	VALUES ("aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"38bfba2f-2d39-47f7-9d1b-d40018dc20af",
-	"7eab5928-5891-4467-b71c-b0ae5d332a35",
-	42,
-	0,
-	'TestFramework::Components::TestSequencer::TestSequencer::TestBucket::Instance State Machine::TimedOut::TestBucket5: TimedOut');
-INSERT INTO GD_CON
-	VALUES ("aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO GD_CTXT
-	VALUES ("e166a9e8-2401-440b-bb99-269e793e2b0c",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	0,
-	0.000000,
-	0.000000);
-INSERT INTO DIM_ND
-	VALUES (0.000000,
-	0.000000,
-	"e166a9e8-2401-440b-bb99-269e793e2b0c");
-INSERT INTO DIM_GE
-	VALUES (0.000000,
-	0.000000,
-	"e166a9e8-2401-440b-bb99-269e793e2b0c",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ELE
-	VALUES ("e166a9e8-2401-440b-bb99-269e793e2b0c",
-	0,
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO GD_CTXT
-	VALUES ("dd639769-d8bd-481f-a41c-27486aa127c0",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	2,
-	0.000000,
-	0.000000);
-INSERT INTO DIM_ND
-	VALUES (0.000000,
-	0.000000,
-	"dd639769-d8bd-481f-a41c-27486aa127c0");
-INSERT INTO DIM_GE
-	VALUES (5259.000000,
-	3024.000000,
-	"dd639769-d8bd-481f-a41c-27486aa127c0",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ELE
-	VALUES ("dd639769-d8bd-481f-a41c-27486aa127c0",
-	0,
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO GD_CTXT
-	VALUES ("0de87d3a-2f9d-4c16-8b13-29b01a311f7a",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	1,
-	0.000000,
-	0.000000);
-INSERT INTO DIM_ND
-	VALUES (0.000000,
-	0.000000,
-	"0de87d3a-2f9d-4c16-8b13-29b01a311f7a");
-INSERT INTO DIM_GE
-	VALUES (0.000000,
-	0.000000,
-	"0de87d3a-2f9d-4c16-8b13-29b01a311f7a",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ELE
-	VALUES ("0de87d3a-2f9d-4c16-8b13-29b01a311f7a",
-	0,
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO GD_LS
-	VALUES ("1bfdce57-b998-41c9-ae26-6dc9c24da643",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"bb825e39-b455-4485-b16a-6c0dba4cb262",
-	"49b0b016-a93f-4c48-b69a-a9d1c9bd1073");
-INSERT INTO GD_LS
-	VALUES ("d30ae601-ac8c-4ccb-99a9-b37d473251a1",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"1bfdce57-b998-41c9-ae26-6dc9c24da643",
-	"49b0b016-a93f-4c48-b69a-a9d1c9bd1073",
-	"f603ddaa-dc07-4156-a26d-5bbcc0c1d136");
-INSERT INTO GD_LS
-	VALUES ("3801a9b4-67f0-4c8d-8337-c3f0220fb9bf",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"d30ae601-ac8c-4ccb-99a9-b37d473251a1",
-	"f603ddaa-dc07-4156-a26d-5bbcc0c1d136",
-	"30904e64-f097-4959-a65c-bd4d63e8e5a1");
-INSERT INTO GD_LS
-	VALUES ("18fcc549-ff74-4e5f-9d77-df71afdccd56",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"3801a9b4-67f0-4c8d-8337-c3f0220fb9bf",
-	"30904e64-f097-4959-a65c-bd4d63e8e5a1",
-	"7164816a-430a-410f-bf93-7c4e2c3dbf26");
-INSERT INTO DIM_WAY
-	VALUES ("bb825e39-b455-4485-b16a-6c0dba4cb262",
-	5196.000000,
-	3120.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_WAY
-	VALUES ("7164816a-430a-410f-bf93-7c4e2c3dbf26",
-	5124.000000,
-	3072.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"bb825e39-b455-4485-b16a-6c0dba4cb262");
-INSERT INTO DIM_WAY
-	VALUES ("49b0b016-a93f-4c48-b69a-a9d1c9bd1073",
-	5246.000000,
-	3120.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_WAY
-	VALUES ("f603ddaa-dc07-4156-a26d-5bbcc0c1d136",
-	5246.000000,
-	3024.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_WAY
-	VALUES ("30904e64-f097-4959-a65c-bd4d63e8e5a1",
-	5124.000000,
-	3024.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_GE
-	VALUES (0.000000,
-	0.000000,
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ELE
-	VALUES ("aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4",
-	0,
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ED
-	VALUES ("5bc31f34-81f9-4030-ad73-1c6d70078f3b",
-	"3901d0cb-51cb-4cc9-a1f1-f31187518b06",
-	"aa5e9c90-6f3f-4cb7-bea4-83a5ca91f4e4");
 INSERT INTO DIM_DIA
 	VALUES ("38bfba2f-2d39-47f7-9d1b-d40018dc20af",
 	'',
