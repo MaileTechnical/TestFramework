@@ -15,6 +15,10 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
+select one tc related by self->TestCase[R124.''is currently building''];
+if ( not_empty tc )
+  unrelate self from tc across R124.''is currently building'';
+end if;
 select one bucket related by self->TestBucket[R111.''will first run''];
 if ( not_empty bucket )
   relate self to bucket across R118.''is running'';

@@ -32,7 +32,12 @@ else
   end while;
   relate cursor to new_tc across R114.''follows'';
 end if;
-',
+select any ts from instances of TestSuite;
+select one tc related by ts->TestCase[R124.''is currently building''];
+if ( not_empty tc )
+  unrelate tc from ts across R124.''is being scripted for'';
+end if;
+relate new_tc to ts across R124.''is being scripted for'';',
 	1,
 	'',
 	"a74bd92a-e1c2-4cc9-8129-7acf7f50c1f3",

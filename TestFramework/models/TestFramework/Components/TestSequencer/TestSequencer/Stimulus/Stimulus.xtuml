@@ -16,7 +16,9 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
-	'select any seq from instances of StimulusSequence
+	'select any ts from instances of TestSuite;
+select one tc related by ts->TestCase[R124.''is currently building''];
+select any seq related by tc->StimulusSequence[R119.''executes'']
   where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
   create object instance new_stimulus of Stimulus;
