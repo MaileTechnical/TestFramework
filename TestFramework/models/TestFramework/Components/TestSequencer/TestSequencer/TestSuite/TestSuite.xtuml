@@ -163,7 +163,6 @@ for each seq in seqs
                                 ->Observation[R115.''is current active''];
   if ( not_empty obs )
     if ( obs.assessKey == param.key )
-      obs.assessKey = "";	// ..otherwise it will not trigger in state action
       generate Observation1:Observe() to obs;
     end if;
   end if;

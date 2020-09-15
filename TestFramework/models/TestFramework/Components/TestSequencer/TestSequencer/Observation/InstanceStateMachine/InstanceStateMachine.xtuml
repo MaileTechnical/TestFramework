@@ -322,7 +322,7 @@ INSERT INTO SM_ACT
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
 	'if ( not self.isDelay)
-  if ( self.assessKey == "" )  // not waiting for a "assess" trigger..
+  if ( not self.awaitsTrigger )  // not waiting for a "assess" trigger..
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
     if ( self.polling_interval > 0 )
       self.StartPollingTimer();  // prepare to re-observe
