@@ -162,8 +162,16 @@ for each seq in seqs
   select one obs related by seq->Stimulus[R116.''is processing'']
                                 ->Observation[R115.''is current active''];
   if ( not_empty obs )
+    // there is a possibility that Stimulus has not yet ''promoted'' next observation after ''completed''.
+    while (obs.obsStatus == tsStatus::completed )
+      select one obs related by obs->Observation[R106.''follows''];
+    end while;
     if ( obs.assessKey == param.key )
-      generate Observation1:Observe() to obs;
+      if ( obs.obsStatus == tsStatus::created )  // not yet ''started''
+        obs.obsStatus = tsStatus::triggered;     // see first transition in Observation
+      else
+        generate Observation1:Observe() to obs;
+      end if;
     end if;
   end if;
 end for;

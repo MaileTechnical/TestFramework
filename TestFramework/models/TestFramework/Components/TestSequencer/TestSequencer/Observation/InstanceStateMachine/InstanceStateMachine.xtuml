@@ -423,8 +423,13 @@ INSERT INTO SM_ACT
   self.StartDurationLimitTimer();
 end if;
 if ( not self.isDelay)
-  if ( self.assessKey == "" )  // not waiting for a "assess" trigger invocation..
+  // do not immediately ''observe'' an observation waiting to be triggered by "assess"
+  if ( self.assessKey == "" )
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+  else
+    if ( self.obsStatus == tsStatus::triggered )  // "assess" saw this before Stimulus had ''promoted'' it. 
+      send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+    end if;
   end if;
 end if;
 ',

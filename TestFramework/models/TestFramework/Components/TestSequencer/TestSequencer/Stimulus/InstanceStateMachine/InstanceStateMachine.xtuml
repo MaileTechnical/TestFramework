@@ -326,6 +326,7 @@ send TESTBENCH::InjectStimulus( stimulusId:self.assignedID );
 select one obs related by self->Observation[R105.''will first trigger''];
 if ( not_empty obs )
   relate self to obs across R115.''is current active'';
+  obs.obsStatus = tsStatus::started;
 end if;
 // wait for stimulus injection to complete; 
 // then run observations',
@@ -457,6 +458,10 @@ unrelate self from obs across R115.''is current active'';
 select one obs related by obs->Observation[R106.''follows''];
 if ( not_empty obs )
   relate self to obs across R115.''is current active'';
+  // there is a possibilty that this observation has been ''triggered'' before this promotion
+  if ( obs.obsStatus == tsStatus::created )  // do not overwrite ''triggered'' status
+    obs. obsStatus = tsStatus::started;
+  end if;
 end if;',
 	'',
 	0);

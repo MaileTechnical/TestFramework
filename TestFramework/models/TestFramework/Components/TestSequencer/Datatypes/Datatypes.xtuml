@@ -106,7 +106,7 @@ INSERT INTO S_ENUM
 	'timedout',
 	'',
 	"f118c998-732a-4398-a820-4480fa8cdb21",
-	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
+	"426bae61-a8e2-4e95-ba99-93b2615c7f15");
 INSERT INTO S_ENUM
 	VALUES ("05ecd1e6-b55b-40fb-8d0c-79ec43bb33bb",
 	'failed',
@@ -119,6 +119,12 @@ INSERT INTO S_ENUM
 	'',
 	"f118c998-732a-4398-a820-4480fa8cdb21",
 	"05ecd1e6-b55b-40fb-8d0c-79ec43bb33bb");
+INSERT INTO S_ENUM
+	VALUES ("426bae61-a8e2-4e95-ba99-93b2615c7f15",
+	'triggered',
+	'',
+	"f118c998-732a-4398-a820-4480fa8cdb21",
+	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
 INSERT INTO PE_PE
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	1,
@@ -206,15 +212,91 @@ INSERT INTO C_C_PROXY
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000",
 	'TestSequencer',
-	'A service supporting the sequencing of the steps involved in running a suite of test cases.
+	'Summary description:
+
+A service supporting the sequencing of the steps involved in running a suite of test cases.
 A test suite contains an ordered set of test buckets.
 Each test bucket contains at least one test case; typically several related tests.
 A test case consists of one or more sequences of stimuli and following observations.
-Stimuli effect changes in an application under test.
-Observations evaluate the response of the application to such stimuli.
+Multiple sequences of stimuli run concurrently in a test case execution.
+A stimulus effects some changes in a system under test.
+Following observations may evaluate the response of the system to such a stimulus.
+Time delays can be interspersed between stimuli and observations and between observations.
+All observations following a stimulus must complete before the next stimulus is injected
 If all observations are found acceptable, the test case is deemed to be successful.
+If any observation fails, the test case ceases execution: all sequences discontinue.
 A test case may be associated with instances of requirements to support coverage reporting.
 
+Discussion:
+
+Typically a self-checking test case has three primary components:
+1. Establish pre-conditions.
+2. Inject stimulus.
+3. Verify post-stimulus conditions.
+Often, the injection of stimulus and the verification of post-conditions
+are intermixed, as the test case injects a stimulus, verifies the response(s), 
+injects additional stimuli, and so on.
+
+This subject matter-independent Test Sequencer service asumes the burdens of sequencing, timer 
+management, requirements coverage tracking and summary reporting for multi-threaded test cases 
+ordered in test buckets within a test suite.
+
+A testbench, with subject matter-specific details of stimuli and observations, can use this 
+Test Sequencer service to manage its interaction with a system under test.
+
+To use the service, a testbench must derive its test bucket, stimuli and observation classes from 
+the supertype classes provided in the sample testbench component and use the operations supplied 
+in the supertypes to interface with the service.
+
+In principle, a testbench registers a test suite with the service, supplying a name and optionally 
+selecting a timescale which will be default for the testcases it will contain. The testbench adds 
+test buckets to the suite and populates each bucket with test cases comprised of stimuli and 
+observations. A test bucket contains at least one test case, but commonly a number of cases which 
+share some common purpose, such as comprehensive testing of a subgroup of requirements. 
+
+Optionally, a testbench can register instances of requirements with the service. There is provision 
+for associating any such requirement with one or more test case instances; the service will provide 
+a summary report on requirements coverage at completion of testing.
+
+A test case may choose to specify pre-conditions which should be established before the case is run.
+This is done by associating an instance of the testbench preconditions class which is configured with 
+the desired values and an operation to inject these values when invoked at test case initialization.
+
+As the testbench constructs test cases, using provided operations of the stimulus and observation 
+supertypes to add its specific stimuli and observation instances, the sequencer builds corresponding 
+sequences in the Test Sequencer service context. 
+
+For each instance of test bucket, stimulus or observation created in the testbench in this way, the 
+service returns identifying information which is used to activate those instances when appropriate.
+
+The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
+respond to the invocations of injection and observation operations on the supertype when triggered by 
+the sequencing service as it works through the series of test cases. 
+The supertypes also provide operations to signal responses to the service.
+
+The test cases are created in an instance based operation of a test bucket subtype. This operation 
+will be invoked for each test bucket subtype as the sequencer runs through the set of buckets that 
+constitute a test suite. The invoked operation creates subtype instances of stimulus and observation 
+arranging them in order. Stimuli are added to a stimulus sequence - of which there must be at least 
+one created for a test case. If there are multiple sequences of stimuli they will run concurrently.
+Observations are each appended to a specific stimulus and may be separated by chosen time delays.
+
+An observation may be configured to poll, repeatedly evaluating system conditions until it completes 
+by reporting success, or fails after some time limit. Alternatively, invocation of an evaluation can
+be triggered by some specific occurrence in the testbench - such as receipt of a status change in 
+the system under test. This is achieved by associating a specific key with the observation; invoking 
+a sequence "assess" signal, with a key value, will trigger evaluation of any current observations 
+with a matching key. If desired, such an ''asynchronous'' observation may be associated with a separate 
+stimulus sequence, allowing other sets of observations to proceed while it waits to be triggered.
+
+Associated with each stimulus sequence there is one interval timer. A stimulus or observation can 
+start (or restart) the timer on a sequence. A subsequent observation may read the elapsed time since 
+the timer was started - and may optionally reset the timer value to zero on reading. Interval timer 
+resolution defaults to that of the test case, but can be overridden.
+
+The provided sample testbench demonstrates the capabilities provided by the test sequencing service.
+They include linking pre-conditions and requirements to test cases, chosing time resolution values 
+and measuring elapsed time intervals.
 ',
 	0,
 	"00000000-0000-0000-0000-000000000000",
