@@ -119,10 +119,7 @@ new_observation.polling_interval = param.pollInterval;
 new_observation.duration_limit = param.durationLimit;
 new_observation.assessKey = param.eventKey;
 new_observation.isDelay = param.isDelay;
-if ( param.eventKey != "" )
-  new_observation.assessKey = param.eventKey;
-  new_observation.awaitsTrigger = true;
-end if;
+new_observation.assessKey = param.eventKey;
 new_observation.obsStatus = tsStatus::created;
 
 stimulus.observations = stimulus.observations + 1;
@@ -407,7 +404,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"56788e39-2058-4ecf-9cf0-3e9e3b6f683b",
+	"a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
 	'current_state',
 	'',
 	'',
@@ -448,24 +445,6 @@ INSERT INTO O_ATTR
 	'This ''observation'' just uses timeout as a delay; it will not invoke any client activity.',
 	'',
 	'isDelay',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000001",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("56788e39-2058-4ecf-9cf0-3e9e3b6f683b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("56788e39-2058-4ecf-9cf0-3e9e3b6f683b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("56788e39-2058-4ecf-9cf0-3e9e3b6f683b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
-	'awaitsTrigger',
-	'',
-	'',
-	'awaitsTrigger',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
