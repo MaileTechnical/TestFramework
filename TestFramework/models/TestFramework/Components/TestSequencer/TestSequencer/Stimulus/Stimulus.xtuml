@@ -13,7 +13,7 @@ INSERT INTO O_TFR
 	VALUES ("010572a9-3364-4429-86fb-aeab14976f4e",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	'Append',
-	'',
+	'Add a stimulus to a sequence of such that belong to the test case being scripted.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
 	'select any ts from instances of TestSuite;
@@ -60,7 +60,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'');
+	'Identifies the sequence in the currently building test case to which this timulus should append.');
 INSERT INTO O_TPARM
 	VALUES ("2cc51060-ad37-4230-bcae-2bd0006665fc",
 	"010572a9-3364-4429-86fb-aeab14976f4e",
@@ -74,7 +74,7 @@ INSERT INTO O_TFR
 	VALUES ("39c93c24-b96a-4e09-81bd-97578ae30d17",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	'Delete',
-	'',
+	'Signal client that this is "all over".',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'send TESTBENCH::DeleteStimulus( stimulusId:self.assignedID );
@@ -89,7 +89,8 @@ INSERT INTO O_TFR
 	VALUES ("cc87cb5b-9ec3-468d-b00c-2b4ffcbfb775",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	'StartIntervalTimer',
-	'',
+	'Each sequence of stimuli in a test case makes available an interval timer for use by observations.
+Signal start to the timer for this sequence.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one itmr related by self->StimulusSequence[R116.''is active for'']
@@ -145,7 +146,7 @@ INSERT INTO O_ATTR
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'A supplied value which identifies the counterpart entity in the Testbench.',
+	'A supplied value which identifies the counterpart entity in the client testbench',
 	'',
 	'assignedID',
 	0,
@@ -221,7 +222,7 @@ INSERT INTO O_ATTR
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	"be145dc9-8cda-4f3a-a335-ec60440c3648",
 	'stmStatus',
-	'Tracks the status of the stimulus through creation to completion/failure.',
+	'Tracks the status of the stimulus through creation to completion/failure of any following observations.',
 	'',
 	'stmStatus',
 	0,

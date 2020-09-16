@@ -103,7 +103,9 @@ INSERT INTO O_TFR
 	VALUES ("48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	'Append',
-	'',
+	'Add an observation to the sequence of observations that should evaluate following stimulus injection.
+A stimulus may have zero or more observations for evaluation in sequence.
+Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
 	'select any stimulus from instances of Stimulus
@@ -154,7 +156,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"ed94511a-1ba5-41fa-af71-bf810cc45f5c",
-	'');
+	'If this is a polling ( repeated until success/failure ) obsevation, the polling interval.');
 INSERT INTO O_TPARM
 	VALUES ("5cd1928e-f46d-4919-aee6-2bfb9590acbe",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -163,7 +165,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"e4be0c83-60d3-496e-a688-3e3d832da9bf",
-	'');
+	'For a polling ( repeated until success/failure ) obsevation, the time after which failure is declared.');
 INSERT INTO O_TPARM
 	VALUES ("4d06e5c5-3364-404d-9364-b3340967640d",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -172,7 +174,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'');
+	'Identifies the stimulus, after injection of which, this observation should be sequentially evaluated.');
 INSERT INTO O_TPARM
 	VALUES ("4733748f-225f-4480-87ef-6251e166bc50",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -181,7 +183,8 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"5cd1928e-f46d-4919-aee6-2bfb9590acbe",
-	'');
+	'If non-null, this observation will not invoke a client evaluation until triggered.
+Triggering is accomplished by a client "assess" signal with a matching key value.');
 INSERT INTO O_TPARM
 	VALUES ("ed94511a-1ba5-41fa-af71-bf810cc45f5c",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -190,7 +193,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"4d06e5c5-3364-404d-9364-b3340967640d",
-	'');
+	'Assigned by the client; used to initiate appropriate client evaluation when observation comes due.');
 INSERT INTO O_TPARM
 	VALUES ("1f61a05e-fae9-4aa6-8b2f-a094515f4bda",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -199,7 +202,8 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"4733748f-225f-4480-87ef-6251e166bc50",
-	'');
+	'This "observation" merely elapses perceived time before any following observation becomes eligible.
+It has no counterpart in the testing client and, so, will not trigger any action in the client.');
 INSERT INTO O_TFR
 	VALUES ("11e1c0f8-3755-4db7-8c71-1c398cd039a0",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
@@ -261,7 +265,7 @@ interval = tmr.ticks;
 if ( param.reset )
   tmr.ticks = 0;
 end if;
-return interval;
+send TESTBENCH::IntervalTimerValue( observationId:self.assignedID, value: interval );
 ',
 	1,
 	'',
@@ -349,7 +353,7 @@ INSERT INTO O_ATTR
 	"655558b2-6035-4116-afec-d34876d2b21f",
 	'duration_limit',
 	'The time limit for which this observation may delay, waiting for a successful evaluation.
-While delaying, re-evaluation my be triggered by polling or by a reassess request from the client.
+While delaying, re-evaluation may be triggered by polling or by a reassess request from the client.
 If not a positive value, this is deemed to be a one-shot observation: succeed or fail.
 Units: as specified/inherited by stimulus sequence resolution.',
 	'',
@@ -388,7 +392,8 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
 	'assessKey',
-	'If a client sends an assess signal with a matching key, this observation will evaluate.',
+	'A non-null vaLue indicates that this observation will only evaluate on receipt of an asess signal.
+If a client sends an assess signal with a matching key, this observation will evaluate.',
 	'',
 	'assessKey',
 	0,
@@ -424,7 +429,7 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'A supplied value which identifies the counterpart entity in the Testbench.',
+	'A supplied value which identifies the counterpart entity in the test client.',
 	'',
 	'assignedID',
 	0,
@@ -442,7 +447,8 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"24be76cd-6e25-43bb-ad99-9b1b9098100a",
 	'isDelay',
-	'This ''observation'' just uses timeout as a delay; it will not invoke any client activity.',
+	'This ''observation'' just uses timeout as a delay; it will not invoke any client activity.
+It should never cause an "observe" action in the client.',
 	'',
 	'isDelay',
 	0,

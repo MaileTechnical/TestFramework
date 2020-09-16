@@ -12,7 +12,7 @@ INSERT INTO O_TFR
 	VALUES ("5a4d2c90-55b1-4d65-a736-980238f02208",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	'Dismantle',
-	'',
+	'Discard the no-longer-wanted sequence structure.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one stimulus related by self->Stimulus[R104.''will first inject''];
@@ -50,7 +50,7 @@ INSERT INTO O_TFR
 	VALUES ("8bedcf33-635e-410e-bff2-14de88e3ffe9",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	'Completed',
-	'',
+	'Notify test case of sequence completion',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'self.seqStatus = tsStatus::completed;
@@ -66,7 +66,7 @@ INSERT INTO O_TFR
 	VALUES ("a71e16a2-a938-4663-8f0e-b1ecb9e451bd",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	'CreateTimers',
-	'',
+	'Each sequence is initialised with some utility timers.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'// Create the 3 timers associated with a stimulus sequence:
@@ -91,7 +91,7 @@ INSERT INTO O_TFR
 	VALUES ("2001704a-ac41-4358-8995-b86650348538",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	'DeleteTimers',
-	'',
+	'Discard the utility timers.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
@@ -121,7 +121,7 @@ INSERT INTO O_ATTR
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	"a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
 	'seqLabel',
-	'Testbench-assigned label used for identification.',
+	'Client testbench-assigned label used for identification.',
 	'',
 	'seqLabel',
 	0,
@@ -195,7 +195,7 @@ INSERT INTO O_ATTR
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	"ce363601-8e98-4cbe-b4d3-b03e48c3e581",
 	'seqStatus',
-	'',
+	'Tracks status',
 	'',
 	'seqStatus',
 	0,
