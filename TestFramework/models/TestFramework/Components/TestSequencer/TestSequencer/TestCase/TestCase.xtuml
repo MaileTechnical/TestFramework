@@ -63,7 +63,7 @@ INSERT INTO O_TFR
 	VALUES ("74064370-1d28-45f8-8225-1cffeb0706d7",
 	"ec247a2b-53a1-4839-882c-db3bb2812c25",
 	'Dismantle',
-	'',
+	'Discard the no-longer-wanted test case structure.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'send TESTBENCH::DeletePreCondition( caseLabel:self.testCaseLabel );
@@ -148,7 +148,7 @@ INSERT INTO O_ATTR
 	"ec247a2b-53a1-4839-882c-db3bb2812c25",
 	"00000000-0000-0000-0000-000000000000",
 	'testCaseId',
-	'An arbitrary unique id which can be used to identify an instance.',
+	'Unused',
 	'',
 	'testCaseId',
 	0,

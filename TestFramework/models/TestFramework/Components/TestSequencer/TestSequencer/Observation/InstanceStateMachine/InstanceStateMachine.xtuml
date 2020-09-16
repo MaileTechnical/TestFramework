@@ -321,13 +321,8 @@ INSERT INTO SM_ACT
 	VALUES ("5b987442-1102-4ea3-9762-8d4fea0f4839",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'if ( not self.isDelay)
-  if ( self.assessKey == "" )  // not waiting for a "assess" trigger..
-    send TESTBENCH::TriggerObservation( observationId:self.assignedID );
-    if ( self.polling_interval > 0 )
-      self.StartPollingTimer();  // prepare to re-observe
-    end if;
-  end if;
+	'if ( self.polling_interval > 0 )
+  self.StartPollingTimer();  // prepare to re-observe
 end if;',
 	'',
 	0);
@@ -427,9 +422,17 @@ INSERT INTO SM_ACT
 	'if ( self.duration_limit > 0 )
   self.StartDurationLimitTimer();
 end if;
-if ( self.polling_interval > 0 )
-  self.StartPollingTimer();
-end if;',
+if ( not self.isDelay)
+  // do not immediately ''observe'' an observation waiting to be triggered by "assess"
+  if ( self.assessKey == "" )
+    send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+  else
+    if ( self.obsStatus == tsStatus::triggered )  // "assess" saw this before Stimulus had ''promoted'' it. 
+      send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+    end if;
+  end if;
+end if;
+',
 	'',
 	0);
 INSERT INTO SM_TAH
@@ -443,7 +446,8 @@ INSERT INTO SM_ACT
 	VALUES ("bd7030c6-1f71-4a17-9cdd-901d62f440b6",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'',
+	'send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+',
 	'',
 	0);
 INSERT INTO SM_TAH

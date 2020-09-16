@@ -15,6 +15,10 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
+select one tc related by self->TestCase[R124.''is currently building''];
+if ( not_empty tc )
+  unrelate self from tc across R124.''is currently building'';
+end if;
 select one bucket related by self->TestBucket[R111.''will first run''];
 if ( not_empty bucket )
   relate self to bucket across R118.''is running'';
@@ -158,9 +162,16 @@ for each seq in seqs
   select one obs related by seq->Stimulus[R116.''is processing'']
                                 ->Observation[R115.''is current active''];
   if ( not_empty obs )
+    // there is a possibility that Stimulus has not yet ''promoted'' next observation after ''completed''.
+    while (obs.obsStatus == tsStatus::completed )
+      select one obs related by obs->Observation[R106.''follows''];
+    end while;
     if ( obs.assessKey == param.key )
-      obs.assessKey = "";	// ..otherwise it will not trigger in state action
-      generate Observation1:Observe() to obs;
+      if ( obs.obsStatus == tsStatus::created )  // not yet ''started''
+        obs.obsStatus = tsStatus::triggered;     // see first transition in Observation
+      else
+        generate Observation1:Observe() to obs;
+      end if;
     end if;
   end if;
 end for;

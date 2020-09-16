@@ -421,9 +421,7 @@ INSERT INTO SM_ACT
 	'LOG::LogInfo( message:"SEQ:  ---  Bucket completed ---  " 
                                       + self.bucketLabel );
 select one ts related by self->TestSuite[R118.''is current for''];
-ts.BucketDone();
-
-',
+ts.BucketDone();',
 	'',
 	0);
 INSERT INTO SM_TAH

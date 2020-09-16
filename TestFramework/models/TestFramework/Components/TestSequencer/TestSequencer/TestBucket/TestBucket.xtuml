@@ -32,7 +32,12 @@ else
   end while;
   relate cursor to new_tc across R114.''follows'';
 end if;
-',
+select any ts from instances of TestSuite;
+select one tc related by ts->TestCase[R124.''is currently building''];
+if ( not_empty tc )
+  unrelate tc from ts across R124.''is being scripted for'';
+end if;
+relate new_tc to ts across R124.''is being scripted for'';',
 	1,
 	'',
 	"a74bd92a-e1c2-4cc9-8129-7acf7f50c1f3",
@@ -50,7 +55,7 @@ INSERT INTO O_TFR
 	VALUES ("6ce05e9b-06fe-4c0b-9d34-8111f867249d",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
 	'Dismantle',
-	'',
+	'Discard the no-longer-wanted bucket structure.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one tc related by self->TestCase[R112.''will first execute''];
@@ -101,7 +106,7 @@ INSERT INTO O_TFR
 	VALUES ("60029514-495b-47fa-bdf4-1ee87abe0986",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
 	'StartGuardTimer',
-	'',
+	'Set a time limit to abandon an unsuccessful test case.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one tmr related by self->TestSuite[R118.''is current for'']
