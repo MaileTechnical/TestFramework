@@ -369,11 +369,19 @@ INSERT INTO SM_ACT
 	VALUES ("5f82cba3-4942-4cda-8686-988ac72b8e6b",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'self.obsStatus = tsStatus::completed;
+	'// success
+self.obsStatus = tsStatus::completed;
 self.CancelTimers();
-// success
 select one stm related by self->Stimulus[R115.''is currently observing for''];
-generate Stimulus2:DoObservation to stm;
+unrelate self from stm across R115.''is currently observing for'';
+select one nextobs related by self->Observation[R106.''follows''];
+if ( not_empty nextobs )
+  relate nextobs to stm across R115.''is currently observing for'';
+  generate Observation1:Observe() to nextobs;
+else
+  generate Stimulus3:ObservationsCompleted() to stm;
+end if;
+
 if ( self.isDelay )
   select one seq related by stm->StimulusSequence[R116.''is active for''];
   LOG::LogInfo( message:"SEQ  Delay timer completed in seq: " + seq.seqLabel );
@@ -419,17 +427,13 @@ INSERT INTO SM_ACT
 	VALUES ("8365397f-d928-40a1-a143-1f5b67717161",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'if ( self.duration_limit > 0 )
+	'self.obsStatus = tsStatus::started;
+if ( self.duration_limit > 0 )
   self.StartDurationLimitTimer();
 end if;
-if ( not self.isDelay)
-  // do not immediately ''observe'' an observation waiting to be triggered by "assess"
-  if ( self.assessKey == "" )
+if ( not self.isDelay)       // delays are a "non-observing" observation
+  if ( self.assessKey == "" )  // not waiting to be triggered by "assess"
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
-  else
-    if ( self.obsStatus == tsStatus::triggered )  // "assess" saw this before Stimulus had ''promoted'' it. 
-      send TESTBENCH::TriggerObservation( observationId:self.assignedID );
-    end if;
   end if;
 end if;
 ',
