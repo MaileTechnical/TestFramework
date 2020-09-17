@@ -151,7 +151,7 @@ INSERT INTO O_TPARM
 INSERT INTO O_TFR
 	VALUES ("014f2f7d-eb4a-4972-827d-b94e37df2bdc",
 	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
-	'Assess',
+	'FindObservation',
 	'Re-evaluate any currently waiting observations with matching assess key value.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -162,8 +162,12 @@ for each seq in seqs
   select one obs related by seq->Stimulus[R116.''is processing'']
                                 ->Observation[R115.''is current active''];
   if ( not_empty obs )
-    if ( obs.assessKey == param.key )
-      generate Observation1:Observe() to obs;  // go ahead and have it observe
+    if ( obs.assessKey == param.key )  // found
+      if ( param.trigger )
+        generate Observation1:Observe() to obs;  // go ahead and have it observe
+      else
+        generate Observation5:Cancel() to obs;
+      end if;
     end if;
   end if;
 end for;',
@@ -179,6 +183,15 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("b28ae5c9-32f1-45db-8d34-2c3196314e6c",
+	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
+	'trigger',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"bd40cd9e-6330-45a8-a1dc-e919c14f530b",
 	'');
 INSERT INTO O_TFR
 	VALUES ("9c5e8b50-d65d-4931-8447-cc3528b4e9b1",
