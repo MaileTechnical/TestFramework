@@ -320,8 +320,8 @@ INSERT INTO SM_ACT
 send TESTBENCH::InjectStimulus( stimulusId:self.assignedID );
 select one obs related by self->Observation[R105.''will first trigger''];
 if ( not_empty obs )
+  // do this here to ''stage'' the observation; it may be ''triggered'' by an "assess"
   relate self to obs across R115.''is current active'';
-  obs.obsStatus = tsStatus::started;
 end if;
 // wait for stimulus injection to complete; 
 // then run observations',
