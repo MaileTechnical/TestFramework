@@ -819,13 +819,13 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RequestIntervalTimerValue',
-	'N observation may request the value of the interval timer associated with its stimulus sequence.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.');
 INSERT INTO C_AS
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	'RequestIntervalTimerValue',
-	'N observation may request the value of the interval timer associated with its stimulus sequence.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	0,
