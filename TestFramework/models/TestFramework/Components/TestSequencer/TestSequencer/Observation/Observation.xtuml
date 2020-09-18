@@ -256,17 +256,16 @@ INSERT INTO O_TFR
 	'ReadIntervalTimer',
 	'Access the interval timer belonging to the stimulus sequence that triggered this observation.
 Optionally, reset the timer value to zero after reading: see reset paramater.',
-	"ba5eda7a-def5-0000-0000-000000000002",
+	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one tmr related by self->Stimulus[R115.''is currently observing for'']
-                             ->StimulusSequence[R116.''is active for'']
-                             ->IntervalTimer[R120.''measures intervals with''];
+                              ->StimulusSequence[R116.''is active for'']
+                              ->IntervalTimer[R120.''measures intervals with''];
 interval = tmr.ticks;
 if ( param.reset )
   tmr.ticks = 0;
 end if;
-send TESTBENCH::IntervalTimerValue( observationId:self.assignedID, value: interval );
-',
+send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,
 	'',
 	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
@@ -278,8 +277,17 @@ INSERT INTO O_TPARM
 	"ba5eda7a-def5-0000-0000-000000000001",
 	0,
 	'',
-	"00000000-0000-0000-0000-000000000000",
+	"aff24c3b-2781-4843-9117-5f243468d35b",
 	'If set to true, the timer value will reset to zero after being read.');
+INSERT INTO O_TPARM
+	VALUES ("aff24c3b-2781-4843-9117-5f243468d35b",
+	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	'key',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
 INSERT INTO O_TFR
 	VALUES ("47df170d-7e82-485c-a2ec-b2936e92e9fb",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",

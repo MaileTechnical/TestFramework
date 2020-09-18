@@ -998,17 +998,14 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("a7fd58ce-2f1a-4180-a410-8e39062d165b",
 	'RequestIntervalTimerValue',
-	'Request the value of the interval timer associated with the sequence to which the observation belongs.
-The value will be signalled to the testbench, attaching the observation identifier.
+	'N observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	'select any obs from instances of Observation
-  where ( selected.assignedID == param.observationId );
+ where ( selected.assignedID == param.observationId );
 if ( not_empty obs )
-  value = obs.ReadIntervalTimer( reset:param.reset );
-  send TESTBENCH::IntervalTimerValue( observationId:param.observationId, value:value );
-else
-  LOG::LogFailure( message:"SEQ Invalid observation identifier in Timer value request" );
-end if;  ',
+  obs.ReadIntervalTimer( key:param.key, reset:param.reset );
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -1016,8 +1013,8 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RequestIntervalTimerValue',
-	'Request the value of the interval timer associated with the sequence to which the observation belongs.
-The value will be signalled to the testbench, attaching the observation identifier.
+	'N observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
@@ -1071,7 +1068,8 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("7d52ac6c-99e0-40be-8abe-5dd4027a72a5",
 	'CancelTriggeredObservation',
-	'',
+	'On this signal, any active observations with matching key value will be canceled.
+This has the effect of completing the observation without a failure penalty.',
 	'select any ts from instances of TestSuite;
 if ( not_empty ts )
   ts.FindObservation( key:param.key, trigger:False );
@@ -1085,7 +1083,8 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'CancelTriggeredObservation',
-	'',
+	'On this signal, any active observations with matching key value will be canceled.
+This has the effect of completing the observation without a failure penalty.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",

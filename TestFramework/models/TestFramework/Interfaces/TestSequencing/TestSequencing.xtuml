@@ -819,26 +819,17 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RequestIntervalTimerValue',
-	'Request the value of the interval timer associated with the sequence to which the observation belongs.
-The value will be signalled to the testbench, attaching the observation identifier.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.');
 INSERT INTO C_AS
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	'RequestIntervalTimerValue',
-	'Request the value of the interval timer associated with the sequence to which the observation belongs.
-The value will be signalled to the testbench, attaching the observation identifier.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	0,
 	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2");
-INSERT INTO C_PP
-	VALUES ("6f29b081-e959-4f67-8b2c-03368fb69a98",
-	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'observationId',
-	'This value is used to navigate to the associated stimulus sequence, and hence the timer.',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_PP
 	VALUES ("9f2d1cb3-f76c-489f-a3cd-ae9412109a19",
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
@@ -847,7 +838,25 @@ INSERT INTO C_PP
 	'If true, the interval timer value will be reset to zero after being read.',
 	0,
 	'',
-	"6f29b081-e959-4f67-8b2c-03368fb69a98");
+	"a14955f8-67b1-4590-8cf4-7136dd9ffe0e");
+INSERT INTO C_PP
+	VALUES ("a14955f8-67b1-4590-8cf4-7136dd9ffe0e",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'key',
+	'Request identification string.',
+	0,
+	'',
+	"d0eeb3c2-9d5f-42d0-9496-172ea6254d76");
+INSERT INTO C_PP
+	VALUES ("d0eeb3c2-9d5f-42d0-9496-172ea6254d76",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
 	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
@@ -861,15 +870,6 @@ INSERT INTO C_AS
 	1,
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa");
 INSERT INTO C_PP
-	VALUES ("a24e164c-5e00-413f-a9c6-e1e3ba762353",
-	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'observationId',
-	'This value is used to navigate to the associated stimulus sequence, and hence the timer.',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_PP
 	VALUES ("b617f901-0f94-447c-a83d-9d5a78c4b847",
 	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
 	"ba5eda7a-def5-0000-0000-000000000002",
@@ -877,7 +877,16 @@ INSERT INTO C_PP
 	'',
 	0,
 	'',
-	"a24e164c-5e00-413f-a9c6-e1e3ba762353");
+	"d110b163-a1e7-4774-9ba4-b1746331992d");
+INSERT INTO C_PP
+	VALUES ("d110b163-a1e7-4774-9ba4-b1746331992d",
+	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'key',
+	'Request identification string.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
 	VALUES ("d69685a1-d173-411e-954d-82338177cf09",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
