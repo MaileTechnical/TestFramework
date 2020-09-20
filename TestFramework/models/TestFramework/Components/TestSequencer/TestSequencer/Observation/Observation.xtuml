@@ -370,7 +370,7 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
 	'assessKey',
-	'A non-null vaLue indicates that this observation will only evaluate on receipt of an asess signal.
+	'A non-null vaLue indicates that this observation will only evaluate on receipt of an assess signal.
 If a client sends an assess signal with a matching key, this observation will evaluate.',
 	'',
 	'assessKey',
