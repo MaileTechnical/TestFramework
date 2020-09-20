@@ -2990,7 +2990,7 @@ INSERT INTO R_PART
 	"2c13470f-861d-4cda-9f3a-dc9b7e9b216a",
 	1,
 	1,
-	'is active');
+	'has active');
 INSERT INTO R_RTO
 	VALUES ("575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"6bca7645-7d30-4956-89fd-d099eb50ca0b",
