@@ -318,11 +318,11 @@ INSERT INTO SM_ACT
 	1,
 	'self.stmStatus = tsStatus::started;
 send TESTBENCH::InjectStimulus( stimulusId:self.assignedID );
-select one obs related by self->Observation[R105.''will first trigger''];
-if ( not_empty obs )
-  // do this here to ''stage'' the observation; it may be ''triggered'' by an "assess"
-  relate self to obs across R115.''is current active'';
-end if;
+select many observations related by self->Observation[R105.''will trigger'']
+ where ( selected.sequence_number == 1 );
+for each observation in observations
+  relate observation to self across R115.''is currently observing for'';
+end for;
 // wait for stimulus injection to complete; 
 // then run observations',
 	'',
@@ -386,11 +386,13 @@ INSERT INTO SM_ACT
 	VALUES ("05710f86-c75a-4d32-8d25-2f6dc4cfddcf",
 	"04dd84b7-ce74-4c3f-8a18-138da22fce83",
 	1,
-	'select one obs related by self->Observation[R115.''is current active''];
-if ( not_empty obs )
-  generate Observation1:Observe to obs;
-else
+	'select many observations related by self->Observation[R115.''is active''];
+if ( empty observations )
   generate Stimulus3:ObservationsCompleted to self;
+else
+  for each observation in observations
+    generate Observation1:Observe to observation;
+  end for;
 end if;
 ',
 	'',

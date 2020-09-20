@@ -102,48 +102,54 @@ INSERT INTO O_TPARM
 INSERT INTO O_TFR
 	VALUES ("48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	'Append',
+	'Add',
 	'Add an observation to the sequence of observations that should evaluate following stimulus injection.
 A stimulus may have zero or more observations for evaluation in sequence.
 Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
-	'select any stimulus from instances of Stimulus
-  where ( selected.assignedID == param.stimulusId );
-if ( empty stimulus )
-  LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
+	'select any ts from instances of TestSuite;
+select one tc related by ts->TestCase[R124.''is currently building''];
+select any seq related by tc->StimulusSequence[R119.''executes'']
+  where ( selected.seqLabel == param.seqLabel );
+if ( empty seq )
+  LOG::LogFailure( message:"No sequence matches " + param.seqLabel );
   return;
 end if;
 
+select one first_stimulus related by seq->Stimulus[R104.''will first inject''];
+if ( empty first_stimulus ) 
+  LOG::LogFailure( message:"No stimulus exists on sequence " + param.seqLabel );
+  return;
+end if;
+// Point cursor at last stimulus in sequence for this test case.
+cursor = first_stimulus;
+while ( True )
+  select one next related by cursor->Stimulus[R102.''follows''];
+  if ( empty next )
+    break;
+  else
+    cursor = next;
+  end if;
+end while;
+
+select any observation related by cursor->Observation[R105.''will trigger''];
+if ( empty observation )
+  cursor.observations = 1;
+else
+  if ( not param.concurrent )
+    cursor.observations = cursor.observations + 1;
+  end if;
+end if;
 create object instance new_observation of Observation;
 new_observation.assignedID = param.observationId;
 new_observation.polling_interval = param.pollInterval;
 new_observation.duration_limit = param.durationLimit;
 new_observation.assessKey = param.eventKey;
 new_observation.isDelay = param.isDelay;
-new_observation.assessKey = param.eventKey;
+new_observation.sequence_number = cursor.observations;
 new_observation.obsStatus = tsStatus::created;
-
-stimulus.observations = stimulus.observations + 1;
-new_observation.sequence_number = stimulus.observations;
-
-select one first_observation related by stimulus->Observation[R105.''will first trigger''];
-if ( empty first_observation ) 
-  relate stimulus to new_observation across R105.''will first trigger'';
-else
-  // Point cursor at last observation in sequence for this stimulus.
-  cursor = first_observation;
-  while ( True )
-    select one next related by cursor->Observation[R106.''follows''];
-    if ( empty next )
-      break;
-    else
-      cursor = next;
-    end if;
-  end while;
-  // Add this instance of observation to the end of the sequence.
-  relate cursor to new_observation across R106.''follows'';
-end if;',
+relate new_observation to cursor across R105.''is made after'';',
 	1,
 	'',
 	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
@@ -169,8 +175,8 @@ INSERT INTO O_TPARM
 INSERT INTO O_TPARM
 	VALUES ("4d06e5c5-3364-404d-9364-b3340967640d",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	'stimulusId',
-	"ba5eda7a-def5-0000-0000-000000000005",
+	'seqLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -201,54 +207,17 @@ INSERT INTO O_TPARM
 	"ba5eda7a-def5-0000-0000-000000000001",
 	0,
 	'',
-	"4733748f-225f-4480-87ef-6251e166bc50",
+	"be671862-f1ad-4106-8f60-181a44963c8b",
 	'This "observation" merely elapses perceived time before any following observation becomes eligible.
 It has no counterpart in the testing client and, so, will not trigger any action in the client.');
-INSERT INTO O_TFR
-	VALUES ("11e1c0f8-3755-4db7-8c71-1c398cd039a0",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	'AppendDelay',
-	'Add a specialized observation which only incurs a time delay in the sequence of observations.
-It does not have a counterpart invocation in the testbench and it cannot report failure.',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	0,
-	'Observation::Append( stimulusId:param.stimulusId,
-                          observationId:param.observationId,
-                          pollInterval:0, 
-                          durationLimit:param.duration, 
-                          eventKey:"", 
-                          isDelay:True );
-',
-	1,
-	'',
+INSERT INTO O_TPARM
+	VALUES ("be671862-f1ad-4106-8f60-181a44963c8b",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("cd2fd7d6-5ef0-42ab-ade3-261df1c4b92a",
-	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
-	'stimulusId',
-	"ba5eda7a-def5-0000-0000-000000000005",
+	'concurrent',
+	"ba5eda7a-def5-0000-0000-000000000001",
 	0,
 	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO O_TPARM
-	VALUES ("f41f3a9c-d352-499f-b728-1036840b835c",
-	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
-	'duration',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	0,
-	'',
-	"85a546a9-5163-44b9-96c4-7f0edd992456",
-	'');
-INSERT INTO O_TPARM
-	VALUES ("85a546a9-5163-44b9-96c4-7f0edd992456",
-	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
-	'observationId',
-	"ba5eda7a-def5-0000-0000-000000000005",
-	0,
-	'',
-	"cd2fd7d6-5ef0-42ab-ade3-261df1c4b92a",
+	"4733748f-225f-4480-87ef-6251e166bc50",
 	'');
 INSERT INTO O_TFR
 	VALUES ("3411cdd6-af11-4830-9206-1a2dc2aa08f7",
@@ -268,7 +237,7 @@ end if;
 send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,
 	'',
-	"11e1c0f8-3755-4db7-8c71-1c398cd039a0",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
 	0);
 INSERT INTO O_TPARM
 	VALUES ("6ad5b0b1-6d02-41f7-899b-df41524719e0",
@@ -341,8 +310,9 @@ INSERT INTO O_ATTR
 	"0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
 	'sequence_number',
 	'Observations are numbered, starting at 1, on an observation sequence attached to a stimulus.
-Numberings are used in identifying/reporting failure points.
-',
+Multiple observations following a given stimulus will be run by order of sequence number.
+Multiple observations sharing the same sequence number will run concurrently.
+Numberings are also used in identifying/reporting failure points.',
 	'',
 	'sequence_number',
 	0,
@@ -400,7 +370,7 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
 	'assessKey',
-	'A non-null vaLue indicates that this observation will only evaluate on receipt of an asess signal.
+	'A non-null vaLue indicates that this observation will only evaluate on receipt of an assess signal.
 If a client sends an assess signal with a matching key, this observation will evaluate.',
 	'',
 	'assessKey',
