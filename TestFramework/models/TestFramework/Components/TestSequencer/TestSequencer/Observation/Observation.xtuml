@@ -218,7 +218,8 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"4733748f-225f-4480-87ef-6251e166bc50",
-	'');
+	'If true, this observation  will share the same sequence number as the previous observation.
+Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
 INSERT INTO O_TFR
 	VALUES ("3411cdd6-af11-4830-9206-1a2dc2aa08f7",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
@@ -425,8 +426,8 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"24be76cd-6e25-43bb-ad99-9b1b9098100a",
 	'isDelay',
-	'This ''observation'' just uses timeout as a delay; it will not invoke any client activity.
-It should never cause an "observe" action in the client.',
+	'When True, this ''observation'' just uses timeout as a delay; it will not invoke any client activity.
+It will never cause an "observe" action in the client as it has no counterpart.',
 	'',
 	'isDelay',
 	0,

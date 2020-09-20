@@ -822,7 +822,7 @@ INSERT INTO C_PP
 	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'concurrent',
-	'It true, this observation  will share the same sequence number as the previous observation.
+	'If true, this observation  will share the same sequence number as the previous observation.
 Observations sharing a sequence number will run concurrently when triggered after a stimulus.',
 	0,
 	'',
