@@ -159,17 +159,17 @@ INSERT INTO O_TFR
                              ->TestCase[R117.''is currently running''];
 select many seqs related by tc->StimulusSequence[R119.''executes''];
 for each seq in seqs
-  select one obs related by seq->Stimulus[R116.''is processing'']
-                                ->Observation[R115.''is current active''];
-  if ( not_empty obs )
-    if ( obs.assessKey == param.key )  // found
+  select many observations related by seq->Stimulus[R116.''is processing'']
+                                         ->Observation[R115.''is active''];
+  for each observation in observations
+    if ( observation.assessKey == param.key )  // found
       if ( param.trigger )
-        generate Observation1:Observe() to obs;  // go ahead and have it observe
+        generate Observation1:Observe() to observation;  // go ahead and have it observe
       else
-        generate Observation5:Cancel() to obs;
+        generate Observation5:Cancel() to observation;
       end if;
     end if;
-  end if;
+  end for;
 end for;',
 	1,
 	'',
@@ -217,14 +217,16 @@ while ( not_empty bucket )
       LOG::LogFailure( message:" in sequence " + seq.seqLabel );
       select one stm related by seq->Stimulus[R116.''is processing''];
       LOG::LogReal( message:" after stimulus ", r:stm.numberInSeq );
-      select one obs related by stm->Observation[R115.''is current active''];
-      LOG::LogReal( message:" observation ", r:obs.sequence_number );
-      if ( obs.obsStatus == tsStatus::failed )
-        LOG::LogFailure( message:"Observation failed" );
-      end if;
-      if ( obs.obsStatus == tsStatus::timedout )
-        LOG::LogInfo( message:"Observation timed out" );
-      end if;
+      select many observations related by stm->Observation[R115.''is active''];
+      for each observation in observations
+        LOG::LogReal( message:" observation ", r:observation.sequence_number );
+        if ( observation.obsStatus == tsStatus::failed )
+          LOG::LogFailure( message:"Observation failed" );
+        end if;
+        if ( observation.obsStatus == tsStatus::timedout )
+          LOG::LogInfo( message:"Observation timed out" );
+        end if;
+      end for;
     end if;
    end if;
    if ( tc.tcStatus == tsStatus::created )

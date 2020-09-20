@@ -611,9 +611,13 @@ INSERT INTO SPR_PS
 	'InsertDelay',
 	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
 For observations, consider using the polling capability which can repeatedly evaluate with delays.',
-	'Observation::AppendDelay( stimulusId:param.stimulusId, 
-                          observationId:param.observationId,
-                          duration:param.duration );',
+	'Observation::Add( seqLabel:param.seqLabel, 
+                     observationId:param.observationId,
+                     pollInterval:0,
+                     durationLimit:param.duration,
+                     eventKey:"",
+                     concurrent:False,
+                     isDelay:True );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -976,11 +980,12 @@ INSERT INTO SPR_PS
 	VALUES ("9a12b970-7867-4d86-91e4-304e0af6a38d",
 	'AddObservation',
 	'Add an observation to follow injection of a specified stimulus.',
-	'Observation::Append( stimulusId:param.stimulusId, 
+	'Observation::Add( seqLabel:param.seqLabel, 
                      observationId:param.observationId,
                      pollInterval:param.pollInterval,
                      durationLimit:param.pollDuration,
                      eventKey:param.eventKey,
+                     concurrent:param.concurrent,
                      isDelay:False );',
 	1,
 	0);
@@ -998,7 +1003,7 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("a7fd58ce-2f1a-4180-a410-8e39062d165b",
 	'RequestIntervalTimerValue',
-	'N observation may request the value of the interval timer associated with its stimulus sequence.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	'select any obs from instances of Observation
@@ -1013,7 +1018,7 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RequestIntervalTimerValue',
-	'N observation may request the value of the interval timer associated with its stimulus sequence.
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');

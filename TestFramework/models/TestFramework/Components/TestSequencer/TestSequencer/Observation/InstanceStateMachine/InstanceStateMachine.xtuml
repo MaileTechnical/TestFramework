@@ -444,19 +444,26 @@ INSERT INTO SM_ACT
 	'// success
 self.obsStatus = tsStatus::completed;
 self.CancelTimers();
-select one stm related by self->Stimulus[R115.''is currently observing for''];
-unrelate self from stm across R115.''is currently observing for'';
-select one nextobs related by self->Observation[R106.''follows''];
-if ( not_empty nextobs )
-  relate nextobs to stm across R115.''is currently observing for'';
-  generate Observation1:Observe() to nextobs;
-else
-  generate Stimulus3:ObservationsCompleted() to stm;
-end if;
-
+select one stimulus related by self->Stimulus[R115.''is currently observing for''];
 if ( self.isDelay )
-  select one seq related by stm->StimulusSequence[R116.''is active for''];
+  select one seq related by stimulus->StimulusSequence[R116.''is active for''];
   LOG::LogInfo( message:"SEQ  Delay timer completed in seq: " + seq.seqLabel );
+end if;
+unrelate self from stimulus across R115.''is currently observing for'';
+
+// any concurrent observations waiting to complete - if so, do nothing
+// otherwise, move on to subsequent observation(s)
+select any other_observation related by stimulus->Observation[R115.''is active''];
+if ( empty other_observation )
+  select many observations related by stimulus->Observation[R105.''will trigger'']
+   where ( selected.sequence_number == self.sequence_number + 1 );
+  if ( empty observations )  // no more observations following this stimulus?
+    generate Stimulus3:ObservationsCompleted to stimulus;
+  else
+    for each observation in observations
+      generate Observation1:Observe to observation;
+    end for;
+  end if;
 end if;',
 	'',
 	0);

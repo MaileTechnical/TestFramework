@@ -320,8 +320,8 @@ For observations, consider using the polling capability which can repeatedly eva
 INSERT INTO C_PP
 	VALUES ("48668688-6431-4a4e-9c59-68e291cc9ef5",
 	"581dc69f-0c98-4ab6-baf0-a03c367e212f",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'stimulusId',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
 	'',
 	0,
 	'',
@@ -771,8 +771,8 @@ INSERT INTO C_AS
 INSERT INTO C_PP
 	VALUES ("589d107b-bf56-490e-ba8b-50b57cfc90d2",
 	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'stimulusId',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
 	'Identifies the stimulus which this observation will follow.
 This is the value assigned by the Testbench when the stimulus was added.',
 	0,
@@ -814,6 +814,15 @@ INSERT INTO C_PP
 	0,
 	'',
 	"589d107b-bf56-490e-ba8b-50b57cfc90d2");
+INSERT INTO C_PP
+	VALUES ("424f489a-b8c3-4f41-9118-6ae9ba7d53ee",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'concurrent',
+	'',
+	0,
+	'',
+	"a5cf080d-7c9a-4f46-b70c-49d0ab7876f5");
 INSERT INTO C_EP
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",

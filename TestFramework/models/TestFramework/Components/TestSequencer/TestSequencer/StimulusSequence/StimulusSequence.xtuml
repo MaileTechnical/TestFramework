@@ -20,18 +20,11 @@ if ( not_empty stimulus )
   unrelate self from stimulus across R104.''will first inject'';
 end if;
 while ( not empty stimulus )
-  select one obs related by stimulus->Observation[R105.''will first trigger''];
-  if ( not_empty obs )
-    unrelate stimulus from obs across R105.''will first trigger'';
-  end if;
-  while ( not_empty obs )
-    select one next_obs related by obs->Observation[R106.''follows''];
-    if ( not_empty next_obs )
-      unrelate obs from next_obs across R106.''follows'';
-    end if;
-    obs.Delete();
-    obs = next_obs;
-  end while;
+  select many observations related by stimulus->Observation[R105.''will trigger''];
+  for each observation in observations
+    unrelate observation from stimulus across R105.''is made after'';
+    delete object instance observation;
+  end for;
   select one next_stimulus related by stimulus->Stimulus[R102.''follows''];
   if ( not_empty next_stimulus )
     unrelate stimulus from next_stimulus across R102.''follows'';
