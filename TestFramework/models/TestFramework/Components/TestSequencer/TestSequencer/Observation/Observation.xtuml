@@ -310,8 +310,9 @@ INSERT INTO O_ATTR
 	"0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
 	'sequence_number',
 	'Observations are numbered, starting at 1, on an observation sequence attached to a stimulus.
-Numberings are used in identifying/reporting failure points.
-',
+Multiple observations following a given stimulus will be run by order of sequence number.
+Multiple observations sharing the same sequence number will run concurrently.
+Numberings are also used in identifying/reporting failure points.',
 	'',
 	'sequence_number',
 	0,
