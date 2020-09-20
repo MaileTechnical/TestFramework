@@ -981,12 +981,12 @@ INSERT INTO SPR_PS
 	'AddObservation',
 	'Add an observation to follow injection of a specified stimulus.',
 	'Observation::Add( seqLabel:param.seqLabel, 
-                     observationId:param.observationId,
-                     pollInterval:param.pollInterval,
-                     durationLimit:param.pollDuration,
-                     eventKey:param.eventKey,
-                     concurrent:param.concurrent,
-                     isDelay:False );',
+                  observationId:param.observationId,
+                  pollInterval:param.pollInterval,
+                  durationLimit:param.pollDuration,
+                  eventKey:param.eventKey,
+                  concurrent:param.concurrent,
+                  isDelay:False );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
