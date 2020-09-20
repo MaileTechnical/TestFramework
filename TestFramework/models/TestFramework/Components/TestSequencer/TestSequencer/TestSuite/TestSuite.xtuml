@@ -160,7 +160,7 @@ INSERT INTO O_TFR
 select many seqs related by tc->StimulusSequence[R119.''executes''];
 for each seq in seqs
   select many observations related by seq->Stimulus[R116.''is processing'']
-                                         ->Observation[R115.''is active''];
+                                         ->Observation[R115.''has active''];
   for each observation in observations
     if ( observation.assessKey == param.key )  // found
       if ( param.trigger )
@@ -217,7 +217,7 @@ while ( not_empty bucket )
       LOG::LogFailure( message:" in sequence " + seq.seqLabel );
       select one stm related by seq->Stimulus[R116.''is processing''];
       LOG::LogReal( message:" after stimulus ", r:stm.numberInSeq );
-      select many observations related by stm->Observation[R115.''is active''];
+      select many observations related by stm->Observation[R115.''has active''];
       for each observation in observations
         LOG::LogReal( message:" observation ", r:observation.sequence_number );
         if ( observation.obsStatus == tsStatus::failed )

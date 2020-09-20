@@ -453,7 +453,7 @@ unrelate self from stimulus across R115.''is currently observing for'';
 
 // any concurrent observations waiting to complete - if so, do nothing
 // otherwise, move on to subsequent observation(s)
-select any other_observation related by stimulus->Observation[R115.''is active''];
+select any other_observation related by stimulus->Observation[R115.''has active''];
 if ( empty other_observation )
   select many observations related by stimulus->Observation[R105.''will trigger'']
    where ( selected.sequence_number == self.sequence_number + 1 );

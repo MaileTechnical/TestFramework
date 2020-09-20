@@ -23,7 +23,7 @@ select many seqs related by self->StimulusSequence[R119.''executes''];
 for each seq in seqs
   select one stimulus related by seq->Stimulus[R116.''is processing''];
   if ( not_empty stimulus )
-    select many observations related by stimulus->Observation[R115.''is active''];
+    select many observations related by stimulus->Observation[R115.''has active''];
     for each observation in observations
       observation.CancelTimers();
     end for;
