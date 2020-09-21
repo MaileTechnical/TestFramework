@@ -828,6 +828,94 @@ INSERT INTO C_PP
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.');
+INSERT INTO C_AS
+	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	0,
+	"ca057380-3763-49be-a902-4f89bd14277c");
+INSERT INTO C_PP
+	VALUES ("2ff69a94-3704-471b-9924-a8439da7d9cd",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"2ce4c903-8629-4182-8835-49401a85a10c");
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../SharedDatatypes/SharedDatatypes.xtuml');
+INSERT INTO C_PP
+	VALUES ("2ce4c903-8629-4182-8835-49401a85a10c",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
+INSERT INTO C_AS
+	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	0,
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03");
+INSERT INTO C_PP
+	VALUES ("2cc9f5dc-e2ae-4fd6-83cd-a726b9663a7c",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"563ce030-a2b6-4c94-b36f-859c47b568c4");
+INSERT INTO C_PP
+	VALUES ("563ce030-a2b6-4c94-b36f-859c47b568c4",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'stimulusId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.');
+INSERT INTO C_AS
+	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	0,
+	"092a77de-9124-470e-9e04-e55568aebdc9");
+INSERT INTO C_PP
+	VALUES ("d9b2eb93-a8f1-4204-b785-d67c807d9671",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO PE_PE
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	1,

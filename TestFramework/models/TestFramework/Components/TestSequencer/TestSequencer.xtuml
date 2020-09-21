@@ -1005,6 +1005,72 @@ INSERT INTO C_EP_PROXY
 	'On this signal, any active observations with matching key value will be canceled.
 This has the effect of completing the observation without a failure penalty.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("d8c0e7cd-e935-473f-8893-2d13ddf22e22",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("d8c0e7cd-e935-473f-8893-2d13ddf22e22",
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	'select any bucket from instances of TestBucket
+  where ( selected.assignedID == param.bucketId );
+if ( not_empty bucket )
+  bucket.SetTimerResolution( resolution:param.resolution );
+else
+  LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
+end if;
+',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestBucketResolution',
+	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("2ebed635-f6ff-4aef-b302-2c270c93aabb",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("2ebed635-f6ff-4aef-b302-2c270c93aabb",
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'select any ts from instances of TestSuite;
+if ( not_empty ts )
+  ts.timerResolution = param.resolution;
+else
+  LOG::LogFailure( message:"SEQ No test suite exists!" );
+end if;',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestSuiteResolution',
+	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	"00000000-0000-0000-0000-000000000000",
