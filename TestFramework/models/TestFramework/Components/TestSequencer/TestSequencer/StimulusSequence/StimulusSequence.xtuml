@@ -62,20 +62,15 @@ INSERT INTO O_TFR
 	'Each sequence is initialised with some utility timers.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'// Create the 3 timers associated with a stimulus sequence:
-// One interval timer for general timimg use by testbench.
-// Two countdown timers for observation polling and timeout use.
+	'// Create an interval timer for general timimg use by testbench.
+// This may be started or reset by a stimulus or observation.
+// It may subsequently be ''read'' by some other instance.
 select one bucket related by self->TestCase[R119.''is execution thread for'']
                                  ->TestBucket[R117.''is active for''];
 create object instance itmr of IntervalTimer;
 itmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
 relate self to itmr across R120.''measures intervals with'';
-create object instance ctmr of CountdownTimer;
-ctmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
-relate self to ctmr across R121.''limits observation duration with'';
-create object instance ctmr of CountdownTimer;
-ctmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
-relate self to ctmr across R122.''polls observation with'';',
+',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -91,12 +86,6 @@ INSERT INTO O_TFR
 if ( not_empty itmr )	// this sequence never started
   unrelate itmr from self across R120.''times intervals for'';
   itmr.Delete();
-  select one ctmr related by self->CountdownTimer[R121.''limits observation duration with''];
-  unrelate ctmr from self across R121.''triggers observation timeout for'';
-  ctmr.Delete();
-  select one ctmr related by self->CountdownTimer[R122.''polls observation with''];
-  unrelate ctmr from self across R122.''triggers polling observation for'';
-  ctmr.Delete();
 end if;
 ',
 	1,

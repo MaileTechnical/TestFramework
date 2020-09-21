@@ -17,11 +17,9 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one seq related by self->Stimulus[R115.''is currently observing for'']
-                              ->StimulusSequence[R116.''is active for''];
-select one ptmr related by seq->CountdownTimer[R122.''polls observation with''];
+	'select one polltimer related by self->CountdownTimer[R126.''is polled by''];
 create event instance poll of Observation1:Observe to self;
-ptmr.Start( event:poll, duration:self.polling_interval );
+polltimer.Start( event:poll, duration:self.polling_interval );
 ',
 	1,
 	'',
@@ -34,18 +32,17 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one seq related by self->Stimulus[R115.''is currently observing for'']
-                              ->StimulusSequence[R116.''is active for''];
-select one mtmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+	'select one timeout related by self->CountdownTimer[R125.''is stopped by''];
+if ( empty timeout )
+  return;
+end if;
 if ( self.isDelay )
   create event instance evt of Observation2:Completed to self;
-  mtmr.Start( event:evt, duration:self.duration_limit );
-  LOG::LogInfo( message:"SEQ: Delay timer started in seq: " + seq.seqLabel );                    
+  timeout.Start( event:evt, duration:self.duration_limit );
 else
   create event instance evt of Observation4:TimedOut to self;
-  mtmr.Start( event:evt, duration:self.duration_limit );
-end if;
-',
+  timeout.Start( event:evt, duration:self.duration_limit );
+end if;',
 	1,
 	'',
 	"6475862e-fa46-4136-b86e-0c99df6734ca",
@@ -57,14 +54,12 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one seq related by self->Stimulus[R115.''is currently observing for'']
-                              ->StimulusSequence[R116.''is active for''];
-if ( self.polling_interval > 0 )
-  select one ptmr related by seq->CountdownTimer[R122.''polls observation with''];
+	'select one ptmr related by self->CountdownTimer[R126.''is polled by''];
+if ( not_empty ptmr )
   ptmr.Cancel();
 end if;
-if ( self.duration_limit > 0 )
-  select one dtmr related by seq->CountdownTimer[R121.''limits observation duration with''];
+select one dtmr related by self->CountdownTimer[R125.''is stopped by''];
+if ( not_empty dtmr )
   dtmr.Cancel();
 end if;
 ',

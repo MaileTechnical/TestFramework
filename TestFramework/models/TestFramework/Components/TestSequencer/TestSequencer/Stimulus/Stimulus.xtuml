@@ -110,11 +110,7 @@ INSERT INTO O_TFR
 	1,
 	'select one seq related by self->StimulusSequence[R116.''is active for''];
 select one itmr related by seq->IntervalTimer[R120.''measures intervals with''];
-itmr.SetResolution( resolution:param.resolution );
-select one ctmr related by seq->CountdownTimer[R121.''limits observation duration with''];
-ctmr.SetResolution( resolution:param.resolution );
-select one ctmr related by seq->CountdownTimer[R122.''polls observation with''];
-ctmr.SetResolution( resolution:param.resolution );',
+itmr.SetResolution( resolution:param.resolution );',
 	1,
 	'',
 	"cc87cb5b-9ec3-468d-b00c-2b4ffcbfb775",
