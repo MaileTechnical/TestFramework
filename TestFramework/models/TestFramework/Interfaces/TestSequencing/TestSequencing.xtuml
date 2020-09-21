@@ -429,94 +429,6 @@ INSERT INTO C_PP
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
-	VALUES ("9ef51640-e733-4e08-87de-474d06cc17d7",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.');
-INSERT INTO C_AS
-	VALUES ("9ef51640-e733-4e08-87de-474d06cc17d7",
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
-	0,
-	"e3261067-756f-427b-94ca-307412068ce6");
-INSERT INTO C_PP
-	VALUES ("71c44585-83bd-445b-a4dc-f3dbb40a111b",
-	"9ef51640-e733-4e08-87de-474d06cc17d7",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"d795b40b-f09f-4252-9545-5feb96cbf681");
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../SharedDatatypes/SharedDatatypes.xtuml');
-INSERT INTO C_PP
-	VALUES ("d795b40b-f09f-4252-9545-5feb96cbf681",
-	"9ef51640-e733-4e08-87de-474d06cc17d7",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'bucketId',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
-	VALUES ("7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
-INSERT INTO C_AS
-	VALUES ("7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
-	0,
-	"9ef51640-e733-4e08-87de-474d06cc17d7");
-INSERT INTO C_PP
-	VALUES ("48a0cdad-a4ed-4014-b6d3-a3a2edf57eb8",
-	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"a1289f11-7c22-4b1c-afb2-c21251d2afd6");
-INSERT INTO C_PP
-	VALUES ("a1289f11-7c22-4b1c-afb2-c21251d2afd6",
-	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'stimulusId',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
-	VALUES ("e9a718cd-155e-4f82-ab40-9e08b065623a",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.');
-INSERT INTO C_AS
-	VALUES ("e9a718cd-155e-4f82-ab40-9e08b065623a",
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
-	0,
-	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f");
-INSERT INTO C_PP
-	VALUES ("28079354-b5a2-4b50-9f4c-fcf9a03b4ff2",
-	"e9a718cd-155e-4f82-ab40-9e08b065623a",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
 	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -527,7 +439,7 @@ INSERT INTO C_AS
 	'RegisterTestSuite',
 	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
 	0,
-	"e9a718cd-155e-4f82-ab40-9e08b065623a");
+	"e3261067-756f-427b-94ca-307412068ce6");
 INSERT INTO C_PP
 	VALUES ("57323b9a-ddb1-4267-ad70-201602c6b6c1",
 	"b1465433-efc9-45bd-ad88-e5ead4500931",
@@ -549,38 +461,6 @@ If true all test case contexts will be retained.',
 	'',
 	"57323b9a-ddb1-4267-ad70-201602c6b6c1");
 INSERT INTO C_EP
-	VALUES ("9e278084-be96-4393-8eee-f1793a29017b",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestCaseDurationLimit',
-	'Assign an optional overall duration limit for execution of a test case.
-If the limit is exceeded, the test case fails and terminates all sequence execution.');
-INSERT INTO C_AS
-	VALUES ("9e278084-be96-4393-8eee-f1793a29017b",
-	'SetTestCaseDurationLimit',
-	'Assign an optional overall duration limit for execution of a test case.
-If the limit is exceeded, the test case fails and terminates all sequence execution.',
-	0,
-	"b1465433-efc9-45bd-ad88-e5ead4500931");
-INSERT INTO C_PP
-	VALUES ("c6a21297-95fd-4d19-b54c-7cc977ec6524",
-	"9e278084-be96-4393-8eee-f1793a29017b",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'caseLabel',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_PP
-	VALUES ("b9d2538b-4997-45c5-a6d4-c6598ea8c167",
-	"9e278084-be96-4393-8eee-f1793a29017b",
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'durationLimit',
-	'',
-	0,
-	'',
-	"c6a21297-95fd-4d19-b54c-7cc977ec6524");
-INSERT INTO C_EP
 	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -591,7 +471,7 @@ INSERT INTO C_AS
 	'DeleteObservation',
 	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
 	1,
-	"9e278084-be96-4393-8eee-f1793a29017b");
+	"b1465433-efc9-45bd-ad88-e5ead4500931");
 INSERT INTO C_PP
 	VALUES ("e582117a-a982-428d-86d9-0158140f94af",
 	"a65ba45b-40f5-486e-9280-968e92d5d402",

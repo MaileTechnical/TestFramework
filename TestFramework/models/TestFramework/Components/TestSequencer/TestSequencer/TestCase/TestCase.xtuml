@@ -128,32 +128,13 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("d1aa937d-f84c-48ed-b0f0-0cc18b8ff8d4",
 	"ec247a2b-53a1-4839-882c-db3bb2812c25",
-	"4fceeb4d-7131-4175-9bc2-2367f3e97a39",
+	"5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
 	'current_state',
 	'',
 	'',
 	'current_state',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000006",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
-	"ec247a2b-53a1-4839-882c-db3bb2812c25");
-INSERT INTO O_BATTR
-	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
-	"ec247a2b-53a1-4839-882c-db3bb2812c25");
-INSERT INTO O_ATTR
-	VALUES ("4fceeb4d-7131-4175-9bc2-2367f3e97a39",
-	"ec247a2b-53a1-4839-882c-db3bb2812c25",
-	"5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
-	'durationLimit',
-	'If positive, the maximum time the test case can contimue execution.
-Units: see test bucket timer resolution setting.',
-	'',
-	'durationLimit',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	'');
 INSERT INTO O_ID

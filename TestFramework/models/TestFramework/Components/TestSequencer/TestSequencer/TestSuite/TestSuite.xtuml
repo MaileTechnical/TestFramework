@@ -96,7 +96,7 @@ new_bucket.bktStatus = tsStatus::created;
 ',
 	1,
 	'',
-	"df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
+	"8a5d688d-f48b-465c-8930-167630d9c2a9",
 	0);
 INSERT INTO O_TPARM
 	VALUES ("1fbe1517-179e-48b9-a1fa-fb64b75cde96",
@@ -117,11 +117,8 @@ INSERT INTO O_TFR
 	'select any ts from instances of TestSuite;  // Test Suite should be a singleton
 if ( empty ts ) 
   create object instance ts of TestSuite;
-  ts.timerResolution = timerResolution::second;		// default
   ts.suiteLabel = param.suiteLabel;
   ts.retainAll = param.retainAll;
-  create object instance tmr of CountdownTimer;
-  relate ts to tmr across R123.''limits test case duration with'';
 else
   LOG::LogFailure( message:"SEQ  Test suite already exists!" );
 end if;
@@ -241,34 +238,6 @@ LOG::LogInfo( message:" --- End of summary report ---" );',
 	'',
 	"4397b71c-de2d-434c-a016-a421c3783aa0",
 	0);
-INSERT INTO O_TFR
-	VALUES ("df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
-	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
-	'SetTimerResolution',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'',
-	1,
-	'',
-	"8a5d688d-f48b-465c-8930-167630d9c2a9",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("47e7a7ae-396c-47dc-b828-57e187a82a71",
-	"df1e5c74-286a-447a-89cd-b3ed9e2e19fd",
-	'resolution',
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("b980968f-16f6-4867-b93f-b083badb5d39",
 	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
@@ -323,6 +292,13 @@ INSERT INTO O_ATTR
 	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
 	'',
 	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_ID
 	VALUES (0,
 	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
