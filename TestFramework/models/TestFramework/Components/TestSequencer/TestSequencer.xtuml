@@ -911,6 +911,12 @@ INSERT INTO SPR_PS
   LOG::LogFailure( message:"SEQ New test case label required" );
   return;
 end if;
+select any case from instances of TestCase
+ where ( selected.testCaseLabel == param.caseLabel );
+if ( not_empty case )
+  LOG::LogFailure( message:"Test case with this label already exists" );
+  return;
+end if;
 select any bucket from instances of TestBucket
   where ( selected.assignedID == param.bucketId );
 if ( not_empty bucket )
@@ -934,7 +940,8 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("a9fe3cfb-7860-405a-a80a-2dac41fe8152",
 	'CreateStimulusSequence',
-	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
+A test case, identified by its label, can have one or more labeled sequences of stimuli.
 These sequences may run in parallel and may interact via assess signals.',
 	'LOG::LogInfo( message:"Deprecated: use AddStimulusSequence" );
 select any tc from instances of TestCase
@@ -951,7 +958,8 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'CreateStimulusSequence',
-	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
+A test case, identified by its label, can have one or more labeled sequences of stimuli.
 These sequences may run in parallel and may interact via assess signals.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
@@ -1047,7 +1055,8 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("00b40b43-eb10-49f4-8f08-a6dd5cde9967",
 	'AddStimulusSequence',
-	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+	'A test case can have one or more labeled sequences of stimuli.
+A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
 	'// A new stimulus sequence will be added to the test case currently being ''scripted''
 select any suite from instances of TestSuite;
@@ -1064,7 +1073,8 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddStimulusSequence',
-	'A test case, identified by its label, can have one or more labeled sequences of stimuli.
+	'A test case can have one or more labeled sequences of stimuli.
+A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
