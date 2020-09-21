@@ -18,9 +18,9 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one polltimer related by self->CountdownTimer[R126.''is polled by''];
-create event instance poll of Observation1:Observe to self;
-polltimer.Start( event:poll, duration:self.polling_interval );
-',
+if ( not_empty polltimer )
+  polltimer.Start();
+end if;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -33,15 +33,8 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one timeout related by self->CountdownTimer[R125.''is stopped by''];
-if ( empty timeout )
-  return;
-end if;
-if ( self.isDelay )
-  create event instance evt of Observation2:Completed to self;
-  timeout.Start( event:evt, duration:self.duration_limit );
-else
-  create event instance evt of Observation4:TimedOut to self;
-  timeout.Start( event:evt, duration:self.duration_limit );
+if (not  empty timeout )
+  timeout.Start();
 end if;',
 	1,
 	'',
@@ -138,12 +131,27 @@ else
 end if;
 create object instance new_observation of Observation;
 new_observation.assignedID = param.observationId;
-new_observation.polling_interval = param.pollInterval;
-new_observation.duration_limit = param.durationLimit;
 new_observation.assessKey = param.eventKey;
 new_observation.isDelay = param.isDelay;
 new_observation.sequence_number = cursor.observations;
 new_observation.obsStatus = tsStatus::created;
+
+if ( param.durationLimit != 0 )
+  if ( param.isDelay )
+    create event instance delayed of Observation2:Completed() to new_observation; 
+    wait = CountdownTimer::Create( duration:param.durationLimit, event:delayed );
+    relate wait to new_observation across R125.''timesout'';
+  else
+    create event instance timesup of Observation4:TimedOut() to new_observation;
+    timeout = CountdownTimer::Create( duration:param.durationLimit, event:timesup );
+    relate timeout to new_observation across R125.''timesout'';
+end if;
+end if;
+if ( param.pollInterval != 0 )
+  create event instance poll of Observation1:Observe() to new_observation;
+  retry = CountdownTimer::Create( duration:param.pollInterval, event:poll );
+  relate retry to new_observation across R126.''polls'';
+end if;
 relate new_observation to cursor across R105.''is made after'';',
 	1,
 	'',
@@ -263,8 +271,17 @@ INSERT INTO O_TFR
 	'if ( not self.isDelay )
   send TESTBENCH::DeleteObservation( observationId:self.assignedID );
 end if;
-delete object instance self;
-',
+select one timeout related by self->CountdownTimer[R125.''is stopped by''];
+if ( not_empty timeout )
+  unrelate self from timeout across R125.''is stopped by'';
+  generate CountdownTimer2:kill() to timeout;
+end if;
+select one retry related by self->CountdownTimer[R126.''is polled by''];
+if ( not_empty retry )
+  unrelate self from retry across R126.''is polled by'';
+  generate CountdownTimer2:kill() to retry;
+end if;
+delete object instance self;',
 	1,
 	'',
 	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
@@ -325,13 +342,13 @@ INSERT INTO O_ATTR
 	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"655558b2-6035-4116-afec-d34876d2b21f",
-	'duration_limit',
+	'duration_limitX',
 	'The time limit for which this observation may delay, waiting for a successful evaluation.
 While delaying, re-evaluation may be triggered by polling or by a reassess request from the client.
 If not a positive value, this is deemed to be a one-shot observation: succeed or fail.
 Units: as specified/inherited by stimulus sequence resolution.',
 	'',
-	'duration_limit',
+	'duration_limitX',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
@@ -346,11 +363,11 @@ INSERT INTO O_ATTR
 	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"461e232d-e064-4ec7-991a-9ab6353d0a53",
-	'polling_interval',
+	'polling_intervalX',
 	'The periodic interval at which the observation will re-evaluate.
 Units: as specified/inherited by stimulus sequence resolution.',
 	'',
-	'polling_interval',
+	'polling_intervalX',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
