@@ -395,9 +395,6 @@ INSERT INTO SM_ACT
 	1,
 	'select one tc related by self->TestCase[R117.''is currently running''];
 if ( not_empty tc )
-  if ( tc.durationLimit > 0 )
-    self.StartGuardTimer(duration:tc.durationLimit );
-  end if;
   generate TestCase1:InitializeCase to tc;
 else
   if ( self.bktStatus != tsStatus::failed )

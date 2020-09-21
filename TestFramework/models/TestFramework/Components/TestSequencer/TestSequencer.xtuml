@@ -707,77 +707,6 @@ INSERT INTO C_EP_PROXY
 	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
-	VALUES ("379ae919-ede3-4bc5-8493-d2e2aa324286",
-	"9ef51640-e733-4e08-87de-474d06cc17d7",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("379ae919-ede3-4bc5-8493-d2e2aa324286",
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
-	'select any bucket from instances of TestBucket
-  where ( selected.assignedID == param.bucketId );
-if ( not_empty bucket )
-  bucket.SetTimerResolution( resolution:param.resolution );
-else
-  LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("9ef51640-e733-4e08-87de-474d06cc17d7",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
-	VALUES ("c30f447e-f870-4456-93d6-bdafa2468460",
-	"7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("c30f447e-f870-4456-93d6-bdafa2468460",
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
-	'select any stimulus from instances of Stimulus
-  where ( selected.assignedID == param.stimulusId );
-if ( not_empty stimulus )
-  stimulus.SetSequenceResolution( resolution:param.resolution );
-else
-  LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("7db0ac18-85c0-4cf0-a9aa-cd3dc8466a8f",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
-	VALUES ("abd31f1e-2f10-4962-b0e9-d9df78ef794f",
-	"e9a718cd-155e-4f82-ab40-9e08b065623a",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("abd31f1e-2f10-4962-b0e9-d9df78ef794f",
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
-	'select any ts from instances of TestSuite;
-if ( not_empty ts )
-  ts.timerResolution = param.resolution;
-else
-  LOG::LogFailure( message:"SEQ No test suite exists!" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("e9a718cd-155e-4f82-ab40-9e08b065623a",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
 	VALUES ("8f6ffb50-c347-4c7a-b8c6-5fe63c9eba11",
 	"b1465433-efc9-45bd-ad88-e5ead4500931",
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
@@ -794,32 +723,6 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'RegisterTestSuite',
 	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
-	VALUES ("085b45e8-c45e-4d39-ac5d-f8aff38e68b3",
-	"9e278084-be96-4393-8eee-f1793a29017b",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("085b45e8-c45e-4d39-ac5d-f8aff38e68b3",
-	'SetTestCaseDurationLimit',
-	'Assign an optional overall duration limit for execution of a test case.
-If the limit is exceeded, the test case fails and terminates all sequence execution.',
-	'select any tc from instances of TestCase
-  where ( selected.testCaseLabel == param.caseLabel );
-if ( not_empty tc )
-  tc.durationLimit = param.durationLimit;
-else
-  LOG::LogFailure( message:"SEQ Invalid test case identifier" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("9e278084-be96-4393-8eee-f1793a29017b",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'SetTestCaseDurationLimit',
-	'Assign an optional overall duration limit for execution of a test case.
-If the limit is exceeded, the test case fails and terminates all sequence execution.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("6bff7eb3-2b23-43a3-9f4f-385237af3b21",
