@@ -101,40 +101,6 @@ itmr.Start();
 	'',
 	"39c93c24-b96a-4e09-81bd-97578ae30d17",
 	0);
-INSERT INTO O_TFR
-	VALUES ("ec486db3-85e2-4b59-821d-501a39a2d574",
-	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
-	'SetSequenceResolution',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'select one seq related by self->StimulusSequence[R116.''is active for''];
-select one itmr related by seq->IntervalTimer[R120.''measures intervals with''];
-itmr.SetResolution( resolution:param.resolution );
-select one ctmr related by seq->CountdownTimer[R121.''limits observation duration with''];
-ctmr.SetResolution( resolution:param.resolution );
-select one ctmr related by seq->CountdownTimer[R122.''polls observation with''];
-ctmr.SetResolution( resolution:param.resolution );',
-	1,
-	'',
-	"cc87cb5b-9ec3-468d-b00c-2b4ffcbfb775",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("fccdbc1b-0342-49df-bff1-965588fc4c6a",
-	"ec486db3-85e2-4b59-821d-501a39a2d574",
-	'resolution',
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("66a641e5-550e-435e-bccc-9b80b78659ca",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0");

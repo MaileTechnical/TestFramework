@@ -393,9 +393,7 @@ INSERT INTO SM_ACT
 	VALUES ("5b987442-1102-4ea3-9762-8d4fea0f4839",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'if ( self.polling_interval > 0 )
-  self.StartPollingTimer();  // prepare to re-observe
-end if;',
+	'self.StartPollingTimer();',
 	'',
 	0);
 INSERT INTO SM_MOAH
@@ -461,6 +459,7 @@ if ( empty other_observation )
     generate Stimulus3:ObservationsCompleted to stimulus;
   else
     for each observation in observations
+      relate observation to stimulus across R115.''is currently observing for'';
       generate Observation1:Observe to observation;
     end for;
   end if;
@@ -507,9 +506,7 @@ INSERT INTO SM_ACT
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
 	'self.obsStatus = tsStatus::started;
-if ( self.duration_limit > 0 )
-  self.StartDurationLimitTimer();
-end if;
+self.StartDurationLimitTimer();
 if ( not self.isDelay)       // delays are a "non-observing" observation
   if ( self.assessKey == "" )  // not waiting to be triggered by "assess"
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );

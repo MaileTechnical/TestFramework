@@ -32,6 +32,7 @@ else
   end while;
   relate cursor to new_tc across R114.''follows'';
 end if;
+new_tc.SetTimerResolution( resolution:self.timerResolution );
 select any ts from instances of TestSuite;
 select one tc related by ts->TestCase[R124.''is currently building''];
 if ( not_empty tc )
@@ -72,7 +73,7 @@ if ( self.bktStatus == tsStatus::completed )
 end if;',
 	1,
 	'',
-	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
+	"de853476-5692-42d6-a20a-34c207063a8b",
 	0);
 INSERT INTO O_TFR
 	VALUES ("d1031ea8-3f36-4e69-86bb-8be5960a911c",
@@ -97,6 +98,34 @@ end if;',
 	'',
 	"2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
 	0);
+INSERT INTO O_TFR
+	VALUES ("de853476-5692-42d6-a20a-34c207063a8b",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	'SetTimerResolution',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.timerResolution = param.resolution;',
+	1,
+	'',
+	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("dfe11a85-dccd-4c31-96aa-5a0fdfe07e97",
+	"de853476-5692-42d6-a20a-34c207063a8b",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
@@ -169,13 +198,6 @@ INSERT INTO O_ATTR
 	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
 	'',
 	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");

@@ -32,7 +32,7 @@ end for;
 	',
 	1,
 	'',
-	"214debee-c292-46cc-8a56-fac51578e9b9",
+	"ae0efcbd-9385-47c1-bb12-9f4b8b4830a6",
 	0);
 INSERT INTO O_TFR
 	VALUES ("214debee-c292-46cc-8a56-fac51578e9b9",
@@ -45,7 +45,12 @@ A test case may have several such sequences which execute in parallel.',
 	'create object instance seq of StimulusSequence;
 seq.seqLabel = param.seqLabel;
 relate seq to self across R119.''is execution thread for'';
-',
+// Create an interval timer for general timimg use by testbench.
+// This may be started or reset by a stimulus or observation.
+// It may subsequently be ''read'' by some other instance.
+create object instance itmr of IntervalTimer;
+relate seq to itmr across R120.''measures intervals with'';
+seq.SetSequenceResolution( resolution:self.timerResolution );',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -76,6 +81,34 @@ end for;',
 	'',
 	"8879251c-f38e-48ba-96a3-4a6b3f3fcdf4",
 	0);
+INSERT INTO O_TFR
+	VALUES ("ae0efcbd-9385-47c1-bb12-9f4b8b4830a6",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	'SetTimerResolution',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'self.timerResolution = param.resolution;',
+	1,
+	'',
+	"214debee-c292-46cc-8a56-fac51578e9b9",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("a757fabf-154f-4648-9815-1ea9644e4370",
+	"ae0efcbd-9385-47c1-bb12-9f4b8b4830a6",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
 	"ec247a2b-53a1-4839-882c-db3bb2812c25");
@@ -128,13 +161,31 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("d1aa937d-f84c-48ed-b0f0-0cc18b8ff8d4",
 	"ec247a2b-53a1-4839-882c-db3bb2812c25",
-	"5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	"5fdcf9d3-163a-40a6-9c99-13770c75b9d3",
 	'current_state',
 	'',
 	'',
 	'current_state',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000006",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("5fdcf9d3-163a-40a6-9c99-13770c75b9d3",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_BATTR
+	VALUES ("5fdcf9d3-163a-40a6-9c99-13770c75b9d3",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25");
+INSERT INTO O_ATTR
+	VALUES ("5fdcf9d3-163a-40a6-9c99-13770c75b9d3",
+	"ec247a2b-53a1-4839-882c-db3bb2812c25",
+	"5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
+	'timerResolution',
+	'The choice of timer resolution - see Datatypes.',
+	'',
+	'timerResolution',
+	0,
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
 	'',
 	'');
 INSERT INTO O_ID
