@@ -575,40 +575,6 @@ INSERT INTO C_PP
 	'',
 	"7ec424e2-95e1-43ff-9286-ac8dabca9c1b");
 INSERT INTO C_EP
-	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'CreateStimulusSequence',
-	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
-A test case, identified by its label, can have one or more labeled sequences of stimuli.
-These sequences may run in parallel and may interact via assess signals.');
-INSERT INTO C_AS
-	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	'CreateStimulusSequence',
-	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
-A test case, identified by its label, can have one or more labeled sequences of stimuli.
-These sequences may run in parallel and may interact via assess signals.',
-	0,
-	"338f43fc-f8fd-4707-98a1-be43d1ec3394");
-INSERT INTO C_PP
-	VALUES ("311075c1-7128-43a0-b06a-db8459d97bbb",
-	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'seqLabel',
-	'',
-	0,
-	'',
-	"510b96c8-0ab7-4cb2-b73e-2a7353e31af7");
-INSERT INTO C_PP
-	VALUES ("510b96c8-0ab7-4cb2-b73e-2a7353e31af7",
-	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'caseLabel',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
 	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -619,7 +585,7 @@ INSERT INTO C_AS
 	'AddStimulus',
 	'',
 	0,
-	"63e52cd1-3ec8-4352-ade8-ba438a671bd3");
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394");
 INSERT INTO C_PP
 	VALUES ("92524ef5-e6f9-45d9-a452-e5a01514e6dd",
 	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
