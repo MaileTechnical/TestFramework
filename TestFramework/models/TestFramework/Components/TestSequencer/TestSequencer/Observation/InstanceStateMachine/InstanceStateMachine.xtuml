@@ -459,6 +459,7 @@ if ( empty other_observation )
     generate Stimulus3:ObservationsCompleted to stimulus;
   else
     for each observation in observations
+      relate observation to stimulus across R115.''is currently observing for'';
       generate Observation1:Observe to observation;
     end for;
   end if;

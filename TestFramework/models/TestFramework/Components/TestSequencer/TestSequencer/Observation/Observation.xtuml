@@ -295,7 +295,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
+	"461e232d-e064-4ec7-991a-9ab6353d0a53",
 	'obsStatus',
 	'Tracks the status of the observation through creation to completion/failure.',
 	'',
@@ -328,46 +328,6 @@ Multiple observations sharing the same sequence number will run concurrently.
 Numberings are also used in identifying/reporting failure points.',
 	'',
 	'sequence_number',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("f059faa5-ac1e-4130-ac19-6a0c7a5cd8bb",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"655558b2-6035-4116-afec-d34876d2b21f",
-	'duration_limitX',
-	'The time limit for which this observation may delay, waiting for a successful evaluation.
-While delaying, re-evaluation may be triggered by polling or by a reassess request from the client.
-If not a positive value, this is deemed to be a one-shot observation: succeed or fail.
-Units: as specified/inherited by stimulus sequence resolution.',
-	'',
-	'duration_limitX',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("655558b2-6035-4116-afec-d34876d2b21f",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"461e232d-e064-4ec7-991a-9ab6353d0a53",
-	'polling_intervalX',
-	'The periodic interval at which the observation will re-evaluate.
-Units: as specified/inherited by stimulus sequence resolution.',
-	'',
-	'polling_intervalX',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',

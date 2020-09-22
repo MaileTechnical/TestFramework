@@ -23,7 +23,7 @@ while ( not empty stimulus )
   select many observations related by stimulus->Observation[R105.''will trigger''];
   for each observation in observations
     unrelate observation from stimulus across R105.''is made after'';
-    delete object instance observation;
+    observation.Delete();
   end for;
   select one next_stimulus related by stimulus->Stimulus[R102.''follows''];
   if ( not_empty next_stimulus )
