@@ -713,7 +713,7 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("8f6ffb50-c347-4c7a-b8c6-5fe63c9eba11",
 	'RegisterTestSuite',
-	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
 	'TestSuite::Register( suiteLabel:param.suiteLabel, retainAll:param.keepAllCases );',
 	1,
 	0);
@@ -722,7 +722,7 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RegisterTestSuite',
-	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("6bff7eb3-2b23-43a3-9f4f-385237af3b21",
@@ -835,35 +835,6 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'CreateTestCase',
 	'Add an instance of a test case, identified by label, to the indicated test bucket.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
-	VALUES ("a9fe3cfb-7860-405a-a80a-2dac41fe8152",
-	"63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("a9fe3cfb-7860-405a-a80a-2dac41fe8152",
-	'CreateStimulusSequence',
-	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
-A test case, identified by its label, can have one or more labeled sequences of stimuli.
-These sequences may run in parallel and may interact via assess signals.',
-	'LOG::LogInfo( message:"Deprecated: use AddStimulusSequence" );
-select any tc from instances of TestCase
-  where ( selected.testCaseLabel == param.caseLabel );
-if ( not_empty tc )
-  tc.AttachSequence( seqLabel:param.seqLabel );
-else
-  LOG::LogFailure( message:"SEQ Invalid test case identifier" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("63e52cd1-3ec8-4352-ade8-ba438a671bd3",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'CreateStimulusSequence',
-	'Deprecated: AddStimulusSequence now adds a labelled sequence to the current test case.
-A test case, identified by its label, can have one or more labeled sequences of stimuli.
-These sequences may run in parallel and may interact via assess signals.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("8a572599-520f-4fb5-b9ce-54781221ca86",
