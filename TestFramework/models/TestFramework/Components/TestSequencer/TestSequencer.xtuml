@@ -935,11 +935,17 @@ These sequences may run in parallel and may interact via assess signals.',
 	'// A new stimulus sequence will be added to the test case currently being ''scripted''
 select any suite from instances of TestSuite;
 select one case related by suite->TestCase[R124.''is currently building''];
-if ( not_empty case )
-  case.AttachSequence( seqLabel:param.seqLabel );
-else
+if ( empty case )
   LOG::LogFailure( message:"SEQ No test case currently being assembled" );
-end if;',
+  return;
+end if;
+select any seq related by case->StimulusSequence[R119.''executes'']
+ where ( selected.seqLabel == param.seqLabel );
+if ( not_empty seq )
+  LOG::LogFailure( message:" SEQ Sequence label must be unique within test case" );
+  return;
+end if;
+case.AttachSequence( seqLabel:param.seqLabel );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY

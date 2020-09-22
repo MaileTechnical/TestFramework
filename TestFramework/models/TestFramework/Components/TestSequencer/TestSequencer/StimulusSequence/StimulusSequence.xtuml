@@ -96,31 +96,13 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	"a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
+	"00000000-0000-0000-0000-000000000000",
 	'seqLabel',
 	'Client testbench-assigned label used for identification.',
 	'',
 	'seqLabel',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000004",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
-INSERT INTO O_BATTR
-	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
-INSERT INTO O_ATTR
-	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	"00000000-0000-0000-0000-000000000000",
-	'sequenceId',
-	'An arbitrary unique id which can be used to identify an instance.',
-	'',
-	'sequenceId',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000005",
 	'',
 	'');
 INSERT INTO O_NBATTR
@@ -207,11 +189,6 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
-INSERT INTO O_OIDA
-	VALUES ("a56249ee-ec70-4668-b1cb-8cf1ab27ef3f",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	0,
-	'sequenceId');
 INSERT INTO O_ID
 	VALUES (1,
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
