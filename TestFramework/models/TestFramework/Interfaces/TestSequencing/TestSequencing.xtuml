@@ -433,11 +433,11 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RegisterTestSuite',
-	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).');
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).');
 INSERT INTO C_AS
 	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
 	'RegisterTestSuite',
-	'A single instance of test suite must be created, to which will be added test bucket(s) containg test case(s).',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
 	0,
 	"e3261067-756f-427b-94ca-307412068ce6");
 INSERT INTO C_PP
@@ -889,8 +889,8 @@ INSERT INTO C_PP
 INSERT INTO C_PP
 	VALUES ("563ce030-a2b6-4c94-b36f-859c47b568c4",
 	"092a77de-9124-470e-9e04-e55568aebdc9",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'stimulusId',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
 	'',
 	0,
 	'',
@@ -912,6 +912,36 @@ INSERT INTO C_PP
 	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
 	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
 	'resolution',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_EP
+	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestCaseResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
+INSERT INTO C_AS
+	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	'SetTestCaseResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	0,
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5");
+INSERT INTO C_PP
+	VALUES ("634de2a1-d3b0-466b-862f-d3741fe42c1b",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'resolution',
+	'',
+	0,
+	'',
+	"d3b9002e-72ea-4636-82be-49467234ac80");
+INSERT INTO C_PP
+	VALUES ("d3b9002e-72ea-4636-82be-49467234ac80",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
 	'',
 	0,
 	'',

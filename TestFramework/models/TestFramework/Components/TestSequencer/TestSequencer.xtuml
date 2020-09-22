@@ -1038,7 +1038,14 @@ INSERT INTO SPR_PS
 	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
 	'SetSequenceResolution',
 	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
-	'',
+	'select any suite from instances of TestSuite;
+select one case related by suite->TestCase[R124.''is currently building''];
+select any seq related by case ->StimulusSequence[R119.''executes'']
+ where ( selected.seqLabel == param.seqLabel );
+if ( empty seq )
+  LOG::LogFailure( message:"No sequence found matching " + param.seqLabel );
+end if;
+seq.SetSequenceResolution( resolution:param.resolution );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -1070,6 +1077,29 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetTestSuiteResolution',
 	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("2d634a28-7315-4bba-9d3d-481e0ece2eb7",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("2d634a28-7315-4bba-9d3d-481e0ece2eb7",
+	'SetTestCaseResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'select any suite from instances of TestSuite;
+select one case related by suite->TestCase[R124.''is currently building''];
+if ( empty case )
+  LOG::LogFailure( message:"No test case found matching " + param.caseLabel );
+end if;
+case.SetTimerResolution( resolution:param.resolution );',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestCaseResolution',
+	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",

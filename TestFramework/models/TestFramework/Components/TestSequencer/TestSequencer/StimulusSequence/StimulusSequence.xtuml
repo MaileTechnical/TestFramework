@@ -32,7 +32,9 @@ while ( not empty stimulus )
   stimulus.Delete();
   stimulus = next_stimulus;
 end while;
-self.DeleteTimers();
+select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
+unrelate itmr from self across R120.''times intervals for'';
+itmr.Delete();
 
 delete object instance self;',
 	1,
@@ -53,45 +55,38 @@ generate TestCase3:SequenceComplete to tc;
 ',
 	1,
 	'',
-	"a71e16a2-a938-4663-8f0e-b1ecb9e451bd",
-	0);
-INSERT INTO O_TFR
-	VALUES ("a71e16a2-a938-4663-8f0e-b1ecb9e451bd",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	'CreateTimers',
-	'Each sequence is initialised with some utility timers.',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'// Create an interval timer for general timimg use by testbench.
-// This may be started or reset by a stimulus or observation.
-// It may subsequently be ''read'' by some other instance.
-select one bucket related by self->TestCase[R119.''is execution thread for'']
-                                 ->TestBucket[R117.''is active for''];
-create object instance itmr of IntervalTimer;
-itmr.SetResolution( resolution:bucket.timerResolution );	// default; may be changed by stimulus
-relate self to itmr across R120.''measures intervals with'';
-',
-	1,
-	'',
 	"00000000-0000-0000-0000-000000000000",
 	0);
 INSERT INTO O_TFR
-	VALUES ("2001704a-ac41-4358-8995-b86650348538",
+	VALUES ("84562cca-12cf-418b-909a-348816ad2097",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	'DeleteTimers',
-	'Discard the utility timers.',
+	'SetSequenceResolution',
+	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
-if ( not_empty itmr )	// this sequence never started
-  unrelate itmr from self across R120.''times intervals for'';
-  itmr.Delete();
-end if;
-',
+	'self.timerResolution = param.resolution;
+select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
+itmr.SetResolution( resolution:param.resolution );',
 	1,
 	'',
 	"5a4d2c90-55b1-4d65-a736-980238f02208",
 	0);
+INSERT INTO O_TPARM
+	VALUES ("3864a04b-fb16-4a5e-94e8-76ffedd77121",
+	"84562cca-12cf-418b-909a-348816ad2097",
+	'resolution',
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO S_DT_PROXY
+	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"00000000-0000-0000-0000-000000000000",
+	'timerResolution',
+	'',
+	'',
+	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
@@ -137,7 +132,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("70fc584c-3727-4bf6-8a12-20c70cafb7e5",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	"280d0095-61a4-4fe8-bee9-09bef3406932",
+	"08d47417-664d-4e82-8119-f12ab47e4f49",
 	'current_state',
 	'',
 	'',
@@ -191,6 +186,24 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"280d0095-61a4-4fe8-bee9-09bef3406932",
+	'timerResolution',
+	'The choice of timer resolution - see Datatypes.',
+	'',
+	'timerResolution',
+	0,
+	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	'',
+	'');
 INSERT INTO O_ID
 	VALUES (0,
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");

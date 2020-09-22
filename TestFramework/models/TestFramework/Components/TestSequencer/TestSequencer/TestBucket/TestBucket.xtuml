@@ -32,6 +32,7 @@ else
   end while;
   relate cursor to new_tc across R114.''follows'';
 end if;
+new_tc.SetTimerResolution( resolution:self.timerResolution );
 select any ts from instances of TestSuite;
 select one tc related by ts->TestCase[R124.''is currently building''];
 if ( not_empty tc )

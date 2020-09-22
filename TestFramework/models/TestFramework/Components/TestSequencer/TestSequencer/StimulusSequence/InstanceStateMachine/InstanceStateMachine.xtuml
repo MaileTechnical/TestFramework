@@ -209,13 +209,11 @@ INSERT INTO SM_ACT
 	"cbf2fb30-3a61-468f-8153-06abe12f07cd",
 	1,
 	'self.seqStatus = tsStatus::created;
-self.CreateTimers();
 select one stimulus related by self->Stimulus[R104.''will first inject''];
 if ( not_empty stimulus )
   relate self to stimulus across R116.''is processing'';
 end if;
-generate StimulusSequence3:RunSequence to self;
-',
+generate StimulusSequence3:RunSequence to self;',
 	'',
 	0);
 INSERT INTO SM_TAH
@@ -317,7 +315,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("ceb2c994-c92e-4086-aee6-cd272de17472",
 	"2c0ae719-9e12-425f-a6fb-799547d3bf16",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -336,7 +334,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("4c5a25aa-1c8b-40c4-93d6-2b197e5db9a7",
 	"2c0ae719-9e12-425f-a6fb-799547d3bf16",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -355,7 +353,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("51ff5602-173c-4dc7-8c28-fd5b44f8a844",
 	"2c0ae719-9e12-425f-a6fb-799547d3bf16",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -495,7 +493,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("17bbdef8-54c7-4af9-90f7-de378c66d688",
 	"09a6171d-056b-457c-bc8b-1b1545c0eb9a",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -514,7 +512,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("fef2b9b2-f374-483a-bfe0-6a3999b538da",
 	"09a6171d-056b-457c-bc8b-1b1545c0eb9a",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -533,7 +531,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("6b4a3d9a-c77b-4b24-bef3-b303fff2cf95",
 	"09a6171d-056b-457c-bc8b-1b1545c0eb9a",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -595,7 +593,7 @@ INSERT INTO GD_CON
 INSERT INTO GD_CTXT
 	VALUES ("4f61f28e-2071-4675-a418-c0aad5197980",
 	"8ead15d4-98a3-4b95-9828-35fe40c26fa3",
-	1,
+	0,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -614,7 +612,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("41b0b80e-e7e9-40c5-ba9d-14096de6834b",
 	"8ead15d4-98a3-4b95-9828-35fe40c26fa3",
-	3,
+	2,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND
@@ -633,7 +631,7 @@ INSERT INTO DIM_ELE
 INSERT INTO GD_CTXT
 	VALUES ("00ccdde4-31cf-428f-9dea-c45262416b1d",
 	"8ead15d4-98a3-4b95-9828-35fe40c26fa3",
-	2,
+	1,
 	0.000000,
 	0.000000);
 INSERT INTO DIM_ND

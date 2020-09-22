@@ -140,16 +140,19 @@ if ( param.durationLimit != 0 )
   if ( param.isDelay )
     create event instance delayed of Observation2:Completed() to new_observation; 
     wait = CountdownTimer::Create( duration:param.durationLimit, event:delayed );
+    wait.SetResolution( resolution:seq.timerResolution );
     relate wait to new_observation across R125.''timesout'';
   else
     create event instance timesup of Observation4:TimedOut() to new_observation;
     timeout = CountdownTimer::Create( duration:param.durationLimit, event:timesup );
+    timeout.SetResolution( resolution:seq.timerResolution );
     relate timeout to new_observation across R125.''timesout'';
-end if;
+  end if;
 end if;
 if ( param.pollInterval != 0 )
   create event instance poll of Observation1:Observe() to new_observation;
   retry = CountdownTimer::Create( duration:param.pollInterval, event:poll );
+  retry.SetResolution( resolution:seq.timerResolution );
   relate retry to new_observation across R126.''polls'';
 end if;
 relate new_observation to cursor across R105.''is made after'';',
