@@ -54,22 +54,27 @@ for each req in reqs
     for each tc in tcs
       if ( tc.tcStatus == tsStatus::completed )
     	LOG::LogInfo( message:" tested by successful test case " + tc.testCaseLabel );
+        req.tested = True;
       end if;
     end for;
   end if;
 end for; 
-LOG::LogInfo( message:"** Failed Test Case Requirements **" );
-for each req in reqs
-  select many tcs related by req->TestCase[R101.''is tested by''];
-  if ( not_empty tcs )
-    LOG::LogReal( message:req.prefix, r:req.number);
-    for each tc in tcs
-      if ( tc.tcStatus != tsStatus::completed )
-    	LOG::LogInfo( message:" associated with failed test case " + tc.testCaseLabel );
-      end if;
-    end for;
-  end if;
-end for; 
+select many reqs from instances of Requirement
+ where ( not selected.tested );
+if ( not_empty reqs )
+  LOG::LogInfo( message:"** Failed Test Case Requirements **" );
+  for each req in reqs
+    select many tcs related by req->TestCase[R101.''is tested by''];
+    if ( not_empty tcs )
+      LOG::LogReal( message:req.prefix, r:req.number);
+      for each tc in tcs
+        if ( tc.tcStatus != tsStatus::completed )
+    	  LOG::LogInfo( message:" associated with failed test case " + tc.testCaseLabel );
+        end if;
+      end for;
+    end if;
+  end for;
+end if; 
 ',
 	1,
 	'',
@@ -232,6 +237,24 @@ E.g "dropped", "moved to phase X", ...',
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'',
 	'');
+INSERT INTO O_NBATTR
+	VALUES ("5c67015f-07b4-4870-841b-a585031690aa",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_BATTR
+	VALUES ("5c67015f-07b4-4870-841b-a585031690aa",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
+INSERT INTO O_ATTR
+	VALUES ("5c67015f-07b4-4870-841b-a585031690aa",
+	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
+	"494c9f18-faf6-4cd5-aded-a43ea01566f1",
+	'tested',
+	'',
+	'',
+	'tested',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'False');
 INSERT INTO O_ID
 	VALUES (0,
 	"dc3f7ef1-11bb-4925-964d-603794e4aa41");
