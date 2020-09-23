@@ -479,12 +479,13 @@ INSERT INTO SPR_PS
 	VALUES ("c711a80f-d68a-4639-af8a-071ddc7ece4e",
 	'Assess',
 	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
-	'select any ts from instances of TestSuite;
-if ( not_empty ts )
-  ts.FindObservation( key:param.key, trigger:True );
-else
-  LOG::LogFailure( message:"SEQ No test suite exists" );
-end if;',
+	'select any trigger from instances of Trigger
+ where ( selected.KeyValue == param.key );
+if ( empty trigger )
+  LOG::LogFailure( message:"No observation is waiting for trigger " + param.key );
+  return;
+end if;
+trigger.TriggerObservations( fire:True );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -615,7 +616,7 @@ For observations, consider using the polling capability which can repeatedly eva
                      observationId:param.observationId,
                      pollInterval:0,
                      durationLimit:param.duration,
-                     eventKey:"",
+                     triggerKey:"",
                      concurrent:False,
                      isDelay:True );',
 	1,
@@ -866,7 +867,7 @@ INSERT INTO SPR_PS
                   observationId:param.observationId,
                   pollInterval:param.pollInterval,
                   durationLimit:param.pollDuration,
-                  eventKey:param.eventKey,
+                  triggerKey:param.eventKey,
                   concurrent:param.concurrent,
                   isDelay:False );',
 	1,
@@ -966,12 +967,13 @@ INSERT INTO SPR_PS
 	'CancelTriggeredObservation',
 	'On this signal, any active observations with matching key value will be canceled.
 This has the effect of completing the observation without a failure penalty.',
-	'select any ts from instances of TestSuite;
-if ( not_empty ts )
-  ts.FindObservation( key:param.key, trigger:False );
-else
-  LOG::LogFailure( message:"SEQ No test suite exists" );
-end if;',
+	'select any trigger from instances of Trigger
+ where ( selected.KeyValue == param.key );
+if ( empty trigger )
+  LOG::LogFailure( message:"No observation is waiting for trigger " + param.key );
+  return;
+end if;
+trigger.TriggerObservations( fire:False );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY

@@ -508,11 +508,11 @@ INSERT INTO SM_ACT
 	'self.obsStatus = tsStatus::started;
 self.StartDurationLimitTimer();
 if ( not self.isDelay)       // delays are a "non-observing" observation
-  if ( self.assessKey == "" )  // not waiting to be triggered by "assess"
+  select one trigger related by self->Trigger[R127.''delay until triggered by''];
+  if ( empty trigger )  // not waiting to be triggered by "assess"
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
   end if;
-end if;
-',
+end if;',
 	'',
 	0);
 INSERT INTO SM_TAH
