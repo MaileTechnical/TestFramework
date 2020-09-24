@@ -141,7 +141,7 @@ if ( param.triggerKey != "" )
     create object instance trigger of Trigger;
     trigger.KeyValue = param.triggerKey;
   end if;
-  relate new_observation to trigger across R127.''delay until triggered by'';
+  relate new_observation to trigger across R127.''delays until triggered by'';
 end if;
 
 if ( param.durationLimit != 0 )
@@ -283,9 +283,9 @@ INSERT INTO O_TFR
 	'if ( not self.isDelay )
   send TESTBENCH::DeleteObservation( observationId:self.assignedID );
 end if;
-select one trigger related by self->Trigger[R127.''delay until triggered by''];
+select one trigger related by self->Trigger[R127.''delays until triggered by''];
 if ( not_empty trigger )
-  unrelate self from trigger across R127.''delay until triggered by'';
+  unrelate self from trigger across R127.''delays until triggered by'';
   select many observations related by trigger->Observation[R127.''may initiate''];
   if ( empty observations )
     delete object instance trigger;

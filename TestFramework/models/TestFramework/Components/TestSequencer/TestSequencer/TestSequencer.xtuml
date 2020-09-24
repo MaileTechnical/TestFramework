@@ -3555,7 +3555,7 @@ INSERT INTO R_PART
 	"5f2d4fc0-c2c7-4b2d-a321-3ce9543ad7bf",
 	0,
 	1,
-	'delay until triggered by');
+	'delays until triggered by');
 INSERT INTO R_RTO
 	VALUES ("de3f24bd-e21c-4d1a-baa3-7da417d92837",
 	"63645d78-0c62-4dec-820a-a6029199232f",
