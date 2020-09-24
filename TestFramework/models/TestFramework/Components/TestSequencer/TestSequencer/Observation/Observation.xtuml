@@ -131,10 +131,18 @@ else
 end if;
 create object instance new_observation of Observation;
 new_observation.assignedID = param.observationId;
-new_observation.assessKey = param.eventKey;
 new_observation.isDelay = param.isDelay;
 new_observation.sequence_number = cursor.observations;
 new_observation.obsStatus = tsStatus::created;
+if ( param.triggerKey != "" )
+  select any trigger from instances of Trigger
+   where ( selected.KeyValue == param.triggerKey );
+  if ( empty trigger )
+    create object instance trigger of Trigger;
+    trigger.KeyValue = param.triggerKey;
+  end if;
+  relate new_observation to trigger across R127.''delays until triggered by'';
+end if;
 
 if ( param.durationLimit != 0 )
   if ( param.isDelay )
@@ -155,7 +163,8 @@ if ( param.pollInterval != 0 )
   retry.SetResolution( resolution:seq.timerResolution );
   relate retry to new_observation across R126.''polls'';
 end if;
-relate new_observation to cursor across R105.''is made after'';',
+relate new_observation to cursor across R105.''is made after'';
+',
 	1,
 	'',
 	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
@@ -190,7 +199,7 @@ INSERT INTO O_TPARM
 INSERT INTO O_TPARM
 	VALUES ("4733748f-225f-4480-87ef-6251e166bc50",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	'eventKey',
+	'triggerKey',
 	"ba5eda7a-def5-0000-0000-000000000004",
 	0,
 	'',
@@ -274,6 +283,14 @@ INSERT INTO O_TFR
 	'if ( not self.isDelay )
   send TESTBENCH::DeleteObservation( observationId:self.assignedID );
 end if;
+select one trigger related by self->Trigger[R127.''delays until triggered by''];
+if ( not_empty trigger )
+  unrelate self from trigger across R127.''delays until triggered by'';
+  select many observations related by trigger->Observation[R127.''may initiate''];
+  if ( empty observations )
+    delete object instance trigger;
+  end if;
+end if;
 select one timeout related by self->CountdownTimer[R125.''is stopped by''];
 if ( not_empty timeout )
   unrelate self from timeout across R125.''is stopped by'';
@@ -336,34 +353,15 @@ Numberings are also used in identifying/reporting failure points.',
 	'',
 	'');
 INSERT INTO O_NBATTR
-	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
 INSERT INTO O_BATTR
-	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
 INSERT INTO O_ATTR
-	VALUES ("a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
+	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
-	'assessKey',
-	'A non-null vaLue indicates that this observation will only evaluate on receipt of an assess signal.
-If a client sends an assess signal with a matching key, this observation will evaluate.',
-	'',
-	'assessKey',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"a1f9941b-45d3-4e71-8022-40d1f8d8bcef",
 	'current_state',
 	'',
 	'',

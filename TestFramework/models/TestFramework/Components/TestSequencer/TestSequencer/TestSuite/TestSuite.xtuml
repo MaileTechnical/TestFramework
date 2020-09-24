@@ -57,7 +57,7 @@ else
 end if;  ',
 	1,
 	'',
-	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
+	"5f6b9307-a1a4-45ba-9d2a-78f1606a0a60",
 	0);
 INSERT INTO O_TFR
 	VALUES ("1a9fbf33-1ec8-49d6-ae22-1d875f0510e6",
@@ -144,51 +144,6 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"1f4f1fc6-9f39-4ad5-95d8-0de3192ecbb3",
-	'');
-INSERT INTO O_TFR
-	VALUES ("014f2f7d-eb4a-4972-827d-b94e37df2bdc",
-	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
-	'FindObservation',
-	'Re-evaluate any currently waiting observations with matching assess key value.',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'select one tc related by self->TestBucket[R118.''is running'']
-                             ->TestCase[R117.''is currently running''];
-select many seqs related by tc->StimulusSequence[R119.''executes''];
-for each seq in seqs
-  select many observations related by seq->Stimulus[R116.''is processing'']
-                                         ->Observation[R115.''has active''];
-  for each observation in observations
-    if ( observation.assessKey == param.key )  // found
-      if ( param.trigger )
-        generate Observation1:Observe() to observation;  // go ahead and have it observe
-      else
-        generate Observation5:Cancel() to observation;
-      end if;
-    end if;
-  end for;
-end for;',
-	1,
-	'',
-	"5f6b9307-a1a4-45ba-9d2a-78f1606a0a60",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("bd40cd9e-6330-45a8-a1dc-e919c14f530b",
-	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
-	'key',
-	"ba5eda7a-def5-0000-0000-000000000004",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO O_TPARM
-	VALUES ("b28ae5c9-32f1-45db-8d34-2c3196314e6c",
-	"014f2f7d-eb4a-4972-827d-b94e37df2bdc",
-	'trigger',
-	"ba5eda7a-def5-0000-0000-000000000001",
-	0,
-	'',
-	"bd40cd9e-6330-45a8-a1dc-e919c14f530b",
 	'');
 INSERT INTO O_TFR
 	VALUES ("9c5e8b50-d65d-4931-8447-cc3528b4e9b1",
