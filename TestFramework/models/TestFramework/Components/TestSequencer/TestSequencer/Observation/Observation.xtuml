@@ -286,8 +286,8 @@ end if;
 select one trigger related by self->Trigger[R127.''delays until triggered by''];
 if ( not_empty trigger )
   unrelate self from trigger across R127.''delays until triggered by'';
-  select many observations related by trigger->Observation[R127.''may initiate''];
-  if ( empty observations )
+  select any observation related by trigger->Observation[R127.''may initiate''];
+  if ( empty observation )
     delete object instance trigger;
   end if;
 end if;
