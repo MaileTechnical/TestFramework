@@ -462,7 +462,11 @@ INSERT INTO SM_ACT
 	1,
 	'LOG::LogInfo( message:"SEQ  Initializing Test Case: " + self.testCaseLabel );
 // Inform the testbench that this test case is ready to execute.
-send TESTBENCH::InitializeTestCase( caseLabel:self.testCaseLabel );',
+send TESTBENCH::InitializeTestCase( caseLabel:self.testCaseLabel );
+select one suite related by self->TestSuite[R124.''is being scripted for''];
+if ( not_empty suite )
+  unrelate self from suite across R124.''is being scripted for'';
+end if;',
 	'',
 	0);
 INSERT INTO SM_MOAH

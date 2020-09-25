@@ -60,12 +60,16 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one tc related by self->TestCase[R112.''will first execute''];
+unrelate self from tc across R112.''will first execute'';
 while ( not_empty tc )
   select one next_tc related by tc->TestCase[R114.''follows''];
+  if ( not_empty next_tc )
+    unrelate next_tc from tc across R114.''follows'';
+  end if;
   if ( tc.tcStatus == tsStatus::completed )	// keep all context for failed test case for diagnosis
     // delete the sequences, stimuli and observations of successsful test cases
     tc.Dismantle();
-  end if;
+  end if; 
   tc = next_tc;
 end while;
 if ( self.bktStatus == tsStatus::completed )
@@ -85,14 +89,17 @@ Imvoked from the event signalling test case completion.',
 	1,
 	'select one tc related by self->TestCase[R117.''is currently running''];
 unrelate self from tc across R117.''is currently running'';
+select one next_tc related by tc->TestCase[R114.''follows''];
+if ( not_empty next_tc )
+  unrelate tc from  next_tc across R114.''follows'';
+end if;
 if ( tc.tcStatus != tsStatus::completed )
   self.bktStatus = tsStatus::failed;	// inhibit deletion of client test bucket at clean-up
 else
   tc.Dismantle();
 end if;
-select one tc related by tc->TestCase[R114.''follows''];
-if ( not_empty tc )
-  relate self to tc across R117.''is currently running'';
+if ( not_empty next_tc )
+  relate self to next_tc across R117.''is currently running'';
 end if;',
 	1,
 	'',

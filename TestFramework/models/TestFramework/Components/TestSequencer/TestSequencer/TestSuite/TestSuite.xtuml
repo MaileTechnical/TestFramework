@@ -21,10 +21,12 @@ if ( not_empty tc )
 end if;
 select one bucket related by self->TestBucket[R111.''will first run''];
 if ( not_empty bucket )
+  unrelate self from bucket across R111.''will first run'';
   relate self to bucket across R118.''is running'';
   send TESTBENCH::InitializeBucket( bucketId:bucket.assignedID );
 else
   LOG::LogFailure( message:"SEQ No tests to run!" );
+  delete object instance self;
 end if;',
 	1,
 	'',
@@ -40,21 +42,43 @@ INSERT INTO O_TFR
 	'select one bucket related by self->TestBucket[R118.''is running''];
 unrelate self from bucket across R118.''is running'';
 select one next_bucket related by bucket->TestBucket[R113.''follows''];
+if ( not_empty next_bucket )
+  unrelate next_bucket from bucket across R113.''follows'';
+  relate self to next_bucket across R118.''is running'';
+  send TESTBENCH::InitializeBucket( bucketId:next_bucket.assignedID );
+end if;
 if ( not self.retainAll )
   bucket.Dismantle();
 end if;
 
-if ( not_empty next_bucket )
-  relate self to next_bucket across R118.''is running'';
-  send TESTBENCH::InitializeBucket( bucketId:next_bucket.assignedID );
-else
+if ( empty next_bucket )
   LOG::LogInfo( message:"SEQ Suite complete: " + self.suiteLabel );
   LOG::LogInfo( message:" ------ " );	// separator
   Requirement::TestedBy();
   Requirement::ShowUntested();
   self.SummaryReport();
   send TESTBENCH::TestSuiteComplete();
-end if;  ',
+  select many reqs from instances of Requirement;
+  for each req in reqs
+    select many cases related by req->TestCase[R101.''is tested by''];
+    for each case in cases
+      unrelate req from case across R101.''is tested by'';
+    end for;
+    delete object instance req;
+  end for;
+end if; 
+if ( not self.retainAll )
+  select many cases from instances of TestCase;
+  for each case in cases
+    delete object instance case;
+  end for;
+  select many buckets from instances of TestBucket;
+  for each bucket in buckets
+    delete object instance bucket;
+  end for;
+  delete object instance self;
+end if;
+',
 	1,
 	'',
 	"5f6b9307-a1a4-45ba-9d2a-78f1606a0a60",

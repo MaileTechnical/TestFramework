@@ -229,7 +229,7 @@ INSERT INTO O_ATTR
 	"dc3f7ef1-11bb-4925-964d-603794e4aa41",
 	"2d23a97a-4a5d-4169-a202-46fb62e66181",
 	'remark',
-	'Arbitrary information associted with the requirement.
+	'Arbitrary information associated with the requirement.
 E.g "dropped", "moved to phase X", ...',
 	'',
 	'remark',
