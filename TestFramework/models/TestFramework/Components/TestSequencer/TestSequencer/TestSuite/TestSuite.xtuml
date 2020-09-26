@@ -14,14 +14,15 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
+	'// Prepare to run the test cases in the test buckets configured in this test suite.
+
+LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
 select one tc related by self->TestCase[R124.''is currently building''];
 if ( not_empty tc )
   unrelate self from tc across R124.''is currently building'';
 end if;
 select one bucket related by self->TestBucket[R111.''will first run''];
 if ( not_empty bucket )
-  unrelate self from bucket across R111.''will first run'';
   relate self to bucket across R118.''is running'';
   send TESTBENCH::InitializeBucket( bucketId:bucket.assignedID );
 else
@@ -58,6 +59,9 @@ if ( empty next_bucket )
   Requirement::ShowUntested();
   self.SummaryReport();
   send TESTBENCH::TestSuiteComplete();
+
+  // clean up
+
   select many reqs from instances of Requirement;
   for each req in reqs
     select many cases related by req->TestCase[R101.''is tested by''];
@@ -70,11 +74,15 @@ end if;
 if ( not self.retainAll )
   select many cases from instances of TestCase;
   for each case in cases
-    delete object instance case;
+    if ( case.tcStatus == tsStatus::completed )  // keep incomplete for error analysis.
+      delete object instance case;
+    end if;
   end for;
   select many buckets from instances of TestBucket;
   for each bucket in buckets
-    delete object instance bucket;
+    if ( bucket.bktStatus == tsStatus::completed )
+      delete object instance bucket;
+    end if;
   end for;
   delete object instance self;
 end if;
@@ -179,9 +187,15 @@ INSERT INTO O_TFR
 	'LOG::LogInfo( message:" --- SEQ Summary test suite report ---" );
 LOG::LogInfo( message:self.suiteLabel );
 select one bucket related by self->TestBucket[R111.''will first run''];
+if ( not_empty bucket )
+  unrelate bucket from self across R111.''is first in'';
+end if;
 while ( not_empty bucket )
   LOG::LogInfo( message:"Reporting for Test Bucket: " + bucket.bucketLabel );
   select one tc related by bucket->TestCase[R112.''will first execute''];
+  if ( not_empty tc )
+   unrelate tc from bucket across R112.''is first in'';
+  end if;
   while ( not_empty tc )
    if ( tc.tcStatus == tsStatus::completed )
     LOG::LogInfo( message:"Test case passed: " + tc.testCaseLabel );
@@ -208,9 +222,17 @@ while ( not_empty bucket )
    if ( tc.tcStatus == tsStatus::created )
     LOG::LogFailure( message:"Test case not run; " + tc.testCaseLabel );
    end if;
-   select one tc related by tc->TestCase[R114.''follows''];
+   select one next_tc related by tc->TestCase[R114.''follows''];
+   if ( not_empty next_tc )
+     unrelate tc from next_tc across R114.''follows'';
+   end if;
+   tc = next_tc;
   end while;
-  select one bucket related by bucket->TestBucket[R113.''follows''];
+  select one next_bucket related by bucket->TestBucket[R113.''follows''];
+  if ( not_empty next_bucket )
+    unrelate bucket from next_bucket across R113.''precedes'';
+  end if;
+  bucket = next_bucket;
 end while;
 LOG::LogInfo( message:" --- End of summary report ---" );',
 	1,

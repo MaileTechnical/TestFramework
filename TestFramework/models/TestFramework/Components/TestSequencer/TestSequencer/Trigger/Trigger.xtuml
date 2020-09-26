@@ -14,14 +14,18 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select many observations related by self->Observation[R127.''may initiate'']
-                                        ->Stimulus[R115.''is currently observing for'']
-                                        ->Observation[R115.''has active''];
+	'// Find any observations waiting for this trigger that are currently waiting to observe for a latest stimulus.
+// for any such, take the appropriate action: either initiate an observation evaluation or cancel the observation.
+
+select many observations related by self->Observation[R127.''may initiate''];
 for each observation in observations
-  if ( param.fire )
-    generate Observation1:Observe() to observation;  // go ahead and have it observe
-  else
-    generate Observation5:Cancel() to observation;
+  select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
+  if ( not_empty stimulus )
+    if ( param.fire )
+      generate Observation1:Observe() to observation;  // go ahead and have it observe
+    else
+      generate Observation5:Cancel() to observation;
+    end if;
   end if;
 end for;',
 	1,

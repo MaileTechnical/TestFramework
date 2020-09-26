@@ -60,14 +60,11 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one tc related by self->TestCase[R112.''will first execute''];
-unrelate self from tc across R112.''will first execute'';
 while ( not_empty tc )
   select one next_tc related by tc->TestCase[R114.''follows''];
-  if ( not_empty next_tc )
-    unrelate next_tc from tc across R114.''follows'';
-  end if;
-  if ( tc.tcStatus == tsStatus::completed )	// keep all context for failed test case for diagnosis
-    // delete the sequences, stimuli and observations of successsful test cases
+  // Delete the sequences, stimuli and observations of successsful test cases
+  // Keep all context for failed test case for diagnosis
+  if ( tc.tcStatus == tsStatus::completed )	
     tc.Dismantle();
   end if; 
   tc = next_tc;
@@ -87,15 +84,16 @@ INSERT INTO O_TFR
 Imvoked from the event signalling test case completion.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one tc related by self->TestCase[R117.''is currently running''];
+	'// Prepare to proceed with the next test case in this test bucket.
+
+select one tc related by self->TestCase[R117.''is currently running''];
 unrelate self from tc across R117.''is currently running'';
 select one next_tc related by tc->TestCase[R114.''follows''];
-if ( not_empty next_tc )
-  unrelate tc from  next_tc across R114.''follows'';
-end if;
+// Retain entire contents of unsuccessful test case for error analysis
 if ( tc.tcStatus != tsStatus::completed )
   self.bktStatus = tsStatus::failed;	// inhibit deletion of client test bucket at clean-up
 else
+  // clean up the test case contents, but leave the test case instances for reporting.
   tc.Dismantle();
 end if;
 if ( not_empty next_tc )
