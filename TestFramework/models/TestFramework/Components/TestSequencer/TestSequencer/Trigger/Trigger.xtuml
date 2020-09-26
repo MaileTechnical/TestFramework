@@ -15,7 +15,8 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'// Find any observations waiting for this trigger that are currently waiting to observe for a latest stimulus.
-// for any such, take the appropriate action: either initiate an observation evaluation or cancel the observation.
+// for any such, take the appropriate action:
+// either initiate an observation evaluation or consider it no longer needed.
 
 select many observations related by self->Observation[R127.''may initiate''];
 for each observation in observations
@@ -24,7 +25,7 @@ for each observation in observations
     if ( param.fire )
       generate Observation1:Observe() to observation;  // go ahead and have it observe
     else
-      generate Observation5:Cancel() to observation;
+      generate Observation5:Unobserve() to observation;
     end if;
   end if;
 end for;',
