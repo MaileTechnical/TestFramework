@@ -3547,7 +3547,10 @@ INSERT INTO R_SIMP
 INSERT INTO R_REL
 	VALUES ("63645d78-0c62-4dec-820a-a6029199232f",
 	127,
-	'',
+	'Established for each observation that is initiated by
+a particular trigger.  This can be considered a
+publish-subscribe interface in which an observation
+subscribes to a trigger of interest.',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO R_PART
 	VALUES ("de3f24bd-e21c-4d1a-baa3-7da417d92837",
@@ -3571,7 +3574,8 @@ INSERT INTO O_OBJ_PROXY
 	'Trigger',
 	126,
 	'Trigger',
-	'',
+	'An active notification, such as receipt of an interface message,
+that triggers one or more observations. ',
 	"00000000-0000-0000-0000-000000000000",
 	'./Trigger/Trigger.xtuml');
 INSERT INTO R_PART
@@ -3580,7 +3584,7 @@ INSERT INTO R_PART
 	"f23b5df8-1c65-4e71-92cd-b0aa9c02b863",
 	1,
 	0,
-	'may initiate');
+	'initiates');
 INSERT INTO R_RTO
 	VALUES ("575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"63645d78-0c62-4dec-820a-a6029199232f",

@@ -5,7 +5,8 @@ INSERT INTO O_OBJ
 	'Trigger',
 	126,
 	'Trigger',
-	'',
+	'An active notification, such as receipt of an interface message,
+that triggers one or more observations. ',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
 	VALUES ("204a8db1-afba-4b50-b47c-0d8bfb506bfc",
@@ -18,7 +19,7 @@ INSERT INTO O_TFR
 // for any such, take the appropriate action:
 // either initiate an observation evaluation or consider it no longer needed.
 
-select many observations related by self->Observation[R127.''may initiate''];
+select many observations related by self->Observation[R127.''initiates''];
 for each observation in observations
   select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
   if ( not_empty stimulus )
