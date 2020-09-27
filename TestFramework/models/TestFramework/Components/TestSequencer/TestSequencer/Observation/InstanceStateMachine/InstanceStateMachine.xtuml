@@ -44,7 +44,7 @@ INSERT INTO SM_EVT
 	0,
 	'',
 	'Observation3',
-	'');
+	'An observation has failed to match its desired value(s).');
 INSERT INTO SM_LEVT
 	VALUES ("71dca4dc-e2f4-494c-9bb4-fab26503c890",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
@@ -62,7 +62,7 @@ INSERT INTO SM_EVT
 	0,
 	'',
 	'Observation2',
-	'');
+	'An observation has evaluated satisfactorily.');
 INSERT INTO SM_LEVT
 	VALUES ("89317b3f-a96b-4875-8cd5-387a65edbea1",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
@@ -80,7 +80,7 @@ INSERT INTO SM_EVT
 	0,
 	'',
 	'Observation4',
-	'');
+	'An observation has taken too long to report success.');
 INSERT INTO SM_LEVT
 	VALUES ("3346a608-0e0a-4b98-a88f-5e3cf63cf9ec",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
@@ -94,11 +94,11 @@ INSERT INTO SM_EVT
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	"00000000-0000-0000-0000-000000000000",
 	5,
-	'Cancel',
+	'Unobserve',
 	0,
 	'',
 	'Observation5',
-	'');
+	'An observation is now deemed unneccessary; this is not a failure.');
 INSERT INTO SM_STATE
 	VALUES ("8e476c54-0030-467a-ad05-0746d1d19822",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
@@ -393,7 +393,10 @@ INSERT INTO SM_ACT
 	VALUES ("5b987442-1102-4ea3-9762-8d4fea0f4839",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'self.StartPollingTimer();',
+	'// If appropriate, start polling timer.
+// Wait to hear success or failure.
+
+self.StartPollingTimer();',
 	'',
 	0);
 INSERT INTO SM_MOAH
@@ -407,10 +410,13 @@ INSERT INTO SM_ACT
 	VALUES ("e94c6d89-925e-498f-bcb2-a3d18f5971fb",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'self.CancelTimers();
-// either, failed, timed out or cancelled
-select one stm related by self->Stimulus[R115.''is currently observing for''];
-generate Stimulus4:ObservationIncomplete to stm;
+	'// An observation has either, failed, timed out or been cancelled.
+// Cancel any timers - polling or duration.
+// Indicate failure to the appropriate stimulus sequence
+
+self.CancelTimers();
+select one stimulus related by self->Stimulus[R115.''is currently observing for''];
+generate Stimulus4:ObservationIncomplete to stimulus;
 ',
 	'',
 	0);
@@ -439,7 +445,9 @@ INSERT INTO SM_ACT
 	VALUES ("5f82cba3-4942-4cda-8686-988ac72b8e6b",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'// success
+	'// An observation has been deemed to complete successfully.
+// Attempt to promote any immediately succeeding observations to observing status.
+
 self.obsStatus = tsStatus::completed;
 self.CancelTimers();
 select one stimulus related by self->Stimulus[R115.''is currently observing for''];
@@ -449,8 +457,9 @@ if ( self.isDelay )
 end if;
 unrelate self from stimulus across R115.''is currently observing for'';
 
-// any concurrent observations waiting to complete - if so, do nothing
-// otherwise, move on to subsequent observation(s)
+// Any concurrent observations waiting to complete - if so, do nothing ( "thread join" ).
+// Otherwise, attempt to promote subsequent observation(s)
+
 select any other_observation related by stimulus->Observation[R115.''has active''];
 if ( empty other_observation )
   select many observations related by stimulus->Observation[R105.''will trigger'']
@@ -505,9 +514,13 @@ INSERT INTO SM_ACT
 	VALUES ("8365397f-d928-40a1-a143-1f5b67717161",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'self.obsStatus = tsStatus::started;
+	'// Following a stimuulus injection, an observation is now ''readied'' for evaluation.
+// If it is not associated with a trigger - for which it must wait - then proceed.
+// If it has been created with a timeout timer, then start the timer now.
+
+self.obsStatus = tsStatus::started;
 self.StartDurationLimitTimer();
-if ( not self.isDelay)       // delays are a "non-observing" observation
+if ( not self.isDelay)  // delays are a "non-observing" observation.
   select one trigger related by self->Trigger[R127.''delays until triggered by''];
   if ( empty trigger )  // not waiting to be triggered by "assess"
     send TESTBENCH::TriggerObservation( observationId:self.assignedID );
@@ -526,8 +539,9 @@ INSERT INTO SM_ACT
 	VALUES ("bd7030c6-1f71-4a17-9cdd-901d62f440b6",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'send TESTBENCH::TriggerObservation( observationId:self.assignedID );
-',
+	'// On wake-up from a polling timer, re-evaluate the observation.
+
+send TESTBENCH::TriggerObservation( observationId:self.assignedID );',
 	'',
 	0);
 INSERT INTO SM_TAH
@@ -606,10 +620,10 @@ INSERT INTO GD_NCS
 	VALUES ("2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_ND
 	VALUES (396.000000,
-	109.000000,
+	121.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_GE
-	VALUES (4452.000000,
+	VALUES (4416.000000,
 	3192.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac",
 	"00000000-0000-0000-0000-000000000000");
@@ -624,8 +638,8 @@ INSERT INTO DIM_CON
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("02de4355-b539-48eb-a91b-6a4db1ba2ee5",
-	4656.000000,
-	3301.000000,
+	4518.000000,
+	3313.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("c4ed4a16-217b-44e9-9297-7144c0819063",
@@ -639,8 +653,8 @@ INSERT INTO DIM_CON
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("ed081d54-5aa8-4a28-b3e6-85f453c0be6d",
-	4485.000000,
-	3301.000000,
+	4812.000000,
+	3240.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("18180543-c88e-47a3-95f6-5cb7f2af03bb",
@@ -674,28 +688,28 @@ INSERT INTO DIM_CON
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("d05771b5-1e30-40b6-8c9e-50eea56ff153",
-	4530.000000,
-	3192.000000,
+	4416.000000,
+	3228.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("0cfb6fa7-5667-4f7a-9cfc-d9bf13a70973",
-	4632.000000,
+	4596.000000,
 	3192.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("0a88a58b-2d36-490e-b420-40491811b26a",
-	4776.000000,
+	4740.000000,
 	3192.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("0f49f123-03ae-473c-9118-8a6eb2eee027",
-	4799.000000,
-	3301.000000,
+	4759.000000,
+	3313.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO DIM_CON
 	VALUES ("8c9208ab-5f84-4890-999c-45c776b5fa57",
-	4452.000000,
-	3251.000000,
+	4812.000000,
+	3282.000000,
 	"2b07f56c-10bb-4257-aada-4c0a66fac4ac");
 INSERT INTO GD_GE
 	VALUES ("268e7419-f723-400d-b18f-e2ac05dca3fd",
@@ -709,12 +723,12 @@ INSERT INTO GD_SHP
 INSERT INTO GD_NCS
 	VALUES ("268e7419-f723-400d-b18f-e2ac05dca3fd");
 INSERT INTO DIM_ND
-	VALUES (409.000000,
-	145.000000,
+	VALUES (445.000000,
+	181.000000,
 	"268e7419-f723-400d-b18f-e2ac05dca3fd");
 INSERT INTO DIM_GE
-	VALUES (4560.000000,
-	3420.000000,
+	VALUES (4416.000000,
+	3384.000000,
 	"268e7419-f723-400d-b18f-e2ac05dca3fd",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -723,13 +737,13 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("b2c88b8b-fc37-471f-aa89-7f35d0e81e03",
-	4656.000000,
-	3420.000000,
+	4518.000000,
+	3384.000000,
 	"268e7419-f723-400d-b18f-e2ac05dca3fd");
 INSERT INTO DIM_CON
 	VALUES ("09765d50-1bf7-4bf0-8762-6f0f1999a845",
-	4799.000000,
-	3420.000000,
+	4759.000000,
+	3384.000000,
 	"268e7419-f723-400d-b18f-e2ac05dca3fd");
 INSERT INTO GD_GE
 	VALUES ("bc7339c1-2ccf-476b-9d0e-94f9db80ad6c",
@@ -771,8 +785,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"6ace5955-4864-454a-8481-72c6c824bc75");
 INSERT INTO DIM_GE
-	VALUES (4659.000000,
-	3328.000000,
+	VALUES (4360.000000,
+	3335.000000,
 	"6ace5955-4864-454a-8481-72c6c824bc75",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -806,15 +820,15 @@ INSERT INTO GD_LS
 	"895830dd-31c2-43ab-bb3b-eef0ddbae676");
 INSERT INTO DIM_WAY
 	VALUES ("73e2968b-195a-4ddc-a575-4842f2f8eb1e",
-	4656.000000,
-	3301.000000,
+	4518.000000,
+	3313.000000,
 	"bc7339c1-2ccf-476b-9d0e-94f9db80ad6c",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("895830dd-31c2-43ab-bb3b-eef0ddbae676",
-	4656.000000,
-	3420.000000,
+	4518.000000,
+	3384.000000,
 	"bc7339c1-2ccf-476b-9d0e-94f9db80ad6c",
 	"00000000-0000-0000-0000-000000000000",
 	"73e2968b-195a-4ddc-a575-4842f2f8eb1e");
@@ -843,12 +857,12 @@ INSERT INTO GD_SHP
 INSERT INTO GD_NCS
 	VALUES ("c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_ND
-	VALUES (408.000000,
-	205.000000,
+	VALUES (432.000000,
+	505.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_GE
-	VALUES (4140.000000,
-	3420.000000,
+	VALUES (5052.000000,
+	3156.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -857,18 +871,28 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("5b03fdcf-e4df-4888-98c0-8794fd2dcc40",
-	4485.000000,
-	3420.000000,
+	5052.000000,
+	3240.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_CON
 	VALUES ("b15830cf-6d4c-4957-bc24-eb008e10dbec",
-	4259.000000,
-	3420.000000,
+	5052.000000,
+	3612.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_CON
 	VALUES ("6e0abf02-f310-4eae-82d9-432b71261631",
-	4331.000000,
-	3420.000000,
+	5052.000000,
+	3282.000000,
+	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
+INSERT INTO DIM_CON
+	VALUES ("402cf357-bd06-4bbf-a252-64eedafd0655",
+	4258.000000,
+	3623.000000,
+	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
+INSERT INTO DIM_CON
+	VALUES ("5cbaeb72-35a3-4b04-bdcc-53ff9f4d4f52",
+	4449.000000,
+	3623.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO GD_GE
 	VALUES ("6190f0b1-0f41-429e-a7fa-39a2d0add813",
@@ -910,8 +934,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"669902fe-3192-4968-9ef6-b5359c4470a2");
 INSERT INTO DIM_GE
-	VALUES (4493.000000,
-	3324.000000,
+	VALUES (4855.000000,
+	3207.000000,
 	"669902fe-3192-4968-9ef6-b5359c4470a2",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -945,15 +969,15 @@ INSERT INTO GD_LS
 	"cfeed2ec-b785-4bbf-90b1-06bd413d7c4d");
 INSERT INTO DIM_WAY
 	VALUES ("b2b9f8b9-3c5c-4217-9508-ee459624a318",
-	4485.000000,
-	3301.000000,
+	4812.000000,
+	3240.000000,
 	"6190f0b1-0f41-429e-a7fa-39a2d0add813",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("cfeed2ec-b785-4bbf-90b1-06bd413d7c4d",
-	4485.000000,
-	3420.000000,
+	5052.000000,
+	3240.000000,
 	"6190f0b1-0f41-429e-a7fa-39a2d0add813",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
@@ -986,8 +1010,8 @@ INSERT INTO DIM_ND
 	73.000000,
 	"1efc9197-f8b0-41d7-85fe-93e3bf7f7ff4");
 INSERT INTO DIM_GE
-	VALUES (4153.000000,
-	3120.000000,
+	VALUES (4068.000000,
+	3192.000000,
 	"1efc9197-f8b0-41d7-85fe-93e3bf7f7ff4",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -996,13 +1020,13 @@ INSERT INTO DIM_ELE
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_CON
 	VALUES ("ddbe047b-e8c1-4bbf-b344-b1929bbc42a8",
-	4357.000000,
-	3156.000000,
+	4272.000000,
+	3228.000000,
 	"1efc9197-f8b0-41d7-85fe-93e3bf7f7ff4");
 INSERT INTO DIM_CON
 	VALUES ("8e513da7-2b56-45ad-a4e6-6a7b262289fb",
-	4259.000000,
-	3193.000000,
+	4187.000000,
+	3265.000000,
 	"1efc9197-f8b0-41d7-85fe-93e3bf7f7ff4");
 INSERT INTO GD_GE
 	VALUES ("8ee71e57-dc55-4dd2-8404-6581f0399b1b",
@@ -1044,8 +1068,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"625e017d-73f1-4901-8bf9-81ee5f8de902");
 INSERT INTO DIM_GE
-	VALUES (4398.000000,
-	3124.000000,
+	VALUES (4263.000000,
+	3178.500000,
 	"625e017d-73f1-4901-8bf9-81ee5f8de902",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -1085,22 +1109,22 @@ INSERT INTO GD_LS
 	"5d6e8f6b-b287-4688-a192-52ac85a99cfa");
 INSERT INTO DIM_WAY
 	VALUES ("941fbaf6-6b42-4aa4-a262-a8f777b4ff38",
-	4357.000000,
-	3156.000000,
+	4272.000000,
+	3228.000000,
 	"8ee71e57-dc55-4dd2-8404-6581f0399b1b",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("5d6e8f6b-b287-4688-a192-52ac85a99cfa",
-	4530.000000,
-	3192.000000,
+	4416.000000,
+	3228.000000,
 	"8ee71e57-dc55-4dd2-8404-6581f0399b1b",
 	"00000000-0000-0000-0000-000000000000",
 	"941fbaf6-6b42-4aa4-a262-a8f777b4ff38");
 INSERT INTO DIM_WAY
 	VALUES ("554c74e3-3500-440a-b405-f676210eaa62",
-	4530.000000,
-	3154.000000,
+	4367.000000,
+	3227.000000,
 	"8ee71e57-dc55-4dd2-8404-6581f0399b1b",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
@@ -1157,7 +1181,7 @@ INSERT INTO DIM_ND
 	0.000000,
 	"64c95101-bc3b-480c-96f6-5eaaa0e9f11f");
 INSERT INTO DIM_GE
-	VALUES (4645.000000,
+	VALUES (4609.000000,
 	3122.000000,
 	"64c95101-bc3b-480c-96f6-5eaaa0e9f11f",
 	"00000000-0000-0000-0000-000000000000");
@@ -1204,28 +1228,28 @@ INSERT INTO GD_LS
 	"00c0b4dc-8318-4cb1-97ab-e8b2cf295343");
 INSERT INTO DIM_WAY
 	VALUES ("43c7660b-d780-4661-99f5-a412547edcef",
-	4632.000000,
+	4596.000000,
 	3192.000000,
 	"0295127f-6f07-4058-8738-04cc30b59f76",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("00c0b4dc-8318-4cb1-97ab-e8b2cf295343",
-	4776.000000,
+	4740.000000,
 	3192.000000,
 	"0295127f-6f07-4058-8738-04cc30b59f76",
 	"00000000-0000-0000-0000-000000000000",
 	"43c7660b-d780-4661-99f5-a412547edcef");
 INSERT INTO DIM_WAY
 	VALUES ("8cb59055-7f42-4d70-bea7-3e39b1890023",
-	4632.000000,
+	4596.000000,
 	3155.000000,
 	"0295127f-6f07-4058-8738-04cc30b59f76",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("4b5bea61-939a-4724-ac4e-d4d36b28d92a",
-	4775.000000,
+	4739.000000,
 	3155.000000,
 	"0295127f-6f07-4058-8738-04cc30b59f76",
 	"00000000-0000-0000-0000-000000000000",
@@ -1283,8 +1307,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"cd101703-b75b-4ae5-b3b3-eb45941d6fc4");
 INSERT INTO DIM_GE
-	VALUES (4815.000000,
-	3344.000000,
+	VALUES (4599.000000,
+	3334.000000,
 	"cd101703-b75b-4ae5-b3b3-eb45941d6fc4",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -1318,15 +1342,15 @@ INSERT INTO GD_LS
 	"c209a87e-2dc6-4126-a9e5-30d6b3a0ddcd");
 INSERT INTO DIM_WAY
 	VALUES ("2b920a33-3e0c-4ad1-a435-57891c534e88",
-	4799.000000,
-	3301.000000,
+	4759.000000,
+	3313.000000,
 	"c5ee08eb-1693-4a1b-9304-f75a94d1dad0",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("c209a87e-2dc6-4126-a9e5-30d6b3a0ddcd",
-	4799.000000,
-	3420.000000,
+	4759.000000,
+	3384.000000,
 	"c5ee08eb-1693-4a1b-9304-f75a94d1dad0",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
@@ -1349,7 +1373,7 @@ INSERT INTO GD_GE
 	"2a2bfc98-0554-45a5-bb1a-9756843caebe",
 	42,
 	0,
-	'TestFramework::Components::TestSequencer::TestSequencer::Observation::Instance State Machine::Waiting::Observation5: Cancel');
+	'TestFramework::Components::TestSequencer::TestSequencer::Observation::Instance State Machine::Waiting::Observation5: Unobserve');
 INSERT INTO GD_CON
 	VALUES ("f378041d-2f6a-4e1e-a843-b42a938057a7",
 	"00000000-0000-0000-0000-000000000000");
@@ -1383,8 +1407,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"b622fe06-50a7-4772-93ce-461415564878");
 INSERT INTO DIM_GE
-	VALUES (4123.000000,
-	3227.000000,
+	VALUES (4662.000000,
+	3625.500000,
 	"b622fe06-50a7-4772-93ce-461415564878",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -1415,21 +1439,34 @@ INSERT INTO GD_LS
 	"f378041d-2f6a-4e1e-a843-b42a938057a7",
 	"00000000-0000-0000-0000-000000000000",
 	"087b7a72-5ca8-4de4-ab49-4118c2c69ba2",
+	"0e6e63b5-e31f-49a0-a082-ff2989f8e689");
+INSERT INTO GD_LS
+	VALUES ("842301f8-872e-43ea-9467-a0ce2fdfa9ae",
+	"f378041d-2f6a-4e1e-a843-b42a938057a7",
+	"856416b3-b35b-4520-8af0-e58b1edc1766",
+	"0e6e63b5-e31f-49a0-a082-ff2989f8e689",
 	"612cf70d-85b6-4200-a752-49ae840c166d");
 INSERT INTO DIM_WAY
 	VALUES ("087b7a72-5ca8-4de4-ab49-4118c2c69ba2",
-	4259.000000,
-	3193.000000,
+	4187.000000,
+	3265.000000,
 	"f378041d-2f6a-4e1e-a843-b42a938057a7",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
 	VALUES ("612cf70d-85b6-4200-a752-49ae840c166d",
-	4259.000000,
-	3420.000000,
+	5052.000000,
+	3612.000000,
 	"f378041d-2f6a-4e1e-a843-b42a938057a7",
 	"00000000-0000-0000-0000-000000000000",
 	"087b7a72-5ca8-4de4-ab49-4118c2c69ba2");
+INSERT INTO DIM_WAY
+	VALUES ("0e6e63b5-e31f-49a0-a082-ff2989f8e689",
+	4187.000000,
+	3611.000000,
+	"f378041d-2f6a-4e1e-a843-b42a938057a7",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_GE
 	VALUES (0.000000,
 	0.000000,
@@ -1449,7 +1486,7 @@ INSERT INTO GD_GE
 	"eb10cd5f-910e-4d30-a3a6-778872aa6065",
 	42,
 	0,
-	'TestFramework::Components::TestSequencer::TestSequencer::Observation::Instance State Machine::Observing::Observation5: Cancel');
+	'TestFramework::Components::TestSequencer::TestSequencer::Observation::Instance State Machine::Observing::Observation5: Unobserve');
 INSERT INTO GD_CON
 	VALUES ("770dbb8a-9694-4fb9-8c63-2c44e462e513",
 	"00000000-0000-0000-0000-000000000000");
@@ -1483,8 +1520,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"02a153f6-bbbc-4533-bbbf-5a316ca4cf47");
 INSERT INTO DIM_GE
-	VALUES (4325.000000,
-	3217.000000,
+	VALUES (4856.000000,
+	3294.000000,
 	"02a153f6-bbbc-4533-bbbf-5a316ca4cf47",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -1516,30 +1553,17 @@ INSERT INTO GD_LS
 	"00000000-0000-0000-0000-000000000000",
 	"fef518ed-2a8e-4b81-a11e-e5d67d1f9e3b",
 	"35d2db87-6ede-4ef4-8d8b-ecd97fa9307d");
-INSERT INTO GD_LS
-	VALUES ("5a648ea6-24c4-48e8-8103-1b813034f55b",
-	"770dbb8a-9694-4fb9-8c63-2c44e462e513",
-	"245f5721-5cea-479d-90c3-baac87afd690",
-	"35d2db87-6ede-4ef4-8d8b-ecd97fa9307d",
-	"6e368fb9-3f4e-4ef3-91ba-5f5e3b0ecdc4");
 INSERT INTO DIM_WAY
 	VALUES ("fef518ed-2a8e-4b81-a11e-e5d67d1f9e3b",
-	4452.000000,
-	3251.000000,
+	4812.000000,
+	3282.000000,
 	"770dbb8a-9694-4fb9-8c63-2c44e462e513",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_WAY
-	VALUES ("6e368fb9-3f4e-4ef3-91ba-5f5e3b0ecdc4",
-	4331.000000,
-	3420.000000,
-	"770dbb8a-9694-4fb9-8c63-2c44e462e513",
-	"00000000-0000-0000-0000-000000000000",
-	"fef518ed-2a8e-4b81-a11e-e5d67d1f9e3b");
-INSERT INTO DIM_WAY
 	VALUES ("35d2db87-6ede-4ef4-8d8b-ecd97fa9307d",
-	4331.000000,
-	3251.000000,
+	5052.000000,
+	3282.000000,
 	"770dbb8a-9694-4fb9-8c63-2c44e462e513",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");

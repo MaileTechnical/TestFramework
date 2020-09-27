@@ -18,7 +18,9 @@ Cancel any current observations.
 No further stimuli will be injected.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'LOG::LogInfo( message:"SEQ Cancelling all further Stimuli/Observations in incomplete test case " + self.testCaseLabel );
+	'// As a result of some failure, all outstanding stimuli and observations are cancelled.
+
+LOG::LogInfo( message:"SEQ Cancelling all further Stimuli/Observations in incomplete test case " + self.testCaseLabel );
 select many seqs related by self->StimulusSequence[R119.''executes''];
 for each seq in seqs
   select one stimulus related by seq->Stimulus[R116.''is processing''];
@@ -42,7 +44,10 @@ INSERT INTO O_TFR
 A test case may have several such sequences which execute in parallel.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'create object instance seq of StimulusSequence;
+	'// Add a labelled sequence to a test case.
+// Stimuli followed by observations will be added to a sequence.
+
+create object instance seq of StimulusSequence;
 seq.seqLabel = param.seqLabel;
 relate seq to self across R119.''is execution thread for'';
 // Create an interval timer for general timimg use by testbench.
