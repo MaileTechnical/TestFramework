@@ -44,7 +44,6 @@ INSERT INTO O_TFR
 unrelate self from bucket across R118.''is running'';
 select one next_bucket related by bucket->TestBucket[R113.''follows''];
 if ( not_empty next_bucket )
-  unrelate next_bucket from bucket across R113.''follows'';
   relate self to next_bucket across R118.''is running'';
   send TESTBENCH::InitializeBucket( bucketId:next_bucket.assignedID );
 end if;
@@ -61,7 +60,6 @@ if ( empty next_bucket )
   send TESTBENCH::TestSuiteComplete();
 
   // clean up
-
   select many reqs from instances of Requirement;
   for each req in reqs
     select many cases related by req->TestCase[R101.''is tested by''];
@@ -70,21 +68,23 @@ if ( empty next_bucket )
     end for;
     delete object instance req;
   end for;
-end if; 
-if ( not self.retainAll )
-  select many cases from instances of TestCase;
-  for each case in cases
-    if ( case.tcStatus == tsStatus::completed )  // keep incomplete for error analysis.
-      delete object instance case;
-    end if;
-  end for;
-  select many buckets from instances of TestBucket;
-  for each bucket in buckets
-    if ( bucket.bktStatus == tsStatus::completed )
-      delete object instance bucket;
-    end if;
-  end for;
-  delete object instance self;
+
+  if ( not self.retainAll )
+    select many cases from instances of TestCase;
+    for each case in cases
+      if ( case.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
+        delete object instance case;
+      end if;
+    end for;
+    select many buckets from instances of TestBucket;
+    for each bucket in buckets
+      if ( bucket.bktStatus == tsStatus::completed )
+        delete object instance bucket;
+      end if;
+    end for;
+    delete object instance self;
+  end if;
+
 end if;
 ',
 	1,
@@ -224,13 +224,13 @@ while ( not_empty bucket )
    end if;
    select one next_tc related by tc->TestCase[R114.''follows''];
    if ( not_empty next_tc )
-     unrelate tc from next_tc across R114.''follows'';
+     unrelate next_tc from tc across R114.''precedes'';
    end if;
    tc = next_tc;
   end while;
   select one next_bucket related by bucket->TestBucket[R113.''follows''];
   if ( not_empty next_bucket )
-    unrelate bucket from next_bucket across R113.''precedes'';
+    unrelate next_bucket from bucket across R113.''precedes'';
   end if;
   bucket = next_bucket;
 end while;
