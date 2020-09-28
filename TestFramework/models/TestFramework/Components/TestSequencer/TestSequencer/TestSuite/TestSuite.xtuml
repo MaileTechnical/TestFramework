@@ -68,23 +68,22 @@ if ( empty next_bucket )
     end for;
     delete object instance req;
   end for;
-//end if; 
 
-if ( not self.retainAll )
-  select many cases from instances of TestCase;
-  for each case in cases
-    if ( case.tcStatus == tsStatus::completed )  // keep incomplete for error analysis.
-      delete object instance case;
-    end if;
-  end for;
-  select many buckets from instances of TestBucket;
-  for each bucket in buckets
-    if ( bucket.bktStatus == tsStatus::completed )
-      delete object instance bucket;
-    end if;
-  end for;
-  delete object instance self;
-end if;
+  if ( not self.retainAll )
+    select many cases from instances of TestCase;
+    for each case in cases
+      if ( case.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
+        delete object instance case;
+      end if;
+    end for;
+    select many buckets from instances of TestBucket;
+    for each bucket in buckets
+      if ( bucket.bktStatus == tsStatus::completed )
+        delete object instance bucket;
+      end if;
+    end for;
+    delete object instance self;
+  end if;
 
 end if;
 ',
