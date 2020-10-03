@@ -127,14 +127,12 @@ INSERT INTO SM_ACT
 	'if ( self.ignore_tick )  // event-in-flight from a too-late cancel
   self.ignore_tick = false;
 else
-  self.countdown = self.countdown - 1;
-  if ( self.countdown == 0 )
+  now = TIM::current_clock();
+  if ( self.expirationTime <= now )
     generate self.triggered_event;
-  else
-    self.MakeTick();
+    self.Cancel();
   end if;
-end if;
-',
+end if;',
 	'',
 	0);
 INSERT INTO SM_MOAH

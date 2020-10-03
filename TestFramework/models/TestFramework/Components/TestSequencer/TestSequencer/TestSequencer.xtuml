@@ -3606,7 +3606,10 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'ResolutionToScaleFactor',
 	'',
-	'if ( param.resolution == timerResolution::millisecond ) 
+	'if ( param.resolution == timerResolution::microsecond )
+  return 1;
+end if;
+if ( param.resolution == timerResolution::millisecond ) 
   return timerScaleFactors::MicroToMilliseconds;
 end if;
 if ( param.resolution == timerResolution::second )
