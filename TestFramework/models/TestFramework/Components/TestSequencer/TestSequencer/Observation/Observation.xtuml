@@ -19,6 +19,9 @@ INSERT INTO O_TFR
 	1,
 	'select one polltimer related by self->CountdownTimer[R126.''is polled by''];
 if ( not_empty polltimer )
+  // Tell the timer what to do on expiration.
+  create event instance poll of Observation1:Observe() to self;
+  polltimer.triggered_event = poll;
   polltimer.Start();
 end if;',
 	1,
@@ -32,8 +35,17 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one timeout related by self->CountdownTimer[R125.''is stopped by''];
+	'// If configured, initialize and start the timer which limits duration of this observation.
+
+select one timeout related by self->CountdownTimer[R125.''is stopped by''];
 if (not  empty timeout )
+  if ( self.isDelay )
+    create event instance delayed of Observation2:Completed() to self;
+    timeout.triggered_event = delayed; 
+  else
+    create event instance timesup of Observation4:TimedOut() to self;
+    timeout.triggered_event = timesup;
+  end if;
   timeout.Start();
 end if;',
 	1,
@@ -146,20 +158,19 @@ end if;
 
 if ( param.durationLimit != 0 )
   if ( param.isDelay )
-    create event instance delayed of Observation2:Completed() to new_observation; 
-    wait = CountdownTimer::Create( duration:param.durationLimit, event:delayed );
+    wait = CountdownTimer::Create( duration:param.durationLimit );
     wait.SetResolution( resolution:seq.timerResolution );
     relate wait to new_observation across R125.''timesout'';
   else
     create event instance timesup of Observation4:TimedOut() to new_observation;
-    timeout = CountdownTimer::Create( duration:param.durationLimit, event:timesup );
+    timeout = CountdownTimer::Create( duration:param.durationLimit );
     timeout.SetResolution( resolution:seq.timerResolution );
     relate timeout to new_observation across R125.''timesout'';
   end if;
 end if;
 if ( param.pollInterval != 0 )
   create event instance poll of Observation1:Observe() to new_observation;
-  retry = CountdownTimer::Create( duration:param.pollInterval, event:poll );
+  retry = CountdownTimer::Create( duration:param.pollInterval );
   retry.SetResolution( resolution:seq.timerResolution );
   relate retry to new_observation across R126.''polls'';
 end if;

@@ -105,7 +105,6 @@ INSERT INTO O_TFR
 end if;
 create object instance timer of CountdownTimer;
 timer.duration = param.duration;
-timer.triggered_event = param.event;
 return timer;',
 	1,
 	'',
@@ -119,15 +118,6 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO O_TPARM
-	VALUES ("2a781690-c5ca-4579-b036-900451c7dbef",
-	"69df729c-84df-4ad7-971f-14ce9cc28ce5",
-	'event',
-	"ba5eda7a-def5-0000-0000-00000000000a",
-	0,
-	'',
-	"ebaedd0c-97f5-47b0-8c59-65ec2e2fd361",
 	'');
 INSERT INTO S_DT_PROXY
 	VALUES ("ffcbf1b4-89d6-4739-a85b-5c9b610ad5c7",
