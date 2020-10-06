@@ -9,34 +9,6 @@ INSERT INTO O_OBJ
 It is based on the built-in microsecond timer, but can be scaled by chosen resolution.',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
-	VALUES ("6baeba1a-2ea3-48a2-935d-f08301f43f44",
-	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
-	'SetResolution',
-	'Set the ratio between base timer units and this timer''s desired units.',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'self.scale_factor = ::ResolutionToScaleFactor( resolution:param.resolution ); ',
-	1,
-	'',
-	"69df729c-84df-4ad7-971f-14ce9cc28ce5",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("2e8cfe46-cf31-44b7-a35b-ffa902851d44",
-	"6baeba1a-2ea3-48a2-935d-f08301f43f44",
-	'resolution',
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
-INSERT INTO O_TFR
 	VALUES ("8810f559-085b-4b79-91f8-3e421175d8a5",
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	'Start',
@@ -49,7 +21,7 @@ create event instance tick of CountdownTimer1:timer_tick() to self;
 self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );',
 	1,
 	'',
-	"6baeba1a-2ea3-48a2-935d-f08301f43f44",
+	"00000000-0000-0000-0000-000000000000",
 	0);
 INSERT INTO O_TFR
 	VALUES ("145f9bc8-85bc-48db-8acc-66154b415578",
@@ -93,39 +65,6 @@ self.base_timer = TIM::timer_start( event_inst:tick, microseconds:self.scale_fac
 	'',
 	"8810f559-085b-4b79-91f8-3e421175d8a5",
 	0);
-INSERT INTO O_TFR
-	VALUES ("69df729c-84df-4ad7-971f-14ce9cc28ce5",
-	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
-	'Create',
-	'',
-	"ffcbf1b4-89d6-4739-a85b-5c9b610ad5c7",
-	0,
-	'if ( param.duration <= 0 )
-  LOG::LogFailure( message:"SEQ Timeout value for coundown must be positive" );
-end if;
-create object instance timer of CountdownTimer;
-timer.duration = param.duration;
-return timer;',
-	1,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("ebaedd0c-97f5-47b0-8c59-65ec2e2fd361",
-	"69df729c-84df-4ad7-971f-14ce9cc28ce5",
-	'duration',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("ffcbf1b4-89d6-4739-a85b-5c9b610ad5c7",
-	"00000000-0000-0000-0000-000000000000",
-	'inst_ref<CountdownTimer>',
-	'',
-	'',
-	'../TestSequencer.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5");

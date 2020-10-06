@@ -108,7 +108,10 @@ A stimulus may have zero or more observations for evaluation in sequence.
 Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
-	'select any ts from instances of TestSuite;
+	'// Add an observation to the last stimulus added to a sequence.
+// It may be added in sequence or concurrently with other observations.
+
+select any ts from instances of TestSuite;
 select one tc related by ts->TestCase[R124.''is currently building''];
 select any seq related by tc->StimulusSequence[R119.''executes'']
   where ( selected.seqLabel == param.seqLabel );
@@ -122,6 +125,7 @@ if ( empty first_stimulus )
   LOG::LogFailure( message:"No stimulus exists on sequence " + param.seqLabel );
   return;
 end if;
+
 // Point cursor at last stimulus in sequence for this test case.
 cursor = first_stimulus;
 while ( True )
@@ -156,22 +160,16 @@ if ( param.triggerKey != "" )
   relate new_observation to trigger across R127.''delays until triggered by'';
 end if;
 
-if ( param.durationLimit != 0 )
-  if ( param.isDelay )
-    wait = CountdownTimer::Create( duration:param.durationLimit );
-    wait.SetResolution( resolution:seq.timerResolution );
-    relate wait to new_observation across R125.''timesout'';
-  else
-    create event instance timesup of Observation4:TimedOut() to new_observation;
-    timeout = CountdownTimer::Create( duration:param.durationLimit );
-    timeout.SetResolution( resolution:seq.timerResolution );
-    relate timeout to new_observation across R125.''timesout'';
-  end if;
+if ( param.durationLimit > 0 )
+  create object instance timeout of CountdownTimer;
+  timeout.duration = param.durationLimit;
+  timeout.scale_factor = seq.timeScaleFactor;
+  relate timeout to new_observation across R125.''timesout'';
 end if;
-if ( param.pollInterval != 0 )
-  create event instance poll of Observation1:Observe() to new_observation;
-  retry = CountdownTimer::Create( duration:param.pollInterval );
-  retry.SetResolution( resolution:seq.timerResolution );
+if ( param.pollInterval > 0 )
+  create object instance retry of CountdownTimer;
+  retry.duration = param.pollInterval;
+  retry.scale_factor = seq.pollScaleFactor;
   relate retry to new_observation across R126.''polls'';
 end if;
 relate new_observation to cursor across R105.''is made after'';
@@ -254,12 +252,12 @@ INSERT INTO O_TFR
 Optionally, reset the timer value to zero after reading: see reset paramater.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one tmr related by self->Stimulus[R115.''is currently observing for'']
-                              ->StimulusSequence[R116.''is active for'']
-                              ->IntervalTimer[R120.''measures intervals with''];
-interval = tmr.ticks;
+	'select one seq related by self->Stimulus[R115.''is currently observing for'']
+                              ->StimulusSequence[R116.''is active for''];
+
+interval = ( TIM::current_clock() - seq.IntervalTimerStartTime ) / seq.timeScaleFactor;
 if ( param.reset )
-  tmr.ticks = 0;
+  seq.IntervalTimerStartTime = TIM::current_clock();
 end if;
 send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,

@@ -98,16 +98,22 @@ INSERT INTO O_TFR
 	'Add a test bucket to the set to be run by the test suite.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
-	'select any ts from instances of TestSuite;
+	'// Ensure there is a Test Suite. Add a new bucket in sequence.
+
+select any ts from instances of TestSuite;
 if ( empty ts )
   create object instance ts of TestSuite;
   ts.suiteLabel = "Default";
-  ts.timerResolution = timerResolution::second;		// default
+  ts.timeScaleFactor = timeResolution::second;
+  ts.pollScaleFactor = timeResolution::second;
 end if;
 
 create object instance new_bucket of TestBucket;
 new_bucket.assignedID = param.bucketId;
-new_bucket.timerResolution = ts.timerResolution;	// default
+
+// Propagate defaults for any timing that may be needed.
+new_bucket.timeScaleFactor = ts.timeScaleFactor;
+new_bucket.pollScaleFactor = ts.pollScaleFactor;
 
 select one first_bucket related by ts->TestBucket[R111.''will first run''];
 if ( empty first_bucket )
@@ -285,21 +291,32 @@ INSERT INTO O_ATTR
 	VALUES ("05045c98-25f1-4ba4-abc2-770e0e9016fb",
 	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
 	"a0b29faf-0f0b-4498-ac82-0496a0a93132",
-	'timerResolution',
+	'timeScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for duration timing.',
 	'',
-	'',
-	'timerResolution',
+	'timeScaleFactor',
 	0,
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
+INSERT INTO O_NBATTR
+	VALUES ("5bef442b-0872-46a6-9aff-78e6d609ac92",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_BATTR
+	VALUES ("5bef442b-0872-46a6-9aff-78e6d609ac92",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
+INSERT INTO O_ATTR
+	VALUES ("5bef442b-0872-46a6-9aff-78e6d609ac92",
+	"a590c443-f2d2-4e4e-8863-6927d8b5d995",
+	"05045c98-25f1-4ba4-abc2-770e0e9016fb",
+	'pollScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
 	'',
+	'pollScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
+	'');
 INSERT INTO O_ID
 	VALUES (0,
 	"a590c443-f2d2-4e4e-8863-6927d8b5d995");
