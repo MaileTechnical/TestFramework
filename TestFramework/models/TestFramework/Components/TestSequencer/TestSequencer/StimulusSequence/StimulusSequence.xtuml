@@ -54,29 +54,6 @@ generate TestCase3:SequenceComplete to tc;
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	0);
-INSERT INTO O_TFR
-	VALUES ("5661077b-7144-4b1f-989c-8af88c44d220",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	'IntervalMeasurement',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	1,
-	'now = TIM::current_clock();
-duration =  ( now - self.IntervalTimerStartTime ) / self.timerScaleFactor; 
-',
-	1,
-	'',
-	"5a4d2c90-55b1-4d65-a736-980238f02208",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("e8703882-81c0-4a53-bcf8-0e146623d2cb",
-	"5661077b-7144-4b1f-989c-8af88c44d220",
-	'Reset',
-	"ba5eda7a-def5-0000-0000-000000000001",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
 INSERT INTO O_NBATTR
 	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");

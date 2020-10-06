@@ -17,7 +17,9 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one polltimer related by self->CountdownTimer[R126.''is polled by''];
+	'// If configured, initialize and start the timer which causes this observation to repeatedly evaluate.
+
+select one polltimer related by self->CountdownTimer[R126.''is polled by''];
 if ( not_empty polltimer )
   // Tell the timer what to do on expiration.
   create event instance poll of Observation1:Observe() to self;
@@ -39,7 +41,7 @@ INSERT INTO O_TFR
 
 select one timeout related by self->CountdownTimer[R125.''is stopped by''];
 if (not  empty timeout )
-  if ( self.isDelay )
+  if ( self.isDelay )  // a delay merely completes; it never ''observes''.
     create event instance delayed of Observation2:Completed() to self;
     timeout.triggered_event = delayed; 
   else
@@ -56,10 +58,12 @@ INSERT INTO O_TFR
 	VALUES ("d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	'CancelTimers',
-	'',
+	'// Cancel any associated timers; note: they may be retained for error analysis.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one ptmr related by self->CountdownTimer[R126.''is polled by''];
+	'// If configured, stop timers running.
+
+select one ptmr related by self->CountdownTimer[R126.''is polled by''];
 if ( not_empty ptmr )
   ptmr.Cancel();
 end if;
@@ -252,9 +256,10 @@ INSERT INTO O_TFR
 Optionally, reset the timer value to zero after reading: see reset paramater.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one seq related by self->Stimulus[R115.''is currently observing for'']
-                              ->StimulusSequence[R116.''is active for''];
+	'// Calculate, scale, and signal the interval time since measurement was started.
 
+select one seq related by self->Stimulus[R115.''is currently observing for'']
+                              ->StimulusSequence[R116.''is active for''];
 interval = ( TIM::current_clock() - seq.IntervalTimerStartTime ) / seq.timeScaleFactor;
 if ( param.reset )
   seq.IntervalTimerStartTime = TIM::current_clock();
@@ -281,7 +286,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'');
+	'A supplied string key which can be recognized by the client receiving the returned value.');
 INSERT INTO O_TFR
 	VALUES ("47df170d-7e82-485c-a2ec-b2936e92e9fb",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
@@ -289,9 +294,13 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'if ( not self.isDelay )
+	'// Signal deletion to the client.
+// then, delete any associated trigger and/or timers before self-deletion.
+
+if ( not self.isDelay )  // A delay ''observation'' has no client counterpart.
   send TESTBENCH::DeleteObservation( observationId:self.assignedID );
 end if;
+
 select one trigger related by self->Trigger[R127.''delays until triggered by''];
 if ( not_empty trigger )
   unrelate self from trigger across R127.''delays until triggered by'';
@@ -370,7 +379,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	"1115e56f-69c6-4727-90da-db593f65aa0b",
 	'current_state',
 	'',
 	'',
@@ -414,6 +423,42 @@ It will never cause an "observe" action in the client as it has no counterpart.'
 	'isDelay',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	'timeScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for duration timing.',
+	'',
+	'timeScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_BATTR
+	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_ATTR
+	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	"0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
+	'pollScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
+	'',
+	'pollScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	'');
 INSERT INTO O_ID
