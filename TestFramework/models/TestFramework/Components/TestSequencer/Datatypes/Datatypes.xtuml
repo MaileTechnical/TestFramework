@@ -27,30 +27,6 @@ INSERT INTO GD_MD
 	'',
 	'TestFramework::Components::TestSequencer::Datatypes');
 INSERT INTO GD_GE
-	VALUES ("4bd8400b-aaea-4431-be74-a5a24207743d",
-	"756cb780-4e1a-403e-a7a4-b06484eebd50",
-	"bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	109,
-	0,
-	'TestFramework::Components::TestSequencer::Datatypes::timerScaleFactors');
-INSERT INTO GD_SHP
-	VALUES ("4bd8400b-aaea-4431-be74-a5a24207743d");
-INSERT INTO GD_NCS
-	VALUES ("4bd8400b-aaea-4431-be74-a5a24207743d");
-INSERT INTO DIM_ND
-	VALUES (200.000000,
-	150.000000,
-	"4bd8400b-aaea-4431-be74-a5a24207743d");
-INSERT INTO DIM_GE
-	VALUES (0.000000,
-	0.000000,
-	"4bd8400b-aaea-4431-be74-a5a24207743d",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO DIM_ELE
-	VALUES ("4bd8400b-aaea-4431-be74-a5a24207743d",
-	0,
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO GD_GE
 	VALUES ("4e97dda7-b6bf-4803-b688-89562668dea7",
 	"756cb780-4e1a-403e-a7a4-b06484eebd50",
 	"f118c998-732a-4398-a820-4480fa8cdb21",
@@ -85,7 +61,7 @@ INSERT INTO S_DT
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
 	'tsStatus',
-	'',
+	'Status values associated with the lifecycles of various instances.',
 	'');
 INSERT INTO S_EDT
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21");
@@ -106,7 +82,7 @@ INSERT INTO S_ENUM
 	'timedout',
 	'',
 	"f118c998-732a-4398-a820-4480fa8cdb21",
-	"426bae61-a8e2-4e95-ba99-93b2615c7f15");
+	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
 INSERT INTO S_ENUM
 	VALUES ("05ecd1e6-b55b-40fb-8d0c-79ec43bb33bb",
 	'failed',
@@ -119,88 +95,12 @@ INSERT INTO S_ENUM
 	'',
 	"f118c998-732a-4398-a820-4480fa8cdb21",
 	"05ecd1e6-b55b-40fb-8d0c-79ec43bb33bb");
-INSERT INTO S_ENUM
-	VALUES ("426bae61-a8e2-4e95-ba99-93b2615c7f15",
-	'triggered',
-	'',
-	"f118c998-732a-4398-a820-4480fa8cdb21",
-	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
 INSERT INTO PE_PE
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	1,
 	"0a55d6bd-e7c8-4286-a6b3-77c525cf64b9",
 	"00000000-0000-0000-0000-000000000000",
 	3);
-INSERT INTO CNST_CSP
-	VALUES ("bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	'timerScaleFactors',
-	'');
-INSERT INTO CNST_SYC
-	VALUES ("e3442f2a-0fec-4b2b-b91a-5146b5389adf",
-	'MicroToMilliseconds',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	"bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	"00000000-0000-0000-0000-000000000000",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LFSC
-	VALUES ("e3442f2a-0fec-4b2b-b91a-5146b5389adf",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LSC
-	VALUES ("e3442f2a-0fec-4b2b-b91a-5146b5389adf",
-	"00000000-0000-0000-0000-000000000000",
-	'1000');
-INSERT INTO CNST_SYC
-	VALUES ("919e040a-dd79-4e48-b14c-d14c60d74d4e",
-	'MicroToSeconds',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	"bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	"e3442f2a-0fec-4b2b-b91a-5146b5389adf",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LFSC
-	VALUES ("919e040a-dd79-4e48-b14c-d14c60d74d4e",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LSC
-	VALUES ("919e040a-dd79-4e48-b14c-d14c60d74d4e",
-	"00000000-0000-0000-0000-000000000000",
-	'1000000');
-INSERT INTO CNST_SYC
-	VALUES ("3d642916-0da9-41b4-ba03-7f719c2305c2",
-	'SecondsToMinutes',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	"bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	"919e040a-dd79-4e48-b14c-d14c60d74d4e",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LFSC
-	VALUES ("3d642916-0da9-41b4-ba03-7f719c2305c2",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LSC
-	VALUES ("3d642916-0da9-41b4-ba03-7f719c2305c2",
-	"00000000-0000-0000-0000-000000000000",
-	'60');
-INSERT INTO CNST_SYC
-	VALUES ("0c543c0b-85fc-4806-87e5-5b33c7c21f87",
-	'MinuteToHours',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	"bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	"3d642916-0da9-41b4-ba03-7f719c2305c2",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LFSC
-	VALUES ("0c543c0b-85fc-4806-87e5-5b33c7c21f87",
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO CNST_LSC
-	VALUES ("0c543c0b-85fc-4806-87e5-5b33c7c21f87",
-	"00000000-0000-0000-0000-000000000000",
-	'60');
-INSERT INTO PE_PE
-	VALUES ("bded8be3-2861-4b45-a7e9-cb2255edaadc",
-	1,
-	"0a55d6bd-e7c8-4286-a6b3-77c525cf64b9",
-	"00000000-0000-0000-0000-000000000000",
-	10);
 INSERT INTO PE_PE
 	VALUES ("0a55d6bd-e7c8-4286-a6b3-77c525cf64b9",
 	1,
@@ -221,6 +121,9 @@ A test case consists of one or more sequences of stimuli and following observati
 Multiple sequences of stimuli run concurrently in a test case execution.
 A stimulus effects some changes in a system under test.
 Following observations may evaluate the response of the system to such a stimulus.
+Observations may evaluate sequentially in a defined order, or concurrently if order is undefined.
+Observations may be triggered to evaluate on some occurence, or may poll, repeatedly evaluating.
+Observations may be limited in duration; failure to succeed within this time constitutes failure.
 Time delays can be interspersed between stimuli and observations and between observations.
 All observations following a stimulus must complete before the next stimulus is injected
 If all observations are found acceptable, the test case is deemed to be successful.
@@ -233,7 +136,7 @@ Typically a self-checking test case has three primary components:
 1. Establish pre-conditions.
 2. Inject stimulus.
 3. Verify post-stimulus conditions.
-Often, the injection of stimulus and the verification of post-conditions
+Often, the injection of stimuli and the verification of post-conditions
 are intermixed, as the test case injects a stimulus, verifies the response(s), 
 injects additional stimuli, and so on.
 
@@ -266,13 +169,10 @@ As the testbench constructs test cases, using provided operations of the stimulu
 supertypes to add its specific stimuli and observation instances, the sequencer builds corresponding 
 sequences in the Test Sequencer service context. 
 
-For each instance of test bucket, stimulus or observation created in the testbench in this way, the 
-service returns identifying information which is used to activate those instances when appropriate.
-
 The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
-respond to the invocations of injection and observation operations on the supertype when triggered by 
-the sequencing service as it works through the series of test cases. 
-The supertypes also provide operations to signal responses to the service.
+respond to the invocations of injection and observation operations on the testbench supertype when 
+triggered by the sequencing service as it works through the series of test cases. 
+The testbench supertypes also provide operations to signal comkpletion/failure to the service.
 
 The test cases are created in an instance based operation of a test bucket subtype. This operation 
 will be invoked for each test bucket subtype as the sequencer runs through the set of buckets that 
@@ -291,12 +191,8 @@ stimulus sequence, allowing other sets of observations to proceed while it waits
 
 Associated with each stimulus sequence there is one interval timer. A stimulus or observation can 
 start (or restart) the timer on a sequence. A subsequent observation may read the elapsed time since 
-the timer was started - and may optionally reset the timer value to zero on reading. Interval timer 
+the timer was started - and may optionally reset the timer value on reading. Interval timer 
 resolution defaults to that of the test case, but can be overridden.
-
-The provided sample testbench demonstrates the capabilities provided by the test sequencing service.
-They include linking pre-conditions and requirements to test cases, chosing time resolution values 
-and measuring elapsed time intervals.
 ',
 	0,
 	"00000000-0000-0000-0000-000000000000",

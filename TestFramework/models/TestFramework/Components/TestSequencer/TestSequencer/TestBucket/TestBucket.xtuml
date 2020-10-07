@@ -14,7 +14,9 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'create object instance new_tc of TestCase;
+	'// Create a new test case instance and add it, sequentially, to the test bucket.
+
+create object instance new_tc of TestCase;
 new_tc.testCaseLabel = param.caseLabel;
 new_tc.tcStatus = tsStatus::created;
 select one first_case related by self->TestCase[R112.''will first execute''];
@@ -32,7 +34,12 @@ else
   end while;
   relate cursor to new_tc across R114.''follows'';
 end if;
-new_tc.SetTimerResolution( resolution:self.timerResolution );
+
+// Propagate defaults for any timing that may be needed.
+new_tc.timeScaleFactor = self.timeScaleFactor;
+new_tc.pollScaleFactor = self.pollScaleFactor;
+
+// Make this the "currently building" test case.
 select any ts from instances of TestSuite;
 select one tc related by ts->TestCase[R124.''is currently building''];
 if ( not_empty tc )
@@ -74,7 +81,7 @@ if ( self.bktStatus == tsStatus::completed )
 end if;',
 	1,
 	'',
-	"de853476-5692-42d6-a20a-34c207063a8b",
+	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
 	0);
 INSERT INTO O_TFR
 	VALUES ("d1031ea8-3f36-4e69-86bb-8be5960a911c",
@@ -103,34 +110,6 @@ end if;',
 	'',
 	"2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
 	0);
-INSERT INTO O_TFR
-	VALUES ("de853476-5692-42d6-a20a-34c207063a8b",
-	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	'SetTimerResolution',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'self.timerResolution = param.resolution;',
-	1,
-	'',
-	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("dfe11a85-dccd-4c31-96aa-5a0fdfe07e97",
-	"de853476-5692-42d6-a20a-34c207063a8b",
-	'resolution',
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
@@ -176,7 +155,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("09fd0ce6-922b-4aa2-aafb-555b1db3c564",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	"de9eb285-b54e-4445-80bb-62d345a4a89f",
+	"58b2cbf8-2cd9-41ca-9d9d-4aa63d2622e6",
 	'current_state',
 	'',
 	'',
@@ -186,33 +165,15 @@ INSERT INTO O_ATTR
 	'',
 	'');
 INSERT INTO O_NBATTR
-	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
 INSERT INTO O_BATTR
-	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
 INSERT INTO O_ATTR
-	VALUES ("5d4115da-b32c-4c29-a2d8-440144b10019",
+	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
 	"9c0da15d-eace-4093-959c-0312f913dfbe",
-	'timerResolution',
-	'The choice of timer resolution - see Datatypes.',
-	'',
-	'timerResolution',
-	0,
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
-	"cf812356-d586-4cdf-9c29-72003a1e9246");
-INSERT INTO O_BATTR
-	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
-	"cf812356-d586-4cdf-9c29-72003a1e9246");
-INSERT INTO O_ATTR
-	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
-	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	"5d4115da-b32c-4c29-a2d8-440144b10019",
 	'bktStatus',
 	'This status is used to prevent client (testbench) teardown of a bucket which contains failed test cases.
 The bucket context is retained for diagnosis.',
@@ -229,6 +190,42 @@ INSERT INTO S_DT_PROXY
 	'',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
+INSERT INTO O_NBATTR
+	VALUES ("f6606833-5b16-4e64-bae2-2db2e04e98e8",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("f6606833-5b16-4e64-bae2-2db2e04e98e8",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("f6606833-5b16-4e64-bae2-2db2e04e98e8",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"de9eb285-b54e-4445-80bb-62d345a4a89f",
+	'timeScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for duration timing.',
+	'',
+	'timeScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("58b2cbf8-2cd9-41ca-9d9d-4aa63d2622e6",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_BATTR
+	VALUES ("58b2cbf8-2cd9-41ca-9d9d-4aa63d2622e6",
+	"cf812356-d586-4cdf-9c29-72003a1e9246");
+INSERT INTO O_ATTR
+	VALUES ("58b2cbf8-2cd9-41ca-9d9d-4aa63d2622e6",
+	"cf812356-d586-4cdf-9c29-72003a1e9246",
+	"f6606833-5b16-4e64-bae2-2db2e04e98e8",
+	'pollScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
+	'',
+	'pollScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
 INSERT INTO O_ID
 	VALUES (0,
 	"cf812356-d586-4cdf-9c29-72003a1e9246");

@@ -4,7 +4,7 @@ INSERT INTO C_I
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	"00000000-0000-0000-0000-000000000000",
 	'TestSequencing',
-	'');
+	'Interface signals for communication with the test service.');
 INSERT INTO C_EP
 	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
@@ -694,7 +694,7 @@ INSERT INTO C_PP
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"ba5eda7a-def5-0000-0000-000000000001",
 	'reset',
-	'If true, the interval timer value will be reset to zero after being read.',
+	'If true, the interval timer value will be reset after being read.',
 	0,
 	'',
 	"a14955f8-67b1-4590-8cf4-7136dd9ffe0e");
@@ -703,7 +703,7 @@ INSERT INTO C_PP
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"ba5eda7a-def5-0000-0000-000000000004",
 	'key',
-	'Request identification string.',
+	'Request identification string; this will be echoed by the returned signal.',
 	0,
 	'',
 	"d0eeb3c2-9d5f-42d0-9496-172ea6254d76");
@@ -712,7 +712,7 @@ INSERT INTO C_PP
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"ba5eda7a-def5-0000-0000-000000000005",
 	'observationId',
-	'',
+	'An observation identifier from which the sequence can be identified.',
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
@@ -721,11 +721,11 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'IntervalTimerValue',
-	'');
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.');
 INSERT INTO C_AS
 	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
 	'IntervalTimerValue',
-	'',
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
 	1,
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa");
 INSERT INTO C_PP
@@ -775,13 +775,13 @@ INSERT INTO C_EP
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'CancelTriggeredObservation',
-	'On this signal, any active observations with matching key value will be canceled.
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.');
 INSERT INTO C_AS
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
-	'CancelTriggeredObservation',
-	'On this signal, any active observations with matching key value will be canceled.
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.',
 	0,
 	"d69685a1-d173-411e-954d-82338177cf09");
@@ -798,30 +798,14 @@ INSERT INTO C_EP
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.');
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.');
 INSERT INTO C_AS
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
 	0,
 	"ca057380-3763-49be-a902-4f89bd14277c");
-INSERT INTO C_PP
-	VALUES ("2ff69a94-3704-471b-9924-a8439da7d9cd",
-	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"2ce4c903-8629-4182-8835-49401a85a10c");
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO C_PP
 	VALUES ("2ce4c903-8629-4182-8835-49401a85a10c",
 	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
@@ -831,27 +815,36 @@ INSERT INTO C_PP
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("5d8263ef-ad5e-4654-b081-c934c7fedf31",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
+	0,
+	'',
+	"2ce4c903-8629-4182-8835-49401a85a10c");
+INSERT INTO C_PP
+	VALUES ("5685a8a8-0230-40b0-8137-9268080b052d",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"5d8263ef-ad5e-4654-b081-c934c7fedf31");
 INSERT INTO C_EP
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.');
 INSERT INTO C_AS
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	0,
 	"de9c9d7b-2d7a-4144-923a-4f0477575d03");
-INSERT INTO C_PP
-	VALUES ("2cc9f5dc-e2ae-4fd6-83cd-a726b9663a7c",
-	"092a77de-9124-470e-9e04-e55568aebdc9",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"563ce030-a2b6-4c94-b36f-859c47b568c4");
 INSERT INTO C_PP
 	VALUES ("563ce030-a2b6-4c94-b36f-859c47b568c4",
 	"092a77de-9124-470e-9e04-e55568aebdc9",
@@ -861,48 +854,66 @@ INSERT INTO C_PP
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("013430b7-a277-45cd-a107-3faa512a7ca6",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
+	0,
+	'',
+	"563ce030-a2b6-4c94-b36f-859c47b568c4");
+INSERT INTO C_PP
+	VALUES ("ee25d75c-f10d-47b2-abc5-4803322427b9",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"013430b7-a277-45cd-a107-3faa512a7ca6");
 INSERT INTO C_EP
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.');
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.');
 INSERT INTO C_AS
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
 	0,
 	"092a77de-9124-470e-9e04-e55568aebdc9");
 INSERT INTO C_PP
 	VALUES ("d9b2eb93-a8f1-4204-b785-d67c807d9671",
 	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("061be7ef-8c1a-45c0-9eee-929e494c86be",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"d9b2eb93-a8f1-4204-b785-d67c807d9671");
 INSERT INTO C_EP
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestCaseResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.');
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.');
 INSERT INTO C_AS
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
-	'SetTestCaseResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
 	0,
 	"168e2aad-1615-4146-ac35-e977e2dbf6c5");
-INSERT INTO C_PP
-	VALUES ("634de2a1-d3b0-466b-862f-d3741fe42c1b",
-	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	'resolution',
-	'',
-	0,
-	'',
-	"d3b9002e-72ea-4636-82be-49467234ac80");
 INSERT INTO C_PP
 	VALUES ("d3b9002e-72ea-4636-82be-49467234ac80",
 	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
@@ -912,6 +923,93 @@ INSERT INTO C_PP
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("33a2ad53-1099-4c88-b588-8f96be776305",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
+	0,
+	'',
+	"d3b9002e-72ea-4636-82be-49467234ac80");
+INSERT INTO C_PP
+	VALUES ("26a94f7c-2ca0-4a48-a317-8f9921862bc3",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"33a2ad53-1099-4c88-b588-8f96be776305");
+INSERT INTO C_EP
+	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.');
+INSERT INTO C_AS
+	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	0,
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2");
+INSERT INTO C_PP
+	VALUES ("119751b6-3d47-4551-835b-a9612ad7c183",
+	"abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'seqLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("e7718876-1b9d-4d13-a629-f488d7d20dd8",
+	"abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which an interval measurement may be specified.',
+	0,
+	'',
+	"119751b6-3d47-4551-835b-a9612ad7c183");
+INSERT INTO C_EP
+	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.');
+INSERT INTO C_AS
+	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	0,
+	"abe4b64e-9b6b-4aa3-a59c-1c6df05a312a");
+INSERT INTO C_PP
+	VALUES ("43305558-a4ed-4b30-aa0b-167529982bc9",
+	"33169678-f345-469d-ac15-ea1c7322c7a9",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("af8287d9-5262-43a8-a532-970a90f98370",
+	"33169678-f345-469d-ac15-ea1c7322c7a9",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
+	0,
+	'',
+	"43305558-a4ed-4b30-aa0b-167529982bc9");
+INSERT INTO C_PP
+	VALUES ("76d23754-ef4f-4653-8936-143476d0d262",
+	"33169678-f345-469d-ac15-ea1c7322c7a9",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"af8287d9-5262-43a8-a532-970a90f98370");
 INSERT INTO PE_PE
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	1,

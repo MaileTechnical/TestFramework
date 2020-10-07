@@ -32,9 +32,6 @@ while ( not empty stimulus )
   stimulus.Delete();
   stimulus = next_stimulus;
 end while;
-select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
-unrelate itmr from self across R120.''times intervals for'';
-itmr.Delete();
 
 delete object instance self;',
 	1,
@@ -57,36 +54,6 @@ generate TestCase3:SequenceComplete to tc;
 	'',
 	"00000000-0000-0000-0000-000000000000",
 	0);
-INSERT INTO O_TFR
-	VALUES ("84562cca-12cf-418b-909a-348816ad2097",
-	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	'SetSequenceResolution',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'self.timerResolution = param.resolution;
-select one itmr related by self->IntervalTimer[R120.''measures intervals with''];
-itmr.SetResolution( resolution:param.resolution );',
-	1,
-	'',
-	"5a4d2c90-55b1-4d65-a736-980238f02208",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("3864a04b-fb16-4a5e-94e8-76ffedd77121",
-	"84562cca-12cf-418b-909a-348816ad2097",
-	'resolution',
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("74e39e3b-eaad-47cb-889d-3ede473b7f8b",
-	"00000000-0000-0000-0000-000000000000",
-	'timerResolution',
-	'',
-	'',
-	'../../../../SharedDatatypes/SharedDatatypes.xtuml');
 INSERT INTO O_NBATTR
 	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
@@ -114,7 +81,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("70fc584c-3727-4bf6-8a12-20c70cafb7e5",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
-	"08d47417-664d-4e82-8119-f12ab47e4f49",
+	"703a6d5c-e46d-46ca-87cc-c42b3f7824ca",
 	'current_state',
 	'',
 	'',
@@ -169,21 +136,75 @@ INSERT INTO S_DT_PROXY
 	'',
 	'../../Datatypes/Datatypes.xtuml');
 INSERT INTO O_NBATTR
-	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	VALUES ("703a6d5c-e46d-46ca-87cc-c42b3f7824ca",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
 INSERT INTO O_BATTR
-	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	VALUES ("703a6d5c-e46d-46ca-87cc-c42b3f7824ca",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
 INSERT INTO O_ATTR
-	VALUES ("08d47417-664d-4e82-8119-f12ab47e4f49",
+	VALUES ("703a6d5c-e46d-46ca-87cc-c42b3f7824ca",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"ce01f828-963a-4d6b-90a8-c0da7f0b9885",
+	'IntervalTimerStartTime',
+	'Time at which an interval measurement is initiated.',
+	'',
+	'IntervalTimerStartTime',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000010",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("4d1409da-52dc-4cd9-9769-8d89ee76a8a2",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("4d1409da-52dc-4cd9-9769-8d89ee76a8a2",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("4d1409da-52dc-4cd9-9769-8d89ee76a8a2",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	"280d0095-61a4-4fe8-bee9-09bef3406932",
-	'timerResolution',
-	'The choice of timer resolution - see Datatypes.',
+	'timeScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for duration timing.',
 	'',
-	'timerResolution',
+	'timeScaleFactor',
 	0,
-	"74e39e3b-eaad-47cb-889d-3ede473b7f8b",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("359e0eaa-e122-4ef4-96d8-15d9053c5bce",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("359e0eaa-e122-4ef4-96d8-15d9053c5bce",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("359e0eaa-e122-4ef4-96d8-15d9053c5bce",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"4d1409da-52dc-4cd9-9769-8d89ee76a8a2",
+	'pollScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
+	'',
+	'pollScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("ce01f828-963a-4d6b-90a8-c0da7f0b9885",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_BATTR
+	VALUES ("ce01f828-963a-4d6b-90a8-c0da7f0b9885",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
+INSERT INTO O_ATTR
+	VALUES ("ce01f828-963a-4d6b-90a8-c0da7f0b9885",
+	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
+	"359e0eaa-e122-4ef4-96d8-15d9053c5bce",
+	'IntervalTimeScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for interval time measurement on this sequence.',
+	'',
+	'IntervalTimeScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
 	'');
 INSERT INTO O_ID

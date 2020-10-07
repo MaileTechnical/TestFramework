@@ -16,7 +16,9 @@ INSERT INTO O_TFR
 	'Add a stimulus to a sequence of such that belong to the test case being scripted.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	0,
-	'select any ts from instances of TestSuite;
+	'// Add a stimulus to the labelled sequence of the "currently-building" test case.
+
+select any ts from instances of TestSuite;
 select one tc related by ts->TestCase[R124.''is currently building''];
 select any seq related by tc->StimulusSequence[R119.''executes'']
   where ( selected.seqLabel == param.seqLabel );
@@ -93,10 +95,8 @@ INSERT INTO O_TFR
 Signal start to the timer for this sequence.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'select one itmr related by self->StimulusSequence[R116.''is active for'']
-                               ->IntervalTimer[R120.''measures intervals with''];
-itmr.Start();
-',
+	'select one seq related by self->StimulusSequence[R116.''is active for''];
+seq.IntervalTimerStartTime = TIM::current_clock();',
 	1,
 	'',
 	"39c93c24-b96a-4e09-81bd-97578ae30d17",
@@ -168,7 +168,7 @@ INSERT INTO O_ATTR
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	"5e8fac69-57b7-4374-92bf-1067564007c8",
 	'observations',
-	'Incremented as observations are added; used to assign numbering to observations.
+	'Incremented as observations are added; used to assign sequence numbering to observations.
 Numberings are used in identifying/reporting failure points.
 ',
 	'',

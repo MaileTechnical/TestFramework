@@ -5,37 +5,61 @@ INSERT INTO C_C
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000",
 	'TestSequencer',
-	'Summary description:
+	'Overview:
 
-A service supporting the sequencing of the steps involved in running a suite of test cases.
-A test suite contains an ordered set of test buckets.
-Each test bucket contains at least one test case; typically several related tests.
-A test case consists of one or more sequences of stimuli and following observations.
-Multiple sequences of stimuli run concurrently in a test case execution.
-A stimulus effects some changes in a system under test.
-Following observations may evaluate the response of the system to such a stimulus.
-Time delays can be interspersed between stimuli and observations and between observations.
-All observations following a stimulus must complete before the next stimulus is injected
-If all observations are found acceptable, the test case is deemed to be successful.
-If any observation fails, the test case ceases execution: all sequences discontinue.
-A test case may be associated with instances of requirements to support coverage reporting.
-
-Discussion:
+This is a service to automate the running of a suite of multiple self-checking test cases.
 
 Typically a self-checking test case has three primary components:
 1. Establish pre-conditions.
 2. Inject stimulus.
-3. Verify post-stimulus conditions.
-Often, the injection of stimulus and the verification of post-conditions
+3. Verify (observe) post-stimulus conditions.
+Often, the injection of stimuli and the observation of post-conditions
 are intermixed, as the test case injects a stimulus, verifies the response(s), 
 injects additional stimuli, and so on.
+
+While stimulus actions and observation measurements are subject-matter specific, the organization 
+of sequencing stimuli and adjudication of success or failure are not. Hence this service.
+
+
+Summary description:
 
 This subject matter-independent Test Sequencer service asumes the burdens of sequencing, timer 
 management, requirements coverage tracking and summary reporting for multi-threaded test cases 
 ordered in test buckets within a test suite.
 
 A testbench, with subject matter-specific details of stimuli and observations, can use this 
-Test Sequencer service to manage its interaction with a system under test.
+service to manage its interaction with a system under test.
+
+A test suite is configured to contain one or more of test buckets which are added in order.
+Each test bucket ''scripts'' at least one test case; typically several related tests.
+
+When all test buckets have been added to the test suite, the test suite is signalled to execute.
+In turn, each bucket is signalled to execute the script that builds its test cases and run them.
+
+A test case consists of one or more sequences of stimuli and following observations.
+The instances in the testbench have counterparts in the test service where sequencing is managed.
+The script creates stimuli and observation instances which add themselves to the test service.
+When the test bucket script is complete its test cases are run in order.
+Running a test case involves appropriate invocation of the stimulus interactions with the system 
+under test and evaluating the system''s response as measured by observations.
+
+
+Some details:
+
+Multiple sequences of stimuli may run concurrently in a test case execution.
+A stimulus effects some changes in a system under test.
+Following observations may evaluate the response of the system to such a stimulus.
+Observations may evaluate sequentially in a defined order, or concurrently if so configured.
+Observations may be triggered to evaluate on some occurence, or may poll, repeatedly evaluating.
+Observations may be limited in duration; failure to succeed within this time constitutes failure.
+Time delays can be interspersed between stimuli and observations and between observations.
+All observations following a stimulus must complete before the next stimulus is injected
+If all observations are found acceptable, the test case is deemed to be successful.
+If any observation fails, the test case ceases execution: all sequences discontinue.
+A test case may be associated with instances of requirements to support coverage reporting.
+
+
+Usage:
 
 To use the service, a testbench must derive its test bucket, stimuli and observation classes from 
 the supertype classes provided in the sample testbench component and use the operations supplied 
@@ -59,20 +83,30 @@ As the testbench constructs test cases, using provided operations of the stimulu
 supertypes to add its specific stimuli and observation instances, the sequencer builds corresponding 
 sequences in the Test Sequencer service context. 
 
-For each instance of test bucket, stimulus or observation created in the testbench in this way, the 
-service returns identifying information which is used to activate those instances when appropriate.
-
 The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
-respond to the invocations of injection and observation operations on the supertype when triggered by 
-the sequencing service as it works through the series of test cases. 
-The supertypes also provide operations to signal responses to the service.
+respond to the invocations of injection and observation operations on the testbench supertype when 
+triggered by the sequencing service as it works through the series of test cases. 
+The testbench supertypes also provide operations to signal completion/failure to the test service.
 
 The test cases are created in an instance based operation of a test bucket subtype. This operation 
 will be invoked for each test bucket subtype as the sequencer runs through the set of buckets that 
 constitute a test suite. The invoked operation creates subtype instances of stimulus and observation 
-arranging them in order. Stimuli are added to a stimulus sequence - of which there must be at least 
+arranging them in order. Stimuli are added to a stimulus sequence of which there must be at least 
 one created for a test case. If there are multiple sequences of stimuli they will run concurrently.
 Observations are each appended to a specific stimulus and may be separated by chosen time delays.
+Where the order in which observations should evaluate after a stimulus is unpredictable, they may be 
+configured to evaluate concurrently; each one must succeed to consitute completion. If, however, 
+during test case execution it is determined that a triggered operation is no longer required, there 
+is a provision to "remove" it without causing failure of the test case.
+
+An observation may be configured with optional timers: one limits the duration until lack of success 
+will be timed a timeout failure; the other may determine a polling frequency for re-evaluation.
+These timers may be independently configured with resolutions which may differ. The overall duration 
+and the polling interval are specified as values using those configured resolution units.
+Example: observations with timeouts specified in seconds may poll at some number of milliseconds.
+
+Resolution values are propagated as defaults down the hierarchy from test suite to observation.
+They can, however be overridden at any level - from where they now become defaults.
 
 An observation may be configured to poll, repeatedly evaluating system conditions until it completes 
 by reporting success, or fails after some time limit. Alternatively, invocation of an evaluation can
@@ -81,15 +115,12 @@ the system under test. This is achieved by associating a specific key with the o
 a sequence "assess" signal, with a key value, will trigger evaluation of any current observations 
 with a matching key. If desired, such an ''asynchronous'' observation may be associated with a separate 
 stimulus sequence, allowing other sets of observations to proceed while it waits to be triggered.
+A ''hybrid'' observation may wait for an initial trigger and subsequently poll in search of success.
 
 Associated with each stimulus sequence there is one interval timer. A stimulus or observation can 
 start (or restart) the timer on a sequence. A subsequent observation may read the elapsed time since 
-the timer was started - and may optionally reset the timer value to zero on reading. Interval timer 
-resolution defaults to that of the test case, but can be overridden.
-
-The provided sample testbench demonstrates the capabilities provided by the test sequencing service.
-They include linking pre-conditions and requirements to test cases, chosing time resolution values 
-and measuring elapsed time intervals.
+the timer was started - and may optionally reset the timer value on reading. Interval timer 
+resolution defaults to that of the sequence time resolution, but can be overridden.
 ',
 	0,
 	"00000000-0000-0000-0000-000000000000",
@@ -912,7 +943,7 @@ INSERT INTO SPR_PEP
 INSERT INTO SPR_PS
 	VALUES ("e8daef11-107e-4232-84d4-0610afd32558",
 	'IntervalTimerValue',
-	'',
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
 	'',
 	1,
 	0);
@@ -921,7 +952,7 @@ INSERT INTO C_EP_PROXY
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'IntervalTimerValue',
-	'',
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("00b40b43-eb10-49f4-8f08-a6dd5cde9967",
@@ -964,8 +995,8 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("7d52ac6c-99e0-40be-8abe-5dd4027a72a5",
-	'CancelTriggeredObservation',
-	'On this signal, any active observations with matching key value will be canceled.
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.',
 	'select any trigger from instances of Trigger
  where ( selected.KeyValue == param.key );
@@ -980,8 +1011,8 @@ INSERT INTO C_EP_PROXY
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'CancelTriggeredObservation',
-	'On this signal, any active observations with matching key value will be canceled.
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
@@ -990,24 +1021,24 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("d8c0e7cd-e935-473f-8893-2d13ddf22e22",
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
 	'select any bucket from instances of TestBucket
   where ( selected.assignedID == param.bucketId );
 if ( not_empty bucket )
-  bucket.SetTimerResolution( resolution:param.resolution );
+  bucket.timeScaleFactor = param.timeResolution;
+  bucket.pollScaleFactor = param.pollResolution;
 else
   LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
-end if;
-',
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestBucketResolution',
-	'Test buckets inherit a default resolution from the test suite; this can be overridden.',
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
@@ -1015,24 +1046,26 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	'select any suite from instances of TestSuite;
 select one case related by suite->TestCase[R124.''is currently building''];
 select any seq related by case ->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
-if ( empty seq )
+if ( not_empty seq )
+  seq.timeScaleFactor = param.timeResolution;
+  seq.pollScaleFactor = param.pollResolution;
+else
   LOG::LogFailure( message:"No sequence found matching " + param.seqLabel );
-end if;
-seq.SetSequenceResolution( resolution:param.resolution );',
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetSequenceResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("2ebed635-f6ff-4aef-b302-2c270c93aabb",
@@ -1040,11 +1073,12 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("2ebed635-f6ff-4aef-b302-2c270c93aabb",
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
 	'select any ts from instances of TestSuite;
 if ( not_empty ts )
-  ts.timerResolution = param.resolution;
+  ts.timeScaleFactor = param.timeResolution;
+  ts.pollScaleFactor = param.pollResolution;
 else
   LOG::LogFailure( message:"SEQ No test suite exists!" );
 end if;',
@@ -1054,8 +1088,8 @@ INSERT INTO C_EP_PROXY
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestSuiteResolution',
-	'Set the timer resolution which will be default for the test buckets in this test suite.',
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("2d634a28-7315-4bba-9d3d-481e0ece2eb7",
@@ -1063,28 +1097,83 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("2d634a28-7315-4bba-9d3d-481e0ece2eb7",
-	'SetTestCaseResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
-	'select any suite from instances of TestSuite;
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	'// Set timer scale factors; This overrides defaults set from Test Bucket.
+
+select any suite from instances of TestSuite;
 select one case related by suite->TestCase[R124.''is currently building''];
-if ( empty case )
+if ( not_empty case )
+  case.timeScaleFactor = param.timeResolution;
+  case.pollScaleFactor = param.pollResolution;
+else
   LOG::LogFailure( message:"No test case found matching " + param.caseLabel );
-end if;
-case.SetTimerResolution( resolution:param.resolution );',
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'SetTestCaseResolution',
-	'Test sequences inherit a default resolution from the test bucket; this can be overridden.',
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("f6bc7f0c-3eb1-4b7c-aadc-b201ec7baeb0",
+	"abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("f6bc7f0c-3eb1-4b7c-aadc-b201ec7baeb0",
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	'select any suite from instances of TestSuite;
+select one case related by suite->TestCase[R124.''is currently building''];
+select any seq related by case ->StimulusSequence[R119.''executes'']
+ where ( selected.seqLabel == param.seqLabel );
+if ( not_empty seq )
+  seq.IntervalTimeScaleFactor = param.timeResolution;
+else
+  LOG::LogFailure( message:"No sequence found matching " + param.seqLabel );
+end if;',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("e89a4566-6c96-4c22-be80-f3aa98a4a7b4",
+	"33169678-f345-469d-ac15-ea1c7322c7a9",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("e89a4566-6c96-4c22-be80-f3aa98a4a7b4",
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	'select any observation from instances of Observation
+  where ( selected.assignedID == param.observationId );
+if ( not_empty observation )
+  observation.timeScaleFactor = param.timeResolution;
+  observation.pollScaleFactor = param.pollResolution;
+else
+  LOG::LogFailure( message:"SEQ Invalid observation identifier" );
+end if;',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	"00000000-0000-0000-0000-000000000000",
 	'TestSequencing',
-	'',
+	'Interface signals for communication with the test service.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO PE_PE
 	VALUES ("6458b090-4d5d-4bec-a376-1c820254581c",

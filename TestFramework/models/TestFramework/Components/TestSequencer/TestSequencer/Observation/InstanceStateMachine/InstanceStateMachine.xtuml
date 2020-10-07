@@ -515,8 +515,8 @@ INSERT INTO SM_ACT
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
 	'// Following a stimuulus injection, an observation is now ''readied'' for evaluation.
-// If it is not associated with a trigger - for which it must wait - then proceed.
 // If it has been created with a timeout timer, then start the timer now.
+// If it is not associated with a trigger - for which it must wait - then proceed.
 
 self.obsStatus = tsStatus::started;
 self.StartDurationLimitTimer();
