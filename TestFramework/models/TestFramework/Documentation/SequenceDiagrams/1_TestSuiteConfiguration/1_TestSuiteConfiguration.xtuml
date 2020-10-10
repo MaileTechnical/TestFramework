@@ -1,0 +1,1691 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'1_TestSuiteConfiguration',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("b837d730-2db6-448b-b134-cbdd97be1b4c",
+	112,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'4.1.17',
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration');
+INSERT INTO GD_GE
+	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"8361c663-3e5e-4780-b652-bbe7c323d994",
+	107,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::testbench');
+INSERT INTO GD_SHP
+	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f");
+INSERT INTO GD_NCS
+	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f");
+INSERT INTO DIM_ND
+	VALUES (216.000000,
+	85.000000,
+	"c680885a-11ff-461e-92e7-f584c656f77f");
+INSERT INTO DIM_GE
+	VALUES (3792.000000,
+	3096.000000,
+	"c680885a-11ff-461e-92e7-f584c656f77f",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_CON
+	VALUES ("174a9bc2-51b6-42e4-83f3-54bcab7dd606",
+	3900.000000,
+	3181.000000,
+	"c680885a-11ff-461e-92e7-f584c656f77f");
+INSERT INTO GD_GE
+	VALUES ("526fa1ed-8aa6-4f7a-bb61-dafe720060bd",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"18c876c1-c66b-4d0f-81ec-32cd0e480382",
+	107,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer');
+INSERT INTO GD_SHP
+	VALUES ("526fa1ed-8aa6-4f7a-bb61-dafe720060bd");
+INSERT INTO GD_NCS
+	VALUES ("526fa1ed-8aa6-4f7a-bb61-dafe720060bd");
+INSERT INTO DIM_ND
+	VALUES (277.000000,
+	85.000000,
+	"526fa1ed-8aa6-4f7a-bb61-dafe720060bd");
+INSERT INTO DIM_GE
+	VALUES (3396.000000,
+	3096.000000,
+	"526fa1ed-8aa6-4f7a-bb61-dafe720060bd",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("526fa1ed-8aa6-4f7a-bb61-dafe720060bd",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_CON
+	VALUES ("8621f8a7-3569-4cd2-9367-849159cd5a0e",
+	3492.000000,
+	3181.000000,
+	"526fa1ed-8aa6-4f7a-bb61-dafe720060bd");
+INSERT INTO GD_GE
+	VALUES ("7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	57,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link');
+INSERT INTO GD_CON
+	VALUES ("7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("382fe619-a303-4ff0-98ef-64acaa558623",
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"382fe619-a303-4ff0-98ef-64acaa558623");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"382fe619-a303-4ff0-98ef-64acaa558623",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("382fe619-a303-4ff0-98ef-64acaa558623",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("e2314c4a-4520-47dd-afd1-3a87565bd03a",
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"e2314c4a-4520-47dd-afd1-3a87565bd03a");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"e2314c4a-4520-47dd-afd1-3a87565bd03a",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e2314c4a-4520-47dd-afd1-3a87565bd03a",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("a2cea09d-a1c6-4379-8ec3-7b4fae24866f",
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"a2cea09d-a1c6-4379-8ec3-7b4fae24866f");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"a2cea09d-a1c6-4379-8ec3-7b4fae24866f",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("a2cea09d-a1c6-4379-8ec3-7b4fae24866f",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("8844a48a-218f-4298-ac93-fe3cae68944a",
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"00000000-0000-0000-0000-000000000000",
+	"fb3b14ed-6cd0-4d91-b117-f3a1d76f7491",
+	"6091462f-3b38-4661-91b4-1dcd9c84fa47");
+INSERT INTO GD_AOS
+	VALUES ("1e4a8077-d154-4bda-abd1-b2cba0dc6bb7",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("357910e1-0a1d-46ce-970e-7338c9efcd37",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("d963bf27-bf3e-4b23-b4cd-60b8e68e29fe",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("faa2c717-683d-45c0-b47a-4477ce42a0c7",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("784c2b4b-5e2c-4e92-9dcd-69935acbe475",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("11fe9a7c-3b75-4af9-9216-68c8137eae78",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO GD_AOS
+	VALUES ("1a22e413-d9ae-4bf1-88c0-295757fe634a",
+	"8844a48a-218f-4298-ac93-fe3cae68944a");
+INSERT INTO DIM_WAY
+	VALUES ("fb3b14ed-6cd0-4d91-b117-f3a1d76f7491",
+	3492.000000,
+	3181.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("6091462f-3b38-4661-91b4-1dcd9c84fa47",
+	3492.000000,
+	3588.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"00000000-0000-0000-0000-000000000000",
+	"fb3b14ed-6cd0-4d91-b117-f3a1d76f7491");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_CON
+	VALUES ("1e4a8077-d154-4bda-abd1-b2cba0dc6bb7",
+	3492.000000,
+	3228.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("357910e1-0a1d-46ce-970e-7338c9efcd37",
+	3492.000000,
+	3324.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("d963bf27-bf3e-4b23-b4cd-60b8e68e29fe",
+	3492.000000,
+	3372.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("faa2c717-683d-45c0-b47a-4477ce42a0c7",
+	3492.000000,
+	3468.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("784c2b4b-5e2c-4e92-9dcd-69935acbe475",
+	3492.000000,
+	3540.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("11fe9a7c-3b75-4af9-9216-68c8137eae78",
+	3492.000000,
+	3420.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_CON
+	VALUES ("1a22e413-d9ae-4bf1-88c0-295757fe634a",
+	3492.000000,
+	3276.000000,
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO DIM_ED
+	VALUES ("8621f8a7-3569-4cd2-9367-849159cd5a0e",
+	"00000000-0000-0000-0000-000000000000",
+	"7ba58ec2-0fb8-47aa-a0a2-3005209ff9f4");
+INSERT INTO GD_GE
+	VALUES ("1b877491-119f-4e05-aefb-3cec119ff608",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	57,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::testbench:: Communication Link');
+INSERT INTO GD_CON
+	VALUES ("1b877491-119f-4e05-aefb-3cec119ff608",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("4692bcef-ac24-4a06-b23c-cd14910539bd",
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"4692bcef-ac24-4a06-b23c-cd14910539bd");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"4692bcef-ac24-4a06-b23c-cd14910539bd",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("4692bcef-ac24-4a06-b23c-cd14910539bd",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("bde8fb3d-550d-4ec2-a45a-03681e382fce",
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"bde8fb3d-550d-4ec2-a45a-03681e382fce");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"bde8fb3d-550d-4ec2-a45a-03681e382fce",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("bde8fb3d-550d-4ec2-a45a-03681e382fce",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("e75ba978-d74b-456b-84dd-5d8a2c9a3370",
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"e75ba978-d74b-456b-84dd-5d8a2c9a3370");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"e75ba978-d74b-456b-84dd-5d8a2c9a3370",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e75ba978-d74b-456b-84dd-5d8a2c9a3370",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("515fcd62-17d9-47e1-ae24-40df4be37349",
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	"00000000-0000-0000-0000-000000000000",
+	"7e8ec387-7b89-4c1d-b086-3a051ec0790b",
+	"321c5825-4fb2-49dc-a811-23ffdb41361a");
+INSERT INTO GD_AOS
+	VALUES ("b874e0f9-42f4-4bb7-a432-f28e39bfd789",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("9c35cca4-06ff-4e89-b5f2-85e1a49d9712",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("a57afdb7-1c67-46c1-be4b-0262586eed08",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("930cd1ce-747a-4a89-8571-debe8e8a43bb",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("1a1782ec-111e-4c39-9505-cb04fb471707",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("41ecb145-74d3-4e63-b6aa-4e2220c75a10",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO GD_AOS
+	VALUES ("7cae750d-4278-462a-b77e-7d46244a23cb",
+	"515fcd62-17d9-47e1-ae24-40df4be37349");
+INSERT INTO DIM_WAY
+	VALUES ("7e8ec387-7b89-4c1d-b086-3a051ec0790b",
+	3900.000000,
+	3181.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("321c5825-4fb2-49dc-a811-23ffdb41361a",
+	3900.000000,
+	3575.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	"00000000-0000-0000-0000-000000000000",
+	"7e8ec387-7b89-4c1d-b086-3a051ec0790b");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("1b877491-119f-4e05-aefb-3cec119ff608",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_CON
+	VALUES ("b874e0f9-42f4-4bb7-a432-f28e39bfd789",
+	3900.000000,
+	3228.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("9c35cca4-06ff-4e89-b5f2-85e1a49d9712",
+	3900.000000,
+	3324.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("a57afdb7-1c67-46c1-be4b-0262586eed08",
+	3900.000000,
+	3372.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("930cd1ce-747a-4a89-8571-debe8e8a43bb",
+	3900.000000,
+	3468.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("1a1782ec-111e-4c39-9505-cb04fb471707",
+	3900.000000,
+	3540.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("41ecb145-74d3-4e63-b6aa-4e2220c75a10",
+	3900.000000,
+	3420.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_CON
+	VALUES ("7cae750d-4278-462a-b77e-7d46244a23cb",
+	3900.000000,
+	3276.000000,
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO DIM_ED
+	VALUES ("174a9bc2-51b6-42e4-83f3-54bcab7dd606",
+	"00000000-0000-0000-0000-000000000000",
+	"1b877491-119f-4e05-aefb-3cec119ff608");
+INSERT INTO GD_GE
+	VALUES ("f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::RegisterTestSuite');
+INSERT INTO GD_CON
+	VALUES ("f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("9ed252dc-41ec-48ab-9622-1c6857fe3c54",
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"9ed252dc-41ec-48ab-9622-1c6857fe3c54");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"9ed252dc-41ec-48ab-9622-1c6857fe3c54",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("9ed252dc-41ec-48ab-9622-1c6857fe3c54",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("52847130-2f4c-4ad0-a7d5-37cdf907839a",
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"52847130-2f4c-4ad0-a7d5-37cdf907839a");
+INSERT INTO DIM_GE
+	VALUES (3576.000000,
+	3192.000000,
+	"52847130-2f4c-4ad0-a7d5-37cdf907839a",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("52847130-2f4c-4ad0-a7d5-37cdf907839a",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("4234077a-242f-4873-be2f-46d2c7c8df93",
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"4234077a-242f-4873-be2f-46d2c7c8df93");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"4234077a-242f-4873-be2f-46d2c7c8df93",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("4234077a-242f-4873-be2f-46d2c7c8df93",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("72125a83-e5d6-4bc7-8ba2-8f7af8e76849",
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"00000000-0000-0000-0000-000000000000",
+	"380fd96d-cd6b-4faf-b3bb-bda5bf760e77",
+	"8bee3614-58a3-47f7-99a4-403027eb8211");
+INSERT INTO DIM_WAY
+	VALUES ("380fd96d-cd6b-4faf-b3bb-bda5bf760e77",
+	3900.000000,
+	3228.000000,
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("8bee3614-58a3-47f7-99a4-403027eb8211",
+	3492.000000,
+	3228.000000,
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"00000000-0000-0000-0000-000000000000",
+	"380fd96d-cd6b-4faf-b3bb-bda5bf760e77");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"f43ff641-7d1b-46a6-a459-e36395e03d62",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("f43ff641-7d1b-46a6-a459-e36395e03d62",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("b874e0f9-42f4-4bb7-a432-f28e39bfd789",
+	"1e4a8077-d154-4bda-abd1-b2cba0dc6bb7",
+	"f43ff641-7d1b-46a6-a459-e36395e03d62");
+INSERT INTO GD_GE
+	VALUES ("eb60fedf-327a-44db-bd64-653957be1023",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::AddBucket');
+INSERT INTO GD_CON
+	VALUES ("eb60fedf-327a-44db-bd64-653957be1023",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("82b91f89-d00a-4cee-aa2b-16bcf3212a68",
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"82b91f89-d00a-4cee-aa2b-16bcf3212a68");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"82b91f89-d00a-4cee-aa2b-16bcf3212a68",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("82b91f89-d00a-4cee-aa2b-16bcf3212a68",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("b06ca9d0-29d2-4667-940b-8ff5acd3bfb8",
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"b06ca9d0-29d2-4667-940b-8ff5acd3bfb8");
+INSERT INTO DIM_GE
+	VALUES (3640.000000,
+	3296.000000,
+	"b06ca9d0-29d2-4667-940b-8ff5acd3bfb8",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("b06ca9d0-29d2-4667-940b-8ff5acd3bfb8",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("52fbed0c-5f87-4c2b-a0ae-846007a124bd",
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"52fbed0c-5f87-4c2b-a0ae-846007a124bd");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"52fbed0c-5f87-4c2b-a0ae-846007a124bd",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("52fbed0c-5f87-4c2b-a0ae-846007a124bd",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("6b5ea019-dd25-403a-b571-43916191fcab",
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	"00000000-0000-0000-0000-000000000000",
+	"ae387d31-69ed-49cf-b14e-9de459604e19",
+	"d042e69e-9627-4635-9a5b-48b9aa025921");
+INSERT INTO DIM_WAY
+	VALUES ("ae387d31-69ed-49cf-b14e-9de459604e19",
+	3900.000000,
+	3324.000000,
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("d042e69e-9627-4635-9a5b-48b9aa025921",
+	3492.000000,
+	3324.000000,
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	"00000000-0000-0000-0000-000000000000",
+	"ae387d31-69ed-49cf-b14e-9de459604e19");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"eb60fedf-327a-44db-bd64-653957be1023",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("eb60fedf-327a-44db-bd64-653957be1023",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("9c35cca4-06ff-4e89-b5f2-85e1a49d9712",
+	"357910e1-0a1d-46ce-970e-7338c9efcd37",
+	"eb60fedf-327a-44db-bd64-653957be1023");
+INSERT INTO GD_GE
+	VALUES ("4c50b3af-a13b-4e92-845d-7436d538e526",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"bbe73592-8011-4cdb-87eb-a7a088029d72",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::CreateTestCase');
+INSERT INTO GD_CON
+	VALUES ("4c50b3af-a13b-4e92-845d-7436d538e526",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("3edd7046-c9c9-4d43-8dc9-fb11e10271d9",
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"3edd7046-c9c9-4d43-8dc9-fb11e10271d9");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"3edd7046-c9c9-4d43-8dc9-fb11e10271d9",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("3edd7046-c9c9-4d43-8dc9-fb11e10271d9",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("abb72437-a9d7-4003-ad16-de7539a500d3",
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"abb72437-a9d7-4003-ad16-de7539a500d3");
+INSERT INTO DIM_GE
+	VALUES (3589.000000,
+	3346.000000,
+	"abb72437-a9d7-4003-ad16-de7539a500d3",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("abb72437-a9d7-4003-ad16-de7539a500d3",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("035fbc3c-0710-497c-9bd4-46b6f1ccdcf2",
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"035fbc3c-0710-497c-9bd4-46b6f1ccdcf2");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"035fbc3c-0710-497c-9bd4-46b6f1ccdcf2",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("035fbc3c-0710-497c-9bd4-46b6f1ccdcf2",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("2997fa6e-c3cd-49c1-a547-01631f1f82bb",
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	"00000000-0000-0000-0000-000000000000",
+	"0d078fac-f9ec-4773-b157-64fd9b42a20b",
+	"fb0c949a-f958-415e-ad28-dd39d9c6de36");
+INSERT INTO DIM_WAY
+	VALUES ("0d078fac-f9ec-4773-b157-64fd9b42a20b",
+	3900.000000,
+	3372.000000,
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("fb0c949a-f958-415e-ad28-dd39d9c6de36",
+	3492.000000,
+	3372.000000,
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	"00000000-0000-0000-0000-000000000000",
+	"0d078fac-f9ec-4773-b157-64fd9b42a20b");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"4c50b3af-a13b-4e92-845d-7436d538e526",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("4c50b3af-a13b-4e92-845d-7436d538e526",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("a57afdb7-1c67-46c1-be4b-0262586eed08",
+	"d963bf27-bf3e-4b23-b4cd-60b8e68e29fe",
+	"4c50b3af-a13b-4e92-845d-7436d538e526");
+INSERT INTO GD_GE
+	VALUES ("2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"718a7700-e260-49fa-a5b2-3847ef3fce80",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::Optionally, create and populate more test cases...');
+INSERT INTO GD_CON
+	VALUES ("2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("291e2e76-8d9f-4809-9cf7-18073f0ac451",
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"291e2e76-8d9f-4809-9cf7-18073f0ac451");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"291e2e76-8d9f-4809-9cf7-18073f0ac451",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("291e2e76-8d9f-4809-9cf7-18073f0ac451",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("c795b766-3e76-4df1-9fed-6d263e1bf3c7",
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"c795b766-3e76-4df1-9fed-6d263e1bf3c7");
+INSERT INTO DIM_GE
+	VALUES (3561.000000,
+	3433.000000,
+	"c795b766-3e76-4df1-9fed-6d263e1bf3c7",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("c795b766-3e76-4df1-9fed-6d263e1bf3c7",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("96391d30-a392-4a26-ab8f-3adc5907c5ee",
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"96391d30-a392-4a26-ab8f-3adc5907c5ee");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"96391d30-a392-4a26-ab8f-3adc5907c5ee",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("96391d30-a392-4a26-ab8f-3adc5907c5ee",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("3ca48029-cf13-4ac7-ae5d-505f8a26c739",
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"00000000-0000-0000-0000-000000000000",
+	"216cf529-533e-4baf-8a87-701f0b9b5489",
+	"bf24cb4b-ec1b-4398-b6c2-062917b263bc");
+INSERT INTO DIM_WAY
+	VALUES ("216cf529-533e-4baf-8a87-701f0b9b5489",
+	3900.000000,
+	3468.000000,
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("bf24cb4b-ec1b-4398-b6c2-062917b263bc",
+	3492.000000,
+	3468.000000,
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"00000000-0000-0000-0000-000000000000",
+	"216cf529-533e-4baf-8a87-701f0b9b5489");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("2af4d33a-1b6b-4086-9c49-ba4c70dc6d05",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("930cd1ce-747a-4a89-8571-debe8e8a43bb",
+	"faa2c717-683d-45c0-b47a-4477ce42a0c7",
+	"2af4d33a-1b6b-4086-9c49-ba4c70dc6d05");
+INSERT INTO GD_GE
+	VALUES ("6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"cc036473-8fb0-452b-afec-3b90808e9a95",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::BucketInitialized');
+INSERT INTO GD_CON
+	VALUES ("6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("a2e8abe8-3bc5-42f8-b2b5-0eb36209de01",
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"a2e8abe8-3bc5-42f8-b2b5-0eb36209de01");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"a2e8abe8-3bc5-42f8-b2b5-0eb36209de01",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("a2e8abe8-3bc5-42f8-b2b5-0eb36209de01",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("cd993e27-da12-4081-9e22-eeef8ad7e843",
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"cd993e27-da12-4081-9e22-eeef8ad7e843");
+INSERT INTO DIM_GE
+	VALUES (3615.000000,
+	3507.000000,
+	"cd993e27-da12-4081-9e22-eeef8ad7e843",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("cd993e27-da12-4081-9e22-eeef8ad7e843",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("2bf46d55-6fbd-44df-aca3-f7aa2504f814",
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"2bf46d55-6fbd-44df-aca3-f7aa2504f814");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"2bf46d55-6fbd-44df-aca3-f7aa2504f814",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("2bf46d55-6fbd-44df-aca3-f7aa2504f814",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("45b6d1b5-fe81-4b69-9733-5ccb9f66313c",
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"00000000-0000-0000-0000-000000000000",
+	"492816a1-fade-4a40-bf9e-184e39a04b9b",
+	"7648229a-b9a4-40a9-ae33-c24a330ab22c");
+INSERT INTO DIM_WAY
+	VALUES ("492816a1-fade-4a40-bf9e-184e39a04b9b",
+	3900.000000,
+	3540.000000,
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("7648229a-b9a4-40a9-ae33-c24a330ab22c",
+	3492.000000,
+	3540.000000,
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"00000000-0000-0000-0000-000000000000",
+	"492816a1-fade-4a40-bf9e-184e39a04b9b");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("6fd5f517-43bd-4c30-b49b-8d135c7f1f08",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("1a1782ec-111e-4c39-9505-cb04fb471707",
+	"784c2b4b-5e2c-4e92-9dcd-69935acbe475",
+	"6fd5f517-43bd-4c30-b49b-8d135c7f1f08");
+INSERT INTO GD_GE
+	VALUES ("ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"a4b190a8-c09e-4cf3-9146-2dcabb183a01",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::Populate test case - see separate sequence');
+INSERT INTO GD_CON
+	VALUES ("ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("b4ce5d92-beef-4c62-96e6-145bfeb9c9dc",
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"b4ce5d92-beef-4c62-96e6-145bfeb9c9dc");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"b4ce5d92-beef-4c62-96e6-145bfeb9c9dc",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("b4ce5d92-beef-4c62-96e6-145bfeb9c9dc",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("e3da7e44-31f7-4ce9-b805-251f791201e4",
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"e3da7e44-31f7-4ce9-b805-251f791201e4");
+INSERT INTO DIM_GE
+	VALUES (3579.000000,
+	3389.000000,
+	"e3da7e44-31f7-4ce9-b805-251f791201e4",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e3da7e44-31f7-4ce9-b805-251f791201e4",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("473b66ff-4a6f-4cca-ad9e-f629e7c7ed35",
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"473b66ff-4a6f-4cca-ad9e-f629e7c7ed35");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"473b66ff-4a6f-4cca-ad9e-f629e7c7ed35",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("473b66ff-4a6f-4cca-ad9e-f629e7c7ed35",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("9f293278-c374-469b-be9d-0f47af7ec57c",
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"00000000-0000-0000-0000-000000000000",
+	"0e48efce-fa1e-4f48-ae3f-98854e2d0c98",
+	"bbc138da-295b-46a0-874c-4ff663cd017e");
+INSERT INTO DIM_WAY
+	VALUES ("0e48efce-fa1e-4f48-ae3f-98854e2d0c98",
+	3900.000000,
+	3420.000000,
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("bbc138da-295b-46a0-874c-4ff663cd017e",
+	3492.000000,
+	3420.000000,
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"00000000-0000-0000-0000-000000000000",
+	"0e48efce-fa1e-4f48-ae3f-98854e2d0c98");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("ddb5aea4-40c0-4805-aa73-76ffee6e7e85",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("41ecb145-74d3-4e63-b6aa-4e2220c75a10",
+	"11fe9a7c-3b75-4af9-9216-68c8137eae78",
+	"ddb5aea4-40c0-4805-aa73-76ffee6e7e85");
+INSERT INTO GD_GE
+	VALUES ("e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	66,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::1_TestSuiteConfiguration::TestFramework::Components::TestSequencer:: Communication Link::SetTestSuiteTimeResolutions');
+INSERT INTO GD_CON
+	VALUES ("e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("e3c59413-ed53-4dab-985f-fb1ff304d733",
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"e3c59413-ed53-4dab-985f-fb1ff304d733");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"e3c59413-ed53-4dab-985f-fb1ff304d733",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e3c59413-ed53-4dab-985f-fb1ff304d733",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("f10d1643-713e-4e52-bdce-d04b7ad3f54e",
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"f10d1643-713e-4e52-bdce-d04b7ad3f54e");
+INSERT INTO DIM_GE
+	VALUES (3519.000000,
+	3245.000000,
+	"f10d1643-713e-4e52-bdce-d04b7ad3f54e",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("f10d1643-713e-4e52-bdce-d04b7ad3f54e",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("e81e61d4-06b6-49d1-a285-d0e71436c0ba",
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"e81e61d4-06b6-49d1-a285-d0e71436c0ba");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"e81e61d4-06b6-49d1-a285-d0e71436c0ba",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e81e61d4-06b6-49d1-a285-d0e71436c0ba",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("5a67d7b1-b474-47ec-88e7-c904fc3d90cc",
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"00000000-0000-0000-0000-000000000000",
+	"f7e688ff-a8a4-4288-ab43-3fb1244fdc36",
+	"9f3df061-f4ff-4c2e-8cbf-2deba8226cbc");
+INSERT INTO DIM_WAY
+	VALUES ("f7e688ff-a8a4-4288-ab43-3fb1244fdc36",
+	3900.000000,
+	3276.000000,
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("9f3df061-f4ff-4c2e-8cbf-2deba8226cbc",
+	3492.000000,
+	3276.000000,
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"00000000-0000-0000-0000-000000000000",
+	"f7e688ff-a8a4-4288-ab43-3fb1244fdc36");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("e959a24f-c4aa-4949-912f-ea8d0f00fb81",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("7cae750d-4278-462a-b77e-7d46244a23cb",
+	"1a22e413-d9ae-4bf1-88c0-295757fe634a",
+	"e959a24f-c4aa-4949-912f-ea8d0f00fb81");
+INSERT INTO DIM_DIA
+	VALUES ("b837d730-2db6-448b-b134-cbdd97be1b4c",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SQ_P
+	VALUES ("8361c663-3e5e-4780-b652-bbe7c323d994",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SQ_COP
+	VALUES ("8361c663-3e5e-4780-b652-bbe7c323d994",
+	"00000000-0000-0000-0000-000000000000",
+	'testbench',
+	'testbench',
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("8361c663-3e5e-4780-b652-bbe7c323d994",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	14);
+INSERT INTO SQ_P
+	VALUES ("18c876c1-c66b-4d0f-81ec-32cd0e480382",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SQ_COP
+	VALUES ("18c876c1-c66b-4d0f-81ec-32cd0e480382",
+	"6458b090-4d5d-4bec-a376-1c820254581c",
+	'TestFramework::Components::TestSequencer',
+	'TestSequencer',
+	'',
+	1);
+INSERT INTO C_C_PROXY
+	VALUES ("6458b090-4d5d-4bec-a376-1c820254581c",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'TestSequencer',
+	'Overview:
+
+This is a service to automate the running of a suite of multiple self-checking test cases.
+
+Typically a self-checking test case has three primary components:
+1. Establish pre-conditions.
+2. Inject stimulus.
+3. Verify (observe) post-stimulus conditions.
+Often, the injection of stimuli and the observation of post-conditions
+are intermixed, as the test case injects a stimulus, verifies the response(s), 
+injects additional stimuli, and so on.
+
+While stimulus actions and observation measurements are subject-matter specific, the organization 
+of sequencing stimuli and adjudication of success or failure are not. Hence this service.
+
+
+Summary description:
+
+This subject matter-independent Test Sequencer service asumes the burdens of sequencing, timer 
+management, requirements coverage tracking and summary reporting for multi-threaded test cases 
+ordered in test buckets within a test suite.
+
+A testbench, with subject matter-specific details of stimuli and observations, can use this 
+service to manage its interaction with a system under test.
+
+A test suite is configured to contain one or more of test buckets which are added in order.
+Each test bucket ''scripts'' at least one test case; typically several related tests.
+
+When all test buckets have been added to the test suite, the test suite is signalled to execute.
+In turn, each bucket is signalled to execute the script that builds its test cases and run them.
+
+A test case consists of one or more sequences of stimuli and following observations.
+The instances in the testbench have counterparts in the test service where sequencing is managed.
+The script creates stimuli and observation instances which add themselves to the test service.
+When the test bucket script is complete its test cases are run in order.
+Running a test case involves appropriate invocation of the stimulus interactions with the system 
+under test and evaluating the system''s response as measured by observations.
+
+
+Some details:
+
+Multiple sequences of stimuli may run concurrently in a test case execution.
+A stimulus effects some changes in a system under test.
+Following observations may evaluate the response of the system to such a stimulus.
+Observations may evaluate sequentially in a defined order, or concurrently if so configured.
+Observations may be triggered to evaluate on some occurence, or may poll, repeatedly evaluating.
+Observations may be limited in duration; failure to succeed within this time constitutes failure.
+Time delays can be interspersed between stimuli and observations and between observations.
+All observations following a stimulus must complete before the next stimulus is injected
+If all observations are found acceptable, the test case is deemed to be successful.
+If any observation fails, the test case ceases execution: all sequences discontinue.
+A test case may be associated with instances of requirements to support coverage reporting.
+
+
+Usage:
+
+To use the service, a testbench must derive its test bucket, stimuli and observation classes from 
+the supertype classes provided in the sample testbench component and use the operations supplied 
+in the supertypes to interface with the service.
+
+In principle, a testbench registers a test suite with the service, supplying a name and optionally 
+selecting a timescale which will be default for the testcases it will contain. The testbench adds 
+test buckets to the suite and populates each bucket with test cases comprised of stimuli and 
+observations. A test bucket contains at least one test case, but commonly a number of cases which 
+share some common purpose, such as comprehensive testing of a subgroup of requirements. 
+
+Optionally, a testbench can register instances of requirements with the service. There is provision 
+for associating any such requirement with one or more test case instances; the service will provide 
+a summary report on requirements coverage at completion of testing.
+
+A test case may choose to specify pre-conditions which should be established before the case is run.
+This is done by associating an instance of the testbench preconditions class which is configured with 
+the desired values and an operation to inject these values when invoked at test case initialization.
+
+As the testbench constructs test cases, using provided operations of the stimulus and observation 
+supertypes to add its specific stimuli and observation instances, the sequencer builds corresponding 
+sequences in the Test Sequencer service context. 
+
+The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
+respond to the invocations of injection and observation operations on the testbench supertype when 
+triggered by the sequencing service as it works through the series of test cases. 
+The testbench supertypes also provide operations to signal completion/failure to the test service.
+
+The test cases are created in an instance based operation of a test bucket subtype. This operation 
+will be invoked for each test bucket subtype as the sequencer runs through the set of buckets that 
+constitute a test suite. The invoked operation creates subtype instances of stimulus and observation 
+arranging them in order. Stimuli are added to a stimulus sequence of which there must be at least 
+one created for a test case. If there are multiple sequences of stimuli they will run concurrently.
+Observations are each appended to a specific stimulus and may be separated by chosen time delays.
+Where the order in which observations should evaluate after a stimulus is unpredictable, they may be 
+configured to evaluate concurrently; each one must succeed to consitute completion. If, however, 
+during test case execution it is determined that a triggered operation is no longer required, there 
+is a provision to "remove" it without causing failure of the test case.
+
+An observation may be configured with optional timers: one limits the duration until lack of success 
+will be timed a timeout failure; the other may determine a polling frequency for re-evaluation.
+These timers may be independently configured with resolutions which may differ. The overall duration 
+and the polling interval are specified as values using those configured resolution units.
+Example: observations with timeouts specified in seconds may poll at some number of milliseconds.
+
+Resolution values are propagated as defaults down the hierarchy from test suite to observation.
+They can, however be overridden at any level - from where they now become defaults.
+
+An observation may be configured to poll, repeatedly evaluating system conditions until it completes 
+by reporting success, or fails after some time limit. Alternatively, invocation of an evaluation can
+be triggered by some specific occurrence in the testbench - such as receipt of a status change in 
+the system under test. This is achieved by associating a specific key with the observation; invoking 
+a sequence "assess" signal, with a key value, will trigger evaluation of any current observations 
+with a matching key. If desired, such an ''asynchronous'' observation may be associated with a separate 
+stimulus sequence, allowing other sets of observations to proceed while it waits to be triggered.
+A ''hybrid'' observation may wait for an initial trigger and subsequently poll in search of success.
+
+Associated with each stimulus sequence there is one interval timer. A stimulus or observation can 
+start (or restart) the timer on a sequence. A subsequent observation may read the elapsed time since 
+the timer was started - and may optionally reset the timer value on reading. Interval timer 
+resolution defaults to that of the sequence time resolution, but can be overridden.
+',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'../../../Components/TestSequencer/TestSequencer.xtuml');
+INSERT INTO PE_PE
+	VALUES ("18c876c1-c66b-4d0f-81ec-32cd0e480382",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	14);
+INSERT INTO SQ_P
+	VALUES ("f18813e7-8027-49d1-8bcc-e580620258c4",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SQ_LS
+	VALUES ("f18813e7-8027-49d1-8bcc-e580620258c4",
+	"18c876c1-c66b-4d0f-81ec-32cd0e480382",
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("f18813e7-8027-49d1-8bcc-e580620258c4",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	14);
+INSERT INTO SQ_P
+	VALUES ("11a9ab87-c941-466d-a42d-ccf436804312",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO SQ_LS
+	VALUES ("11a9ab87-c941-466d-a42d-ccf436804312",
+	"8361c663-3e5e-4780-b652-bbe7c323d994",
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("11a9ab87-c941-466d-a42d-ccf436804312",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	14);
+INSERT INTO MSG_M
+	VALUES ("bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	'Informal Message',
+	'',
+	'',
+	'',
+	'',
+	1,
+	'RegisterTestSuite',
+	'');
+INSERT INTO MSG_SIG
+	VALUES ("bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	"b1465433-efc9-45bd-ad88-e5ead4500931");
+INSERT INTO C_AS_PROXY
+	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
+	'RegisterTestSuite',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
+	0,
+	"e3261067-756f-427b-94ca-307412068ce6",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("2212807f-c043-4cbf-9702-d4df230969ee",
+	"00000000-0000-0000-0000-000000000000",
+	"bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	'suiteLabel',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("2212807f-c043-4cbf-9702-d4df230969ee",
+	"57323b9a-ddb1-4267-ad70-201602c6b6c1");
+INSERT INTO C_PP_PROXY
+	VALUES ("57323b9a-ddb1-4267-ad70-201602c6b6c1",
+	"b1465433-efc9-45bd-ad88-e5ead4500931",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'suiteLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("2b03a8a9-4c91-41c0-ad7b-f3a855ae2fb5",
+	"00000000-0000-0000-0000-000000000000",
+	"bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	'keepAllCases',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("2b03a8a9-4c91-41c0-ad7b-f3a855ae2fb5",
+	"0218eeeb-fb8d-48a4-afff-8958f8688153");
+INSERT INTO C_PP_PROXY
+	VALUES ("0218eeeb-fb8d-48a4-afff-8958f8688153",
+	"b1465433-efc9-45bd-ad88-e5ead4500931",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'keepAllCases',
+	'Provide a choice for disposition of successful test cases.
+If false, then only failed test cases will be retained for diagnosis.
+If true all test case contexts will be retained.',
+	0,
+	'',
+	"57323b9a-ddb1-4267-ad70-201602c6b6c1",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("bbb6ec7a-3461-4cf2-8eff-e26a99af4222",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	'Informal Message',
+	'',
+	'',
+	'',
+	'',
+	1,
+	'AddBucket',
+	'');
+INSERT INTO MSG_SIG
+	VALUES ("96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	"3ab9f7fe-b572-4c34-98f5-076122029206");
+INSERT INTO C_AS_PROXY
+	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	0,
+	"2ab9bd8f-a044-44bc-b988-74be588a3af7",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("511f58a6-05f1-4622-a255-95374c9d7b20",
+	"00000000-0000-0000-0000-000000000000",
+	"96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	'ID',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("511f58a6-05f1-4622-a255-95374c9d7b20",
+	"c8487470-bc98-44db-809e-5d7d9968f2e9");
+INSERT INTO C_PP_PROXY
+	VALUES ("c8487470-bc98-44db-809e-5d7d9968f2e9",
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'ID',
+	'The identifier taken from the corresponding test bucket in the Testbench.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("96d5ae0b-94e6-47ce-a22e-a4c849758d59",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("bbe73592-8011-4cdb-87eb-a7a088029d72",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("bbe73592-8011-4cdb-87eb-a7a088029d72",
+	'Informal Message',
+	'',
+	'',
+	'',
+	'',
+	1,
+	'CreateTestCase',
+	'');
+INSERT INTO MSG_SIG
+	VALUES ("bbe73592-8011-4cdb-87eb-a7a088029d72",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394");
+INSERT INTO C_AS_PROXY
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	'CreateTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	0,
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("584cd937-cd2f-4efa-9c3c-993a585e9f15",
+	"00000000-0000-0000-0000-000000000000",
+	"bbe73592-8011-4cdb-87eb-a7a088029d72",
+	'bucketId',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("584cd937-cd2f-4efa-9c3c-993a585e9f15",
+	"7ec424e2-95e1-43ff-9286-ac8dabca9c1b");
+INSERT INTO C_PP_PROXY
+	VALUES ("7ec424e2-95e1-43ff-9286-ac8dabca9c1b",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("032d8ef9-4072-44f2-8c85-bd34868b9e7e",
+	"00000000-0000-0000-0000-000000000000",
+	"bbe73592-8011-4cdb-87eb-a7a088029d72",
+	'caseLabel',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("032d8ef9-4072-44f2-8c85-bd34868b9e7e",
+	"b57fa56d-a016-4bb3-a78b-d2bc343e0c81");
+INSERT INTO C_PP_PROXY
+	VALUES ("b57fa56d-a016-4bb3-a78b-d2bc343e0c81",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"7ec424e2-95e1-43ff-9286-ac8dabca9c1b",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("bbe73592-8011-4cdb-87eb-a7a088029d72",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("718a7700-e260-49fa-a5b2-3847ef3fce80",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("718a7700-e260-49fa-a5b2-3847ef3fce80",
+	'Optionally, create and populate more test cases...',
+	'',
+	'',
+	'',
+	'',
+	0,
+	'Optionally, create and populate more test cases...',
+	'');
+INSERT INTO MSG_IAM
+	VALUES ("718a7700-e260-49fa-a5b2-3847ef3fce80");
+INSERT INTO PE_PE
+	VALUES ("718a7700-e260-49fa-a5b2-3847ef3fce80",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("cc036473-8fb0-452b-afec-3b90808e9a95",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("cc036473-8fb0-452b-afec-3b90808e9a95",
+	'Informal Message',
+	'',
+	'',
+	'',
+	'',
+	1,
+	'BucketInitialized',
+	'');
+INSERT INTO MSG_SIG
+	VALUES ("cc036473-8fb0-452b-afec-3b90808e9a95",
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d");
+INSERT INTO C_AS_PROXY
+	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	'BucketInitialized',
+	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
+',
+	0,
+	"acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("d6dcf47e-b8bc-4e3f-8446-5fe21d8f8874",
+	"00000000-0000-0000-0000-000000000000",
+	"cc036473-8fb0-452b-afec-3b90808e9a95",
+	'bucketId',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("d6dcf47e-b8bc-4e3f-8446-5fe21d8f8874",
+	"f5605492-acb1-44fb-a382-5395aae09fc2");
+INSERT INTO C_PP_PROXY
+	VALUES ("f5605492-acb1-44fb-a382-5395aae09fc2",
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("cc036473-8fb0-452b-afec-3b90808e9a95",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("a4b190a8-c09e-4cf3-9146-2dcabb183a01",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("a4b190a8-c09e-4cf3-9146-2dcabb183a01",
+	'Populate test case - see separate sequence',
+	'',
+	'',
+	'',
+	'',
+	0,
+	'Populate test case - see separate sequence',
+	'');
+INSERT INTO MSG_IAM
+	VALUES ("a4b190a8-c09e-4cf3-9146-2dcabb183a01");
+INSERT INTO PE_PE
+	VALUES ("a4b190a8-c09e-4cf3-9146-2dcabb183a01",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO MSG_M
+	VALUES ("0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	"11a9ab87-c941-466d-a42d-ccf436804312",
+	"f18813e7-8027-49d1-8bcc-e580620258c4",
+	0);
+INSERT INTO MSG_AM
+	VALUES ("0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	'Informal Message',
+	'',
+	'',
+	'',
+	'',
+	1,
+	'SetTestSuiteTimeResolutions',
+	'');
+INSERT INTO MSG_SIG
+	VALUES ("0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5");
+INSERT INTO C_AS_PROXY
+	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
+	0,
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("f60bb2a5-818f-498a-9aa3-ff6296bca698",
+	"00000000-0000-0000-0000-000000000000",
+	"0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	'timeResolution',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("f60bb2a5-818f-498a-9aa3-ff6296bca698",
+	"d9b2eb93-a8f1-4204-b785-d67c807d9671");
+INSERT INTO C_PP_PROXY
+	VALUES ("d9b2eb93-a8f1-4204-b785-d67c807d9671",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'timeResolution',
+	'Units in which timeout duration may be specified.',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("db94613d-6ce2-48bc-a85a-073e8876f785",
+	"00000000-0000-0000-0000-000000000000",
+	"0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	'pollResolution',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("db94613d-6ce2-48bc-a85a-073e8876f785",
+	"061be7ef-8c1a-45c0-9eee-929e494c86be");
+INSERT INTO C_PP_PROXY
+	VALUES ("061be7ef-8c1a-45c0-9eee-929e494c86be",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'pollResolution',
+	'Units in which piolling interval may be specified.',
+	0,
+	'',
+	"d9b2eb93-a8f1-4204-b785-d67c807d9671",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("0c2879a2-3eb3-492e-9364-c37e820e7e75",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	17);
+INSERT INTO PE_PE
+	VALUES ("27875393-7657-4938-ac92-4f8ee33217d9",
+	1,
+	"d9aa5180-6aaa-417c-a4da-6dc0f23b88ac",
+	"00000000-0000-0000-0000-000000000000",
+	7);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("d9aa5180-6aaa-417c-a4da-6dc0f23b88ac",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'SequenceDiagrams',
+	'',
+	0,
+	'../SequenceDiagrams.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("b06a8228-7533-46d6-b644-27cf49555288",
+	'TestFramework',
+	1,
+	'../../../TestFramework.xtuml');
