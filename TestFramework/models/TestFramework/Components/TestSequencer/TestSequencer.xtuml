@@ -7,7 +7,8 @@ INSERT INTO C_C
 	'TestSequencer',
 	'Overview:
 
-This is a service to automate the running of a suite of multiple self-checking test cases.
+This is a service to automate the running of a suite of multiple self-checking test cases 
+including rudimentary reporting of results and requirements coverage.
 
 Typically a self-checking test case has three primary components:
 1. Establish pre-conditions.
@@ -30,16 +31,23 @@ ordered in test buckets within a test suite.
 A testbench, with subject matter-specific details of stimuli and observations, can use this 
 service to manage its interaction with a system under test.
 
-A test suite is configured to contain one or more of test buckets which are added in order.
-Each test bucket ''scripts'' at least one test case; typically several related tests.
+Each test case is defined in data as instances of stimuli and observations.  Test cases 
+are typically organized into buckets.  For example, a testbench might have a bucket containing
+all nominal (good-path) test cases and perhaps several buckets containing off-nominal (unusual
+situations, error-recovery, etc.) test cases.  Or, test buckets could be organized around 
+sections of the requirements specification.  The scheme for organizing test cases into buckets
+is entirely at the discretion of the test engineer.
+
+A test suite is configured to contain one or more test buckets which are added to the suite in order.
+Each test bucket configures at least one test case; typically several related tests.
 
 When all test buckets have been added to the test suite, the test suite is signalled to execute.
-In turn, each bucket is signalled to execute the script that builds its test cases and run them.
+In turn, each bucket is signalled to configure its test cases and run them.
 
 A test case consists of one or more sequences of stimuli and following observations.
 The instances in the testbench have counterparts in the test service where sequencing is managed.
-The script creates stimuli and observation instances which add themselves to the test service.
-When the test bucket script is complete its test cases are run in order.
+The testbench creates stimuli and observation instances which add themselves to the test service.
+When the test bucket configuration is complete its test cases are run in order.
 Running a test case involves appropriate invocation of the stimulus interactions with the system 
 under test and evaluating the system''s response as measured by observations.
 
@@ -53,46 +61,58 @@ Observations may evaluate sequentially in a defined order, or concurrently if so
 Observations may be triggered to evaluate on some occurence, or may poll, repeatedly evaluating.
 Observations may be limited in duration; failure to succeed within this time constitutes failure.
 Time delays can be interspersed between stimuli and observations and between observations.
+Time resolution values are propagated as defaults down the hierarchy from test suite to observation and 
+can be overridden at any level - from where they now become defaults.
+Polling intervals can be specified indpendently of time resolution values.
 All observations following a stimulus must complete before the next stimulus is injected
 If all observations are found acceptable, the test case is deemed to be successful.
-If any observation fails, the test case ceases execution: all sequences discontinue.
+If any observation fails, the test case ceases execution: all sequences discontinue, and the test
+case is deemed as having failed.
 A test case may be associated with instances of requirements to support coverage reporting.
+
+
+Establishing pre-conditions:
+
+The service sends a message to the testbench indicating that the next test case to execute 
+should be initialized.  Upon receiving this message, the testbench may establish pre-conditions
+for the specified test case.  This might include configuring hardware resources (either
+simulated or real), sending interface messages to the system under test, or (if the testbench
+is inside the same component as the system under test) direct manipulation of the system under
+test.
+
+
+Test case failure:
+
+A failing test typically indicates one of two possibilities.  Either the system under test is 
+not behaving as specified or the test (or its supporting tooling) is in error.  Any test case
+with one or more failing observations is deemed as having failed.  An identifier for each failing 
+observation is emitted to the log, and the data (instances of stimuli and observations) associated
+with the failing test case are retained, enabling many failures to be isolated through analysis of 
+the log or inspection of the instance population. 
 
 
 Usage:
 
-To use the service, a testbench must derive its test bucket, stimuli and observation classes from 
-the supertype classes provided in the sample testbench component and use the operations supplied 
-in the supertypes to interface with the service.
+For an example usage of the service, see the test bench for the Carpark application located here:
+https://github.com/johnrwolfe/CarPark/tree/master/CarParkTestbench. 
 
-In principle, a testbench registers a test suite with the service, supplying a name and optionally 
-selecting a timescale which will be default for the testcases it will contain. The testbench adds 
-test buckets to the suite and populates each bucket with test cases comprised of stimuli and 
-observations. A test bucket contains at least one test case, but commonly a number of cases which 
-share some common purpose, such as comprehensive testing of a subgroup of requirements. 
+The testbench test bucket, stimulus and observation classes must provide instances which will 
+respond to the sequencing services signals to inject stimuli and initiate observations as the service 
+works through the series of test cases. These signals carry identifiers of type unique_id which 
+identify instances in the testbench. A practical way to satisfy these conditions is to create each 
+of these testbench classes as a subtype of a test bucket, stimulus or observation class supertype. 
+Pass the identifier of the supertype when adding instances to the sequencing service. 
+On receipt of a signal from the service navigate to the subtype and carry out the appropriate action.
+The service must be signaled with appropriate completion/failure of these actions in order to progress.
 
-Optionally, a testbench can register instances of requirements with the service. There is provision 
-for associating any such requirement with one or more test case instances; the service will provide 
-a summary report on requirements coverage at completion of testing.
+As the sequencer runs through the set of buckets that constitute a test suite it will signal an
+initialization action for each test bucket. This should invoke an operation that creates the subtype 
+instances of stimulus and observation for each test case, submitting identifiers in order.
+When test case creation for a test bucket is complete the testbench signals for start of execution.
 
-A test case may choose to specify pre-conditions which should be established before the case is run.
-This is done by associating an instance of the testbench preconditions class which is configured with 
-the desired values and an operation to inject these values when invoked at test case initialization.
+Stimuli are added to a stimulus sequence of which there must be at least one created for a test case. 
+If there are multiple sequences of stimuli they will run concurrently.
 
-As the testbench constructs test cases, using provided operations of the stimulus and observation 
-supertypes to add its specific stimuli and observation instances, the sequencer builds corresponding 
-sequences in the Test Sequencer service context. 
-
-The testbench test bucket, stimulus and observation subtype classes must provide instances which will 
-respond to the invocations of injection and observation operations on the testbench supertype when 
-triggered by the sequencing service as it works through the series of test cases. 
-The testbench supertypes also provide operations to signal completion/failure to the test service.
-
-The test cases are created in an instance based operation of a test bucket subtype. This operation 
-will be invoked for each test bucket subtype as the sequencer runs through the set of buckets that 
-constitute a test suite. The invoked operation creates subtype instances of stimulus and observation 
-arranging them in order. Stimuli are added to a stimulus sequence of which there must be at least 
-one created for a test case. If there are multiple sequences of stimuli they will run concurrently.
 Observations are each appended to a specific stimulus and may be separated by chosen time delays.
 Where the order in which observations should evaluate after a stimulus is unpredictable, they may be 
 configured to evaluate concurrently; each one must succeed to consitute completion. If, however, 
@@ -100,13 +120,10 @@ during test case execution it is determined that a triggered operation is no lon
 is a provision to "remove" it without causing failure of the test case.
 
 An observation may be configured with optional timers: one limits the duration until lack of success 
-will be timed a timeout failure; the other may determine a polling frequency for re-evaluation.
+will be deemed a timeout failure; the other may determine a polling frequency for re-evaluation.
 These timers may be independently configured with resolutions which may differ. The overall duration 
 and the polling interval are specified as values using those configured resolution units.
 Example: observations with timeouts specified in seconds may poll at some number of milliseconds.
-
-Resolution values are propagated as defaults down the hierarchy from test suite to observation.
-They can, however be overridden at any level - from where they now become defaults.
 
 An observation may be configured to poll, repeatedly evaluating system conditions until it completes 
 by reporting success, or fails after some time limit. Alternatively, invocation of an evaluation can
@@ -120,8 +137,7 @@ A ''hybrid'' observation may wait for an initial trigger and subsequently poll i
 Associated with each stimulus sequence there is one interval timer. A stimulus or observation can 
 start (or restart) the timer on a sequence. A subsequent observation may read the elapsed time since 
 the timer was started - and may optionally reset the timer value on reading. Interval timer 
-resolution defaults to that of the sequence time resolution, but can be overridden.
-',
+resolution defaults to that of the sequence time resolution, but can be overridden.',
 	0,
 	"00000000-0000-0000-0000-000000000000",
 	0,
