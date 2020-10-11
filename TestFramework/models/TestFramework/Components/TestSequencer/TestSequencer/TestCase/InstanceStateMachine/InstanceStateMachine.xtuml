@@ -460,12 +460,12 @@ INSERT INTO SM_ACT
 	VALUES ("0d0e7efa-ed79-49b7-9322-9de2b0596c3b",
 	"f0ebf01e-2bd3-42c6-bcf3-763d336097bd",
 	1,
-	'LOG::LogInfo( message:"SEQ  Initializing Test Case: " + self.testCaseLabel );
-// Inform the testbench that this test case is ready to execute.
+	'// Inform the testbench that this test case is ready to execute.
+
 send TESTBENCH::InitializeTestCase( caseLabel:self.testCaseLabel );
-select one suite related by self->TestSuite[R124.''is being scripted for''];
-if ( not_empty suite )
-  unrelate self from suite across R124.''is being scripted for'';
+select one bucket related by self->TestBucket[R129.''adding to''];
+if ( not_empty bucket )
+  unrelate self from bucket across R129.''adding to'';
 end if;',
 	'',
 	0);
@@ -510,9 +510,9 @@ INSERT INTO SM_ACT
 	'// Test case is finished; determine disposition.
 
 if ( self.tcStatus == tsStatus::failed );
-  LOG::LogInfo( message:"SEQ Test case FAILED" );
+  LOG::LogInfo( message:"SEQ Test case FAILED: " + self.testCaseLabel );
 else
-  LOG::LogInfo( message:"SEQ Test case passed" );
+  LOG::LogInfo( message:"SEQ Test case passed: " + self.testCaseLabel );
 end if;
 // Report completion to the test bucket
 select one bucket related by self->TestBucket[R117.''is active for''];
@@ -592,9 +592,7 @@ INSERT INTO SM_ACT
 	VALUES ("9951f53a-5342-4a29-bb2c-9aef75370457",
 	"f0ebf01e-2bd3-42c6-bcf3-763d336097bd",
 	1,
-	'LOG::LogSuccess( message:"SEQ Test case successfully completed: " + self.testCaseLabel );
-self.tcStatus = tsStatus::completed;
-',
+	'self.tcStatus = tsStatus::completed;',
 	'',
 	0);
 INSERT INTO SM_TAH

@@ -394,7 +394,7 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("1825ae0d-c6d8-4668-889a-1ad4c836840e",
-	'TriggerObservation',
+	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.',
 	'',
 	1,
@@ -403,7 +403,7 @@ INSERT INTO C_EP_PROXY
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'TriggerObservation',
+	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
@@ -556,7 +556,6 @@ INSERT INTO SPR_PS
 	'Run the sequence of test buckets associated with the singleton test suite.',
 	'select any ts from instances of TestSuite;
 if ( not_empty ts )
-  LOG::LogInfo( message:"SEQ Test sequencer starting test suite" );
   ts.RunTests();
 else
   LOG::LogFailure( message:"SEQ No test suite registered" );
@@ -685,24 +684,6 @@ INSERT INTO C_EP_PROXY
 	'A stimulus may request start of the interval timer linked to its test sequence.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
-	VALUES ("c2c9fed3-caa4-474a-b9ba-745c54d81fab",
-	"8dd429c8-69fa-400e-93ff-d0db0ee2302a",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("c2c9fed3-caa4-474a-b9ba-745c54d81fab",
-	'DeletePreCondition',
-	'Signals the testbench that the identified precodition instance can be disposed of.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("8dd429c8-69fa-400e-93ff-d0db0ee2302a",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'DeletePreCondition',
-	'Signals the testbench that the identified precodition instance can be disposed of.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
 	VALUES ("ef42a107-8de0-4f6c-b55d-75da2f9f82b5",
 	"d5a4cf86-3f41-407c-831c-18e679999a67",
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
@@ -775,30 +756,6 @@ INSERT INTO C_EP_PROXY
 	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
-	VALUES ("7283d351-5756-46a2-abed-e15db5caef39",
-	"43da9421-f19f-491d-b0de-6d07de88d215",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("7283d351-5756-46a2-abed-e15db5caef39",
-	'NameTestBucket',
-	'Assign an optional arbitrary naming label to a test bucket instance.',
-	'select any bucket from instances of TestBucket
-  where ( selected.assignedID == param.bucketId );
-if ( not_empty bucket )
-  bucket.bucketLabel = param.bucketLabel;
-else
-  LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("43da9421-f19f-491d-b0de-6d07de88d215",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'NameTestBucket',
-	'Assign an optional arbitrary naming label to a test bucket instance.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
 	VALUES ("3e8dfde7-e47d-444d-885f-ca13fcadf6f3",
 	"2ab9bd8f-a044-44bc-b988-74be588a3af7",
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
@@ -824,7 +781,7 @@ INSERT INTO SPR_PS
 	VALUES ("47c31571-058c-4076-a86c-dd5664066a39",
 	'AddBucket',
 	'Add an instance of a test bucket to the test suite.',
-	'TestSuite::AddBucket( bucketId:param.ID );',
+	'TestSuite::AddBucket( bucketId:param.bucketId, bucketLabel:param.bucketLabel );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -840,7 +797,7 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("512103c3-042b-4914-806f-465617768e34",
-	'CreateTestCase',
+	'AddTestCase',
 	'Add an instance of a test case, identified by label, to the indicated test bucket.',
 	'if ( param.caseLabel == "" )
   LOG::LogFailure( message:"SEQ New test case label required" );
@@ -852,12 +809,12 @@ if ( not_empty case )
   LOG::LogFailure( message:"Test case with this label already exists" );
   return;
 end if;
-select any bucket from instances of TestBucket
-  where ( selected.assignedID == param.bucketId );
-if ( not_empty bucket )
+select any suite from instances of TestSuite;
+if ( not_empty suite )
+  select one bucket related by suite->TestBucket[R118.''is running''];
   bucket.AddTestCase( caseLabel:param.caseLabel );
 else
-  LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
+  LOG::LogFailure( message:"SEQ No Test Suite registered" );
 end if;',
 	1,
 	0);
@@ -865,7 +822,7 @@ INSERT INTO C_EP_PROXY
 	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'CreateTestCase',
+	'AddTestCase',
 	'Add an instance of a test case, identified by label, to the indicated test bucket.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
@@ -966,7 +923,7 @@ A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
 	'// A new stimulus sequence will be added to the test case currently being ''scripted''
 select any suite from instances of TestSuite;
-select one case related by suite->TestCase[R124.''is currently building''];
+select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
 if ( empty case )
   LOG::LogFailure( message:"SEQ No test case currently being assembled" );
   return;
@@ -1049,7 +1006,7 @@ INSERT INTO SPR_PS
 	'SetSequenceTimeResolutions',
 	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	'select any suite from instances of TestSuite;
-select one case related by suite->TestCase[R124.''is currently building''];
+select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
 select any seq related by case ->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
@@ -1102,7 +1059,7 @@ INSERT INTO SPR_PS
 	'// Set timer scale factors; This overrides defaults set from Test Bucket.
 
 select any suite from instances of TestSuite;
-select one case related by suite->TestCase[R124.''is currently building''];
+select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
 if ( not_empty case )
   case.timeScaleFactor = param.timeResolution;
   case.pollScaleFactor = param.pollResolution;
@@ -1127,7 +1084,7 @@ INSERT INTO SPR_PS
 	'SetSequenceIntervalTimerResolution',
 	'Set a time resolution specific to interval timing measurements on the sequence.',
 	'select any suite from instances of TestSuite;
-select one case related by suite->TestCase[R124.''is currently building''];
+select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
 select any seq related by case ->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )

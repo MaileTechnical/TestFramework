@@ -523,7 +523,7 @@ self.StartDurationLimitTimer();
 if ( not self.isDelay)  // delays are a "non-observing" observation.
   select one trigger related by self->Trigger[R127.''delays until triggered by''];
   if ( empty trigger )  // not waiting to be triggered by "assess"
-    send TESTBENCH::TriggerObservation( observationId:self.assignedID );
+    send TESTBENCH::InvokeObservation( observationId:self.assignedID );
   end if;
 end if;',
 	'',
@@ -541,7 +541,7 @@ INSERT INTO SM_ACT
 	1,
 	'// On wake-up from a polling timer, re-evaluate the observation.
 
-send TESTBENCH::TriggerObservation( observationId:self.assignedID );',
+send TESTBENCH::InvokeObservation( observationId:self.assignedID );',
 	'',
 	0);
 INSERT INTO SM_TAH
