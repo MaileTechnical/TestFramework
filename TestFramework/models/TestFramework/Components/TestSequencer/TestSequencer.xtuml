@@ -819,9 +819,9 @@ INSERT INTO SPR_PS
   LOG::LogFailure( message:"SEQ New test case label required" );
   return;
 end if;
-select any case from instances of TestCase
+select any testcase from instances of TestCase
  where ( selected.testCaseLabel == param.caseLabel );
-if ( not_empty case )
+if ( not_empty testcase )
   LOG::LogFailure( message:"Test case with this label already exists" );
   return;
 end if;
@@ -939,18 +939,18 @@ A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
 	'// A new stimulus sequence will be added to the test case currently being ''scripted''
 select any suite from instances of TestSuite;
-select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
-if ( empty case )
+select one testcase related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
+if ( empty testcase )
   LOG::LogFailure( message:"SEQ No test case currently being assembled" );
   return;
 end if;
-select any seq related by case->StimulusSequence[R119.''executes'']
+select any seq related by testcase->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
   LOG::LogFailure( message:" SEQ Sequence label must be unique within test case" );
   return;
 end if;
-case.AttachSequence( seqLabel:param.seqLabel );',
+testcase.AttachSequence( seqLabel:param.seqLabel );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -1022,8 +1022,8 @@ INSERT INTO SPR_PS
 	'SetSequenceTimeResolutions',
 	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	'select any suite from instances of TestSuite;
-select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
-select any seq related by case ->StimulusSequence[R119.''executes'']
+select one testcase related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
+select any seq related by testcase ->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
   seq.timeScaleFactor = param.timeResolution;
@@ -1075,10 +1075,10 @@ INSERT INTO SPR_PS
 	'// Set timer scale factors; This overrides defaults set from Test Bucket.
 
 select any suite from instances of TestSuite;
-select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
-if ( not_empty case )
-  case.timeScaleFactor = param.timeResolution;
-  case.pollScaleFactor = param.pollResolution;
+select one testcase related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
+if ( not_empty testcase )
+  testcase.timeScaleFactor = param.timeResolution;
+  testcase.pollScaleFactor = param.pollResolution;
 else
   LOG::LogFailure( message:"No test case found matching " + param.caseLabel );
 end if;',
@@ -1100,8 +1100,8 @@ INSERT INTO SPR_PS
 	'SetSequenceIntervalTimerResolution',
 	'Set a time resolution specific to interval timing measurements on the sequence.',
 	'select any suite from instances of TestSuite;
-select one case related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
-select any seq related by case ->StimulusSequence[R119.''executes'']
+select one testcase related by suite->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
+select any seq related by testcase ->StimulusSequence[R119.''executes'']
  where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
   seq.IntervalTimeScaleFactor = param.timeResolution;

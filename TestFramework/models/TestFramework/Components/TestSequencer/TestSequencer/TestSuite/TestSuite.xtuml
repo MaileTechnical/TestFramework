@@ -59,18 +59,18 @@ if ( empty next_bucket )
   // clean up
   select many reqs from instances of Requirement;
   for each req in reqs
-    select many cases related by req->TestCase[R101.''is tested by''];
-    for each case in cases
-      unrelate req from case across R101.''is tested by'';
+    select many testcases related by req->TestCase[R101.''is tested by''];
+    for each testcase in testcases
+      unrelate req from testcase across R101.''is tested by'';
     end for;
     delete object instance req;
   end for;
 
   if ( not self.retainAll )
-    select many cases from instances of TestCase;
-    for each case in cases
-      if ( case.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
-        delete object instance case;
+    select many testcases from instances of TestCase;
+    for each testcase in testcases
+      if ( testcase.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
+        delete object instance testcase;
       end if;
     end for;
     select many buckets from instances of TestBucket;
