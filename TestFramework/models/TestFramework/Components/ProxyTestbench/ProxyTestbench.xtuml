@@ -1,0 +1,820 @@
+-- BP 7.1.6 content: Component syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO C_C
+	VALUES ("4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'ProxyTestbench',
+	'This ''empty'' Testbench serves only to allow formalization of some of the signals shown in Documentation:SequenceDiagrams.',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'');
+INSERT INTO GD_MD
+	VALUES ("fc45bc4c-c7dd-4759-96da-9770ba895a94",
+	111,
+	"4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	98,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'4.1.17',
+	'TestFramework::Components::ProxyTestbench');
+INSERT INTO GD_GE
+	VALUES ("f5022f64-726e-4b03-bfd9-fe72171d1f49",
+	"fc45bc4c-c7dd-4759-96da-9770ba895a94",
+	"4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	103,
+	0,
+	'TestFramework::Components::ProxyTestbench');
+INSERT INTO GD_SHP
+	VALUES ("f5022f64-726e-4b03-bfd9-fe72171d1f49");
+INSERT INTO GD_CTR
+	VALUES ("f5022f64-726e-4b03-bfd9-fe72171d1f49");
+INSERT INTO DIM_ND
+	VALUES (717.000000,
+	293.000000,
+	"f5022f64-726e-4b03-bfd9-fe72171d1f49");
+INSERT INTO DIM_GE
+	VALUES (4100.000000,
+	3100.000000,
+	"f5022f64-726e-4b03-bfd9-fe72171d1f49",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("f5022f64-726e-4b03-bfd9-fe72171d1f49",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_CON
+	VALUES ("cdaa1088-b38d-471a-a8a2-04ea98a4b981",
+	4817.000000,
+	3312.000000,
+	"f5022f64-726e-4b03-bfd9-fe72171d1f49");
+INSERT INTO GD_GE
+	VALUES ("98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"fc45bc4c-c7dd-4759-96da-9770ba895a94",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b",
+	93,
+	0,
+	'TestFramework::Components::ProxyTestbench::Port1::TestSequencing');
+INSERT INTO GD_CON
+	VALUES ("98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("45cd0100-a7bf-43aa-96cc-c2a71279a765",
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	0,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"45cd0100-a7bf-43aa-96cc-c2a71279a765");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"45cd0100-a7bf-43aa-96cc-c2a71279a765",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("45cd0100-a7bf-43aa-96cc-c2a71279a765",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("69d9903d-0c30-4842-822e-591042383d5e",
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	2,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"69d9903d-0c30-4842-822e-591042383d5e");
+INSERT INTO DIM_GE
+	VALUES (4800.000000,
+	3272.000000,
+	"69d9903d-0c30-4842-822e-591042383d5e",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("69d9903d-0c30-4842-822e-591042383d5e",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_CTXT
+	VALUES ("3d813f62-f489-4954-8df0-3453d1e48679",
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	1,
+	0.000000,
+	0.000000);
+INSERT INTO DIM_ND
+	VALUES (0.000000,
+	0.000000,
+	"3d813f62-f489-4954-8df0-3453d1e48679");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"3d813f62-f489-4954-8df0-3453d1e48679",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("3d813f62-f489-4954-8df0-3453d1e48679",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO GD_LS
+	VALUES ("bd710d65-147e-47f7-be49-9fb35632a104",
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"00000000-0000-0000-0000-000000000000",
+	"09e2b61c-6e55-41e9-ab04-f9b1397e7be5",
+	"bddb227e-6250-4205-9588-52056d7d05b0");
+INSERT INTO DIM_WAY
+	VALUES ("09e2b61c-6e55-41e9-ab04-f9b1397e7be5",
+	4817.000000,
+	3312.000000,
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_WAY
+	VALUES ("bddb227e-6250-4205-9588-52056d7d05b0",
+	4884.000000,
+	3312.000000,
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"00000000-0000-0000-0000-000000000000",
+	"09e2b61c-6e55-41e9-ab04-f9b1397e7be5");
+INSERT INTO DIM_GE
+	VALUES (0.000000,
+	0.000000,
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("98a4816d-08c1-4365-a5ed-14e2d2242c8c",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ED
+	VALUES ("cdaa1088-b38d-471a-a8a2-04ea98a4b981",
+	"00000000-0000-0000-0000-000000000000",
+	"98a4816d-08c1-4365-a5ed-14e2d2242c8c");
+INSERT INTO DIM_DIA
+	VALUES ("fc45bc4c-c7dd-4759-96da-9770ba895a94",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PO
+	VALUES ("2b54627a-e9c5-45ef-86b1-10b411da7402",
+	"4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	'Port1',
+	0,
+	0);
+INSERT INTO C_IR
+	VALUES ("3ab4cb98-5041-4a1b-9184-1abd1d9b499b",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	"00000000-0000-0000-0000-000000000000",
+	"2b54627a-e9c5-45ef-86b1-10b411da7402");
+INSERT INTO C_R
+	VALUES ("3ab4cb98-5041-4a1b-9184-1abd1d9b499b",
+	'TestSequencing',
+	'',
+	'Unnamed Interface',
+	'ProxyTestbench::Port1::TestSequencing');
+INSERT INTO SPR_REP
+	VALUES ("37761492-cc9e-45b3-8787-b760e5c5737b",
+	"abb1f40e-d7c8-4654-94f5-c0a999c3866a",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("37761492-cc9e-45b3-8787-b760e5c5737b",
+	'InjectStimulus',
+	'Invoke injection of the identified stimulus in the test bench.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InjectStimulus',
+	'Invoke injection of the identified stimulus in the test bench.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8c816eb8-8fa3-4600-a3a9-0cd1b7c60da8",
+	"ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8c816eb8-8fa3-4600-a3a9-0cd1b7c60da8",
+	'InvokeObservation',
+	'Invoke evaluation of the identified observation in the test bench.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InvokeObservation',
+	'Invoke evaluation of the identified observation in the test bench.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("d6900ed8-b977-48f5-ae00-1f1434c32986",
+	"5df7def7-0028-4dc9-8578-87518097d737",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("d6900ed8-b977-48f5-ae00-1f1434c32986",
+	'ObservationDone',
+	'Report to the Test sequencer service that an observation has completed.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'ObservationDone',
+	'Report to the Test sequencer service that an observation has completed.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("4b0a332d-6a52-49c0-b8a8-a7c11cd4ce48",
+	"b5ee9925-8760-47c6-a3ea-734b7d165169",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("4b0a332d-6a52-49c0-b8a8-a7c11cd4ce48",
+	'InitializeTestCase',
+	'Testbench receives notification that a new test case has been selected to run.
+Initialize any pre-conditions and respond when ready for stimulus injection.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InitializeTestCase',
+	'Testbench receives notification that a new test case has been selected to run.
+Initialize any pre-conditions and respond when ready for stimulus injection.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("b135770e-b537-4771-bc55-4f11c6d303eb",
+	"ef029a3f-8bbc-4d01-b248-9d10545d4527",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("b135770e-b537-4771-bc55-4f11c6d303eb",
+	'StimulusDone',
+	'Respond with this signal when all observations for an executed stimulus are complete.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'StimulusDone',
+	'Respond with this signal when all observations for an executed stimulus are complete.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8b742a3e-f917-4118-ba0e-f482f9a79eda",
+	"976b6c82-6628-4a51-b78f-8a11577ec800",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8b742a3e-f917-4118-ba0e-f482f9a79eda",
+	'TestCaseInitialized',
+	'Report back to the Test sequencer service that a testbench test case has completed initialization.
+This will initiate stimiuli injection, and thus observation reporting, for a test case.
+If the test case has more than one test sequence, these will start in parallel.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestCaseInitialized',
+	'Report back to the Test sequencer service that a testbench test case has completed initialization.
+This will initiate stimiuli injection, and thus observation reporting, for a test case.
+If the test case has more than one test sequence, these will start in parallel.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("62e615c7-d4ac-4a3a-9868-d5a8043544be",
+	"b5a796ca-6082-48ac-92dd-efc0a0922ce7",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("62e615c7-d4ac-4a3a-9868-d5a8043544be",
+	'Assess',
+	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'Assess',
+	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("79fbedf5-7bff-477d-8ddd-9ad7ca60172f",
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("79fbedf5-7bff-477d-8ddd-9ad7ca60172f",
+	'LinkRequirement',
+	'Indicate that the given requirement is (partially) tested by the given test case.
+This is used for test coverage reporting.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'LinkRequirement',
+	'Indicate that the given requirement is (partially) tested by the given test case.
+This is used for test coverage reporting.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("3232ca52-c648-4bb6-95c4-39ab967584df",
+	"acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("3232ca52-c648-4bb6-95c4-39ab967584df",
+	'RunTestSuite',
+	'Run the sequence of test buckets associated with the singleton test suite.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RunTestSuite',
+	'Run the sequence of test buckets associated with the singleton test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8725c5e4-5278-4d00-ad12-5e62e3855aec",
+	"2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8725c5e4-5278-4d00-ad12-5e62e3855aec",
+	'MakeRequirement',
+	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'MakeRequirement',
+	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("6fd790c5-419e-42d6-9f6d-edc36842d1f9",
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("6fd790c5-419e-42d6-9f6d-edc36842d1f9",
+	'BucketInitialized',
+	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
+',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'BucketInitialized',
+	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
+',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("54640a8d-9bac-4895-8563-79777ff38942",
+	"14882a87-5828-4191-a273-30b8788f3566",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("54640a8d-9bac-4895-8563-79777ff38942",
+	'InitializeBucket',
+	'Signals a test bucket to instantiate its test case sequences.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InitializeBucket',
+	'Signals a test bucket to instantiate its test case sequences.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("4fdb1b65-9958-43da-b3e2-f69027dc12c1",
+	"581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("4fdb1b65-9958-43da-b3e2-f69027dc12c1",
+	'InsertDelay',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'InsertDelay',
+	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("059c7b7d-4d1f-4fd6-9fc8-531ae5ca517a",
+	"bb4f4c38-32d2-41f1-a540-93e7d083ed70",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("059c7b7d-4d1f-4fd6-9fc8-531ae5ca517a",
+	'StartIntervalTimer',
+	'A stimulus may request start of the interval timer linked to its test sequence.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'StartIntervalTimer',
+	'A stimulus may request start of the interval timer linked to its test sequence.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("16431bda-a1d3-417e-b06b-bb0146afe9e4",
+	"d5a4cf86-3f41-407c-831c-18e679999a67",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("16431bda-a1d3-417e-b06b-bb0146afe9e4",
+	'DeleteStimulus',
+	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteStimulus',
+	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("6adece44-3b04-4453-8f98-7b16e265535c",
+	"e3261067-756f-427b-94ca-307412068ce6",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("6adece44-3b04-4453-8f98-7b16e265535c",
+	'DeleteTestBucket',
+	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteTestBucket',
+	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("2cef0f90-c518-4904-89d2-e13ea3d07270",
+	"b1465433-efc9-45bd-ad88-e5ead4500931",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("2cef0f90-c518-4904-89d2-e13ea3d07270",
+	'RegisterTestSuite',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RegisterTestSuite',
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("96c45b91-ebfc-445a-81f2-78866eeed1b7",
+	"a65ba45b-40f5-486e-9280-968e92d5d402",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("96c45b91-ebfc-445a-81f2-78866eeed1b7",
+	'DeleteObservation',
+	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'DeleteObservation',
+	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("cd00abe1-f954-4d98-a30f-3dde8de0f0a0",
+	"2ab9bd8f-a044-44bc-b988-74be588a3af7",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("cd00abe1-f954-4d98-a30f-3dde8de0f0a0",
+	'TestSuiteComplete',
+	'Signals completion of the test suite.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestSuiteComplete',
+	'Signals completion of the test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("02836088-4dbc-4b0b-a45f-be6225f9dd4b",
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("02836088-4dbc-4b0b-a45f-be6225f9dd4b",
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddBucket',
+	'Add an instance of a test bucket to the test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("e3d169f5-e070-4cc3-b866-d8394642c405",
+	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("e3d169f5-e070-4cc3-b866-d8394642c405",
+	'AddTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8c2acb31-2ed2-42f4-a0f8-130114942a5d",
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8c2acb31-2ed2-42f4-a0f8-130114942a5d",
+	'AddStimulus',
+	'',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddStimulus',
+	'',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("56874fd5-5810-4c77-b331-aca6dc493a81",
+	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("56874fd5-5810-4c77-b331-aca6dc493a81",
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddObservation',
+	'Add an observation to follow injection of a specified stimulus.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8369705f-f784-465b-a7b4-4dae2a59680b",
+	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8369705f-f784-465b-a7b4-4dae2a59680b",
+	'RequestIntervalTimerValue',
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
+Optionally, the timer can be reset.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RequestIntervalTimerValue',
+	'An observation may request the value of the interval timer associated with its stimulus sequence.
+The value will be signalled back to the testbench, along with the supplied identification key.
+Optionally, the timer can be reset.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("da6a0fd2-0dbc-4c51-aaac-c5ef687273bf",
+	"7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("da6a0fd2-0dbc-4c51-aaac-c5ef687273bf",
+	'IntervalTimerValue',
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'IntervalTimerValue',
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("1a364f54-99ad-4f58-b3a9-42ce3e83fbf8",
+	"d69685a1-d173-411e-954d-82338177cf09",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("1a364f54-99ad-4f58-b3a9-42ce3e83fbf8",
+	'AddStimulusSequence',
+	'A test case can have one or more labeled sequences of stimuli.
+A labelled sequence will be added to the test case currently being constructed.
+These sequences may run in parallel and may interact via assess signals.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("d69685a1-d173-411e-954d-82338177cf09",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddStimulusSequence',
+	'A test case can have one or more labeled sequences of stimuli.
+A labelled sequence will be added to the test case currently being constructed.
+These sequences may run in parallel and may interact via assess signals.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("7e3a0c29-5383-40de-9069-3ab2c6d3214f",
+	"ca057380-3763-49be-a902-4f89bd14277c",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("7e3a0c29-5383-40de-9069-3ab2c6d3214f",
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
+This has the effect of completing the observation without a failure penalty.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'RemoveTriggeredObservation',
+	'On this signal, any active observations with matching key value will be deactivated.
+This has the effect of completing the observation without a failure penalty.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("c29c3cff-e0a8-4cba-9a4b-1b762ed5e997",
+	"de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("c29c3cff-e0a8-4cba-9a4b-1b762ed5e997",
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestBucketTimeResolutions',
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("1ff69f96-aaf0-4b9f-9e2c-9d09ba1001d2",
+	"092a77de-9124-470e-9e04-e55568aebdc9",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("1ff69f96-aaf0-4b9f-9e2c-9d09ba1001d2",
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceTimeResolutions',
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("ca9480b0-0c8e-4876-9543-6c4101f686bc",
+	"168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("ca9480b0-0c8e-4876-9543-6c4101f686bc",
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestSuiteTimeResolutions',
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("5f5543fc-cdbf-42a8-bafe-dc00637a08eb",
+	"80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("5f5543fc-cdbf-42a8-bafe-dc00637a08eb",
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetTestCaseTimeResolutions',
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("bc094102-a874-4bb5-8fd0-52bc8aba2129",
+	"abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("bc094102-a874-4bb5-8fd0-52bc8aba2129",
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetSequenceIntervalTimerResolution',
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("5198fafc-9d89-45f3-8d8f-d4b6ec32b30a",
+	"33169678-f345-469d-ac15-ea1c7322c7a9",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("5198fafc-9d89-45f3-8d8f-d4b6ec32b30a",
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'SetObservationTimeResolutions',
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO C_I_PROXY
+	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	"00000000-0000-0000-0000-000000000000",
+	'TestSequencing',
+	'Interface signals for communication with the test service.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO PE_PE
+	VALUES ("4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	1,
+	"61588b75-4667-4ddf-bf35-32b85d2f22dd",
+	"00000000-0000-0000-0000-000000000000",
+	2);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("61588b75-4667-4ddf-bf35-32b85d2f22dd",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'Components',
+	'',
+	0,
+	'../Components.xtuml');
