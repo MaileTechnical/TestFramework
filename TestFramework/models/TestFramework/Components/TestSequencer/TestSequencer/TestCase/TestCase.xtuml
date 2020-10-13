@@ -74,7 +74,8 @@ INSERT INTO O_TFR
 	'Discard the no-longer-wanted test case structure.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'send TESTBENCH::DeletePreCondition( caseLabel:self.testCaseLabel );
+	'// Delete each stimulus sequence associated with this test case.
+
 select many seqs related by self->StimulusSequence[R119.''executes''];
 for each seq in seqs
   unrelate self from seq across R119.''executes'';
@@ -124,7 +125,7 @@ INSERT INTO S_DT_PROXY
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
 	'tsStatus',
-	'',
+	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
 INSERT INTO O_NBATTR

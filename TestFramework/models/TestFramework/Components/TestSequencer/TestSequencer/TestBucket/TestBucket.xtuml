@@ -41,11 +41,12 @@ new_tc.pollScaleFactor = self.pollScaleFactor;
 
 // Make this the "currently building" test case.
 select any ts from instances of TestSuite;
-select one tc related by ts->TestCase[R124.''is currently building''];
+select one tb related by ts->TestBucket[R118.''is running''];
+select one tc related by tb->TestCase[R129.''is building''];
 if ( not_empty tc )
-  unrelate tc from ts across R124.''is being scripted for'';
+  unrelate tc from tb across R129.''adding to'';
 end if;
-relate new_tc to ts across R124.''is being scripted for'';',
+relate new_tc to tb across R129.''adding to'';',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -187,7 +188,7 @@ INSERT INTO S_DT_PROXY
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
 	'tsStatus',
-	'',
+	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
 INSERT INTO O_NBATTR

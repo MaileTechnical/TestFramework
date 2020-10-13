@@ -30,11 +30,11 @@ INSERT INTO C_EP
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'TriggerObservation',
+	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.');
 INSERT INTO C_AS
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
-	'TriggerObservation',
+	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.',
 	1,
 	"ef029a3f-8bbc-4d01-b248-9d10545d4527");
@@ -366,27 +366,6 @@ INSERT INTO C_PP
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
-	VALUES ("8dd429c8-69fa-400e-93ff-d0db0ee2302a",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'DeletePreCondition',
-	'Signals the testbench that the identified precodition instance can be disposed of.');
-INSERT INTO C_AS
-	VALUES ("8dd429c8-69fa-400e-93ff-d0db0ee2302a",
-	'DeletePreCondition',
-	'Signals the testbench that the identified precodition instance can be disposed of.',
-	1,
-	"bb4f4c38-32d2-41f1-a540-93e7d083ed70");
-INSERT INTO C_PP
-	VALUES ("becb91d8-4a53-4fda-a64f-422cc1525b97",
-	"8dd429c8-69fa-400e-93ff-d0db0ee2302a",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'caseLabel',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
 	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -397,7 +376,7 @@ INSERT INTO C_AS
 	'DeleteStimulus',
 	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
 	1,
-	"8dd429c8-69fa-400e-93ff-d0db0ee2302a");
+	"bb4f4c38-32d2-41f1-a540-93e7d083ed70");
 INSERT INTO C_PP
 	VALUES ("4199f30c-3fc4-4ce2-8c47-f425a2f29e68",
 	"d5a4cf86-3f41-407c-831c-18e679999a67",
@@ -482,36 +461,6 @@ INSERT INTO C_PP
 	'',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
-	VALUES ("43da9421-f19f-491d-b0de-6d07de88d215",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'NameTestBucket',
-	'Assign an optional arbitrary naming label to a test bucket instance.');
-INSERT INTO C_AS
-	VALUES ("43da9421-f19f-491d-b0de-6d07de88d215",
-	'NameTestBucket',
-	'Assign an optional arbitrary naming label to a test bucket instance.',
-	0,
-	"a65ba45b-40f5-486e-9280-968e92d5d402");
-INSERT INTO C_PP
-	VALUES ("9c132e72-c162-4670-980f-630443c96da1",
-	"43da9421-f19f-491d-b0de-6d07de88d215",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'bucketId',
-	'',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_PP
-	VALUES ("2b434da0-158a-4d9e-9144-380bb5de32e8",
-	"43da9421-f19f-491d-b0de-6d07de88d215",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'bucketLabel',
-	'',
-	0,
-	'',
-	"9c132e72-c162-4670-980f-630443c96da1");
-INSERT INTO C_EP
 	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -522,7 +471,7 @@ INSERT INTO C_AS
 	'TestSuiteComplete',
 	'Signals completion of the test suite.',
 	1,
-	"43da9421-f19f-491d-b0de-6d07de88d215");
+	"a65ba45b-40f5-486e-9280-968e92d5d402");
 INSERT INTO C_EP
 	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
@@ -536,35 +485,35 @@ INSERT INTO C_AS
 	0,
 	"2ab9bd8f-a044-44bc-b988-74be588a3af7");
 INSERT INTO C_PP
-	VALUES ("c8487470-bc98-44db-809e-5d7d9968f2e9",
+	VALUES ("f87cec8c-53c6-4b37-8717-b2e11c6eef2b",
 	"3ab9f7fe-b572-4c34-98f5-076122029206",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'ID',
-	'The identifier taken from the corresponding test bucket in the Testbench.',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_EP
-	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'CreateTestCase',
-	'Add an instance of a test case, identified by label, to the indicated test bucket.');
-INSERT INTO C_AS
-	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
-	'CreateTestCase',
-	'Add an instance of a test case, identified by label, to the indicated test bucket.',
-	0,
-	"3ab9f7fe-b572-4c34-98f5-076122029206");
-INSERT INTO C_PP
-	VALUES ("7ec424e2-95e1-43ff-9286-ac8dabca9c1b",
-	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
 	"ba5eda7a-def5-0000-0000-000000000005",
 	'bucketId',
 	'',
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("12d61c71-98fc-49a1-81a0-b9be72ef101a",
+	"3ab9f7fe-b572-4c34-98f5-076122029206",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'bucketLabel',
+	'Arbitrary naming label.',
+	0,
+	'',
+	"f87cec8c-53c6-4b37-8717-b2e11c6eef2b");
+INSERT INTO C_EP
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.');
+INSERT INTO C_AS
+	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
+	'AddTestCase',
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	0,
+	"3ab9f7fe-b572-4c34-98f5-076122029206");
 INSERT INTO C_PP
 	VALUES ("b57fa56d-a016-4bb3-a78b-d2bc343e0c81",
 	"338f43fc-f8fd-4707-98a1-be43d1ec3394",
@@ -573,7 +522,7 @@ INSERT INTO C_PP
 	'',
 	0,
 	'',
-	"7ec424e2-95e1-43ff-9286-ac8dabca9c1b");
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO C_EP
 	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",

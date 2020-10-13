@@ -19,7 +19,7 @@ INSERT INTO O_TFR
 	'// Add a stimulus to the labelled sequence of the "currently-building" test case.
 
 select any ts from instances of TestSuite;
-select one tc related by ts->TestCase[R124.''is currently building''];
+select one tc related by ts->TestBucket[R118.''is running'']->TestCase[R129.''is building''];
 select any seq related by tc->StimulusSequence[R119.''executes'']
   where ( selected.seqLabel == param.seqLabel );
 if ( not_empty seq )
@@ -48,7 +48,6 @@ if ( not_empty seq )
 else
   LOG::LogFailure( message:"SEQ Invalid sequence identifier" );
 end if;
-
 ',
 	1,
 	'',
@@ -199,7 +198,7 @@ INSERT INTO S_DT_PROXY
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
 	'tsStatus',
-	'',
+	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
 INSERT INTO O_ID

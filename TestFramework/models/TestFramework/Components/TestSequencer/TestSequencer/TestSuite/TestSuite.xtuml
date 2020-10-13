@@ -17,16 +17,13 @@ INSERT INTO O_TFR
 	'// Prepare to run the test cases in the test buckets configured in this test suite.
 
 LOG::LogInfo( message:"SEQ Starting Test Suite: " + self.suiteLabel );
-select one tc related by self->TestCase[R124.''is currently building''];
-if ( not_empty tc )
-  unrelate self from tc across R124.''is currently building'';
-end if;
+
 select one bucket related by self->TestBucket[R111.''will first run''];
 if ( not_empty bucket )
   relate self to bucket across R118.''is running'';
   send TESTBENCH::InitializeBucket( bucketId:bucket.assignedID );
 else
-  LOG::LogFailure( message:"SEQ No tests to run!" );
+  LOG::LogFailure( message:"SEQ No test buckets configured!" );
   delete object instance self;
 end if;',
 	1,
@@ -62,18 +59,18 @@ if ( empty next_bucket )
   // clean up
   select many reqs from instances of Requirement;
   for each req in reqs
-    select many cases related by req->TestCase[R101.''is tested by''];
-    for each case in cases
-      unrelate req from case across R101.''is tested by'';
+    select many testcases related by req->TestCase[R101.''is tested by''];
+    for each testcase in testcases
+      unrelate req from testcase across R101.''is tested by'';
     end for;
     delete object instance req;
   end for;
 
   if ( not self.retainAll )
-    select many cases from instances of TestCase;
-    for each case in cases
-      if ( case.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
-        delete object instance case;
+    select many testcases from instances of TestCase;
+    for each testcase in testcases
+      if ( testcase.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
+        delete object instance testcase;
       end if;
     end for;
     select many buckets from instances of TestBucket;
@@ -110,6 +107,7 @@ end if;
 
 create object instance new_bucket of TestBucket;
 new_bucket.assignedID = param.bucketId;
+new_bucket.bucketLabel = param.bucketLabel;
 
 // Propagate defaults for any timing that may be needed.
 new_bucket.timeScaleFactor = ts.timeScaleFactor;
@@ -131,6 +129,7 @@ else
   relate cursor to new_bucket across R113.''follows'';
 end if;
 new_bucket.bktStatus = tsStatus::created;
+
 ',
 	1,
 	'',
@@ -144,6 +143,15 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TPARM
+	VALUES ("eb904b89-b627-462f-8018-8b4ffe585b84",
+	"1a9fbf33-1ec8-49d6-ae22-1d875f0510e6",
+	'bucketLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"1fbe1517-179e-48b9-a1fa-fb64b75cde96",
 	'');
 INSERT INTO O_TFR
 	VALUES ("8a5d688d-f48b-465c-8930-167630d9c2a9",
