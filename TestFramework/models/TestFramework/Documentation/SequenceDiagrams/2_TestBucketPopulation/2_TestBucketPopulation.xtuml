@@ -32,13 +32,13 @@ INSERT INTO GD_GE
 	"8361c663-3e5e-4780-b652-bbe7c323d994",
 	107,
 	0,
-	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::testbench');
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::TestFramework::Components::ProxyTestbench');
 INSERT INTO GD_SHP
 	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f");
 INSERT INTO GD_NCS
 	VALUES ("c680885a-11ff-461e-92e7-f584c656f77f");
 INSERT INTO DIM_ND
-	VALUES (216.000000,
+	VALUES (277.000000,
 	85.000000,
 	"c680885a-11ff-461e-92e7-f584c656f77f");
 INSERT INTO DIM_GE
@@ -270,7 +270,7 @@ INSERT INTO GD_GE
 	"11a9ab87-c941-466d-a42d-ccf436804312",
 	57,
 	0,
-	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::testbench:: Communication Link');
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::TestFramework::Components::ProxyTestbench:: Communication Link');
 INSERT INTO GD_CON
 	VALUES ("1b877491-119f-4e05-aefb-3cec119ff608",
 	"00000000-0000-0000-0000-000000000000");
@@ -850,7 +850,7 @@ INSERT INTO GD_GE
 	"dd5761d2-1dc6-4101-a8cb-663aa4826434",
 	66,
 	0,
-	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::testbench:: Communication Link::InitializeBucket(bucketId)');
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::TestFramework::Components::ProxyTestbench:: Communication Link::InitializeBucket');
 INSERT INTO GD_CON
 	VALUES ("be14cb96-e5cb-47f5-ad41-5f24482f1033",
 	"00000000-0000-0000-0000-000000000000");
@@ -950,7 +950,7 @@ INSERT INTO GD_GE
 	"c7a6d045-7558-4611-8398-30bc0bd5256c",
 	66,
 	0,
-	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::testbench:: Communication Link::InitializeTestCase(caseLabel)');
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::TestFramework::Components::ProxyTestbench:: Communication Link::InitializeTestCase');
 INSERT INTO GD_CON
 	VALUES ("278a6517-328c-492a-a555-81747a373fa1",
 	"00000000-0000-0000-0000-000000000000");
@@ -1044,6 +1044,72 @@ INSERT INTO DIM_ED
 	VALUES ("a455cf10-868f-41a7-8cf1-09b40971f289",
 	"89769223-caf8-4cba-b28a-bb4a57795fcc",
 	"278a6517-328c-492a-a555-81747a373fa1");
+INSERT INTO GD_GE
+	VALUES ("6f482804-c97b-4526-bf98-3679e73488bb",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"85a026c8-a7af-4e7a-a09e-22cfa80bf23c",
+	73,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::See Diagram #3 for Test Case population');
+INSERT INTO GD_SHP
+	VALUES ("6f482804-c97b-4526-bf98-3679e73488bb");
+INSERT INTO GD_NCS
+	VALUES ("6f482804-c97b-4526-bf98-3679e73488bb");
+INSERT INTO DIM_ND
+	VALUES (288.000000,
+	73.000000,
+	"6f482804-c97b-4526-bf98-3679e73488bb");
+INSERT INTO DIM_GE
+	VALUES (3972.000000,
+	3228.000000,
+	"6f482804-c97b-4526-bf98-3679e73488bb",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("6f482804-c97b-4526-bf98-3679e73488bb",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO STY_S
+	VALUES ("7ca4c942-53b7-47bc-b552-c90edf6fe4ca",
+	"6f482804-c97b-4526-bf98-3679e73488bb",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO STY_FCS
+	VALUES ("7ca4c942-53b7-47bc-b552-c90edf6fe4ca",
+	0,
+	255,
+	255);
+INSERT INTO GD_GE
+	VALUES ("60d8914c-99a7-41e1-85a3-3ffeffe78e2e",
+	"b837d730-2db6-448b-b134-cbdd97be1b4c",
+	"416d6b51-ebf2-452c-8f2c-cbcef283f875",
+	73,
+	0,
+	'TestFramework::Documentation::SequenceDiagrams::2_TestBucketPopulation::See Diagram #4 for Test Case execution');
+INSERT INTO GD_SHP
+	VALUES ("60d8914c-99a7-41e1-85a3-3ffeffe78e2e");
+INSERT INTO GD_NCS
+	VALUES ("60d8914c-99a7-41e1-85a3-3ffeffe78e2e");
+INSERT INTO DIM_ND
+	VALUES (288.000000,
+	73.000000,
+	"60d8914c-99a7-41e1-85a3-3ffeffe78e2e");
+INSERT INTO DIM_GE
+	VALUES (3984.000000,
+	3468.000000,
+	"60d8914c-99a7-41e1-85a3-3ffeffe78e2e",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO DIM_ELE
+	VALUES ("60d8914c-99a7-41e1-85a3-3ffeffe78e2e",
+	0,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO STY_S
+	VALUES ("ad1dfa29-d9e6-47cd-b8af-e1c19e53d21e",
+	"60d8914c-99a7-41e1-85a3-3ffeffe78e2e",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO STY_FCS
+	VALUES ("ad1dfa29-d9e6-47cd-b8af-e1c19e53d21e",
+	0,
+	255,
+	255);
 INSERT INTO DIM_DIA
 	VALUES ("b837d730-2db6-448b-b134-cbdd97be1b4c",
 	'',
@@ -1056,11 +1122,22 @@ INSERT INTO SQ_P
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO SQ_COP
 	VALUES ("8361c663-3e5e-4780-b652-bbe7c323d994",
-	"00000000-0000-0000-0000-000000000000",
-	'testbench',
+	"4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	'TestFramework::Components::ProxyTestbench',
 	'testbench',
 	'',
-	0);
+	1);
+INSERT INTO C_C_PROXY
+	VALUES ("4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
+	"00000000-0000-0000-0000-000000000000",
+	"00000000-0000-0000-0000-000000000000",
+	'ProxyTestbench',
+	'This ''empty'' Testbench serves only to allow formalization of some of the signals shown in Documentation:SequenceDiagrams.',
+	0,
+	"00000000-0000-0000-0000-000000000000",
+	0,
+	'',
+	'../../../Components/ProxyTestbench/ProxyTestbench.xtuml');
 INSERT INTO PE_PE
 	VALUES ("8361c663-3e5e-4780-b652-bbe7c323d994",
 	1,
@@ -1254,6 +1331,32 @@ INSERT INTO PE_PE
 	"27875393-7657-4938-ac92-4f8ee33217d9",
 	"00000000-0000-0000-0000-000000000000",
 	14);
+INSERT INTO A_N
+	VALUES ("85a026c8-a7af-4e7a-a09e-22cfa80bf23c",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO A_OBJ
+	VALUES ("85a026c8-a7af-4e7a-a09e-22cfa80bf23c",
+	'See Diagram #3 for Test Case population',
+	'');
+INSERT INTO PE_PE
+	VALUES ("85a026c8-a7af-4e7a-a09e-22cfa80bf23c",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	18);
+INSERT INTO A_N
+	VALUES ("416d6b51-ebf2-452c-8f2c-cbcef283f875",
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO A_OBJ
+	VALUES ("416d6b51-ebf2-452c-8f2c-cbcef283f875",
+	'See Diagram #4 for Test Case execution',
+	'');
+INSERT INTO PE_PE
+	VALUES ("416d6b51-ebf2-452c-8f2c-cbcef283f875",
+	1,
+	"27875393-7657-4938-ac92-4f8ee33217d9",
+	"00000000-0000-0000-0000-000000000000",
+	18);
 INSERT INTO MSG_M
 	VALUES ("96d5ae0b-94e6-47ce-a22e-a4c849758d59",
 	"11a9ab87-c941-466d-a42d-ccf436804312",
@@ -1419,11 +1522,41 @@ INSERT INTO MSG_AM
 	'',
 	'',
 	'',
-	0,
-	'InitializeBucket(bucketId)',
+	1,
+	'InitializeBucket',
 	'');
-INSERT INTO MSG_IAM
-	VALUES ("dd5761d2-1dc6-4101-a8cb-663aa4826434");
+INSERT INTO MSG_SIG
+	VALUES ("dd5761d2-1dc6-4101-a8cb-663aa4826434",
+	"14882a87-5828-4191-a273-30b8788f3566");
+INSERT INTO C_AS_PROXY
+	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
+	'InitializeBucket',
+	'Signals a test bucket to instantiate its test case sequences.',
+	1,
+	"b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("1b1d92ca-12ac-4e5d-9805-d43d5c48d961",
+	"00000000-0000-0000-0000-000000000000",
+	"dd5761d2-1dc6-4101-a8cb-663aa4826434",
+	'bucketId',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("1b1d92ca-12ac-4e5d-9805-d43d5c48d961",
+	"e72f587a-0906-403e-bf54-8da9835177dd");
+INSERT INTO C_PP_PROXY
+	VALUES ("e72f587a-0906-403e-bf54-8da9835177dd",
+	"14882a87-5828-4191-a273-30b8788f3566",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'bucketId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO PE_PE
 	VALUES ("dd5761d2-1dc6-4101-a8cb-663aa4826434",
 	1,
@@ -1442,11 +1575,42 @@ INSERT INTO MSG_AM
 	'',
 	'',
 	'',
-	0,
-	'InitializeTestCase(caseLabel)',
+	1,
+	'InitializeTestCase',
 	'');
-INSERT INTO MSG_IAM
-	VALUES ("c7a6d045-7558-4611-8398-30bc0bd5256c");
+INSERT INTO MSG_SIG
+	VALUES ("c7a6d045-7558-4611-8398-30bc0bd5256c",
+	"b5ee9925-8760-47c6-a3ea-734b7d165169");
+INSERT INTO C_AS_PROXY
+	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
+	'InitializeTestCase',
+	'Testbench receives notification that a new test case has been selected to run.
+Initialize any pre-conditions and respond when ready for stimulus injection.',
+	1,
+	"c7c36dbc-1771-40f5-9e73-c713d789f49a",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO MSG_A
+	VALUES ("0fc59169-c78b-49e9-91f5-1d64bba163e0",
+	"00000000-0000-0000-0000-000000000000",
+	"c7a6d045-7558-4611-8398-30bc0bd5256c",
+	'caseLabel',
+	'',
+	'',
+	'',
+	1);
+INSERT INTO MSG_EPA
+	VALUES ("0fc59169-c78b-49e9-91f5-1d64bba163e0",
+	"c02030b7-ef6c-49fa-b222-f4ceb8fa62c9");
+INSERT INTO C_PP_PROXY
+	VALUES ("c02030b7-ef6c-49fa-b222-f4ceb8fa62c9",
+	"b5ee9925-8760-47c6-a3ea-734b7d165169",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'../../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO PE_PE
 	VALUES ("c7a6d045-7558-4611-8398-30bc0bd5256c",
 	1,
