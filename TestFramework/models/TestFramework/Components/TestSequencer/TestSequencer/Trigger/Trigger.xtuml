@@ -23,6 +23,13 @@ select many observations related by self->Observation[R127.''initiates''];
 for each observation in observations
   select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
   if ( not_empty stimulus )
+    select one timer related by observation->CountdownTimer[R125.''is stopped by''];
+    if ( empty timer )
+      select one timer related by observation->CountdownTimer[R126.''is polled by''];
+    end if;
+    if ( empty timer )
+      unrelate observation from stimulus across R115.''is currently observing for'';
+    end if;
     if ( param.fire )
       generate Observation1:Observe() to observation;  // go ahead and have it observe
     else
@@ -64,6 +71,11 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO O_OIDA
+	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	0,
+	'KeyValue');
 INSERT INTO O_ID
 	VALUES (1,
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");

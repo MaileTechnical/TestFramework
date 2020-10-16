@@ -415,7 +415,7 @@ INSERT INTO SM_ACT
 // Indicate failure to the appropriate stimulus sequence
 
 self.CancelTimers();
-select one stimulus related by self->Stimulus[R115.''is currently observing for''];
+select one stimulus related by self->Stimulus[R105.''is made after''];
 generate Stimulus4:ObservationIncomplete to stimulus;
 ',
 	'',
@@ -451,16 +451,17 @@ INSERT INTO SM_ACT
 self.obsStatus = tsStatus::completed;
 self.CancelTimers();
 select one stimulus related by self->Stimulus[R115.''is currently observing for''];
-if ( self.isDelay )
-  select one seq related by stimulus->StimulusSequence[R116.''is active for''];
-  LOG::LogInfo( message:"SEQ  Delay timer completed in seq: " + seq.seqLabel );
+if ( not_empty stimulus )
+  unrelate self from stimulus across R115.''is currently observing for'';
 end if;
-unrelate self from stimulus across R115.''is currently observing for'';
 
 // Any concurrent observations waiting to complete - if so, do nothing ( "thread join" ).
 // Otherwise, attempt to promote subsequent observation(s)
 
-select any other_observation related by stimulus->Observation[R115.''has active''];
+select one stimulus related by self->Stimulus[R105.''is made after''];
+select any other_observation related by stimulus->Observation[R105.''will trigger'']
+ where ( selected.sequence_number == self.sequence_number )
+  and ( selected.obsStatus != tsStatus::completed );
 if ( empty other_observation )
   select many observations related by stimulus->Observation[R105.''will trigger'']
    where ( selected.sequence_number == self.sequence_number + 1 );
