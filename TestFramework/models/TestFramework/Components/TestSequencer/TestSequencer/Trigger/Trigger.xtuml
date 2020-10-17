@@ -25,12 +25,14 @@ for each observation in observations
   select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
   if ( not_empty stimulus )
     // If this triggered observation is untimed, remove it from possible re-consideration.
-    // Note: if timed, this implies possible further triggering; leave R115 intact.
-    select one timer related by observation->CountdownTimer[R125.''is stopped by''];
-    if ( empty timer )
-      select one timer related by observation->CountdownTimer[R126.''is polled by''];
+    // Note: if it has timeout, this implies possible further triggering; leave R115 intact.
+    select one timoutTimer related by observation->CountdownTimer[R125.''is stopped by''];
+    // If it has a polling timer then it is transitioning to polling; unrelate from trigger.
+    select one pollingTimer related by observation->CountdownTimer[R126.''is polled by''];
+    if ( not_empty pollingTimer )
+      unrelate observation from self across R127.''delays until triggered by'';
     end if;
-    if ( empty timer )
+    if ( empty timoutTimer ) and ( empty pollingTimer )
       unrelate observation from stimulus across R115.''is currently observing for'';
     end if;
     if ( param.fire )
@@ -39,7 +41,13 @@ for each observation in observations
       generate Observation5:Unobserve() to observation;
     end if;
   end if;
-end for;',
+end for;
+// Possible unrelate above may have been the only associated observation..
+select any observation related by self->Observation[R127.''initiates''];
+if ( empty observation )
+  delete object instance self;
+end if;
+',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
