@@ -65,7 +65,8 @@ INSERT INTO O_ATTR
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	"00000000-0000-0000-0000-000000000000",
 	'seqLabel',
-	'Client testbench-assigned label used for identification.',
+	'Client testbench-assigned label used for identification within a test case.
+Need not be unique outside a test case.',
 	'',
 	'seqLabel',
 	0,
@@ -132,7 +133,7 @@ INSERT INTO S_DT_PROXY
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
 	'tsStatus',
-	'',
+	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
 INSERT INTO O_NBATTR

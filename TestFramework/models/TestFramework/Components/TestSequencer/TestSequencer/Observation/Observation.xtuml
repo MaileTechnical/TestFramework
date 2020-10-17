@@ -5,10 +5,16 @@ INSERT INTO O_OBJ
 	'Observation',
 	105,
 	'Observation',
-	'Each instance makes a particular observation, or fails to do so
-within a prescribed length of time.  Various types of observations
-are possible, including the receipt of interface messages from
-the application under test and from the simulated environment.',
+	'Observations are sequenced after a stimulus - sequentially and/or concurrently.
+As a stimulus executes its sequence, observations become ''current'' - primed for evaluation.
+At some point then, an observation is prompted to evaluate (observe).
+Evaluation attempts to match expected conditions and reports success or failure.
+
+Some observations poll repeatedly under control of timers - polling interval and timeout.
+Some are one-shot observations triggered by some occurrence - typically from a port activity.
+Some may allow multiple triggering - this requires the use of a guard (timeout) timer. 
+
+',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
 	VALUES ("6475862e-fa46-4136-b86e-0c99df6734ca",
@@ -84,7 +90,6 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'if ( param.success == True )
-  LOG::LogSuccess( message:"SEQ Observation good" );
   generate Observation2:Completed to self;
 else
   LOG::LogFailure( message:"SEQ Observation FAILED" );
@@ -464,6 +469,11 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
+INSERT INTO O_OIDA
+	VALUES ("0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	0,
+	'assignedID');
 INSERT INTO O_ID
 	VALUES (1,
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
