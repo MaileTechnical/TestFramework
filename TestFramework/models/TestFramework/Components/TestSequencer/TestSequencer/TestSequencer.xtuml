@@ -2931,12 +2931,15 @@ INSERT INTO R_SIMP
 INSERT INTO R_REL
 	VALUES ("6bca7645-7d30-4956-89fd-d099eb50ca0b",
 	115,
-	'This association should not be left in place for triggered observations which have no timers.
-If left until completion is signalled there is a risk that the observation may be re-initiated.
-A port activity with a triggering key relies on this association to determine eligibility.
-Therefore, for non-timed triggered observations, this association must be unrelated.
-A timed triggered operation implies repeated triggering which requires this asssociation.
-A non-triggered operation - which may or may not poll - removes this on completion.
+	'For a triggered observation without a timer (i.e., a one-shot triggered observation), 
+this association is removed immediately after the observation has been triggered.  If
+it is left in place until completion of the obvservation is signalled from the testbench,
+there is a risk that the observation may be re-initiated because a port activity with a 
+triggering key relies on this association to determine eligibility of triggered observations.
+A timed triggered observation implies repeated triggering which requires this asssociation
+to remain in place until completion of the observation is signalled by the testbench.
+A non-triggered observation - which may or may not poll - removes this association upon
+completion of the observation.
 ',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO R_PART
