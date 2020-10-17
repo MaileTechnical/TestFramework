@@ -15,14 +15,17 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'// Find any observations waiting for this trigger that are currently waiting to observe for a latest stimulus.
+	'// Find any associated observations that are currently waiting to observe for a latest stimulus.
 // for any such, take the appropriate action:
 // either initiate an observation evaluation or consider it no longer needed.
 
 select many observations related by self->Observation[R127.''initiates''];
 for each observation in observations
+  // consider only those that are currently ''staged'' for evaluation, but waiting to be initiated.
   select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
   if ( not_empty stimulus )
+    // If this triggered observation is untimed, remove it from possible re-consideration.
+    // Note: if timed, this implies possible further triggering; leave R115 intact.
     select one timer related by observation->CountdownTimer[R125.''is stopped by''];
     if ( empty timer )
       select one timer related by observation->CountdownTimer[R126.''is polled by''];

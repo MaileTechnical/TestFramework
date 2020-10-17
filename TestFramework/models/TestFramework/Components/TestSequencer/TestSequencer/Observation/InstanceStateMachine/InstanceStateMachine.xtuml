@@ -451,11 +451,12 @@ INSERT INTO SM_ACT
 self.obsStatus = tsStatus::completed;
 self.CancelTimers();
 select one stimulus related by self->Stimulus[R115.''is currently observing for''];
-if ( not_empty stimulus )
+if ( not_empty stimulus )  // this was not an untimed triggered observation
   unrelate self from stimulus across R115.''is currently observing for'';
 end if;
 
-// Any concurrent observations waiting to complete - if so, do nothing ( "thread join" ).
+// Any concurrent observations waiting to complete - 
+// if so, do nothing ( wait for "thread join" ).
 // Otherwise, attempt to promote subsequent observation(s)
 
 select one stimulus related by self->Stimulus[R105.''is made after''];
@@ -859,7 +860,7 @@ INSERT INTO GD_NCS
 	VALUES ("c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_ND
 	VALUES (432.000000,
-	505.000000,
+	529.000000,
 	"c5162fe4-2e4f-4ac4-b235-feffc3962670");
 INSERT INTO DIM_GE
 	VALUES (5052.000000,
@@ -1593,9 +1594,15 @@ INSERT INTO O_OBJ_PROXY
 	'Observation',
 	105,
 	'Observation',
-	'Each instance makes a particular observation, or fails to do so
-within a prescribed length of time.  Various types of observations
-are possible, including the receipt of interface messages from
-the application under test and from the simulated environment.',
+	'Observations are sequenced after a stimulus - sequentially and/or concurrently.
+As a stimulus executes its sequence, observations become ''current'' - primed for evaluation.
+At some point then, an observation is prompted to evaluate (observe).
+Evaluation attempts to match expected conditions and reports success or failure.
+
+Some observations poll repeatedly under control of timers - polling interval and timeout.
+Some are one-shot observations triggered by some occurrence - typically from a port activity.
+Some may allow multiple triggering - this requires the use of a guard (timeout) timer. 
+
+',
 	"00000000-0000-0000-0000-000000000000",
 	'../Observation.xtuml');
