@@ -25,7 +25,6 @@ select any seq related by tc->StimulusSequence[R119.''executes'']
 if ( not_empty seq )
   create object instance new_stimulus of Stimulus;
   new_stimulus.assignedID = param.stimulusId;
-  new_stimulus.stmStatus = tsStatus::created;
   seq.lastStimulus = seq.lastStimulus + 1;
   new_stimulus.numberInSeq = seq.lastStimulus; 
   select one first_stimulus related by seq->Stimulus[R104.''will first inject''];
@@ -186,29 +185,17 @@ INSERT INTO O_ATTR
 	VALUES ("82ce7e81-f40b-47a1-8b45-8480b5f83a28",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	"be145dc9-8cda-4f3a-a335-ec60440c3648",
-	'stmStatus',
+	'failed',
 	'Tracks the status of the stimulus through creation to completion/failure of any following observations.',
 	'',
-	'stmStatus',
+	'failed',
 	0,
-	"f118c998-732a-4398-a820-4480fa8cdb21",
+	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
-	"00000000-0000-0000-0000-000000000000",
-	'tsStatus',
-	'Status values associated with the lifecycles of various instances.',
-	'',
-	'../../Datatypes/Datatypes.xtuml');
+	'false');
 INSERT INTO O_ID
 	VALUES (0,
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0");
-INSERT INTO O_OIDA
-	VALUES ("66a641e5-550e-435e-bccc-9b80b78659ca",
-	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
-	0,
-	'assignedID');
 INSERT INTO O_ID
 	VALUES (1,
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0");

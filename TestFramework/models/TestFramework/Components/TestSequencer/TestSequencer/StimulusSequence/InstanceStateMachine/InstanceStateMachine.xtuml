@@ -208,8 +208,7 @@ INSERT INTO SM_ACT
 	VALUES ("f2945ceb-9428-42d6-b31a-1fe6f396c769",
 	"cbf2fb30-3a61-468f-8153-06abe12f07cd",
 	1,
-	'self.seqStatus = tsStatus::created;
-select one stimulus related by self->Stimulus[R104.''will first inject''];
+	'select one stimulus related by self->Stimulus[R104.''will first inject''];
 if ( not_empty stimulus )
   relate self to stimulus across R116.''is processing'';
 end if;
@@ -227,7 +226,7 @@ INSERT INTO SM_ACT
 	VALUES ("5714e897-b6b9-404a-8733-d0c6e82514c7",
 	"cbf2fb30-3a61-468f-8153-06abe12f07cd",
 	1,
-	'self.seqStatus = tsStatus::started;',
+	'',
 	'',
 	0);
 INSERT INTO SM_TAH

@@ -18,7 +18,7 @@ INSERT INTO O_TFR
 
 create object instance new_tc of TestCase;
 new_tc.testCaseLabel = param.caseLabel;
-new_tc.tcStatus = tsStatus::created;
+new_tc.status = caseStatus::created;
 select one first_case related by self->TestCase[R112.''will first execute''];
 if ( empty first_case )
   relate self to new_tc across R112.''will first execute'';
@@ -72,12 +72,12 @@ while ( not_empty tc )
   select one next_tc related by tc->TestCase[R114.''follows''];
   // Delete the sequences, stimuli and observations of successsful test cases
   // Keep all context for failed test case for diagnosis
-  if ( tc.tcStatus == tsStatus::completed )	
+  if ( tc.status == caseStatus::completed )	
     tc.Dismantle();
   end if; 
   tc = next_tc;
 end while;
-if ( self.bktStatus == tsStatus::completed )
+if ( not self.failed )
   send TESTBENCH::DeleteTestBucket( bucketId:self.assignedID );
 end if;',
 	1,
@@ -98,8 +98,8 @@ select one tc related by self->TestCase[R117.''is currently running''];
 unrelate self from tc across R117.''is currently running'';
 select one next_tc related by tc->TestCase[R114.''follows''];
 // Retain entire contents of unsuccessful test case for error analysis
-if ( tc.tcStatus != tsStatus::completed )
-  self.bktStatus = tsStatus::failed;	// inhibit deletion of client test bucket at clean-up
+if ( tc.status != caseStatus::completed )
+  self.failed = True;	// inhibit deletion of client test bucket at clean-up
 else
   // clean up the test case contents, but leave the test case instances for reporting.
   tc.Dismantle();
@@ -175,22 +175,15 @@ INSERT INTO O_ATTR
 	VALUES ("de9eb285-b54e-4445-80bb-62d345a4a89f",
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
 	"9c0da15d-eace-4093-959c-0312f913dfbe",
-	'bktStatus',
+	'failed',
 	'This status is used to prevent client (testbench) teardown of a bucket which contains failed test cases.
 The bucket context is retained for diagnosis.',
 	'',
-	'bktStatus',
+	'failed',
 	0,
-	"f118c998-732a-4398-a820-4480fa8cdb21",
+	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
-	"00000000-0000-0000-0000-000000000000",
-	'tsStatus',
-	'Status values associated with the lifecycles of various instances.',
-	'',
-	'../../Datatypes/Datatypes.xtuml');
+	'false');
 INSERT INTO O_NBATTR
 	VALUES ("f6606833-5b16-4e64-bae2-2db2e04e98e8",
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
@@ -230,11 +223,6 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"cf812356-d586-4cdf-9c29-72003a1e9246");
-INSERT INTO O_OIDA
-	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
-	"cf812356-d586-4cdf-9c29-72003a1e9246",
-	0,
-	'assignedID');
 INSERT INTO O_ID
 	VALUES (1,
 	"cf812356-d586-4cdf-9c29-72003a1e9246");

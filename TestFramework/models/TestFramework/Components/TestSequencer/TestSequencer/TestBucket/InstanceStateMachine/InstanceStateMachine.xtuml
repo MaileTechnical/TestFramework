@@ -273,13 +273,10 @@ INSERT INTO SM_ACT
 	'// Initiate execution of a currently active test case.
 // If none, finish up this bucket.
 
-select one tc related by self->TestCase[R117.''is currently running''];
-if ( not_empty tc )
-  generate TestCase1:InitializeCase to tc;
+select one testcase related by self->TestCase[R117.''is currently running''];
+if ( not_empty testcase )
+  generate TestCase1:InitializeCase to testcase;
 else
-  if ( self.bktStatus != tsStatus::failed )
-    self.bktStatus = tsStatus::completed;
-  end if;
   generate TestBucket4:TestingFinished to self;
 end if;',
 	'',
@@ -344,7 +341,6 @@ INSERT INTO SM_ACT
 	'// Start executing the test cases in this bucket.
 // Select the first test case and ready it for activation.
 
-self.bktStatus = tsStatus::started;
 select one tc related by self->TestCase[R112.''will first execute''];
 if ( not_empty tc )
   relate tc to self across R117.''is active for'';
@@ -393,9 +389,8 @@ INSERT INTO SM_ACT
 	VALUES ("814a8a55-32b9-4770-987a-790224383f32",
 	"3be63f3c-c125-4392-81ae-903e75b9eb89",
 	1,
-	'self.bktStatus = tsStatus::failed;
-LOG::LogFailure( message:"SEQ No tests executed for empty bucket " + self.bucketLabel );
-',
+	'self.failed = True;
+LOG::LogFailure( message:"SEQ No tests executed for empty bucket " + self.bucketLabel );',
 	'',
 	0);
 INSERT INTO GD_MD

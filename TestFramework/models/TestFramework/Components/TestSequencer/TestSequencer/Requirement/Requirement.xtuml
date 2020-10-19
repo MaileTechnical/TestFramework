@@ -48,14 +48,13 @@ INSERT INTO O_TFR
 	'LOG::LogInfo( message:"** Successfully Tested Requirements **" );
 select many reqs from instances of Requirement;
 for each req in reqs
-  select many tcs related by req->TestCase[R101.''is tested by''];
+  select many tcs related by req->TestCase[R101.''is tested by'']
+   where ( selected.status == caseStatus::completed );
   if ( not_empty tcs )
     LOG::LogReal( message:req.prefix, r:req.number);
     for each tc in tcs
-      if ( tc.tcStatus == tsStatus::completed )
-    	LOG::LogInfo( message:" tested by successful test case " + tc.testCaseLabel );
-        req.tested = True;
-      end if;
+      LOG::LogInfo( message:" tested by successful test case " + tc.testCaseLabel );
+      req.tested = True;
     end for;
   end if;
 end for; 
@@ -64,13 +63,12 @@ select many reqs from instances of Requirement
 if ( not_empty reqs )
   LOG::LogInfo( message:"** Failed Test Case Requirements **" );
   for each req in reqs
-    select many tcs related by req->TestCase[R101.''is tested by''];
+    select many tcs related by req->TestCase[R101.''is tested by'']
+     where ( selected.status != caseStatus::completed );
     if ( not_empty tcs )
       LOG::LogReal( message:req.prefix, r:req.number);
       for each tc in tcs
-        if ( tc.tcStatus != tsStatus::completed )
-    	  LOG::LogInfo( message:" associated with failed test case " + tc.testCaseLabel );
-        end if;
+    	LOG::LogInfo( message:" associated with failed test case " + tc.testCaseLabel );
       end for;
     end if;
   end for;

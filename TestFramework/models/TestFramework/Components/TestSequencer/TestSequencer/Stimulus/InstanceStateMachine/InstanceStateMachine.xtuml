@@ -316,8 +316,7 @@ INSERT INTO SM_ACT
 	VALUES ("9575dca7-20f7-4629-be05-a79b623b7c2b",
 	"04dd84b7-ce74-4c3f-8a18-138da22fce83",
 	1,
-	'self.stmStatus = tsStatus::started;
-send TESTBENCH::InjectStimulus( stimulusId:self.assignedID );
+	'send TESTBENCH::InjectStimulus( stimulusId:self.assignedID );
 select many observations related by self->Observation[R105.''will trigger'']
  where ( selected.sequence_number == 1 );
 for each observation in observations
@@ -338,8 +337,7 @@ INSERT INTO SM_ACT
 	VALUES ("d833db70-90b5-4adf-bcfb-9bc622599229",
 	"04dd84b7-ce74-4c3f-8a18-138da22fce83",
 	1,
-	'self.stmStatus = tsStatus::completed;
-select one seq related by self->StimulusSequence[R116.''is active for''];
+	'select one seq related by self->StimulusSequence[R116.''is active for''];
 generate StimulusSequence2:StimulusDone to seq;',
 	'',
 	0);
@@ -354,11 +352,13 @@ INSERT INTO SM_ACT
 	VALUES ("6f9680f7-ad6b-47d5-b9fc-a1bf9ffaced5",
 	"04dd84b7-ce74-4c3f-8a18-138da22fce83",
 	1,
-	'select one seq related by self->StimulusSequence[R116.''is active for''];
-self.stmStatus = tsStatus::failed;
+	'// Report failure both to sequence and to test case.
+self.failed = True;
+select one seq related by self->StimulusSequence[R116.''is active for''];
 LOG::LogFailure( message:"SEQ Stimulus incomplete in sequence " + seq.seqLabel );
-select one tc related by seq->TestCase[R119.''is execution thread for''];
-generate TestCase5:StimulusIncomplete to tc;',
+seq.failed = True;
+select one testcase related by seq->TestCase[R119.''is execution thread for''];
+generate TestCase5:StimulusIncomplete to testcase;',
 	'',
 	0);
 INSERT INTO SM_TAH

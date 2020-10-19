@@ -36,6 +36,7 @@ for each observation in observations
       unrelate observation from stimulus across R115.''is currently observing for'';
     end if;
     if ( param.fire )
+      observation.status = observationStatus::observing;
       generate Observation1:Observe() to observation;  // go ahead and have it observe
     else
       generate Observation5:Unobserve() to observation;

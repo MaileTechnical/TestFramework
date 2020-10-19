@@ -45,11 +45,10 @@ INSERT INTO O_TFR
 	'Notify test case of sequence completion',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'self.seqStatus = tsStatus::completed;
-LOG::LogInfo( message:"SEQ Stimulus sequence complete " + self.seqLabel );
-select one tc related by self->TestCase[R119.''is execution thread for''];
-generate TestCase3:SequenceComplete to tc;
-',
+	'LOG::LogInfo( message:"SEQ Stimulus sequence complete " + self.seqLabel );
+select one testcase related by self->TestCase[R119.''is execution thread for''];
+unrelate self from testcase across R119.''is execution thread for'';
+generate TestCase3:SequenceComplete to testcase;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
@@ -121,21 +120,14 @@ INSERT INTO O_ATTR
 	VALUES ("95b56ef1-8098-454b-9fef-203a680cbe09",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7",
 	"ce363601-8e98-4cbe-b4d3-b03e48c3e581",
-	'seqStatus',
+	'failed',
 	'Tracks status',
 	'',
-	'seqStatus',
+	'failed',
 	0,
-	"f118c998-732a-4398-a820-4480fa8cdb21",
+	"ba5eda7a-def5-0000-0000-000000000001",
 	'',
-	'');
-INSERT INTO S_DT_PROXY
-	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
-	"00000000-0000-0000-0000-000000000000",
-	'tsStatus',
-	'Status values associated with the lifecycles of various instances.',
-	'',
-	'../../Datatypes/Datatypes.xtuml');
+	'false');
 INSERT INTO O_NBATTR
 	VALUES ("703a6d5c-e46d-46ca-87cc-c42b3f7824ca",
 	"0ee731ba-4221-4650-a6e6-a00a6b1f7ee7");
