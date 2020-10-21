@@ -431,7 +431,7 @@ INSERT INTO SM_ACT
 	VALUES ("12dc0ee7-5913-4c32-961d-b1470ebfa768",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'self.obsStatus = tsStatus::failed;',
+	'self.status = observationStatus::failed;',
 	'',
 	0);
 INSERT INTO SM_MOAH
@@ -448,7 +448,7 @@ INSERT INTO SM_ACT
 	'// An observation has been deemed to complete successfully.
 // Attempt to promote any immediately succeeding observations to observing status.
 
-self.obsStatus = tsStatus::completed;
+self.status = observationStatus::completed;
 self.CancelTimers();
 select one stimulus related by self->Stimulus[R115.''is currently observing for''];
 if ( not_empty stimulus )  // this was not an untimed triggered observation
@@ -462,7 +462,7 @@ end if;
 select one stimulus related by self->Stimulus[R105.''is made after''];
 select any other_observation related by stimulus->Observation[R105.''will trigger'']
  where ( selected.sequence_number == self.sequence_number )
-  and ( selected.obsStatus != tsStatus::completed );
+  and ( selected.status != observationStatus::completed );
 if ( empty other_observation )
   select many observations related by stimulus->Observation[R105.''will trigger'']
    where ( selected.sequence_number == self.sequence_number + 1 );
@@ -516,15 +516,16 @@ INSERT INTO SM_ACT
 	VALUES ("8365397f-d928-40a1-a143-1f5b67717161",
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
-	'// Following a stimuulus injection, an observation is now ''readied'' for evaluation.
+	'// Following a stimulus injection, an observation is now ''readied'' for evaluation.
 // If it has been created with a timeout timer, then start the timer now.
 // If it is not associated with a trigger - for which it must wait - then proceed.
 
-self.obsStatus = tsStatus::started;
+self.status = observationStatus::started;
 self.StartDurationLimitTimer();
 if ( not self.isDelay)  // delays are a "non-observing" observation.
   select one trigger related by self->Trigger[R127.''delays until triggered by''];
   if ( empty trigger )  // not waiting to be triggered by "assess"
+    self.status = observationStatus::observing;
     send TESTBENCH::InvokeObservation( observationId:self.assignedID );
   end if;
 end if;',
@@ -558,8 +559,7 @@ INSERT INTO SM_ACT
 	"a21d52cf-6581-475c-99b1-ce226c484bc4",
 	1,
 	'LOG::LogFailure( message:"SEQ Observation timed out " );      
-self.obsStatus = tsStatus::timedout;
-',
+self.status = observationStatus::timedout;',
 	'',
 	0);
 INSERT INTO SM_TAH

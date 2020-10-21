@@ -113,10 +113,10 @@ INSERT INTO O_ATTR
 	VALUES ("5aa69826-1c07-4e6e-9e73-45f2ebcb5c4c",
 	"ec247a2b-53a1-4839-882c-db3bb2812c25",
 	"dc5df546-89e9-4051-8c3b-8e5f8f60a9e9",
-	'tcStatus',
+	'status',
 	'Completion status.',
 	'',
-	'tcStatus',
+	'status',
 	0,
 	"f118c998-732a-4398-a820-4480fa8cdb21",
 	'',
@@ -124,7 +124,7 @@ INSERT INTO O_ATTR
 INSERT INTO S_DT_PROXY
 	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
 	"00000000-0000-0000-0000-000000000000",
-	'tsStatus',
+	'caseStatus',
 	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');

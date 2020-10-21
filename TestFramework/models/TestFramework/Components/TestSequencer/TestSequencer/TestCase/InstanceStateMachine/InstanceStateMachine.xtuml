@@ -486,11 +486,11 @@ LOG::LogInfo( message:"SEQ Beginning test case stimulus Injection for " + self.t
 select many sequences related by self->StimulusSequence[R119.''executes''];
 if ( not_empty sequences )
   for each seq in sequences
-      generate StimulusSequence1:StartSequence to seq;
-      self.tcStatus = tsStatus::started;
+    generate StimulusSequence1:StartSequence to seq;
+    self.status = caseStatus::started;
   end for;
 end if;
-if ( self.tcStatus != tsStatus::started )
+if ( self.status != caseStatus::started )
   LOG::LogInfo( message:"SEQ Test case is empty!" );
   generate TestCase5:StimulusIncomplete to self;
 end if;',
@@ -509,7 +509,7 @@ INSERT INTO SM_ACT
 	1,
 	'// Test case is finished; determine disposition.
 
-if ( self.tcStatus == tsStatus::failed );
+if ( self.status == caseStatus::failed );
   LOG::LogInfo( message:"SEQ Test case FAILED: " + self.testCaseLabel );
 else
   LOG::LogInfo( message:"SEQ Test case passed: " + self.testCaseLabel );
@@ -560,8 +560,7 @@ INSERT INTO SM_ACT
 	1,
 	'// Wait for all sequences to complete
 
-select any sequence related by self->StimulusSequence[R119.''executes'']
- where (selected.seqStatus != tsStatus::completed );
+select any sequence related by self->StimulusSequence[R119.''executes''];
 if (empty sequence )
   generate TestCase4:InjectionComplete to self;
 end if;',
@@ -592,7 +591,7 @@ INSERT INTO SM_ACT
 	VALUES ("9951f53a-5342-4a29-bb2c-9aef75370457",
 	"f0ebf01e-2bd3-42c6-bcf3-763d336097bd",
 	1,
-	'self.tcStatus = tsStatus::completed;',
+	'self.status = caseStatus::completed;',
 	'',
 	0);
 INSERT INTO SM_TAH
@@ -623,7 +622,7 @@ INSERT INTO SM_ACT
 	'// Failure to complete any sequence fails the test case.
 // No further observations will evaluate.
 
-self.tcStatus = tsStatus::failed;
+self.status = caseStatus::failed;
 self.CancelObservations();
 generate TestCase5:StimulusIncomplete to self;',
 	'An observation has failed to complete successfully; the test case cancels all further activity.',

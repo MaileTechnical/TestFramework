@@ -69,13 +69,13 @@ if ( empty next_bucket )
   if ( not self.retainAll )
     select many testcases from instances of TestCase;
     for each testcase in testcases
-      if ( testcase.tcStatus == tsStatus::completed )  // keep incomplete cases for error analysis.
+      if ( testcase.status == caseStatus::completed )  // keep incomplete cases for error analysis.
         delete object instance testcase;
       end if;
     end for;
     select many buckets from instances of TestBucket;
     for each bucket in buckets
-      if ( bucket.bktStatus == tsStatus::completed )
+      if ( not bucket.failed )
         delete object instance bucket;
       end if;
     end for;
@@ -108,6 +108,7 @@ end if;
 create object instance new_bucket of TestBucket;
 new_bucket.assignedID = param.bucketId;
 new_bucket.bucketLabel = param.bucketLabel;
+new_bucket.failed = False;
 
 // Propagate defaults for any timing that may be needed.
 new_bucket.timeScaleFactor = ts.timeScaleFactor;
@@ -127,10 +128,7 @@ else
     end if;
   end while;
   relate cursor to new_bucket across R113.''follows'';
-end if;
-new_bucket.bktStatus = tsStatus::created;
-
-',
+end if;',
 	1,
 	'',
 	"8a5d688d-f48b-465c-8930-167630d9c2a9",
@@ -211,30 +209,28 @@ while ( not_empty bucket )
    unrelate tc from bucket across R112.''is first in'';
   end if;
   while ( not_empty tc )
-   if ( tc.tcStatus == tsStatus::completed )
-    LOG::LogInfo( message:"Test case passed: " + tc.testCaseLabel );
-   end if;
-   if ( tc.tcStatus == tsStatus::failed )
-    LOG::LogFailure( message:"Test case failed; " + tc.testCaseLabel );
-    select any seq related by tc->StimulusSequence[R119.''executes''];
-    if ( not_empty seq )
+   if ( tc.status == caseStatus::created )
+     LOG::LogFailure( message:"Test case not run: " + tc.testCaseLabel );
+   elif ( tc.status == caseStatus::completed )
+     LOG::LogInfo( message:"Test case passed: " + tc.testCaseLabel );
+   elif ( tc.status == caseStatus::failed )
+    LOG::LogFailure( message:"Test case failed: " + tc.testCaseLabel );
+    select many seqs related by tc->StimulusSequence[R119.''executes'']
+     where ( selected.failed);
+    for each seq in seqs
       LOG::LogFailure( message:" in sequence " + seq.seqLabel );
       select one stm related by seq->Stimulus[R116.''is processing''];
       LOG::LogReal( message:" after stimulus ", r:stm.numberInSeq );
       select many observations related by stm->Observation[R115.''has active''];
       for each observation in observations
         LOG::LogReal( message:" observation ", r:observation.sequence_number );
-        if ( observation.obsStatus == tsStatus::failed )
+        if ( observation.status == observationStatus::failed )
           LOG::LogFailure( message:"Observation failed" );
-        end if;
-        if ( observation.obsStatus == tsStatus::timedout )
+        elif ( observation.status == observationStatus::timedout )
           LOG::LogInfo( message:"Observation timed out" );
         end if;
       end for;
-    end if;
-   end if;
-   if ( tc.tcStatus == tsStatus::created )
-    LOG::LogFailure( message:"Test case not run; " + tc.testCaseLabel );
+    end for;
    end if;
    select one next_tc related by tc->TestCase[R114.''follows''];
    if ( not_empty next_tc )

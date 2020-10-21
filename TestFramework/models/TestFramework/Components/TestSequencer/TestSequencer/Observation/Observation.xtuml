@@ -158,7 +158,7 @@ create object instance new_observation of Observation;
 new_observation.assignedID = param.observationId;
 new_observation.isDelay = param.isDelay;
 new_observation.sequence_number = cursor.observations;
-new_observation.obsStatus = tsStatus::created;
+new_observation.status = observationStatus::created;
 if ( param.triggerKey != "" )
   select any trigger from instances of Trigger
    where ( selected.KeyValue == param.triggerKey );
@@ -339,18 +339,18 @@ INSERT INTO O_ATTR
 	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"461e232d-e064-4ec7-991a-9ab6353d0a53",
-	'obsStatus',
+	'status',
 	'Tracks the status of the observation through creation to completion/failure.',
 	'',
-	'obsStatus',
+	'status',
 	0,
-	"f118c998-732a-4398-a820-4480fa8cdb21",
+	"8dbc5f97-fc0a-492e-a0da-e7c134178780",
 	'',
 	'');
 INSERT INTO S_DT_PROXY
-	VALUES ("f118c998-732a-4398-a820-4480fa8cdb21",
+	VALUES ("8dbc5f97-fc0a-492e-a0da-e7c134178780",
 	"00000000-0000-0000-0000-000000000000",
-	'tsStatus',
+	'observationStatus',
 	'Status values associated with the lifecycles of various instances.',
 	'',
 	'../../Datatypes/Datatypes.xtuml');
@@ -404,7 +404,8 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'A supplied value which identifies the counterpart entity in the test client.',
+	'A supplied value which identifies the counterpart entity in the test client.
+Note: this would ideally be marked as an identifier - but that causes editor parse errors.',
 	'',
 	'assignedID',
 	0,
@@ -469,11 +470,6 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_OIDA
-	VALUES ("0590bf3e-aa12-4afe-99e1-e6823fdf25bc",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	0,
-	'assignedID');
 INSERT INTO O_ID
 	VALUES (1,
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
