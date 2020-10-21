@@ -25,6 +25,7 @@ select any seq related by tc->StimulusSequence[R119.''executes'']
 if ( not_empty seq )
   create object instance new_stimulus of Stimulus;
   new_stimulus.assignedID = param.stimulusId;
+  new_stimulus. failed = False;
   seq.lastStimulus = seq.lastStimulus + 1;
   new_stimulus.numberInSeq = seq.lastStimulus; 
   select one first_stimulus related by seq->Stimulus[R104.''will first inject''];
@@ -110,7 +111,8 @@ INSERT INTO O_ATTR
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'A supplied value which identifies the counterpart entity in the client testbench',
+	'A supplied value which identifies the counterpart entity in the client testbench.
+Note: this would ideally be marked as an identifier - but that causes editor parse errors.',
 	'',
 	'assignedID',
 	0,

@@ -102,17 +102,11 @@ INSERT INTO S_ENUM
 	"f118c998-732a-4398-a820-4480fa8cdb21",
 	"e97954b6-ad67-4097-8f63-6ee04dcc4a2a");
 INSERT INTO S_ENUM
-	VALUES ("246d264d-b5e3-4c0a-8edf-cac26e0b843b",
-	'timedoutX',
-	'',
-	"f118c998-732a-4398-a820-4480fa8cdb21",
-	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
-INSERT INTO S_ENUM
 	VALUES ("05ecd1e6-b55b-40fb-8d0c-79ec43bb33bb",
 	'failed',
 	'',
 	"f118c998-732a-4398-a820-4480fa8cdb21",
-	"246d264d-b5e3-4c0a-8edf-cac26e0b843b");
+	"0bc7b0ab-9856-4f1d-9b1c-153ef1f84f32");
 INSERT INTO S_ENUM
 	VALUES ("cc1be859-f8ee-424b-b475-1b9b4ba2ab34",
 	'completed',

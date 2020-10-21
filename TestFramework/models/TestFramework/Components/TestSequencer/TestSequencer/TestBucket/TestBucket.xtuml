@@ -122,7 +122,8 @@ INSERT INTO O_ATTR
 	"cf812356-d586-4cdf-9c29-72003a1e9246",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'An id passed in from the client testbench which can be used to identify an instance.',
+	'An id passed in from the client testbench which can be used to identify an instance.
+Note: this would ideally be marked as an identifier - but that causes editor parse errors.',
 	'',
 	'assignedID',
 	0,

@@ -108,6 +108,7 @@ end if;
 create object instance new_bucket of TestBucket;
 new_bucket.assignedID = param.bucketId;
 new_bucket.bucketLabel = param.bucketLabel;
+new_bucket.failed = False;
 
 // Propagate defaults for any timing that may be needed.
 new_bucket.timeScaleFactor = ts.timeScaleFactor;

@@ -404,7 +404,8 @@ INSERT INTO O_ATTR
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"00000000-0000-0000-0000-000000000000",
 	'assignedID',
-	'A supplied value which identifies the counterpart entity in the test client.',
+	'A supplied value which identifies the counterpart entity in the test client.
+Note: this would ideally be marked as an identifier - but that causes editor parse errors.',
 	'',
 	'assignedID',
 	0,
