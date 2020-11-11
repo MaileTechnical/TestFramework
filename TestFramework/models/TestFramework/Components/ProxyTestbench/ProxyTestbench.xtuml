@@ -191,7 +191,7 @@ INSERT INTO SPR_RS
 	'InjectStimulus',
 	'Invoke injection of the identified stimulus in the test bench.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
@@ -209,7 +209,7 @@ INSERT INTO SPR_RS
 	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
@@ -227,7 +227,7 @@ INSERT INTO SPR_RS
 	'ObservationDone',
 	'Report to the Test sequencer service that an observation has completed.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
@@ -246,7 +246,7 @@ INSERT INTO SPR_RS
 	'Testbench receives notification that a new test case has been selected to run.
 Initialize any pre-conditions and respond when ready for stimulus injection.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
@@ -265,7 +265,7 @@ INSERT INTO SPR_RS
 	'StimulusDone',
 	'Respond with this signal when all observations for an executed stimulus are complete.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
@@ -285,7 +285,7 @@ INSERT INTO SPR_RS
 This will initiate stimiuli injection, and thus observation reporting, for a test case.
 If the test case has more than one test sequence, these will start in parallel.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
@@ -305,7 +305,7 @@ INSERT INTO SPR_RS
 	'Assess',
 	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
@@ -324,7 +324,7 @@ INSERT INTO SPR_RS
 	'Indicate that the given requirement is (partially) tested by the given test case.
 This is used for test coverage reporting.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
@@ -343,7 +343,7 @@ INSERT INTO SPR_RS
 	'RunTestSuite',
 	'Run the sequence of test buckets associated with the singleton test suite.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
@@ -361,7 +361,7 @@ INSERT INTO SPR_RS
 	'MakeRequirement',
 	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
@@ -380,7 +380,7 @@ INSERT INTO SPR_RS
 	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
 ',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
@@ -399,7 +399,7 @@ INSERT INTO SPR_RS
 	'InitializeBucket',
 	'Signals a test bucket to instantiate its test case sequences.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
@@ -418,7 +418,7 @@ INSERT INTO SPR_RS
 	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
 For observations, consider using the polling capability which can repeatedly evaluate with delays.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
@@ -437,7 +437,7 @@ INSERT INTO SPR_RS
 	'StartIntervalTimer',
 	'A stimulus may request start of the interval timer linked to its test sequence.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
@@ -455,7 +455,7 @@ INSERT INTO SPR_RS
 	'DeleteStimulus',
 	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
@@ -473,7 +473,7 @@ INSERT INTO SPR_RS
 	'DeleteTestBucket',
 	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
@@ -491,7 +491,7 @@ INSERT INTO SPR_RS
 	'RegisterTestSuite',
 	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
@@ -509,7 +509,7 @@ INSERT INTO SPR_RS
 	'DeleteObservation',
 	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
@@ -527,7 +527,7 @@ INSERT INTO SPR_RS
 	'TestSuiteComplete',
 	'Signals completion of the test suite.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
@@ -545,7 +545,7 @@ INSERT INTO SPR_RS
 	'AddBucket',
 	'Add an instance of a test bucket to the test suite.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
@@ -563,7 +563,7 @@ INSERT INTO SPR_RS
 	'AddTestCase',
 	'Add an instance of a test case, identified by label, to the indicated test bucket.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
@@ -581,7 +581,7 @@ INSERT INTO SPR_RS
 	'AddStimulus',
 	'',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
@@ -599,7 +599,7 @@ INSERT INTO SPR_RS
 	'AddObservation',
 	'Add an observation to follow injection of a specified stimulus.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
@@ -619,7 +619,7 @@ INSERT INTO SPR_RS
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
@@ -639,7 +639,7 @@ INSERT INTO SPR_RS
 	'IntervalTimerValue',
 	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
@@ -659,7 +659,7 @@ INSERT INTO SPR_RS
 A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("d69685a1-d173-411e-954d-82338177cf09",
@@ -680,7 +680,7 @@ INSERT INTO SPR_RS
 	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
@@ -699,7 +699,7 @@ INSERT INTO SPR_RS
 	'SetTestBucketTimeResolutions',
 	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
@@ -717,7 +717,7 @@ INSERT INTO SPR_RS
 	'SetSequenceTimeResolutions',
 	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
@@ -735,7 +735,7 @@ INSERT INTO SPR_RS
 	'SetTestSuiteTimeResolutions',
 	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
@@ -753,7 +753,7 @@ INSERT INTO SPR_RS
 	'SetTestCaseTimeResolutions',
 	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
@@ -771,7 +771,7 @@ INSERT INTO SPR_RS
 	'SetSequenceIntervalTimerResolution',
 	'Set a time resolution specific to interval timing measurements on the sequence.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
@@ -789,7 +789,7 @@ INSERT INTO SPR_RS
 	'SetObservationTimeResolutions',
 	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
@@ -797,6 +797,24 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetObservationTimeResolutions',
 	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("c79239e2-e498-4d31-aeba-f98feabd25b9",
+	"2e275a42-594f-477a-86c9-6a263a8b1e41",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("c79239e2-e498-4d31-aeba-f98feabd25b9",
+	'TestCaseComplete',
+	'Signal completion of a test case.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestCaseComplete',
+	'Signal completion of a test case.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
