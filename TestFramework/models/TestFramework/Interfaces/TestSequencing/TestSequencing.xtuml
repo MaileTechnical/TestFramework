@@ -959,6 +959,36 @@ INSERT INTO C_PP
 	0,
 	'',
 	"af8287d9-5262-43a8-a532-970a90f98370");
+INSERT INTO C_EP
+	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'TestCaseComplete',
+	'Signal completion of a test case.');
+INSERT INTO C_AS
+	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
+	'TestCaseComplete',
+	'Signal completion of a test case.',
+	1,
+	"33169678-f345-469d-ac15-ea1c7322c7a9");
+INSERT INTO C_PP
+	VALUES ("314af5a4-c10a-48b0-bd9f-cbd3ca2632df",
+	"2e275a42-594f-477a-86c9-6a263a8b1e41",
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'caseLabel',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO C_PP
+	VALUES ("57891e94-d620-4f3e-bffa-2b144c05bbb9",
+	"2e275a42-594f-477a-86c9-6a263a8b1e41",
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'success',
+	'',
+	0,
+	'',
+	"314af5a4-c10a-48b0-bd9f-cbd3ca2632df");
 INSERT INTO PE_PE
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	1,

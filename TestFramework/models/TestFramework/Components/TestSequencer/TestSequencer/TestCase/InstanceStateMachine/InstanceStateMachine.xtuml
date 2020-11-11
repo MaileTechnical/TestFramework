@@ -507,12 +507,12 @@ INSERT INTO SM_ACT
 	VALUES ("8d09c2d4-decc-4a9c-b365-7d3f061f27d8",
 	"f0ebf01e-2bd3-42c6-bcf3-763d336097bd",
 	1,
-	'// Test case is finished; determine disposition.
+	'// Test case is finished; determine disposition and signal client.
 
 if ( self.status == caseStatus::failed );
-  LOG::LogInfo( message:"SEQ Test case FAILED: " + self.testCaseLabel );
+  send TESTBENCH::TestCaseComplete( caseLabel:self.testCaseLabel, success:False );
 else
-  LOG::LogInfo( message:"SEQ Test case passed: " + self.testCaseLabel );
+  send TESTBENCH::TestCaseComplete( caseLabel:self.testCaseLabel, success:True );
 end if;
 // Report completion to the test bucket
 select one bucket related by self->TestBucket[R117.''is active for''];
