@@ -47,7 +47,6 @@ INSERT INTO O_TFR
 	1,
 	'LOG::LogInfo( message:"SEQ Stimulus sequence complete " + self.seqLabel );
 select one testcase related by self->TestCase[R119.''is execution thread for''];
-unrelate self from testcase across R119.''is execution thread for'';
 generate TestCase3:SequenceComplete to testcase;',
 	1,
 	'',
