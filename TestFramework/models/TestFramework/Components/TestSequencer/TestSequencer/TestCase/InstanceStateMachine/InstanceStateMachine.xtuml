@@ -558,10 +558,11 @@ INSERT INTO SM_ACT
 	VALUES ("409beb1f-c66f-4742-8cbe-d9ba06a01fc8",
 	"f0ebf01e-2bd3-42c6-bcf3-763d336097bd",
 	1,
-	'// Wait for all sequences to complete
+	'// Wait for all sequences to complete - no active stimulus present.
 
-select any sequence related by self->StimulusSequence[R119.''executes''];
-if (empty sequence )
+select any stimulus related by self->StimulusSequence[R119.''executes'']
+                                   ->Stimulus[R116.''is processing''];
+if (empty stimulus )
   generate TestCase4:InjectionComplete to self;
 end if;',
 	'',
