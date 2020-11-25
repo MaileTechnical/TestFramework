@@ -989,6 +989,27 @@ INSERT INTO C_PP
 	0,
 	'',
 	"314af5a4-c10a-48b0-bd9f-cbd3ca2632df");
+INSERT INTO C_EP
+	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.');
+INSERT INTO C_AS
+	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.',
+	0,
+	"2e275a42-594f-477a-86c9-6a263a8b1e41");
+INSERT INTO C_PP
+	VALUES ("00ab383e-f386-4201-a589-633f28005244",
+	"5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
+	'',
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000");
 INSERT INTO PE_PE
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	1,

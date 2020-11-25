@@ -1,0 +1,174 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	'ImmediateObservation',
+	127,
+	'ImmediateObservation',
+	'',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("fe8d4f22-bf6a-4a0f-807c-40326ea72057",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	'StartPollingTimer',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'// If configured, initialize and start the timer which causes this observation to repeatedly evaluate.
+
+select one polltimer related by self->CountdownTimer[R126.''is polled by'']; 
+if ( not_empty polltimer )
+  // Tell the timer what to do on expiration.
+  select one observation  related by self->Observation[R127];
+  create event instance poll of Observation1:Observe() to observation;
+  polltimer.triggered_event = poll;
+  polltimer.Start();
+end if;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	'Add',
+	'Add an observation to the sequence of observations that should evaluate following stimulus injection.
+A stimulus may have zero or more observations for evaluation in sequence.
+Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'// Add an immediate observation to the last stimulus added to a sequence.
+// It may be added in sequence or concurrently with other observations
+
+create object instance immediate of ImmediateObservation;
+immediate.isDelay = param.isDelay;
+if ( param.pollInterval > 0 )
+  create object instance retry of CountdownTimer;
+  retry.duration = param.pollInterval;
+  relate retry to immediate across R126.''polls'';
+end if;
+create object instance new_observation of Observation;
+relate immediate to new_observation across R127;
+new_observation.Add( seqLabel:param.seqLabel,
+                     observationId:param.observationId, 
+                     durationLimit:param.durationLimit, 
+                     concurrent:param.concurrent );',
+	1,
+	'',
+	"fe8d4f22-bf6a-4a0f-807c-40326ea72057",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("822ff779-a7ba-4ce5-b56b-670911f2e234",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'pollInterval',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"8d90ac4e-2652-4165-821a-c9c837f7a47b",
+	'If this is a polling ( repeated until success/failure ) obsevation, the polling interval.');
+INSERT INTO O_TPARM
+	VALUES ("85920d04-d171-4b93-9f8e-e7416959ff06",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'durationLimit',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"822ff779-a7ba-4ce5-b56b-670911f2e234",
+	'For a polling ( repeated until success/failure ) obsevation, the time after which failure is declared.');
+INSERT INTO O_TPARM
+	VALUES ("6f9ee86c-b34f-4dd2-ad29-451c3b0047f6",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'seqLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'Identifies the stimulus, after injection of which, this observation should be sequentially evaluated.');
+INSERT INTO O_TPARM
+	VALUES ("8d90ac4e-2652-4165-821a-c9c837f7a47b",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'observationId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"6f9ee86c-b34f-4dd2-ad29-451c3b0047f6",
+	'Assigned by the client; used to initiate appropriate client evaluation when observation comes due.');
+INSERT INTO O_TPARM
+	VALUES ("494f569d-74c3-42e6-905f-9710458a48e4",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'concurrent',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"85920d04-d171-4b93-9f8e-e7416959ff06",
+	'If true, this observation  will share the same sequence number as the previous observation.
+Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
+INSERT INTO O_TPARM
+	VALUES ("101554a7-751f-4d6e-ab3b-3b5105e5cf36",
+	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
+	'isDelay',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"494f569d-74c3-42e6-905f-9710458a48e4",
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("4663277f-d1ac-4636-a933-d93f6e3e57dc",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_BATTR
+	VALUES ("4663277f-d1ac-4636-a933-d93f6e3e57dc",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_ATTR
+	VALUES ("4663277f-d1ac-4636-a933-d93f6e3e57dc",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	"00000000-0000-0000-0000-000000000000",
+	'pollScaleFactor',
+	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
+	'',
+	'pollScaleFactor',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000002",
+	'',
+	'');
+INSERT INTO O_NBATTR
+	VALUES ("83d7c6db-4f48-4390-bb2d-52d5f8e07d83",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_BATTR
+	VALUES ("83d7c6db-4f48-4390-bb2d-52d5f8e07d83",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_ATTR
+	VALUES ("83d7c6db-4f48-4390-bb2d-52d5f8e07d83",
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	"4663277f-d1ac-4636-a933-d93f6e3e57dc",
+	'isDelay',
+	'When True, this ''observation'' just uses timeout as a delay; it will not invoke any client activity.
+It will never cause an "observe" action in the client as it has no counterpart.',
+	'',
+	'isDelay',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000001",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_ID
+	VALUES (1,
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO O_ID
+	VALUES (2,
+	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");
+INSERT INTO PE_PE
+	VALUES ("46465b0b-c72c-46ff-a0e3-8fc1a558114f",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

@@ -430,10 +430,10 @@ INSERT INTO SPR_PS
 	VALUES ("a144cc99-8018-496c-b5f1-43590dbdc1f2",
 	'ObservationDone',
 	'Report to the Test sequencer service that an observation has completed.',
-	'select any obs from instances of Observation 
-  where ( selected.assignedID == param.observationId );
-if ( not_empty obs )
-  obs.ReportedDone( success:param.success );
+	'select any observation from instances of Observation 
+ where ( selected.assignedID == param.observationId );
+if ( not_empty observation )
+  observation.ReportedDone( success:param.success );
 else
   LOG::LogFailure( message:"SEQ Invalid observation identifier" );
 end if;',
@@ -477,7 +477,7 @@ INSERT INTO SPR_PS
 	'select any stimulus from instances of Stimulus
   where (selected.assignedID == param.stimulusId );
 if ( not_empty stimulus )
-  generate Stimulus2:DoObservation to stimulus;
+  generate Stimulus2:DoObservations() to stimulus;
 else
   LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
 end if;',
@@ -526,13 +526,7 @@ INSERT INTO SPR_PS
 	VALUES ("c711a80f-d68a-4639-af8a-071ddc7ece4e",
 	'Assess',
 	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
-	'select any trigger from instances of Trigger
- where ( selected.KeyValue == param.key );
-if ( empty trigger )
-  LOG::LogFailure( message:"No observation is waiting for trigger " + param.key );
-  return;
-end if;
-trigger.TriggerObservations( fire:True );',
+	'TriggeredObservation::TriggerObservations(key:param.key);',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -658,13 +652,12 @@ INSERT INTO SPR_PS
 	'InsertDelay',
 	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
 For observations, consider using the polling capability which can repeatedly evaluate with delays.',
-	'Observation::Add( seqLabel:param.seqLabel, 
-                     observationId:param.observationId,
-                     pollInterval:0,
-                     durationLimit:param.duration,
-                     triggerKey:"",
-                     concurrent:False,
-                     isDelay:True );',
+	'ImmediateObservation::Add( seqLabel:param.seqLabel, 
+                           observationId:param.observationId,
+                           pollInterval:0, 
+                           durationLimit:param.duration, 
+                           concurrent:false,
+                           isDelay:true );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -867,13 +860,22 @@ INSERT INTO SPR_PS
 	VALUES ("9a12b970-7867-4d86-91e4-304e0af6a38d",
 	'AddObservation',
 	'Add an observation to follow injection of a specified stimulus.',
-	'Observation::Add( seqLabel:param.seqLabel, 
-                  observationId:param.observationId,
-                  pollInterval:param.pollInterval,
-                  durationLimit:param.pollDuration,
-                  triggerKey:param.eventKey,
-                  concurrent:param.concurrent,
-                  isDelay:False );',
+	'// @TODO make these separate?
+
+if ( param.eventKey != "" )
+  TriggeredObservation::Add( seqLabel:param.seqLabel, 
+                             observationId:param.observationId, 
+                             durationLimit:param.pollDuration, 
+                             triggerKey:param.eventKey, 
+                             concurrent:param.concurrent );
+else
+  ImmediateObservation::Add( seqLabel:param.seqLabel, 
+                             observationId:param.observationId,
+                             pollInterval:param.pollInterval, 
+                             durationLimit:param.pollDuration, 
+                             concurrent:param.concurrent,
+                             isDelay:false );
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -971,13 +973,7 @@ INSERT INTO SPR_PS
 	'RemoveTriggeredObservation',
 	'On this signal, any active observations with matching key value will be deactivated.
 This has the effect of completing the observation without a failure penalty.',
-	'select any trigger from instances of Trigger
- where ( selected.KeyValue == param.key );
-if ( empty trigger )
-  LOG::LogFailure( message:"No observation is waiting for trigger " + param.key );
-  return;
-end if;
-trigger.TriggerObservations( fire:False );',
+	'TriggeredObservation::CancelObservations( key:param.key );',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -1129,7 +1125,10 @@ INSERT INTO SPR_PS
   where ( selected.assignedID == param.observationId );
 if ( not_empty observation )
   observation.timeScaleFactor = param.timeResolution;
-  observation.pollScaleFactor = param.pollResolution;
+  select one subtype related by observation->ImmediateObservation[R127];
+  if ( not_empty subtype )
+    subtype.pollScaleFactor = param.pollResolution;
+  end if;
 else
   LOG::LogFailure( message:"SEQ Invalid observation identifier" );
 end if;',
@@ -1151,7 +1150,7 @@ INSERT INTO SPR_PS
 	'TestCaseComplete',
 	'Signal completion of a test case.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
@@ -1159,6 +1158,30 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'TestCaseComplete',
 	'Signal completion of a test case.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("1c574cf9-c2a4-442f-b8cc-6503003fa3c1",
+	"5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("1c574cf9-c2a4-442f-b8cc-6503003fa3c1",
+	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.',
+	'select any observation from instances of Observation 
+  where ( selected.assignedID == param.observationId );
+if ( not_empty observation )
+  generate Observation6:Stage() to observation;
+else
+  LOG::LogFailure( message:"SEQ Invalid observation identifier" );
+end if;',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",

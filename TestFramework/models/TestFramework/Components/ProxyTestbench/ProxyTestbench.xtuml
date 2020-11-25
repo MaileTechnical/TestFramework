@@ -816,6 +816,24 @@ INSERT INTO C_EP_PROXY
 	'TestCaseComplete',
 	'Signal completion of a test case.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("203c7dd7-24c4-46cf-be71-fc3fcd8bdbe2",
+	"5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("203c7dd7-24c4-46cf-be71-fc3fcd8bdbe2",
+	'ObservationIncomplete',
+	'',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'ObservationIncomplete',
+	'',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	"00000000-0000-0000-0000-000000000000",
