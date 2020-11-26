@@ -724,21 +724,21 @@ INSERT INTO C_EP
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.');
 INSERT INTO C_AS
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
 	0,
 	"d69685a1-d173-411e-954d-82338177cf09");
 INSERT INTO C_PP
-	VALUES ("fc2612da-ef82-4610-a8b5-02f26599c473",
+	VALUES ("05a772cd-b72a-4cc8-a295-9e66eb94df61",
 	"ca057380-3763-49be-a902-4f89bd14277c",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'key',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	'observationId',
 	'',
 	0,
 	'',

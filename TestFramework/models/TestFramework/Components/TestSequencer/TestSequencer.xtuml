@@ -970,18 +970,22 @@ INSERT INTO SPR_PEP
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
 INSERT INTO SPR_PS
 	VALUES ("7d52ac6c-99e0-40be-8abe-5dd4027a72a5",
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
-	'TriggeredObservation::CancelObservations( key:param.key );',
+	'select any observation from instances of Observation
+ where ( selected.assignedID == param.observationId );
+if ( not_empty observation )
+  generate Observation2:Completed() to observation;
+end if;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP

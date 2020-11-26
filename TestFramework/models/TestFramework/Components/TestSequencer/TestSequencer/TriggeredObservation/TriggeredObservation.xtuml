@@ -116,38 +116,6 @@ INSERT INTO O_TPARM
 	"2521086f-7dea-4fca-a2ac-6609f6ed6263",
 	'If true, this observation  will share the same sequence number as the previous observation.
 Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
-INSERT INTO O_TFR
-	VALUES ("9aaa0b4a-86f0-4efb-8715-5de2f3427811",
-	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
-	'CancelObservations',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	0,
-	'// Find any associated triggered observations with matching key that are currently waiting to observe for a latest stimulus 
-found = false;
-select many triggereds from instances of TriggeredObservation
- where ( selected.KeyValue == param.key );
-for each triggered in triggereds
-  select one observation related by triggered->Observation[R127];
-  select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
-  if ( not_empty stimulus )
-    generate Observation5:Unobserve() to observation;
-    found = true;
-  end if;
-end for;',
-	1,
-	'',
-	"ed75e217-9381-48f8-8709-a4e09886b2b6",
-	0);
-INSERT INTO O_TPARM
-	VALUES ("9f8ea081-3d14-4bd2-a418-3ed44941cecb",
-	"9aaa0b4a-86f0-4efb-8715-5de2f3427811",
-	'key',
-	"ba5eda7a-def5-0000-0000-000000000004",
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	'');
 INSERT INTO O_NBATTR
 	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
@@ -169,11 +137,6 @@ INSERT INTO O_ATTR
 INSERT INTO O_ID
 	VALUES (0,
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
-INSERT INTO O_OIDA
-	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
-	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
-	0,
-	'KeyValue');
 INSERT INTO O_ID
 	VALUES (1,
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
