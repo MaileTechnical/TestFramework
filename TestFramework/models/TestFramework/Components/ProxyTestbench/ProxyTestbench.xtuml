@@ -676,8 +676,8 @@ INSERT INTO SPR_REP
 	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
 INSERT INTO SPR_RS
 	VALUES ("7e3a0c29-5383-40de-9069-3ab2c6d3214f",
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
 	'',
 	1,
@@ -686,8 +686,8 @@ INSERT INTO C_EP_PROXY
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
-	'RemoveTriggeredObservation',
-	'On this signal, any active observations with matching key value will be deactivated.
+	'CancelObservation',
+	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_REP
@@ -807,7 +807,7 @@ INSERT INTO SPR_RS
 	'TestCaseComplete',
 	'Signal completion of a test case.',
 	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
@@ -823,16 +823,70 @@ INSERT INTO SPR_REP
 INSERT INTO SPR_RS
 	VALUES ("203c7dd7-24c4-46cf-be71-fc3fcd8bdbe2",
 	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.',
 	'',
-	'',
-	3,
+	1,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'ObservationIncomplete',
+	'Allow this obbservation to be invoked again, attempting completion.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("12389290-4353-4640-a1e5-7e9bce0b37b9",
+	"082333f2-efc5-427f-b3e7-f2c296eb4bed",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("12389290-4353-4640-a1e5-7e9bce0b37b9",
+	'AddImmediateObservation',
+	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
 	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("082333f2-efc5-427f-b3e7-f2c296eb4bed",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddImmediateObservation',
+	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("9d6537b3-686e-41e7-a1a3-093408ffefcb",
+	"09c40bff-dfaf-4ccb-be7c-87e520743fcf",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("9d6537b3-686e-41e7-a1a3-093408ffefcb",
+	'AddTriggeredObservation',
+	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("09c40bff-dfaf-4ccb-be7c-87e520743fcf",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddTriggeredObservation',
+	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_REP
+	VALUES ("8b2c1fcc-3adb-4006-8619-268098197b36",
+	"18966c4a-2804-4b67-8933-5275d471cb7c",
+	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
+INSERT INTO SPR_RS
+	VALUES ("8b2c1fcc-3adb-4006-8619-268098197b36",
+	'MigrateTriggeredObservation',
+	'Change an existing triggered observation to a polling immediate observation.',
+	'',
+	3,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("18966c4a-2804-4b67-8933-5275d471cb7c",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'MigrateTriggeredObservation',
+	'Change an existing triggered observation to a polling immediate observation.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",

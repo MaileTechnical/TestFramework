@@ -127,8 +127,13 @@ INSERT INTO SM_ACT
 	'if ( self.ignore_tick )  // event-in-flight from a too-late cancel
   self.ignore_tick = false;
 else
-  now = TIM::current_clock();
+  now = TIM::current_seconds();
   if ( self.expirationTime <= now )
+    select one imm related by self->ImmediateObservation[R126.''polls''];
+    if ( not_empty imm )
+      LOG::LogInfo( message:"!!!!!!!!!!!!!!!!!!! poll timer expiring" );
+    end if;
+    LOG::LogInfo( message:"!!!!!!!!!!!!!!!!!!! timer expiring" );
     generate self.triggered_event;
     self.Cancel();
   end if;
@@ -209,11 +214,11 @@ INSERT INTO GD_NCS
 	VALUES ("102d19cb-bf3d-403d-b510-b76608a05739");
 INSERT INTO DIM_ND
 	VALUES (330.000000,
-	150.000000,
+	203.000000,
 	"102d19cb-bf3d-403d-b510-b76608a05739");
 INSERT INTO DIM_GE
 	VALUES (169.000000,
-	132.000000,
+	109.000000,
 	"102d19cb-bf3d-403d-b510-b76608a05739",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -232,8 +237,8 @@ INSERT INTO DIM_CON
 	"102d19cb-bf3d-403d-b510-b76608a05739");
 INSERT INTO DIM_CON
 	VALUES ("5f024d67-57ff-43c1-86e5-0e9613cee72a",
-	335.000000,
-	282.000000,
+	336.000000,
+	312.000000,
 	"102d19cb-bf3d-403d-b510-b76608a05739");
 INSERT INTO DIM_CON
 	VALUES ("8a2c3e70-5b84-4e44-b0b7-36b23e2b8c98",
@@ -257,11 +262,11 @@ INSERT INTO GD_SHP
 INSERT INTO GD_NCS
 	VALUES ("5c23661f-8fd0-4538-bea8-be6edcdda5a0");
 INSERT INTO DIM_ND
-	VALUES (325.000000,
+	VALUES (336.000000,
 	60.000000,
 	"5c23661f-8fd0-4538-bea8-be6edcdda5a0");
 INSERT INTO DIM_GE
-	VALUES (180.000000,
+	VALUES (169.000000,
 	360.000000,
 	"5c23661f-8fd0-4538-bea8-be6edcdda5a0",
 	"00000000-0000-0000-0000-000000000000");
@@ -319,8 +324,8 @@ INSERT INTO DIM_ND
 	0.000000,
 	"42fb0fbe-d790-4abe-8413-3f765fc27216");
 INSERT INTO DIM_GE
-	VALUES (351.000000,
-	303.000000,
+	VALUES (351.500000,
+	318.000000,
 	"42fb0fbe-d790-4abe-8413-3f765fc27216",
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO DIM_ELE
@@ -354,8 +359,8 @@ INSERT INTO GD_LS
 	"69f8d404-806d-450d-9a16-5d7efb7b59bb");
 INSERT INTO DIM_WAY
 	VALUES ("39fd1c8e-018f-4e09-99c6-80e9d134a9c1",
-	335.000000,
-	282.000000,
+	336.000000,
+	312.000000,
 	"7457090a-1592-4802-9c3c-5342bf76faa4",
 	"00000000-0000-0000-0000-000000000000",
 	"00000000-0000-0000-0000-000000000000");

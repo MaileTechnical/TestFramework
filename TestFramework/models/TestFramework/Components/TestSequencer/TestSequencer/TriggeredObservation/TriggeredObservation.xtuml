@@ -25,11 +25,11 @@ for each triggered in triggereds
   if ( not_empty stimulus )
     generate Observation7:Trigger() to observation;
     found = true;
-    LOG::LogInfo( message:"Triggering with " + param.key );
+    LOG::LogInfo( message:"Triggering with " + param.key );  // @TODO
   end if;
 end for;
 if ( not found )
-  LOG::LogInfo( message:"Nothing to trigger with " + param.key );
+  LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO
 end if;',
 	1,
 	'',
@@ -77,7 +77,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"da442853-a73c-4744-9066-d8f8b66f1829",
-	'For a polling ( repeated until success/failure ) obsevation, the time after which failure is declared.');
+	'For a repeating triggered observation, the time interval allowed to report success.');
 INSERT INTO O_TPARM
 	VALUES ("048021e2-2a2a-4a20-949d-68fb8cebddba",
 	"ed75e217-9381-48f8-8709-a4e09886b2b6",
@@ -86,7 +86,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"00000000-0000-0000-0000-000000000000",
-	'Identifies the stimulus, after injection of which, this observation should be sequentially evaluated.');
+	'Identifies the stimulus, after injection of which, this observation will be eligible for triggered evaluation.');
 INSERT INTO O_TPARM
 	VALUES ("2521086f-7dea-4fca-a2ac-6609f6ed6263",
 	"ed75e217-9381-48f8-8709-a4e09886b2b6",
@@ -95,8 +95,7 @@ INSERT INTO O_TPARM
 	0,
 	'',
 	"ac3ae5c8-34d5-4194-9d11-1f8dbb384639",
-	'If non-null, this observation will not invoke a client evaluation until triggered.
-Triggering is accomplished by a client "assess" signal with a matching key value.');
+	'Triggering is accomplished by a client "assess" signal with a matching key value.');
 INSERT INTO O_TPARM
 	VALUES ("da442853-a73c-4744-9066-d8f8b66f1829",
 	"ed75e217-9381-48f8-8709-a4e09886b2b6",
@@ -115,7 +114,7 @@ INSERT INTO O_TPARM
 	'',
 	"2521086f-7dea-4fca-a2ac-6609f6ed6263",
 	'If true, this observation  will share the same sequence number as the previous observation.
-Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
+Observations sharing a sequence number will run concurrently when evaluating after a stimulus.');
 INSERT INTO O_NBATTR
 	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
 	"de3f24bd-e21c-4d1a-baa3-7da417d92837");

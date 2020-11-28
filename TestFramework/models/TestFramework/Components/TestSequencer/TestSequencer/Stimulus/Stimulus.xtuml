@@ -95,7 +95,7 @@ Signal start to the timer for this sequence.',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'select one seq related by self->StimulusSequence[R116.''is active for''];
-seq.IntervalTimerStartTime = TIM::current_clock();',
+seq.IntervalTimerStartTime = TIM::current_seconds();',
 	1,
 	'',
 	"39c93c24-b96a-4e09-81bd-97578ae30d17",

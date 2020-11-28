@@ -23,6 +23,8 @@ if ( not_empty polltimer )
   create event instance poll of Observation1:Observe() to observation;
   polltimer.triggered_event = poll;
   polltimer.Start();
+  LOG::LogInfo( message:" ****************************** poll timer started" ); // @TODO
+
 end if;',
 	1,
 	'',
@@ -41,7 +43,6 @@ Each observation is given an opportunity to evaluate, and must succeed before pr
 // It may be added in sequence or concurrently with other observations
 
 create object instance immediate of ImmediateObservation;
-immediate.isDelay = param.isDelay;
 if ( param.pollInterval > 0 )
   create object instance retry of CountdownTimer;
   retry.duration = param.pollInterval;
@@ -103,15 +104,6 @@ INSERT INTO O_TPARM
 	"85920d04-d171-4b93-9f8e-e7416959ff06",
 	'If true, this observation  will share the same sequence number as the previous observation.
 Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
-INSERT INTO O_TPARM
-	VALUES ("101554a7-751f-4d6e-ab3b-3b5105e5cf36",
-	"9b86fa54-713d-4a4e-8205-a91dc828c2f7",
-	'isDelay',
-	"ba5eda7a-def5-0000-0000-000000000001",
-	0,
-	'',
-	"494f569d-74c3-42e6-905f-9710458a48e4",
-	'');
 INSERT INTO O_NBATTR
 	VALUES ("4663277f-d1ac-4636-a933-d93f6e3e57dc",
 	"46465b0b-c72c-46ff-a0e3-8fc1a558114f");

@@ -53,6 +53,7 @@ INSERT INTO O_TFR
 select one ptmr related by self->ImmediateObservation[R127]->CountdownTimer[R126.''is polled by''];
 if ( not_empty ptmr )
   ptmr.Cancel();
+  LOG::LogInfo( message:" ****************************** cancelling poll timer" ); // @TODO
 end if;
 select one dtmr related by self->CountdownTimer[R125.''is stopped by''];
 if ( not_empty dtmr )
@@ -203,9 +204,9 @@ Optionally, reset the timer value to zero after reading: see reset paramater.',
 
 select one seq related by self->Stimulus[R115.''is currently observing for'']
                               ->StimulusSequence[R116.''is active for''];
-interval = ( TIM::current_clock() - seq.IntervalTimerStartTime ) / seq.timeScaleFactor;
+interval = ( TIM::current_seconds() - seq.IntervalTimerStartTime ) / seq.timeScaleFactor;
 if ( param.reset )
-  seq.IntervalTimerStartTime = TIM::current_clock();
+  seq.IntervalTimerStartTime = TIM::current_seconds();
 end if;
 send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,

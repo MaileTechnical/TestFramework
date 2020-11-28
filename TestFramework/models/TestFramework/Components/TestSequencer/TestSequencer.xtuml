@@ -656,8 +656,11 @@ For observations, consider using the polling capability which can repeatedly eva
                            observationId:param.observationId,
                            pollInterval:0, 
                            durationLimit:param.duration, 
-                           concurrent:false,
-                           isDelay:true );',
+                           concurrent:false );
+select any observation from instances of Observation
+ where ( selected.assignedID == param.observationId );
+select one subtype related by observation->ImmediateObservation[R127];
+subtype.isDelay = true;',
 	1,
 	0);
 INSERT INTO C_EP_PROXY
@@ -873,8 +876,7 @@ else
                              observationId:param.observationId,
                              pollInterval:param.pollInterval, 
                              durationLimit:param.pollDuration, 
-                             concurrent:param.concurrent,
-                             isDelay:false );
+                             concurrent:param.concurrent );
 end if;',
 	1,
 	0);
@@ -1186,6 +1188,82 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'ObservationIncomplete',
 	'Allow this obbservation to be invoked again, attempting completion.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("ba5beb79-ae50-4506-993d-50c60667cd24",
+	"082333f2-efc5-427f-b3e7-f2c296eb4bed",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("ba5beb79-ae50-4506-993d-50c60667cd24",
+	'AddImmediateObservation',
+	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
+	'ImmediateObservation::Add( seqLabel:param.seqLabel,
+                           observationId:param.observationId,
+                           pollInterval:param.pollInterval, 
+                           durationLimit:param.pollInterval,
+                           concurrent:param.concurrent );',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("082333f2-efc5-427f-b3e7-f2c296eb4bed",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddImmediateObservation',
+	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("83c08ee5-abd7-47ab-8110-fc6441771284",
+	"09c40bff-dfaf-4ccb-be7c-87e520743fcf",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("83c08ee5-abd7-47ab-8110-fc6441771284",
+	'AddTriggeredObservation',
+	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	'TriggeredObservation::Add( seqLabel:param.seqLabel,
+                           observationId:param.observationId,
+                           durationLimit:param.durationLimit,
+                           triggerKey:param.eventKey,
+                           concurrent:param.concurrent );',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("09c40bff-dfaf-4ccb-be7c-87e520743fcf",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'AddTriggeredObservation',
+	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
+INSERT INTO SPR_PEP
+	VALUES ("1ae683e0-44d1-47f9-9ce0-6e3bd8e7b537",
+	"18966c4a-2804-4b67-8933-5275d471cb7c",
+	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
+INSERT INTO SPR_PS
+	VALUES ("1ae683e0-44d1-47f9-9ce0-6e3bd8e7b537",
+	'MigrateTriggeredObservation',
+	'Change an existing triggered observation to a polling immediate observation.',
+	'// Create a polling immediate observation to replace the triggered subtype.
+select any observation from instances of Observation
+ where ( selected.assignedID == param.observationId );
+select one triggered related by observation->TriggeredObservation[R127];
+if ( not_empty triggered )
+  unrelate triggered from observation across R127;
+  delete object instance triggered;
+  create object instance immediate of ImmediateObservation;
+  if ( param.pollInterval > 0 )
+    create object instance retry of CountdownTimer;
+    retry.duration = param.pollInterval;
+    relate retry to immediate across R126.''polls'';
+  end if;
+  relate immediate to observation across R127;
+end if;',
+	1,
+	0);
+INSERT INTO C_EP_PROXY
+	VALUES ("18966c4a-2804-4b67-8933-5275d471cb7c",
+	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
+	-1,
+	'MigrateTriggeredObservation',
+	'Change an existing triggered observation to a polling immediate observation.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",
