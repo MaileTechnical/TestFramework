@@ -1200,7 +1200,7 @@ INSERT INTO SPR_PS
 	'ImmediateObservation::Add( seqLabel:param.seqLabel,
                            observationId:param.observationId,
                            pollInterval:param.pollInterval, 
-                           durationLimit:param.pollInterval,
+                           durationLimit:param.pollDuration,
                            concurrent:param.concurrent );',
 	1,
 	0);

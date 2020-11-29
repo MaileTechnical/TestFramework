@@ -29,7 +29,7 @@ for each triggered in triggereds
   end if;
 end for;
 if ( not found )
-  LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO
+  //LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO
 end if;',
 	1,
 	'',

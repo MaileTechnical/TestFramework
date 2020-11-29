@@ -127,13 +127,8 @@ INSERT INTO SM_ACT
 	'if ( self.ignore_tick )  // event-in-flight from a too-late cancel
   self.ignore_tick = false;
 else
-  now = TIM::current_seconds();
+  now = TIM::current_clock();
   if ( self.expirationTime <= now )
-    select one imm related by self->ImmediateObservation[R126.''polls''];
-    if ( not_empty imm )
-      LOG::LogInfo( message:"!!!!!!!!!!!!!!!!!!! poll timer expiring" );
-    end if;
-    LOG::LogInfo( message:"!!!!!!!!!!!!!!!!!!! timer expiring" );
     generate self.triggered_event;
     self.Cancel();
   end if;

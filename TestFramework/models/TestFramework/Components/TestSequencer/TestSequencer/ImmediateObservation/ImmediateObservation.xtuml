@@ -23,8 +23,6 @@ if ( not_empty polltimer )
   create event instance poll of Observation1:Observe() to observation;
   polltimer.triggered_event = poll;
   polltimer.Start();
-  LOG::LogInfo( message:" ****************************** poll timer started" ); // @TODO
-
 end if;',
 	1,
 	'',
