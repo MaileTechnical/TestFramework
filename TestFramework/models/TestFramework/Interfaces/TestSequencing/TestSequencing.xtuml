@@ -554,75 +554,6 @@ INSERT INTO C_PP
 	'',
 	"92524ef5-e6f9-45d9-a452-e5a01514e6dd");
 INSERT INTO C_EP
-	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.');
-INSERT INTO C_AS
-	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.',
-	0,
-	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d");
-INSERT INTO C_PP
-	VALUES ("589d107b-bf56-490e-ba8b-50b57cfc90d2",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'seqLabel',
-	'Identifies the stimulus sequence to which this observation will be added.
-The observation is added to the currently last stimulus in the sequence matching the label.
-It may added to run sequentially or concurrently with others following that stimulus.',
-	0,
-	'',
-	"00000000-0000-0000-0000-000000000000");
-INSERT INTO C_PP
-	VALUES ("9b42030c-17eb-4c48-aad6-3deba33aaac5",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'pollInterval',
-	'For an observation that needs to mett criteria to succeed, it may specify an interval at which it will repeatedly be evaluated.',
-	0,
-	'',
-	"00dca565-b335-4dab-a665-1915fea5fce8");
-INSERT INTO C_PP
-	VALUES ("5ab01dbf-492b-42d0-bce8-58a279f06715",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'pollDuration',
-	'The maximum time allowed to evaluate without reporting success.',
-	0,
-	'',
-	"9b42030c-17eb-4c48-aad6-3deba33aaac5");
-INSERT INTO C_PP
-	VALUES ("a5cf080d-7c9a-4f46-b70c-49d0ab7876f5",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000004",
-	'eventKey',
-	'A value which, if matched by "assess", will trigger an invocation to evaluate the observation.',
-	0,
-	'',
-	"5ab01dbf-492b-42d0-bce8-58a279f06715");
-INSERT INTO C_PP
-	VALUES ("00dca565-b335-4dab-a665-1915fea5fce8",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000005",
-	'observationId',
-	'',
-	0,
-	'',
-	"589d107b-bf56-490e-ba8b-50b57cfc90d2");
-INSERT INTO C_PP
-	VALUES ("424f489a-b8c3-4f41-9118-6ae9ba7d53ee",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"ba5eda7a-def5-0000-0000-000000000001",
-	'concurrent',
-	'If true, this observation  will share the same sequence number as the previous observation.
-Observations sharing a sequence number will run concurrently when triggered after a stimulus.',
-	0,
-	'',
-	"a5cf080d-7c9a-4f46-b70c-49d0ab7876f5");
-INSERT INTO C_EP
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
@@ -637,7 +568,7 @@ INSERT INTO C_AS
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
 	0,
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2");
+	"ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d");
 INSERT INTO C_PP
 	VALUES ("9f2d1cb3-f76c-489f-a3cd-ae9412109a19",
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",

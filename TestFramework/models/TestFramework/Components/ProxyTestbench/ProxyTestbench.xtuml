@@ -64,7 +64,7 @@ INSERT INTO GD_GE
 	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b",
 	93,
 	0,
-	'TestFramework::Components::ProxyTestbench::Port1::TestSequencing');
+	'TestFramework::Components::ProxyTestbench::TESTSEQ::TestSequencing');
 INSERT INTO GD_CON
 	VALUES ("98a4816d-08c1-4365-a5ed-14e2d2242c8c",
 	"00000000-0000-0000-0000-000000000000");
@@ -168,7 +168,7 @@ INSERT INTO DIM_DIA
 INSERT INTO C_PO
 	VALUES ("2b54627a-e9c5-45ef-86b1-10b411da7402",
 	"4e60e1e9-d830-4ee5-80f9-cacc2e9979a0",
-	'Port1',
+	'TESTSEQ',
 	0,
 	0);
 INSERT INTO C_IR
@@ -181,7 +181,7 @@ INSERT INTO C_R
 	'TestSequencing',
 	'',
 	'Unnamed Interface',
-	'ProxyTestbench::Port1::TestSequencing');
+	'ProxyTestbench::TESTSEQ::TestSequencing');
 INSERT INTO SPR_REP
 	VALUES ("37761492-cc9e-45b3-8787-b760e5c5737b",
 	"abb1f40e-d7c8-4654-94f5-c0a999c3866a",
@@ -589,24 +589,6 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddStimulus',
 	'',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_REP
-	VALUES ("56874fd5-5810-4c77-b331-aca6dc493a81",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b");
-INSERT INTO SPR_RS
-	VALUES ("56874fd5-5810-4c77-b331-aca6dc493a81",
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.',
-	'',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_REP
 	VALUES ("8369705f-f784-465b-a7b4-4dae2a59680b",

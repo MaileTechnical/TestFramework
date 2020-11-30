@@ -856,38 +856,6 @@ INSERT INTO C_EP_PROXY
 	'',
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
-	VALUES ("9a12b970-7867-4d86-91e4-304e0af6a38d",
-	"db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
-INSERT INTO SPR_PS
-	VALUES ("9a12b970-7867-4d86-91e4-304e0af6a38d",
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.',
-	'// @TODO make these separate?
-
-if ( param.eventKey != "" )
-  TriggeredObservation::Add( seqLabel:param.seqLabel, 
-                             observationId:param.observationId, 
-                             durationLimit:param.pollDuration, 
-                             triggerKey:param.eventKey, 
-                             concurrent:param.concurrent );
-else
-  ImmediateObservation::Add( seqLabel:param.seqLabel, 
-                             observationId:param.observationId,
-                             pollInterval:param.pollInterval, 
-                             durationLimit:param.pollDuration, 
-                             concurrent:param.concurrent );
-end if;',
-	1,
-	0);
-INSERT INTO C_EP_PROXY
-	VALUES ("db8e25d9-f7a5-4738-85a0-ef4adc5bf3f2",
-	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
-	-1,
-	'AddObservation',
-	'Add an observation to follow injection of a specified stimulus.',
-	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
-INSERT INTO SPR_PEP
 	VALUES ("a7fd58ce-2f1a-4180-a410-8e39062d165b",
 	"80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	"b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb");
