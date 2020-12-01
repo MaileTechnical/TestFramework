@@ -84,7 +84,7 @@ delete object instance self;
 ',
 	1,
 	'',
-	"010572a9-3364-4429-86fb-aeab14976f4e",
+	"b5a3da7a-5ae2-4819-a48a-12536a6fd502",
 	0);
 INSERT INTO O_TFR
 	VALUES ("cc87cb5b-9ec3-468d-b00c-2b4ffcbfb775",
@@ -100,6 +100,31 @@ seq.IntervalTimerStartTime = TIM::current_clock();',
 	'',
 	"39c93c24-b96a-4e09-81bd-97578ae30d17",
 	0);
+INSERT INTO O_TFR
+	VALUES ("b5a3da7a-5ae2-4819-a48a-12536a6fd502",
+	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0",
+	'ActivateObservations',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select many observations related by self->Observation[R105.''will trigger'']
+ where ( selected.sequence_number == param.sequenceNumber );
+for each observation in observations
+  relate observation to self across R115.''is currently observing for'';
+end for;',
+	1,
+	'',
+	"010572a9-3364-4429-86fb-aeab14976f4e",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("95077c7b-c7b5-423a-a298-2e595a5b3eaa",
+	"b5a3da7a-5ae2-4819-a48a-12536a6fd502",
+	'sequenceNumber',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
 INSERT INTO O_NBATTR
 	VALUES ("66a641e5-550e-435e-bccc-9b80b78659ca",
 	"98a0e5ff-b2a0-4159-b98d-6232d74cdff0");

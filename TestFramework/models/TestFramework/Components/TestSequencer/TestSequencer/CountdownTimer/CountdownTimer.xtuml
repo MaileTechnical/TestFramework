@@ -15,7 +15,8 @@ INSERT INTO O_TFR
 	'',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
-	'now = TIM::current_clock();
+	'// calculate expiration time as a timestamp (64-bit)
+now = TIM::current_clock();
 self.expirationTime = now + self.duration * self.scale_factor;
 create event instance tick of CountdownTimer1:timer_tick() to self;
 self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self.scale_factor );',
@@ -99,7 +100,7 @@ INSERT INTO O_ATTR
 	"051d7224-ec52-4fdc-a252-29d517f4c9d5",
 	"33cae18e-65cf-406c-b7c6-effa5245d5c5",
 	'scale_factor',
-	'Multiplier of base timer units to configured timer resolution.',
+	'Multiplier of base timer units (microseconds) to configured timer resolution.',
 	'',
 	'scale_factor',
 	0,

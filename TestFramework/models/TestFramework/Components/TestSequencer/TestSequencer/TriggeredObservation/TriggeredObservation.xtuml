@@ -1,0 +1,158 @@
+-- BP 7.1.6 content: ModelClass syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO O_OBJ
+	VALUES ("de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	'TriggeredObservation',
+	126,
+	'TriggeredObservation',
+	'An active notification, such as receipt of an interface message,
+that triggers one or more observations. ',
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO O_TFR
+	VALUES ("204a8db1-afba-4b50-b47c-0d8bfb506bfc",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	'TriggerObservations',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'// Find any associated triggered observations with matching key that are currently waiting to observe for a latest stimulus 
+found = false;
+select many triggereds from instances of TriggeredObservation
+ where ( selected.KeyValue == param.key );
+for each triggered in triggereds
+  select one observation related by triggered->Observation[R127];
+  select one stimulus related by observation->Stimulus[R115.''is currently observing for''];
+  if ( not_empty stimulus )
+    generate Observation7:Trigger() to observation;
+    found = true;
+    LOG::LogInfo( message:"Triggering with " + param.key );  // @TODO
+  end if;
+end for;
+if ( not found )
+  //LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO
+end if;',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("62ae9874-c39a-49b6-b8b1-c0d531f0d260",
+	"204a8db1-afba-4b50-b47c-0d8bfb506bfc",
+	'key',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'');
+INSERT INTO O_TFR
+	VALUES ("ed75e217-9381-48f8-8709-a4e09886b2b6",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	'Add',
+	'Add an observation to the sequence of observations that should evaluate following stimulus injection.
+A stimulus may have zero or more observations for evaluation in sequence.
+Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	0,
+	'// Add an observation to the last stimulus added to a sequence.
+// It may be added in sequence or concurrently with other observations.
+
+create object instance triggered of TriggeredObservation;
+create object instance new_observation of Observation;
+relate triggered to new_observation across R127;
+triggered.KeyValue = param.triggerKey;
+
+new_observation.Add( seqLabel:param.seqLabel,
+                     observationId:param.observationId, 
+                     durationLimit:param.durationLimit, 
+                     concurrent:param.concurrent );',
+	1,
+	'',
+	"204a8db1-afba-4b50-b47c-0d8bfb506bfc",
+	0);
+INSERT INTO O_TPARM
+	VALUES ("ac3ae5c8-34d5-4194-9d11-1f8dbb384639",
+	"ed75e217-9381-48f8-8709-a4e09886b2b6",
+	'durationLimit',
+	"ba5eda7a-def5-0000-0000-000000000002",
+	0,
+	'',
+	"da442853-a73c-4744-9066-d8f8b66f1829",
+	'For a repeating triggered observation, the time interval allowed to report success.');
+INSERT INTO O_TPARM
+	VALUES ("048021e2-2a2a-4a20-949d-68fb8cebddba",
+	"ed75e217-9381-48f8-8709-a4e09886b2b6",
+	'seqLabel',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	'Identifies the stimulus, after injection of which, this observation will be eligible for triggered evaluation.');
+INSERT INTO O_TPARM
+	VALUES ("2521086f-7dea-4fca-a2ac-6609f6ed6263",
+	"ed75e217-9381-48f8-8709-a4e09886b2b6",
+	'triggerKey',
+	"ba5eda7a-def5-0000-0000-000000000004",
+	0,
+	'',
+	"ac3ae5c8-34d5-4194-9d11-1f8dbb384639",
+	'Triggering is accomplished by a client "assess" signal with a matching key value.');
+INSERT INTO O_TPARM
+	VALUES ("da442853-a73c-4744-9066-d8f8b66f1829",
+	"ed75e217-9381-48f8-8709-a4e09886b2b6",
+	'observationId',
+	"ba5eda7a-def5-0000-0000-000000000005",
+	0,
+	'',
+	"048021e2-2a2a-4a20-949d-68fb8cebddba",
+	'Assigned by the client; used to initiate appropriate client evaluation when observation comes due.');
+INSERT INTO O_TPARM
+	VALUES ("685d9ca9-b5d6-47c4-a2a8-3bd689d1a881",
+	"ed75e217-9381-48f8-8709-a4e09886b2b6",
+	'concurrent',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	0,
+	'',
+	"2521086f-7dea-4fca-a2ac-6609f6ed6263",
+	'If true, this observation  will share the same sequence number as the previous observation.
+Observations sharing a sequence number will run concurrently when evaluating after a stimulus.');
+INSERT INTO O_NBATTR
+	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO O_BATTR
+	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO O_ATTR
+	VALUES ("028ed442-dc9c-4f17-ab74-4bf251388dc6",
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	"00000000-0000-0000-0000-000000000000",
+	'KeyValue',
+	'',
+	'',
+	'KeyValue',
+	0,
+	"ba5eda7a-def5-0000-0000-000000000004",
+	'',
+	'');
+INSERT INTO O_ID
+	VALUES (0,
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO O_ID
+	VALUES (1,
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO O_ID
+	VALUES (2,
+	"de3f24bd-e21c-4d1a-baa3-7da417d92837");
+INSERT INTO PE_PE
+	VALUES ("de3f24bd-e21c-4d1a-baa3-7da417d92837",
+	1,
+	"9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	4);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("9688d51a-0c78-4f2b-b5c4-8da421246f13",
+	"00000000-0000-0000-0000-000000000000",
+	"b06a8228-7533-46d6-b644-27cf49555288",
+	'TestSequencer',
+	'',
+	0,
+	'../TestSequencer.xtuml');

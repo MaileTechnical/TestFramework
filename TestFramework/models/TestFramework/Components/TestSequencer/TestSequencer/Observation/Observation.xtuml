@@ -17,26 +17,6 @@ Some may allow multiple triggering - this requires the use of a guard (timeout) 
 ',
 	"00000000-0000-0000-0000-000000000000");
 INSERT INTO O_TFR
-	VALUES ("6475862e-fa46-4136-b86e-0c99df6734ca",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	'StartPollingTimer',
-	'',
-	"ba5eda7a-def5-0000-0000-000000000000",
-	1,
-	'// If configured, initialize and start the timer which causes this observation to repeatedly evaluate.
-
-select one polltimer related by self->CountdownTimer[R126.''is polled by''];
-if ( not_empty polltimer )
-  // Tell the timer what to do on expiration.
-  create event instance poll of Observation1:Observe() to self;
-  polltimer.triggered_event = poll;
-  polltimer.Start();
-end if;',
-	1,
-	'',
-	"00000000-0000-0000-0000-000000000000",
-	0);
-INSERT INTO O_TFR
 	VALUES ("99f3a05c-edfd-49a4-8f70-160c84f5a3e7",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	'StartDurationLimitTimer',
@@ -47,7 +27,8 @@ INSERT INTO O_TFR
 
 select one timeout related by self->CountdownTimer[R125.''is stopped by''];
 if (not  empty timeout )
-  if ( self.isDelay )  // a delay merely completes; it never ''observes''.
+  select one subtype related by self->ImmediateObservation[R127];
+  if ( subtype.isDelay )  // a delay merely completes; it never ''observes''.
     create event instance delayed of Observation2:Completed() to self;
     timeout.triggered_event = delayed; 
   else
@@ -58,7 +39,7 @@ if (not  empty timeout )
 end if;',
 	1,
 	'',
-	"6475862e-fa46-4136-b86e-0c99df6734ca",
+	"37e0520a-d625-42ae-af71-e0ed81aa52c2",
 	0);
 INSERT INTO O_TFR
 	VALUES ("d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
@@ -69,7 +50,7 @@ INSERT INTO O_TFR
 	1,
 	'// If configured, stop timers running.
 
-select one ptmr related by self->CountdownTimer[R126.''is polled by''];
+select one ptmr related by self->ImmediateObservation[R127]->CountdownTimer[R126.''is polled by''];
 if ( not_empty ptmr )
   ptmr.Cancel();
 end if;
@@ -116,7 +97,7 @@ INSERT INTO O_TFR
 A stimulus may have zero or more observations for evaluation in sequence.
 Each observation is given an opportunity to evaluate, and must succeed before proceeding to the next.',
 	"ba5eda7a-def5-0000-0000-000000000000",
-	0,
+	1,
 	'// Add an observation to the last stimulus added to a sequence.
 // It may be added in sequence or concurrently with other observations.
 
@@ -154,48 +135,25 @@ else
     cursor.observations = cursor.observations + 1;
   end if;
 end if;
-create object instance new_observation of Observation;
-new_observation.assignedID = param.observationId;
-new_observation.isDelay = param.isDelay;
-new_observation.sequence_number = cursor.observations;
-new_observation.status = observationStatus::created;
-if ( param.triggerKey != "" )
-  select any trigger from instances of Trigger
-   where ( selected.KeyValue == param.triggerKey );
-  if ( empty trigger )
-    create object instance trigger of Trigger;
-    trigger.KeyValue = param.triggerKey;
-  end if;
-  relate new_observation to trigger across R127.''delays until triggered by'';
-end if;
+self.assignedID = param.observationId;
+self.sequence_number = cursor.observations;
+self.status = observationStatus::created;
 
 if ( param.durationLimit > 0 )
   create object instance timeout of CountdownTimer;
   timeout.duration = param.durationLimit;
   timeout.scale_factor = seq.timeScaleFactor;
-  relate timeout to new_observation across R125.''timesout'';
+  relate timeout to self across R125.''timesout'';
 end if;
-if ( param.pollInterval > 0 )
-  create object instance retry of CountdownTimer;
-  retry.duration = param.pollInterval;
-  retry.scale_factor = seq.pollScaleFactor;
-  relate retry to new_observation across R126.''polls'';
+select one polltimer related by self->ImmediateObservation[R127]->CountdownTimer[R126.''is polled by''];
+if ( not_empty polltimer )
+  polltimer.scale_factor = seq.timeScaleFactor;
 end if;
-relate new_observation to cursor across R105.''is made after'';
-',
+relate self to cursor across R105.''is made after'';',
 	1,
 	'',
-	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
+	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
 	0);
-INSERT INTO O_TPARM
-	VALUES ("e4be0c83-60d3-496e-a688-3e3d832da9bf",
-	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	'pollInterval',
-	"ba5eda7a-def5-0000-0000-000000000002",
-	0,
-	'',
-	"ed94511a-1ba5-41fa-af71-bf810cc45f5c",
-	'If this is a polling ( repeated until success/failure ) obsevation, the polling interval.');
 INSERT INTO O_TPARM
 	VALUES ("5cd1928e-f46d-4919-aee6-2bfb9590acbe",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
@@ -203,7 +161,7 @@ INSERT INTO O_TPARM
 	"ba5eda7a-def5-0000-0000-000000000002",
 	0,
 	'',
-	"e4be0c83-60d3-496e-a688-3e3d832da9bf",
+	"ed94511a-1ba5-41fa-af71-bf810cc45f5c",
 	'For a polling ( repeated until success/failure ) obsevation, the time after which failure is declared.');
 INSERT INTO O_TPARM
 	VALUES ("4d06e5c5-3364-404d-9364-b3340967640d",
@@ -215,16 +173,6 @@ INSERT INTO O_TPARM
 	"00000000-0000-0000-0000-000000000000",
 	'Identifies the stimulus, after injection of which, this observation should be sequentially evaluated.');
 INSERT INTO O_TPARM
-	VALUES ("4733748f-225f-4480-87ef-6251e166bc50",
-	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	'triggerKey',
-	"ba5eda7a-def5-0000-0000-000000000004",
-	0,
-	'',
-	"5cd1928e-f46d-4919-aee6-2bfb9590acbe",
-	'If non-null, this observation will not invoke a client evaluation until triggered.
-Triggering is accomplished by a client "assess" signal with a matching key value.');
-INSERT INTO O_TPARM
 	VALUES ("ed94511a-1ba5-41fa-af71-bf810cc45f5c",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
 	'observationId',
@@ -234,23 +182,13 @@ INSERT INTO O_TPARM
 	"4d06e5c5-3364-404d-9364-b3340967640d",
 	'Assigned by the client; used to initiate appropriate client evaluation when observation comes due.');
 INSERT INTO O_TPARM
-	VALUES ("1f61a05e-fae9-4aa6-8b2f-a094515f4bda",
-	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
-	'isDelay',
-	"ba5eda7a-def5-0000-0000-000000000001",
-	0,
-	'',
-	"be671862-f1ad-4106-8f60-181a44963c8b",
-	'This "observation" merely elapses perceived time before any following observation becomes eligible.
-It has no counterpart in the testing client and, so, will not trigger any action in the client.');
-INSERT INTO O_TPARM
 	VALUES ("be671862-f1ad-4106-8f60-181a44963c8b",
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
 	'concurrent',
 	"ba5eda7a-def5-0000-0000-000000000001",
 	0,
 	'',
-	"4733748f-225f-4480-87ef-6251e166bc50",
+	"5cd1928e-f46d-4919-aee6-2bfb9590acbe",
 	'If true, this observation  will share the same sequence number as the previous observation.
 Observations sharing a sequence number will run concurrently when triggered after a stimulus.');
 INSERT INTO O_TFR
@@ -272,7 +210,7 @@ end if;
 send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,
 	'',
-	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
 	0);
 INSERT INTO O_TPARM
 	VALUES ("6ad5b0b1-6d02-41f7-899b-df41524719e0",
@@ -300,34 +238,69 @@ INSERT INTO O_TFR
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'// Signal deletion to the client.
-// then, delete any associated trigger and/or timers before self-deletion.
+// then, delete subtype and/or timers before self-deletion.
 
-if ( not self.isDelay )  // A delay ''observation'' has no client counterpart.
+if ( not self.isDelay() )  // A delay ''observation'' has no client counterpart.
   send TESTBENCH::DeleteObservation( observationId:self.assignedID );
 end if;
 
-select one trigger related by self->Trigger[R127.''delays until triggered by''];
-if ( not_empty trigger )
-  unrelate self from trigger across R127.''delays until triggered by'';
-  select any observation related by trigger->Observation[R127.''initiates''];
-  if ( empty observation )
-    delete object instance trigger;
-  end if;
-end if;
 select one timeout related by self->CountdownTimer[R125.''is stopped by''];
 if ( not_empty timeout )
   unrelate self from timeout across R125.''is stopped by'';
   generate CountdownTimer2:kill() to timeout;
 end if;
-select one retry related by self->CountdownTimer[R126.''is polled by''];
-if ( not_empty retry )
-  unrelate self from retry across R126.''is polled by'';
-  generate CountdownTimer2:kill() to retry;
+select one triggered related by self->TriggeredObservation[R127];
+if ( not_empty triggered )
+  unrelate self from triggered across R127;
+  delete object instance triggered;
+else;
+  select one subtype related by self->ImmediateObservation[R127];
+  select one retry related by subtype->CountdownTimer[R126.''is polled by''];
+  if ( not_empty retry )
+    unrelate subtype from retry across R126.''is polled by'';
+    generate CountdownTimer2:kill() to retry;
+  end if;
+  unrelate self from subtype across R127;
+  delete object instance subtype;
 end if;
 delete object instance self;',
 	1,
 	'',
-	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	0);
+INSERT INTO O_TFR
+	VALUES ("37e0520a-d625-42ae-af71-e0ed81aa52c2",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'Activate',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'select one trigger related by self->TriggeredObservation[R127];
+if ( empty trigger )
+  generate Observation1:Observe() to self;
+else
+  generate Observation6:Stage() to self;	
+end if;	',
+	1,
+	'',
+	"00000000-0000-0000-0000-000000000000",
+	0);
+INSERT INTO O_TFR
+	VALUES ("54a3364c-77eb-4637-bd14-bcf9c0d5e3f9",
+	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
+	'isDelay',
+	'',
+	"ba5eda7a-def5-0000-0000-000000000001",
+	1,
+	'result = false;
+select one subtype related by self->ImmediateObservation[R127];
+if ( not_empty subtype )
+  result = subtype.isDelay;
+end if;
+return result;',
+	1,
+	'',
+	"47df170d-7e82-485c-a2ec-b2936e92e9fb",
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",
@@ -384,7 +357,7 @@ INSERT INTO O_BATTR
 INSERT INTO O_ATTR
 	VALUES ("4a8a5f21-7138-4baf-921d-a90344dfae52",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"1115e56f-69c6-4727-90da-db593f65aa0b",
+	"0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
 	'current_state',
 	'',
 	'',
@@ -413,56 +386,19 @@ Note: this would ideally be marked as an identifier - but that causes editor par
 	'',
 	'');
 INSERT INTO O_NBATTR
-	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
 INSERT INTO O_BATTR
-	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
 INSERT INTO O_ATTR
-	VALUES ("d9dc506f-df8a-46c8-ab75-a0819254d4fc",
+	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
 	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
 	"24be76cd-6e25-43bb-ad99-9b1b9098100a",
-	'isDelay',
-	'When True, this ''observation'' just uses timeout as a delay; it will not invoke any client activity.
-It will never cause an "observe" action in the client as it has no counterpart.',
-	'',
-	'isDelay',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000001",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"d9dc506f-df8a-46c8-ab75-a0819254d4fc",
 	'timeScaleFactor',
 	'Value for scaling from microsecond base timer to units selected for duration timing.',
 	'',
 	'timeScaleFactor',
-	0,
-	"ba5eda7a-def5-0000-0000-000000000002",
-	'',
-	'');
-INSERT INTO O_NBATTR
-	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_BATTR
-	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f");
-INSERT INTO O_ATTR
-	VALUES ("1115e56f-69c6-4727-90da-db593f65aa0b",
-	"575e1db4-0e95-46f9-afaa-e41935d0b11f",
-	"0d9b7552-284c-4a1c-8967-ed45d6eaa77c",
-	'pollScaleFactor',
-	'Value for scaling from microsecond base timer to units selected for polling interval specification.',
-	'',
-	'pollScaleFactor',
 	0,
 	"ba5eda7a-def5-0000-0000-000000000002",
 	'',
