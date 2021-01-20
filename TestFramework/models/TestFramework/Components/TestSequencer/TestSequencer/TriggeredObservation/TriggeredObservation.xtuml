@@ -25,11 +25,11 @@ for each triggered in triggereds
   if ( not_empty stimulus )
     generate Observation7:Trigger() to observation;
     found = true;
-    LOG::LogInfo( message:"Triggering with " + param.key );  // @TODO
+    LOG::LogInfo( message:"Triggering with " + param.key );  // @TODO - verbosity; see issue 37
   end if;
 end for;
 if ( not found )
-  //LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO
+  //LOG::LogInfo( message:"Nothing to trigger with " + param.key ); // @TODO - verbosity; see issue 37
 end if;',
 	1,
 	'',
