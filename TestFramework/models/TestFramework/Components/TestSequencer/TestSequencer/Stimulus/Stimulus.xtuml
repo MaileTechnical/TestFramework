@@ -52,6 +52,7 @@ end if;
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("df0a78fb-f0d7-4ffc-9b09-37103f143228",
@@ -85,6 +86,7 @@ delete object instance self;
 	1,
 	'',
 	"b5a3da7a-5ae2-4819-a48a-12536a6fd502",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("cc87cb5b-9ec3-468d-b00c-2b4ffcbfb775",
@@ -99,6 +101,7 @@ seq.IntervalTimerStartTime = TIM::current_clock();',
 	1,
 	'',
 	"39c93c24-b96a-4e09-81bd-97578ae30d17",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("b5a3da7a-5ae2-4819-a48a-12536a6fd502",
@@ -115,6 +118,7 @@ end for;',
 	1,
 	'',
 	"010572a9-3364-4429-86fb-aeab14976f4e",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("95077c7b-c7b5-423a-a298-2e595a5b3eaa",

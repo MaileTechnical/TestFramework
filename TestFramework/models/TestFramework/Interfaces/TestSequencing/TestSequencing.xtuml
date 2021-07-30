@@ -10,7 +10,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'InjectStimulus',
-	'Invoke injection of the identified stimulus in the test bench.');
+	'Invoke injection of the identified stimulus in the test bench.',
+	0);
 INSERT INTO C_AS
 	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
 	'InjectStimulus',
@@ -31,7 +32,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'InvokeObservation',
-	'Invoke evaluation of the identified observation in the test bench.');
+	'Invoke evaluation of the identified observation in the test bench.',
+	0);
 INSERT INTO C_AS
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
 	'InvokeObservation',
@@ -52,7 +54,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'ObservationDone',
-	'Report to the Test sequencer service that an observation has completed.');
+	'Report to the Test sequencer service that an observation has completed.',
+	0);
 INSERT INTO C_AS
 	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
 	'ObservationDone',
@@ -83,7 +86,8 @@ INSERT INTO C_EP
 	-1,
 	'InitializeTestCase',
 	'Testbench receives notification that a new test case has been selected to run.
-Initialize any pre-conditions and respond when ready for stimulus injection.');
+Initialize any pre-conditions and respond when ready for stimulus injection.',
+	0);
 INSERT INTO C_AS
 	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
 	'InitializeTestCase',
@@ -105,7 +109,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'StimulusDone',
-	'Respond with this signal when all observations for an executed stimulus are complete.');
+	'Respond with this signal when all observations for an executed stimulus are complete.',
+	0);
 INSERT INTO C_AS
 	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
 	'StimulusDone',
@@ -128,7 +133,8 @@ INSERT INTO C_EP
 	'TestCaseInitialized',
 	'Report back to the Test sequencer service that a testbench test case has completed initialization.
 This will initiate stimiuli injection, and thus observation reporting, for a test case.
-If the test case has more than one test sequence, these will start in parallel.');
+If the test case has more than one test sequence, these will start in parallel.',
+	0);
 INSERT INTO C_AS
 	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
 	'TestCaseInitialized',
@@ -151,7 +157,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'Assess',
-	'On this signal, any active observations with matching key value will be triggered to re-evaluate.');
+	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
+	0);
 INSERT INTO C_AS
 	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
 	'Assess',
@@ -173,7 +180,8 @@ INSERT INTO C_EP
 	-1,
 	'LinkRequirement',
 	'Indicate that the given requirement is (partially) tested by the given test case.
-This is used for test coverage reporting.');
+This is used for test coverage reporting.',
+	0);
 INSERT INTO C_AS
 	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
 	'LinkRequirement',
@@ -213,7 +221,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RunTestSuite',
-	'Run the sequence of test buckets associated with the singleton test suite.');
+	'Run the sequence of test buckets associated with the singleton test suite.',
+	0);
 INSERT INTO C_AS
 	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
 	'RunTestSuite',
@@ -225,7 +234,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'MakeRequirement',
-	'Create an instance of a requirement which may be linked to test cases for coverage reporting.');
+	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
+	0);
 INSERT INTO C_AS
 	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
 	'MakeRequirement',
@@ -265,7 +275,8 @@ INSERT INTO C_EP
 	-1,
 	'BucketInitialized',
 	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
-');
+',
+	0);
 INSERT INTO C_AS
 	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
 	'BucketInitialized',
@@ -287,7 +298,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'InitializeBucket',
-	'Signals a test bucket to instantiate its test case sequences.');
+	'Signals a test bucket to instantiate its test case sequences.',
+	0);
 INSERT INTO C_AS
 	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
 	'InitializeBucket',
@@ -309,7 +321,8 @@ INSERT INTO C_EP
 	-1,
 	'InsertDelay',
 	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
-For observations, consider using the polling capability which can repeatedly evaluate with delays.');
+For observations, consider using the polling capability which can repeatedly evaluate with delays.',
+	0);
 INSERT INTO C_AS
 	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
 	'InsertDelay',
@@ -349,7 +362,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'StartIntervalTimer',
-	'A stimulus may request start of the interval timer linked to its test sequence.');
+	'A stimulus may request start of the interval timer linked to its test sequence.',
+	0);
 INSERT INTO C_AS
 	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
 	'StartIntervalTimer',
@@ -370,7 +384,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'DeleteStimulus',
-	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.');
+	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
+	0);
 INSERT INTO C_AS
 	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
 	'DeleteStimulus',
@@ -391,7 +406,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'DeleteTestBucket',
-	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.');
+	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
+	0);
 INSERT INTO C_AS
 	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
 	'DeleteTestBucket',
@@ -412,7 +428,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'RegisterTestSuite',
-	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).');
+	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
+	0);
 INSERT INTO C_AS
 	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
 	'RegisterTestSuite',
@@ -444,7 +461,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'DeleteObservation',
-	'Signals the testbench that the identified observation sub/supertype can be disposed of.');
+	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
+	0);
 INSERT INTO C_AS
 	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
 	'DeleteObservation',
@@ -465,7 +483,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'TestSuiteComplete',
-	'Signals completion of the test suite.');
+	'Signals completion of the test suite.',
+	0);
 INSERT INTO C_AS
 	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
 	'TestSuiteComplete',
@@ -477,7 +496,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddBucket',
-	'Add an instance of a test bucket to the test suite.');
+	'Add an instance of a test bucket to the test suite.',
+	0);
 INSERT INTO C_AS
 	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
 	'AddBucket',
@@ -507,7 +527,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddTestCase',
-	'Add an instance of a test case, identified by label, to the indicated test bucket.');
+	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	0);
 INSERT INTO C_AS
 	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
 	'AddTestCase',
@@ -528,7 +549,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddStimulus',
-	'');
+	'',
+	0);
 INSERT INTO C_AS
 	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
 	'AddStimulus',
@@ -560,7 +582,8 @@ INSERT INTO C_EP
 	'RequestIntervalTimerValue',
 	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
-Optionally, the timer can be reset.');
+Optionally, the timer can be reset.',
+	0);
 INSERT INTO C_AS
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
 	'RequestIntervalTimerValue',
@@ -601,7 +624,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'IntervalTimerValue',
-	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.');
+	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
+	0);
 INSERT INTO C_AS
 	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
 	'IntervalTimerValue',
@@ -633,7 +657,8 @@ INSERT INTO C_EP
 	'AddStimulusSequence',
 	'A test case can have one or more labeled sequences of stimuli.
 A labelled sequence will be added to the test case currently being constructed.
-These sequences may run in parallel and may interact via assess signals.');
+These sequences may run in parallel and may interact via assess signals.',
+	0);
 INSERT INTO C_AS
 	VALUES ("d69685a1-d173-411e-954d-82338177cf09",
 	'AddStimulusSequence',
@@ -657,7 +682,8 @@ INSERT INTO C_EP
 	-1,
 	'CancelObservation',
 	'On this signal, an active observation will be cancelled.
-This has the effect of completing the observation without a failure penalty.');
+This has the effect of completing the observation without a failure penalty.',
+	0);
 INSERT INTO C_AS
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
 	'CancelObservation',
@@ -679,7 +705,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetTestBucketTimeResolutions',
-	'Test buckets inherit default resolutions from the test suite; these can be overridden.');
+	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
+	0);
 INSERT INTO C_AS
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
 	'SetTestBucketTimeResolutions',
@@ -718,7 +745,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetSequenceTimeResolutions',
-	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.');
+	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
+	0);
 INSERT INTO C_AS
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
 	'SetSequenceTimeResolutions',
@@ -757,7 +785,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetTestSuiteTimeResolutions',
-	'Set the timer resolutions which will be defaults for the test buckets in this test suite.');
+	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
+	0);
 INSERT INTO C_AS
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
 	'SetTestSuiteTimeResolutions',
@@ -787,7 +816,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetTestCaseTimeResolutions',
-	'Test cases inherit default resolutions from their test bucket; these can be overridden.');
+	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	0);
 INSERT INTO C_AS
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
 	'SetTestCaseTimeResolutions',
@@ -826,7 +856,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetSequenceIntervalTimerResolution',
-	'Set a time resolution specific to interval timing measurements on the sequence.');
+	'Set a time resolution specific to interval timing measurements on the sequence.',
+	0);
 INSERT INTO C_AS
 	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
 	'SetSequenceIntervalTimerResolution',
@@ -856,7 +887,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'SetObservationTimeResolutions',
-	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.');
+	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	0);
 INSERT INTO C_AS
 	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
 	'SetObservationTimeResolutions',
@@ -895,7 +927,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'TestCaseComplete',
-	'Signal completion of a test case.');
+	'Signal completion of a test case.',
+	0);
 INSERT INTO C_AS
 	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
 	'TestCaseComplete',
@@ -925,7 +958,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'ObservationIncomplete',
-	'Allow this obbservation to be invoked again, attempting completion.');
+	'Allow this obbservation to be invoked again, attempting completion.',
+	0);
 INSERT INTO C_AS
 	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
 	'ObservationIncomplete',
@@ -946,7 +980,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddImmediateObservation',
-	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.');
+	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
+	0);
 INSERT INTO C_AS
 	VALUES ("082333f2-efc5-427f-b3e7-f2c296eb4bed",
 	'AddImmediateObservation',
@@ -1006,7 +1041,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'AddTriggeredObservation',
-	'Add an observation which will only evaluate in response to signalled trigger occurrence.');
+	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	0);
 INSERT INTO C_AS
 	VALUES ("09c40bff-dfaf-4ccb-be7c-87e520743fcf",
 	'AddTriggeredObservation',
@@ -1066,7 +1102,8 @@ INSERT INTO C_EP
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
 	-1,
 	'MigrateTriggeredObservation',
-	'Change an existing triggered observation to a polling immediate observation.');
+	'Change an existing triggered observation to a polling immediate observation.',
+	0);
 INSERT INTO C_AS
 	VALUES ("18966c4a-2804-4b67-8933-5275d471cb7c",
 	'MigrateTriggeredObservation',

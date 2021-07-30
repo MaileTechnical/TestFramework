@@ -37,6 +37,7 @@ LOG::LogReal( message:"Untested requirements: ", r:(total_reqs - tested_reqs) );
 	1,
 	'',
 	"869e2ab3-edbe-4f43-b3ef-8184a45ce9eb",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("6cd90eac-232e-4a6b-b01d-70efa1111cd9",
@@ -77,6 +78,7 @@ end if;
 	1,
 	'',
 	"c46a2afb-9638-414e-b9fe-81f816df0540",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("d9576ec5-8992-4354-b846-dfe3fe360374",
@@ -97,6 +99,7 @@ end if;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("aa4a7564-b1db-4b07-81fc-9a9d130e69db",
@@ -151,6 +154,7 @@ end if;',
 	1,
 	'',
 	"d9576ec5-8992-4354-b846-dfe3fe360374",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("998a7e79-ffcf-4de7-a580-d58cd0a0f321",

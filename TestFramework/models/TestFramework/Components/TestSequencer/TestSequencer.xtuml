@@ -141,6 +141,7 @@ resolution defaults to that of the sequence time resolution, but can be overridd
 	0,
 	"00000000-0000-0000-0000-000000000000",
 	0,
+	'',
 	'');
 INSERT INTO GD_MD
 	VALUES ("784da6a9-5bb4-4660-8e91-83c54487a1a8",
@@ -374,7 +375,8 @@ INSERT INTO C_PO
 	"6458b090-4d5d-4bec-a376-1c820254581c",
 	'TESTBENCH',
 	0,
-	0);
+	0,
+	'');
 INSERT INTO C_IR
 	VALUES ("b0b3c5e8-7447-4dbd-98da-8a1ba11cf9fb",
 	"eff7aa83-70b9-46a6-bfc0-08d66d36431e",
@@ -396,6 +398,7 @@ INSERT INTO SPR_PS
 	'Invoke injection of the identified stimulus in the test bench.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("abb1f40e-d7c8-4654-94f5-c0a999c3866a",
@@ -403,6 +406,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'InjectStimulus',
 	'Invoke injection of the identified stimulus in the test bench.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("1825ae0d-c6d8-4668-889a-1ad4c836840e",
@@ -414,6 +418,7 @@ INSERT INTO SPR_PS
 	'Invoke evaluation of the identified observation in the test bench.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ed6e0575-1418-4e51-82ef-2f3bf15fbb57",
@@ -421,6 +426,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'InvokeObservation',
 	'Invoke evaluation of the identified observation in the test bench.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("a144cc99-8018-496c-b5f1-43590dbdc1f2",
@@ -438,6 +444,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid observation identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("5df7def7-0028-4dc9-8578-87518097d737",
@@ -445,6 +452,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'ObservationDone',
 	'Report to the Test sequencer service that an observation has completed.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("0c970a85-3b51-4321-9546-029ad19a46c4",
@@ -457,6 +465,7 @@ INSERT INTO SPR_PS
 Initialize any pre-conditions and respond when ready for stimulus injection.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b5ee9925-8760-47c6-a3ea-734b7d165169",
@@ -465,6 +474,7 @@ INSERT INTO C_EP_PROXY
 	'InitializeTestCase',
 	'Testbench receives notification that a new test case has been selected to run.
 Initialize any pre-conditions and respond when ready for stimulus injection.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("402e4606-8235-4fca-9a70-4db16466eadf",
@@ -482,6 +492,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ef029a3f-8bbc-4d01-b248-9d10545d4527",
@@ -489,6 +500,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'StimulusDone',
 	'Respond with this signal when all observations for an executed stimulus are complete.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("155f99c9-a228-4562-84bf-b6b327ded939",
@@ -508,6 +520,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid test case identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("976b6c82-6628-4a51-b78f-8a11577ec800",
@@ -517,6 +530,7 @@ INSERT INTO C_EP_PROXY
 	'Report back to the Test sequencer service that a testbench test case has completed initialization.
 This will initiate stimiuli injection, and thus observation reporting, for a test case.
 If the test case has more than one test sequence, these will start in parallel.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("c711a80f-d68a-4639-af8a-071ddc7ece4e",
@@ -528,6 +542,7 @@ INSERT INTO SPR_PS
 	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
 	'TriggeredObservation::TriggerObservations(key:param.key);',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b5a796ca-6082-48ac-92dd-efc0a0922ce7",
@@ -535,6 +550,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'Assess',
 	'On this signal, any active observations with matching key value will be triggered to re-evaluate.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("8aa0458d-710a-45da-b6f7-10abcb03e1f4",
@@ -547,6 +563,7 @@ INSERT INTO SPR_PS
 This is used for test coverage reporting.',
 	'Requirement::Link( reqPrefix:param.reqPrefix, reqNumber:param.reqNumber, caseLabel:param.caseLabel );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("c7c36dbc-1771-40f5-9e73-c713d789f49a",
@@ -555,6 +572,7 @@ INSERT INTO C_EP_PROXY
 	'LinkRequirement',
 	'Indicate that the given requirement is (partially) tested by the given test case.
 This is used for test coverage reporting.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("adce7267-3a0f-4418-92f3-f7c30d4b189d",
@@ -571,6 +589,7 @@ else
   LOG::LogFailure( message:"SEQ No test suite registered" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("acaa32df-c46b-4fb9-8a4d-e3da8ab0716a",
@@ -578,6 +597,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'RunTestSuite',
 	'Run the sequence of test buckets associated with the singleton test suite.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("21fd2230-5946-468c-9d06-29dbdc7fc0dd",
@@ -591,6 +611,7 @@ INSERT INTO SPR_PS
                      reqNumber:param.reqNumber, 
                      reqRemark:param.reqRemark );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2410fcc8-0433-44ba-8e92-f529a7ae4e7d",
@@ -598,6 +619,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'MakeRequirement',
 	'Create an instance of a requirement which may be linked to test cases for coverage reporting.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("adaf24ba-f1bf-40c7-8ac6-3feffe99e888",
@@ -616,6 +638,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b7c0a071-0d7d-4ad9-9d92-4170a9db8b0d",
@@ -624,6 +647,7 @@ INSERT INTO C_EP_PROXY
 	'BucketInitialized',
 	'Indicate to the test sequencer that the current test bucket is ready to run test cases.
 ',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("e7fc3011-ec5c-4853-98fa-5f103deea045",
@@ -635,6 +659,7 @@ INSERT INTO SPR_PS
 	'Signals a test bucket to instantiate its test case sequences.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("14882a87-5828-4191-a273-30b8788f3566",
@@ -642,6 +667,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'InitializeBucket',
 	'Signals a test bucket to instantiate its test case sequences.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("085012bf-0159-480c-a014-aa649b445754",
@@ -662,6 +688,7 @@ select any observation from instances of Observation
 select one subtype related by observation->ImmediateObservation[R127];
 subtype.isDelay = true;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("581dc69f-0c98-4ab6-baf0-a03c367e212f",
@@ -670,6 +697,7 @@ INSERT INTO C_EP_PROXY
 	'InsertDelay',
 	'Request the test sequencer to include a timed delay before invoking the next stimulus or observation.
 For observations, consider using the polling capability which can repeatedly evaluate with delays.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("8ee8d8f2-7673-47d8-90a7-2de30df09f47",
@@ -687,6 +715,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid stimulus identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("bb4f4c38-32d2-41f1-a540-93e7d083ed70",
@@ -694,6 +723,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'StartIntervalTimer',
 	'A stimulus may request start of the interval timer linked to its test sequence.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("ef42a107-8de0-4f6c-b55d-75da2f9f82b5",
@@ -705,6 +735,7 @@ INSERT INTO SPR_PS
 	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("d5a4cf86-3f41-407c-831c-18e679999a67",
@@ -712,6 +743,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'DeleteStimulus',
 	'Signals the testbench that the identified stimulus sub/supertype can be disposed of.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("4dabdc55-681d-4930-b270-9d40eb4db8fb",
@@ -723,6 +755,7 @@ INSERT INTO SPR_PS
 	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("e3261067-756f-427b-94ca-307412068ce6",
@@ -730,6 +763,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'DeleteTestBucket',
 	'Signals the testbench that the identified test bucket sub/supertype can be disposed of.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("8f6ffb50-c347-4c7a-b8c6-5fe63c9eba11",
@@ -741,6 +775,7 @@ INSERT INTO SPR_PS
 	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
 	'TestSuite::Register( suiteLabel:param.suiteLabel, retainAll:param.keepAllCases );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("b1465433-efc9-45bd-ad88-e5ead4500931",
@@ -748,6 +783,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'RegisterTestSuite',
 	'A single instance of test suite must be created, to which will be added test bucket(s) containing test case(s).',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("6bff7eb3-2b23-43a3-9f4f-385237af3b21",
@@ -759,6 +795,7 @@ INSERT INTO SPR_PS
 	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("a65ba45b-40f5-486e-9280-968e92d5d402",
@@ -766,6 +803,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'DeleteObservation',
 	'Signals the testbench that the identified observation sub/supertype can be disposed of.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("3e8dfde7-e47d-444d-885f-ca13fcadf6f3",
@@ -777,6 +815,7 @@ INSERT INTO SPR_PS
 	'Signals completion of the test suite.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2ab9bd8f-a044-44bc-b988-74be588a3af7",
@@ -784,6 +823,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'TestSuiteComplete',
 	'Signals completion of the test suite.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("47c31571-058c-4076-a86c-dd5664066a39",
@@ -795,6 +835,7 @@ INSERT INTO SPR_PS
 	'Add an instance of a test bucket to the test suite.',
 	'TestSuite::AddBucket( bucketId:param.bucketId, bucketLabel:param.bucketLabel );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("3ab9f7fe-b572-4c34-98f5-076122029206",
@@ -802,6 +843,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddBucket',
 	'Add an instance of a test bucket to the test suite.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("512103c3-042b-4914-806f-465617768e34",
@@ -829,6 +871,7 @@ else
   LOG::LogFailure( message:"SEQ No Test Suite registered" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("338f43fc-f8fd-4707-98a1-be43d1ec3394",
@@ -836,6 +879,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddTestCase',
 	'Add an instance of a test case, identified by label, to the indicated test bucket.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("8a572599-520f-4fb5-b9ce-54781221ca86",
@@ -847,6 +891,7 @@ INSERT INTO SPR_PS
 	'',
 	'Stimulus::Append( seqLabel:param.seqLabel, stimulusId:param.stimulusId );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ccdf5756-d7fc-4bb0-9a09-adbbe404ef3d",
@@ -854,6 +899,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddStimulus',
 	'',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("a7fd58ce-2f1a-4180-a410-8e39062d165b",
@@ -871,6 +917,7 @@ if ( not_empty obs )
   obs.ReadIntervalTimer( key:param.key, reset:param.reset );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("80b50e27-14fc-4cf7-9830-ef2a7c77d6fa",
@@ -880,6 +927,7 @@ INSERT INTO C_EP_PROXY
 	'An observation may request the value of the interval timer associated with its stimulus sequence.
 The value will be signalled back to the testbench, along with the supplied identification key.
 Optionally, the timer can be reset.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("e8daef11-107e-4232-84d4-0610afd32558",
@@ -891,6 +939,7 @@ INSERT INTO SPR_PS
 	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("7c394270-a8ad-44af-a4ad-8601e7eebc96",
@@ -898,6 +947,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'IntervalTimerValue',
 	'Respond to a request to read the interval timer on a sequence. The key supplied by the request is echoed back.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("00b40b43-eb10-49f4-8f08-a6dd5cde9967",
@@ -924,6 +974,7 @@ if ( not_empty seq )
 end if;
 testcase.AttachSequence( seqLabel:param.seqLabel );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("d69685a1-d173-411e-954d-82338177cf09",
@@ -933,6 +984,7 @@ INSERT INTO C_EP_PROXY
 	'A test case can have one or more labeled sequences of stimuli.
 A labelled sequence will be added to the test case currently being constructed.
 These sequences may run in parallel and may interact via assess signals.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("7d52ac6c-99e0-40be-8abe-5dd4027a72a5",
@@ -949,6 +1001,7 @@ if ( not_empty observation )
   generate Observation2:Completed() to observation;
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("ca057380-3763-49be-a902-4f89bd14277c",
@@ -957,6 +1010,7 @@ INSERT INTO C_EP_PROXY
 	'CancelObservation',
 	'On this signal, an active observation will be cancelled.
 This has the effect of completing the observation without a failure penalty.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("d8c0e7cd-e935-473f-8893-2d13ddf22e22",
@@ -975,6 +1029,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid test bucket identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("de9c9d7b-2d7a-4144-923a-4f0477575d03",
@@ -982,6 +1037,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetTestBucketTimeResolutions',
 	'Test buckets inherit default resolutions from the test suite; these can be overridden.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("046d1896-4f88-4f5f-9ef7-d7b8ab8b8857",
@@ -1002,6 +1058,7 @@ else
   LOG::LogFailure( message:"No sequence found matching " + param.seqLabel );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("092a77de-9124-470e-9e04-e55568aebdc9",
@@ -1009,6 +1066,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetSequenceTimeResolutions',
 	'Test sequences inherit default resolutions from the test case they are attatched to; these can be overridden.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("2ebed635-f6ff-4aef-b302-2c270c93aabb",
@@ -1026,6 +1084,7 @@ else
   LOG::LogFailure( message:"SEQ No test suite exists!" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("168e2aad-1615-4146-ac35-e977e2dbf6c5",
@@ -1033,6 +1092,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetTestSuiteTimeResolutions',
 	'Set the timer resolutions which will be defaults for the test buckets in this test suite.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("2d634a28-7315-4bba-9d3d-481e0ece2eb7",
@@ -1053,6 +1113,7 @@ else
   LOG::LogFailure( message:"No test case found matching " + param.caseLabel );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("80147fc1-3758-4e4b-b996-66d26cfeffd2",
@@ -1060,6 +1121,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetTestCaseTimeResolutions',
 	'Test cases inherit default resolutions from their test bucket; these can be overridden.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("f6bc7f0c-3eb1-4b7c-aadc-b201ec7baeb0",
@@ -1079,6 +1141,7 @@ else
   LOG::LogFailure( message:"No sequence found matching " + param.seqLabel );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("abe4b64e-9b6b-4aa3-a59c-1c6df05a312a",
@@ -1086,6 +1149,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetSequenceIntervalTimerResolution',
 	'Set a time resolution specific to interval timing measurements on the sequence.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("e89a4566-6c96-4c22-be80-f3aa98a4a7b4",
@@ -1107,6 +1171,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid observation identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("33169678-f345-469d-ac15-ea1c7322c7a9",
@@ -1114,6 +1179,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'SetObservationTimeResolutions',
 	'Observations inherit default resolutions from the sequence they are added to; these can be overridden.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("cff8595f-5072-4aeb-8952-6448eebec8ca",
@@ -1125,6 +1191,7 @@ INSERT INTO SPR_PS
 	'Signal completion of a test case.',
 	'',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("2e275a42-594f-477a-86c9-6a263a8b1e41",
@@ -1132,6 +1199,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'TestCaseComplete',
 	'Signal completion of a test case.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("1c574cf9-c2a4-442f-b8cc-6503003fa3c1",
@@ -1149,6 +1217,7 @@ else
   LOG::LogFailure( message:"SEQ Invalid observation identifier" );
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("5c356dfd-5197-46e8-8f38-d8d4f740788a",
@@ -1156,6 +1225,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'ObservationIncomplete',
 	'Allow this obbservation to be invoked again, attempting completion.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("ba5beb79-ae50-4506-993d-50c60667cd24",
@@ -1171,6 +1241,7 @@ INSERT INTO SPR_PS
                            durationLimit:param.pollDuration,
                            concurrent:param.concurrent );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("082333f2-efc5-427f-b3e7-f2c296eb4bed",
@@ -1178,6 +1249,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddImmediateObservation',
 	'Add an observation which will evaluate as soon as it becomes eligible following a stimulus.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("83c08ee5-abd7-47ab-8110-fc6441771284",
@@ -1193,6 +1265,7 @@ INSERT INTO SPR_PS
                            triggerKey:param.eventKey,
                            concurrent:param.concurrent );',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("09c40bff-dfaf-4ccb-be7c-87e520743fcf",
@@ -1200,6 +1273,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'AddTriggeredObservation',
 	'Add an observation which will only evaluate in response to signalled trigger occurrence.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO SPR_PEP
 	VALUES ("1ae683e0-44d1-47f9-9ce0-6e3bd8e7b537",
@@ -1225,6 +1299,7 @@ if ( not_empty triggered )
   relate immediate to observation across R127;
 end if;',
 	1,
+	0,
 	0);
 INSERT INTO C_EP_PROXY
 	VALUES ("18966c4a-2804-4b67-8933-5275d471cb7c",
@@ -1232,6 +1307,7 @@ INSERT INTO C_EP_PROXY
 	-1,
 	'MigrateTriggeredObservation',
 	'Change an existing triggered observation to a polling immediate observation.',
+	0,
 	'../../Interfaces/TestSequencing/TestSequencing.xtuml');
 INSERT INTO C_I_PROXY
 	VALUES ("eff7aa83-70b9-46a6-bfc0-08d66d36431e",

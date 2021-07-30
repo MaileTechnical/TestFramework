@@ -104,7 +104,7 @@ INSERT INTO GD_GE
 	"fa1777ad-a877-4ea8-8355-c41a6b50d69f",
 	108,
 	0,
-	'TestFramework::Documentation::SequenceDiagrams::3_TestCasePopulation-1');
+	'TestFramework::Documentation::SequenceDiagrams::4_TestCaseExecution');
 INSERT INTO GD_SHP
 	VALUES ("70f76ad2-5eee-46f8-a083-a660c825bfdf");
 INSERT INTO GD_NCS

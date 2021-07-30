@@ -23,6 +23,7 @@ self.base_timer = TIM::timer_start_recurring( event_inst:tick, microseconds:self
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("145f9bc8-85bc-48db-8acc-66154b415578",
@@ -36,6 +37,7 @@ self.ignore_tick = not TIM::timer_cancel( timer_inst_ref:self.base_timer );',
 	1,
 	'',
 	"8810f559-085b-4b79-91f8-3e421175d8a5",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("9304f596-e8ce-4497-927a-3b7c88918d77",
@@ -51,6 +53,7 @@ generate CountdownTimer2:kill to self;',
 	1,
 	'',
 	"145f9bc8-85bc-48db-8acc-66154b415578",
+	0,
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("ecb2bc28-1d95-4420-9248-8aeecb280cc9",

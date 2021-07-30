@@ -1320,6 +1320,7 @@ INSERT INTO C_C_PROXY
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
+	'',
 	'../../../Components/ProxyTestbench/ProxyTestbench.xtuml');
 INSERT INTO PE_PE
 	VALUES ("6dfd60c9-4d0b-4dc1-9550-06963adfdfcb",
@@ -1478,6 +1479,7 @@ resolution defaults to that of the sequence time resolution, but can be overridd
 	0,
 	"00000000-0000-0000-0000-000000000000",
 	0,
+	'',
 	'',
 	'../../../Components/TestSequencer/TestSequencer.xtuml');
 INSERT INTO PE_PE

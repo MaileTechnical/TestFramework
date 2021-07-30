@@ -37,6 +37,7 @@ delete object instance self;',
 	1,
 	'',
 	"8bedcf33-635e-410e-bff2-14de88e3ffe9",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("8bedcf33-635e-410e-bff2-14de88e3ffe9",
@@ -51,6 +52,7 @@ generate TestCase3:SequenceComplete to testcase;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("ce363601-8e98-4cbe-b4d3-b03e48c3e581",

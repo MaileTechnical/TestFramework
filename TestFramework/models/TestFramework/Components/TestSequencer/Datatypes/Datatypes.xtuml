@@ -317,6 +317,7 @@ resolution defaults to that of the sequence time resolution, but can be overridd
 	"00000000-0000-0000-0000-000000000000",
 	0,
 	'',
+	'',
 	'../TestSequencer.xtuml');
 INSERT INTO S_SYS_PROXY
 	VALUES ("b06a8228-7533-46d6-b644-27cf49555288",
