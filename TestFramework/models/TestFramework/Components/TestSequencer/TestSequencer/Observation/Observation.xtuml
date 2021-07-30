@@ -40,6 +40,7 @@ end if;',
 	1,
 	'',
 	"37e0520a-d625-42ae-af71-e0ed81aa52c2",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
@@ -62,6 +63,7 @@ end if;
 	1,
 	'',
 	"a0ac75b4-7713-4a89-b89a-2954d6e781ff",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("a0ac75b4-7713-4a89-b89a-2954d6e781ff",
@@ -79,6 +81,7 @@ end if;',
 	1,
 	'',
 	"99f3a05c-edfd-49a4-8f70-160c84f5a3e7",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("67147451-c4cd-4968-aadb-65c3cc37009c",
@@ -153,6 +156,7 @@ relate self to cursor across R105.''is made after'';',
 	1,
 	'',
 	"3411cdd6-af11-4830-9206-1a2dc2aa08f7",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("5cd1928e-f46d-4919-aee6-2bfb9590acbe",
@@ -211,6 +215,7 @@ send TESTBENCH::IntervalTimerValue( key:param.key, value:interval );',
 	1,
 	'',
 	"d64d9272-c56d-4ae7-aa7f-78f5202f2b7f",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("6ad5b0b1-6d02-41f7-899b-df41524719e0",
@@ -267,6 +272,7 @@ delete object instance self;',
 	1,
 	'',
 	"48396ca3-ee3c-4bd3-a3bb-2d4da66fa619",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("37e0520a-d625-42ae-af71-e0ed81aa52c2",
@@ -284,6 +290,7 @@ end if;	',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("54a3364c-77eb-4637-bd14-bcf9c0d5e3f9",
@@ -301,6 +308,7 @@ return result;',
 	1,
 	'',
 	"47df170d-7e82-485c-a2ec-b2936e92e9fb",
+	0,
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("24be76cd-6e25-43bb-ad99-9b1b9098100a",

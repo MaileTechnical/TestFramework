@@ -27,6 +27,7 @@ end if;',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("9b86fa54-713d-4a4e-8205-a91dc828c2f7",
@@ -55,6 +56,7 @@ new_observation.Add( seqLabel:param.seqLabel,
 	1,
 	'',
 	"fe8d4f22-bf6a-4a0f-807c-40326ea72057",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("822ff779-a7ba-4ce5-b56b-670911f2e234",

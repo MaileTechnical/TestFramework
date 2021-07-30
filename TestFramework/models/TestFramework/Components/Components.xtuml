@@ -190,7 +190,7 @@ INSERT INTO GD_GE
 	"3ab4cb98-5041-4a1b-9184-1abd1d9b499b",
 	93,
 	0,
-	'TestFramework::Components::ProxyTestbench::Port1::Unnamed Interface');
+	'TestFramework::Components::ProxyTestbench::TESTSEQ::TestSequencing');
 INSERT INTO GD_CON
 	VALUES ("78565d82-ef4a-4cbb-8c26-046cfce570e4",
 	"00000000-0000-0000-0000-000000000000");

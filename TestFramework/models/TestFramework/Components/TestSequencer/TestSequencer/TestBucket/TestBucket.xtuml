@@ -50,6 +50,7 @@ relate new_tc to tb across R129.''adding to'';',
 	1,
 	'',
 	"00000000-0000-0000-0000-000000000000",
+	0,
 	0);
 INSERT INTO O_TPARM
 	VALUES ("d0804e39-c56c-479a-a3fc-63a7b0e81956",
@@ -83,6 +84,7 @@ end if;',
 	1,
 	'',
 	"d1031ea8-3f36-4e69-86bb-8be5960a911c",
+	0,
 	0);
 INSERT INTO O_TFR
 	VALUES ("d1031ea8-3f36-4e69-86bb-8be5960a911c",
@@ -110,6 +112,7 @@ end if;',
 	1,
 	'',
 	"2b8ef317-f5d3-41ba-8f74-cc23d89a5488",
+	0,
 	0);
 INSERT INTO O_NBATTR
 	VALUES ("467db403-b4d1-4eb4-a423-82cfe5bbf674",
